@@ -1,0 +1,30 @@
+.gitignore
+  s_ea10ec4aae4906::t_d03447e61c2324 12-14
+src/pages/new-game.tsx
+  s_ea10ec4aae4906::t_7c9d60f2f379b1 105
+  s_ea10ec4aae4906::t_cb5ab2c45949dc 10
+src/lib/actions.ts
+  s_ea10ec4aae4906::t_dd56f212b63d33 29-35
+  s_ea10ec4aae4906::t_7f67ca5f50583b 359
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "fd726a5c792049a269320870f29f80b55ae09543",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_ea10ec4aae4906": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2d8b8367-0e13-432e-b99e-7130af001b31",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
