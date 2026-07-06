@@ -1,0 +1,33 @@
+src/lib/actions.ts
+  s_ea10ec4aae4906::t_62598a99d0efee 358-361,438-444,470-501
+  s_ea10ec4aae4906::t_df2fd45ab1cc74 502
+src/components/lobby.tsx
+  s_ea10ec4aae4906::t_793adc11394a67 72-78
+  s_ea10ec4aae4906::t_a5975615684cd3 140
+  s_ea10ec4aae4906::t_81b01a07f7fd12 11
+  s_ea10ec4aae4906::t_71a650e87df751 57-60
+src/components/game.tsx
+  s_ea10ec4aae4906::t_f33314b5a301af 25-33
+  s_ea10ec4aae4906::t_bbd30a1e5ca123 300-305,307
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "de19020ca509af80cd335f3da76ef0e9bc88caf5",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_ea10ec4aae4906": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2d8b8367-0e13-432e-b99e-7130af001b31",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
