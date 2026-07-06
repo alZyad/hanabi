@@ -16,6 +16,15 @@ export const it = {
   gameNotFull_plural: "{{count}} / {{playersCount}} giocatori presenti",
   startGame: "Avvia partita",
   addAi: "+ aggiungi AI",
+  adjustPlayersTitle: "Il numero di giocatori non corrisponde",
+  adjustPlayersContentFewer:
+    "Questa partita era prevista per {{playersCount}} giocatori, ma se ne sono uniti solo {{joined}}.",
+  adjustPlayersContentMore:
+    "Questa partita era prevista per {{playersCount}} giocatori, ma se ne sono uniti {{joined}}.",
+  adjustPlayersQuestion: "Iniziare con {{joined}}?",
+  fillWithAi: "Riempi con IA",
+  cancel: "Annulla",
+  confirmStart: "Inizia comunque",
   lobby: "Lobby",
   choosePlayerName: "Scegli il tuo nome di gioco",
   join: "Unisciti",

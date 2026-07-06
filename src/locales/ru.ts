@@ -21,6 +21,13 @@ export const ru = {
   gameNotFull_1: "{{count}} / {{playersCount}} уже присоединились", // 2, 3, 4
   startGame: "Начать игру",
   addAi: "+ добавить ИИ",
+  adjustPlayersTitle: "Количество игроков не совпадает",
+  adjustPlayersContentFewer: "Эта игра была создана для {{playersCount}} игроков, но присоединилось только {{joined}}.",
+  adjustPlayersContentMore: "Эта игра была создана для {{playersCount}} игроков, но присоединилось {{joined}}.",
+  adjustPlayersQuestion: "Начать с {{joined}}?",
+  fillWithAi: "Дополнить ИИ",
+  cancel: "Отмена",
+  confirmStart: "Всё равно начать",
   lobby: "Лобби",
   choosePlayerName: "Выберите ваше имя игрока",
   join: "Присоединиться",

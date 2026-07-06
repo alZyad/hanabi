@@ -16,6 +16,15 @@ export const de = {
   gameNotFull_plural: "{{count}} / {{playersCount}} bereits beigetreten", // necessary in French
   startGame: "Spiel starten",
   addAi: "+ AI hinzufügen",
+  adjustPlayersTitle: "Spieleranzahl stimmt nicht überein",
+  adjustPlayersContentFewer:
+    "Dieses Spiel wurde für {{playersCount}} Spieler erstellt, aber nur {{joined}} sind beigetreten.",
+  adjustPlayersContentMore:
+    "Dieses Spiel wurde für {{playersCount}} Spieler erstellt, aber {{joined}} sind beigetreten.",
+  adjustPlayersQuestion: "Mit {{joined}} starten?",
+  fillWithAi: "Mit AI auffüllen",
+  cancel: "Abbrechen",
+  confirmStart: "Trotzdem starten",
   lobby: "Lobby",
   choosePlayerName: "Wähle deinen Spielernamen",
   join: "Beitreten",

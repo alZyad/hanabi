@@ -17,6 +17,13 @@ export const zh = {
   gameNotFull_plural: "{{count}} / {{playersCount}} 已加入", // necessary in French
   startGame: "开始游戏",
   addAi: "+ 添加AI",
+  adjustPlayersTitle: "玩家人数不匹配",
+  adjustPlayersContentFewer: "此游戏设置为 {{playersCount}} 名玩家，但只加入了 {{joined}} 名。",
+  adjustPlayersContentMore: "此游戏设置为 {{playersCount}} 名玩家，但已加入 {{joined}} 名。",
+  adjustPlayersQuestion: "以 {{joined}} 名开始吗？",
+  fillWithAi: "用AI填充",
+  cancel: "取消",
+  confirmStart: "仍然开始",
   lobby: "大厅",
   choosePlayerName: "选择你的角色名",
   join: "加入",
