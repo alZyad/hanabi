@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import AdjustPlayersModal from "~/components/adjustPlayersModal";
 import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
@@ -49,6 +50,7 @@ interface Props {
   host: string;
   onJoinGame: (player: Omit<IPlayer, "id">) => void;
   onAddBot: () => void;
+  onFillWithBotsAndStart: () => void;
   onStartGame: () => void;
 }
 
@@ -59,7 +61,7 @@ const MIN_PLAYERS = Math.min(...SupportedPlayerCounts);
 const MAX_PLAYERS = Math.max(...SupportedPlayerCounts);
 
 export default function Lobby(props: Props) {
-  const { host, onJoinGame, onAddBot, onStartGame } = props;
+  const { host, onJoinGame, onAddBot, onFillWithBotsAndStart, onStartGame } = props;
   const { t } = useTranslation();
 
   const game = useGame();
@@ -68,6 +70,7 @@ export default function Lobby(props: Props) {
   const [name, setName] = useState("");
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showAdjustModal, setShowAdjustModal] = useState(false);
 
   const playersCount = game.players.length;
   const configuredCount = game.options.playersCount;
@@ -76,6 +79,14 @@ export default function Lobby(props: Props) {
   const atCapacity = playersCount >= MAX_PLAYERS;
   const canJoin = (game.options.gameMode === GameMode.PASS_AND_PLAY || !selfPlayer) && !atCapacity;
   const canStart = playersCount >= MIN_PLAYERS;
+
+  function onStartClick() {
+    if (gameFull) {
+      onStartGame();
+    } else {
+      setShowAdjustModal(true);
+    }
+  }
 
   const shareLink = `${host}/${router.query.gameId}`;
   const inputRef = React.createRef<HTMLInputElement>();
@@ -114,6 +125,15 @@ export default function Lobby(props: Props) {
         </div>
       )}
       <Meta />
+      {showAdjustModal && (
+        <AdjustPlayersModal
+          configuredCount={configuredCount}
+          joinedCount={playersCount}
+          onClose={() => setShowAdjustModal(false)}
+          onConfirm={onStartGame}
+          onFillWithBotsAndStart={onFillWithBotsAndStart}
+        />
+      )}
       <div className="flex flex-column pa2 w-100 h-100">
         <div className="mb3 ttu flex items-center">
           <Txt size={TxtSize.MEDIUM} value={t("lobby")} />
@@ -140,7 +160,7 @@ export default function Lobby(props: Props) {
                       disabled={!canStart}
                       id="start-game"
                       text={t("startGame")}
-                      onClick={() => onStartGame()}
+                      onClick={() => onStartClick()}
                     />
                   )}
                 </div>

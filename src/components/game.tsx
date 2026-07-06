@@ -296,6 +296,27 @@ export function Game(props: Props) {
     logEvent("Game", "Bot added");
   }
 
+  async function onFillWithBotsAndStart() {
+    let state = game;
+    let botsCount = state.players.filter((p) => p.bot).length;
+
+    while (state.players.length < state.options.playersCount) {
+      botsCount += 1;
+      state = joinGame(state, { id: uniqueId(), name: `AI #${botsCount}`, bot: true });
+    }
+
+    const newState = {
+      ...state,
+      status: IGameStatus.ONGOING,
+      startedAt: Date.now(),
+    };
+
+    onGameChange({ ...newState, synced: false });
+    await updateGame(newState);
+
+    logEvent("Game", "Game started");
+  }
+
   async function onStartGame() {
     const adjustingNeeded = game.players.length !== game.options.playersCount;
     const adjustedGame = adjustingNeeded ? adjustGameToPlayerCount(game) : game;
@@ -487,7 +508,13 @@ export function Game(props: Props) {
           {selectedArea.type === ActionAreaType.MENU && <MenuArea onCloseArea={onCloseArea} />}
 
           {game.status === IGameStatus.LOBBY && (
-            <Lobby host={host} onAddBot={onAddBot} onJoinGame={onJoinGame} onStartGame={onStartGame} />
+            <Lobby
+              host={host}
+              onAddBot={onAddBot}
+              onFillWithBotsAndStart={onFillWithBotsAndStart}
+              onJoinGame={onJoinGame}
+              onStartGame={onStartGame}
+            />
           )}
 
           {selectedArea.type === ActionAreaType.ROLLBACK && (
