@@ -1,0 +1,28 @@
+src/components/lobby.tsx
+  s_ea10ec4aae4906::t_890d7c3501a1f1 7,53,64,73,83-90,128-136,163
+src/components/adjustPlayersModal.tsx
+  s_ea10ec4aae4906::t_e9dc94ef8f162d 1-61
+src/components/game.tsx
+  s_ea10ec4aae4906::t_890d7c3501a1f1 299-319,511-517
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "7b4d3c94cc17723d166a21366899bb8c88fe0a39",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_ea10ec4aae4906": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2d8b8367-0e13-432e-b99e-7130af001b31",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
