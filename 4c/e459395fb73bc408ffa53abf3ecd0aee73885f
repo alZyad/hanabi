@@ -1,0 +1,66 @@
+src/locales/de.ts
+  s_ea10ec4aae4906::t_af119e4dca725a 20,22
+  s_ea10ec4aae4906::t_9b36c1e6211633 19,26-27
+  s_ea10ec4aae4906::t_cb220566d916c5 21,23-24
+  s_508d92677f67bf::t_bab8db13b203bb 25
+src/locales/ru.ts
+  s_ea10ec4aae4906::t_4431940a07cac4 26-27
+  s_ea10ec4aae4906::t_3212b5f58d0653 24,29-30
+  s_508d92677f67bf::t_02ee88618ee188 28
+  s_ea10ec4aae4906::t_1c5a3d2cd03c0e 25
+src/locales/en.ts
+  s_ea10ec4aae4906::t_4a3d5636dbfe5e 25,29-31
+  s_ea10ec4aae4906::t_2a7373c7cf3656 26-28
+src/locales/pt.ts
+  s_ea10ec4aae4906::t_35ed9291511c97 19,23-25
+  s_ea10ec4aae4906::t_2c7d512c1f905a 20-22
+src/locales/nl.ts
+  s_ea10ec4aae4906::t_bb4dc05a3acda9 19-21
+  s_ea10ec4aae4906::t_1ef88538015004 18,22-24
+src/locales/fr.ts
+  s_ea10ec4aae4906::t_71208f6b22caf4 20
+  s_ea10ec4aae4906::t_0a087b6ef2e1ee 19,24-26
+  s_ea10ec4aae4906::t_572ce0a76863b5 21-23
+src/locales/sk.ts
+  s_ea10ec4aae4906::t_6e9aa4645c9494 20,24-26
+  s_ea10ec4aae4906::t_8dc63f1f8312cb 21-23
+src/locales/zh.ts
+  s_ea10ec4aae4906::t_3b701deb937bbc 20,24-26
+  s_ea10ec4aae4906::t_3d18bf6c6705cd 21-23
+src/locales/es.ts
+  s_ea10ec4aae4906::t_d8d3de630fa882 20-22
+  s_ea10ec4aae4906::t_59fe4c72087000 19,23-25
+src/locales/it.ts
+  s_ea10ec4aae4906::t_5870c176c5b629 19,25-27
+  s_ea10ec4aae4906::t_6bb2fac7c2131d 21,23-24
+  s_ea10ec4aae4906::t_d094f87ed9bc4e 20,22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4ce459395fb73bc408ffa53abf3ecd0aee73885f",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_508d92677f67bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "960daa1c-4059-41c6-b253-7bd5ccc64354",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_ea10ec4aae4906": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2d8b8367-0e13-432e-b99e-7130af001b31",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
