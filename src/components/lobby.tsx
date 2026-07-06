@@ -8,6 +8,7 @@ import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
+import { SupportedPlayerCounts } from "~/lib/actions";
 import { GameMode, IPlayer } from "~/lib/state";
 
 function listPlayerNames(players: IPlayer[]) {
@@ -53,6 +54,10 @@ interface Props {
 
 const NAME_KEY = "name";
 
+// Same bounds that constrain game creation.
+const MIN_PLAYERS = Math.min(...SupportedPlayerCounts);
+const MAX_PLAYERS = Math.max(...SupportedPlayerCounts);
+
 export default function Lobby(props: Props) {
   const { host, onJoinGame, onAddBot, onStartGame } = props;
   const { t } = useTranslation();
@@ -64,9 +69,13 @@ export default function Lobby(props: Props) {
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const gameFull = game.players.length === game.options.playersCount;
-  const canJoin = (game.options.gameMode === GameMode.PASS_AND_PLAY || !selfPlayer) && !gameFull;
-  const canStart = gameFull;
+  const playersCount = game.players.length;
+  const configuredCount = game.options.playersCount;
+
+  const gameFull = playersCount === configuredCount;
+  const atCapacity = playersCount >= MAX_PLAYERS;
+  const canJoin = (game.options.gameMode === GameMode.PASS_AND_PLAY || !selfPlayer) && !atCapacity;
+  const canStart = playersCount >= MIN_PLAYERS;
 
   const shareLink = `${host}/${router.query.gameId}`;
   const inputRef = React.createRef<HTMLInputElement>();
@@ -128,7 +137,7 @@ export default function Lobby(props: Props) {
                     <Button
                       primary
                       className="ml3"
-                      disabled={!gameFull}
+                      disabled={!canStart}
                       id="start-game"
                       text={t("startGame")}
                       onClick={() => onStartGame()}

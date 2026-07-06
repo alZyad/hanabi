@@ -22,7 +22,15 @@ import { useReplay } from "~/hooks/replay";
 import { useSession } from "~/hooks/session";
 import { useSoundEffects } from "~/hooks/sounds";
 import { useUserPreferences } from "~/hooks/userPreferences";
-import { commitAction, getMaximumPossibleScore, getScore, joinGame, newGame, recreateGame } from "~/lib/actions";
+import {
+  adjustGameToPlayerCount,
+  commitAction,
+  getMaximumPossibleScore,
+  getScore,
+  joinGame,
+  newGame,
+  recreateGame,
+} from "~/lib/actions";
 import { play } from "~/lib/ai";
 import { cheat } from "~/lib/ai-cheater";
 import { logEvent } from "~/lib/analytics";
@@ -289,8 +297,11 @@ export function Game(props: Props) {
   }
 
   async function onStartGame() {
+    const adjustingNeeded = game.players.length !== game.options.playersCount;
+    const adjustedGame = adjustingNeeded ? adjustGameToPlayerCount(game) : game;
+
     const newState = {
-      ...game,
+      ...adjustedGame,
       status: IGameStatus.ONGOING,
       startedAt: Date.now(),
     };

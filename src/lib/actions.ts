@@ -355,9 +355,10 @@ export function joinGame(state: IGameState, player: IPlayer): IGameState {
   return game;
 }
 
-export function newGame(options: IGameOptions): IGameState {
-  assertSupportedPlayerCount(options.playersCount);
-
+/**
+ * Builds and seed-shuffles the deck for the given options' variant.
+ */
+export function buildDeck(options: IGameOptions): ICard[] {
   // All base cards
   const baseColors = [IColor.WHITE, IColor.BLUE, IColor.RED, IColor.GREEN, IColor.YELLOW];
   let cards = flatMap(baseColors, (color) => [
@@ -434,7 +435,13 @@ export function newGame(options: IGameOptions): IGameState {
     };
   });
 
-  const deck = shuffleSeed(cards, options.seed);
+  return shuffleSeed(cards, options.seed);
+}
+
+export function newGame(options: IGameOptions): IGameState {
+  assertSupportedPlayerCount(options.playersCount);
+
+  const deck = buildDeck(options);
 
   const currentPlayer = shuffleSeed(range(options.playersCount), options.seed)[0];
 
@@ -458,6 +465,39 @@ export function newGame(options: IGameOptions): IGameState {
     synced: false,
     reviewComments: [],
   };
+}
+
+/**
+ * Re-derives a lobby game so that all player-count-dependent state matches the
+ * number of players that actually joined. Produces state byte-identical to a
+ * fresh `newGame` created with `players.length` and the same seed: rebuilds the
+ * deck, re-deals every hand, re-picks the starting player (seed-based, uniform
+ * over joined players) and recomputes `actionsLeft`. Player identities (names,
+ * ids, bot flags) are preserved.
+ */
+export function adjustGameToPlayerCount(state: IGameState): IGameState {
+  const game = cloneDeep(state) as IGameState;
+  const playersCount = game.players.length;
+
+  assertSupportedPlayerCount(playersCount);
+
+  const options = { ...game.options, playersCount };
+  const deck = buildDeck(options);
+  const handSize = startingHandSize[playersCount];
+
+  game.players = game.players.map((player, index) => {
+    const hand = deck.splice(0, handSize);
+    hand.forEach((card) => (card.hint = emptyHint(options)));
+
+    return { ...player, hand, index };
+  });
+
+  game.options = options;
+  game.drawPile = deck;
+  game.currentPlayer = shuffleSeed(range(playersCount), options.seed)[0];
+  game.actionsLeft = playersCount + 1;
+
+  return game;
 }
 
 export function recreateGame(game: IGameState) {
