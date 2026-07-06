@@ -26,6 +26,13 @@ export const numbers: INumber[] = [1, 2, 3, 4, 5];
 const startingHandSize = { 2: 5, 3: 5, 4: 4, 5: 4 };
 export const MaxHints = 8;
 
+// The player counts a game can be created and played with.
+export const SupportedPlayerCounts = [2, 3, 4, 5];
+
+function assertSupportedPlayerCount(count: number) {
+  assert(SupportedPlayerCounts.includes(count), `Unsupported player count: ${count}`);
+}
+
 export function isPlayable(card: ICard, playedCards: ICard[]): boolean {
   const isPreviousHere =
     card.number === 1 || findIndex(playedCards, (c) => card.number === c.number + 1 && card.color === c.color) > -1; // first card on the pile // previous card belongs to the playedCards
@@ -349,7 +356,7 @@ export function joinGame(state: IGameState, player: IPlayer): IGameState {
 }
 
 export function newGame(options: IGameOptions): IGameState {
-  assert(options.playersCount > 1 && options.playersCount < 6);
+  assertSupportedPlayerCount(options.playersCount);
 
   // All base cards
   const baseColors = [IColor.WHITE, IColor.BLUE, IColor.RED, IColor.GREEN, IColor.YELLOW];

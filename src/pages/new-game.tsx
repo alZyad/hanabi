@@ -7,13 +7,11 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import { Checkbox, Field, Select, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
-import { newGame } from "~/lib/actions";
+import { newGame, SupportedPlayerCounts } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
 import { generateShuffleSeed, readableUniqueId } from "~/lib/id";
 import { GameMode, GameVariant, IGameHintsLevel } from "~/lib/state";
-
-const PlayerCounts = [2, 3, 4, 5];
 
 const Variants = {
   [GameVariant.CLASSIC]: "classicVariant",
@@ -104,7 +102,7 @@ export default function NewGame() {
         <div className="flex justify-between ph1 items-center pb4 mb4 bb b--yellow-light">
           <Txt size={TxtSize.MEDIUM} value={t("players", "Players")} />
           <div className="flex">
-            {PlayerCounts.map((count) => {
+            {SupportedPlayerCounts.map((count) => {
               return (
                 <Button
                   key={count}
