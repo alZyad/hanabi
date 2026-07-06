@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a5b771ec9d9e614733d02cc549b9ee471d5f2199",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
