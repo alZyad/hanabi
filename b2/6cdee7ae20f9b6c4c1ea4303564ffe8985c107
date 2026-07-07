@@ -1,0 +1,25 @@
+src/locales/en.ts
+  s_ee68cd7be7730b::t_c6342d5893b9e3 21
+src/lib/firebase.ts
+  s_ee68cd7be7730b::t_99e38c9f9a5e53 90-138
+src/components/game.tsx
+  s_ee68cd7be7730b::t_d23b85f0a5f2f0 29
+  s_ee68cd7be7730b::t_ffec39df811ac4 265-266,268,270-271,278-279,285,287,289-290,296-298,300-301,303
+  s_ee68cd7be7730b::t_57208144417294 269,288
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b26cdee7ae20f9b6c4c1ea4303564ffe8985c107",
+  "prompts": {},
+  "sessions": {
+    "s_ee68cd7be7730b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "456cfc04-da08-4388-9522-75de45becf0a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
