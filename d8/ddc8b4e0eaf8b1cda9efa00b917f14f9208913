@@ -1,0 +1,56 @@
+src/locales/es.ts
+  s_ee68cd7be7730b::t_ae42bf717fa862 17-18
+src/locales/sk.ts
+  s_ee68cd7be7730b::t_d839a4c5a5814a 18-20
+src/locales/zh.ts
+  s_ee68cd7be7730b::t_20e3137107bf7a 18-19
+src/locales/pt.ts
+  s_ee68cd7be7730b::t_f4beb662a7c182 17-18
+src/lib/firebase.ts
+  s_ee68cd7be7730b::t_217cfada0a53d9 5
+  s_ee68cd7be7730b::t_11af0cd99a1d36 165
+src/locales/it.ts
+  s_ee68cd7be7730b::t_7cacab20fb008c 17-18
+src/components/lobby.tsx
+  s_ee68cd7be7730b::t_5642e36156ad68 182
+  s_ee68cd7be7730b::t_3bd751a8f6a3b1 11
+  s_ee68cd7be7730b::t_ed3f911feb01ef 68-71
+  s_ee68cd7be7730b::t_87e8f19a9a67a9 119,130
+src/locales/nl.ts
+  s_ee68cd7be7730b::t_1696e57f8ba749 16-17
+src/pages/join-game.tsx
+  s_ee68cd7be7730b::t_5738413c79d5b3 60
+src/locales/en.ts
+  s_ee68cd7be7730b::t_5f23a3204fa57e 24-25
+src/components/game.tsx
+  s_ee68cd7be7730b::t_c17ab81ec87b93 25-33
+  s_ee68cd7be7730b::t_208579ae3334f1 305
+src/lib/actions.ts
+  s_ee68cd7be7730b::t_fe5dcbae7b782c 29-31
+  s_ee68cd7be7730b::t_634f5946c83972 459-486
+src/locales/de.ts
+  s_ee68cd7be7730b::t_4838f11946ee7d 17-18
+src/locales/ru.ts
+  s_ee68cd7be7730b::t_08183d0563a4f2 22-24
+src/locales/fr.ts
+  s_ee68cd7be7730b::t_76bfa8988c3ccf 17-18
+src/pages/new-game.tsx
+  s_ee68cd7be7730b::t_bb2349b37d1ef1 10
+  s_ee68cd7be7730b::t_d91b1bffd6febe 79-81
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d8ddc8b4e0eaf8b1cda9efa00b917f14f9208913",
+  "prompts": {},
+  "sessions": {
+    "s_ee68cd7be7730b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "456cfc04-da08-4388-9522-75de45becf0a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
