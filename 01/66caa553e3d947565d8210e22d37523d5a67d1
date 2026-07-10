@@ -1,0 +1,32 @@
+tsconfig.tsbuildinfo
+  s_ee68cd7be7730b::t_0d5ccba44d668b 1
+src/components/GameIndex.tsx
+  h_78d9c443c6c3a1 23
+src/lib/actions.ts
+  h_78d9c443c6c3a1 27
+src/lib/state.ts
+  h_78d9c443c6c3a1 218-219,221-222
+src/lib/firebase.ts
+  h_78d9c443c6c3a1 81-82,86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0166caa553e3d947565d8210e22d37523d5a67d1",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_ee68cd7be7730b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "456cfc04-da08-4388-9522-75de45becf0a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
