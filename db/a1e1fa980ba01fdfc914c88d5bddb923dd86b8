@@ -1,0 +1,21 @@
+src/hooks/personalHints.ts
+  s_93fe5bcdd63990::t_95875e3783c5ab 20-24,26,45-62,64,76-87
+  s_93fe5bcdd63990::t_a3c1f60384cdc0 1-2,5-9
+  s_93fe5bcdd63990::t_dc8c61906e7e80 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "dba1e1fa980ba01fdfc914c88d5bddb923dd86b8",
+  "prompts": {},
+  "sessions": {
+    "s_93fe5bcdd63990": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "11f3c4bb-f5ee-433b-97e2-fc8027f72a04",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
