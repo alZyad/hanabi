@@ -1,0 +1,26 @@
+src/components/gameActionsStats.tsx
+  s_8a98ee712f1a11::t_ee67d5c55e9c42 40,42
+package.json
+  s_8a98ee712f1a11::t_665bc7bd52037e 45
+  s_8a98ee712f1a11::t_d0d9ef9997c8f0 20-21,33
+  s_8a98ee712f1a11::t_e526637674a51f 64-67
+  s_8a98ee712f1a11::t_128ad4197c5168 16,44
+yarn.lock
+  s_8a98ee712f1a11::t_a8d79e74e11d2b 198,216-222,1949-1954,1958-1960,1963,1967-1969,1972-1973,3094-3097,4576-4578,4591-4592,4607,4724-4726,4728-4729,4750-4752,4754-4755,4759-4761,4763-4769,6683-6685,6687-6688,6690,6692-6700,8006-8009
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "661a11ed03d4a9dc6530130240a8a85feef7d0ee",
+  "prompts": {},
+  "sessions": {
+    "s_8a98ee712f1a11": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39d038b2-3ff4-41f4-8ad4-55981e1e0e26",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
