@@ -1,0 +1,20 @@
+.vscode/settings.json
+  s_93d17a3cb55dc5::t_911c758c821abd 9
+  s_93d17a3cb55dc5::t_2a8c108c6dd4ee 12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "e0595d6f145d8d7aa5923a44ba45cfa978547608",
+  "prompts": {},
+  "sessions": {
+    "s_93d17a3cb55dc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "42b4930b-94f3-49d1-ab31-330488220e4d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
