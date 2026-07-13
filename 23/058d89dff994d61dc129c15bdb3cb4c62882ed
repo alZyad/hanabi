@@ -1,0 +1,38 @@
+src/components/personalHintArea.tsx
+  s_30a09d92c8cd68::t_3d49616870f19e 36,45,70,74-75,78-80
+  s_331745ae35af5d::t_51b1a78e2affb1 37
+  s_30a09d92c8cd68::t_9dda486e304dd7 39,47
+  s_30a09d92c8cd68::t_5914b389ba4501 59
+  s_30a09d92c8cd68::t_fedc91818582bb 60,65,71-73,76-77
+  s_30a09d92c8cd68::t_ed1893b0f0d3e0 1-35,38,40-44,46,48-58,61-64,66-69,81-83
+src/components/playerGame.tsx
+  s_30a09d92c8cd68::t_a1a7b80fc59100 9
+  s_30a09d92c8cd68::t_28abc7e5be97eb 346,349-352
+  s_30a09d92c8cd68::t_6339ca71eddb78 347-348,353-358,360-373
+src/hooks/personalHints.ts
+  s_30a09d92c8cd68::t_9c5d2f47b0040f 1-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "23058d89dff994d61dc129c15bdb3cb4c62882ed",
+  "prompts": {},
+  "sessions": {
+    "s_30a09d92c8cd68": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbc82d11-f342-47c6-a3dd-64cafeee9002",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_331745ae35af5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1d31d84-09df-4b88-af37-24705618800d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
