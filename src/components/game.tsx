@@ -104,14 +104,14 @@ export function Game(props: Props) {
 
     try {
       if (game.options.botsWait === 0) {
-        updateGame(play(game)).catch(logFailedPromise);
+        updateGame(play(game), "bot").catch(logFailedPromise);
         return;
       }
 
       setReaction(game, currentPlayer, "🧠").catch(logFailedPromise);
       const timeout = setTimeout(() => {
         try {
-          updateGame(play(game)).catch(logFailedPromise);
+          updateGame(play(game), "bot-timeout").catch(logFailedPromise);
           game.options.botsWait && setReaction(game, currentPlayer, null);
         } catch (e) {
           console.error(`[Bot] Error during play:`, e);
@@ -178,7 +178,7 @@ export function Game(props: Props) {
 
       newState = joinGame(newState, { id: playerId, name: botsName[i - 1] + " 🤖", bot: true });
 
-      await updateGame(newState);
+      await updateGame(newState, "fill-bots");
     }
   }, [game]);
 
@@ -223,7 +223,7 @@ export function Game(props: Props) {
       startedAt: Date.now(),
     };
 
-    updateGame(newState).then(() => {
+    updateGame(newState, "start-tutorial").then(() => {
       logEvent("Game", "Tutorial started");
     });
   }, [game]);
@@ -274,7 +274,7 @@ export function Game(props: Props) {
     const newState = joinGame(game, { id: playerId, ...player });
 
     onGameChange({ ...newState, synced: false });
-    updateGame(newState).catch(logFailedPromise);
+    updateGame(newState, "join").catch(logFailedPromise);
 
     logEvent("Game", "Player joined");
 
@@ -291,7 +291,7 @@ export function Game(props: Props) {
     const newState = joinGame(game, { id: playerId, ...bot, bot: true });
 
     onGameChange({ ...newState, synced: false });
-    updateGame(newState).catch(logFailedPromise);
+    updateGame(newState, "add-bot").catch(logFailedPromise);
 
     logEvent("Game", "Bot added");
   }
@@ -300,7 +300,7 @@ export function Game(props: Props) {
     const newState = startGameFromLobby(game, Date.now());
 
     onGameChange({ ...newState, synced: false });
-    await updateGame(newState);
+    await updateGame(newState, "start");
 
     logEvent("Game", "Game started");
   }
@@ -320,7 +320,7 @@ export function Game(props: Props) {
     }
 
     onGameChange({ ...newState, synced: false });
-    await updateGame(newState);
+    await updateGame(newState, "commit");
 
     logEvent("Game", "Turn played");
   }
@@ -448,7 +448,7 @@ export function Game(props: Props) {
     onStopReplay();
     const finishedGame = liveGame();
     const nextGame = recreateGame(finishedGame);
-    await updateGame(nextGame);
+    await updateGame(nextGame, "restart-create");
     log("Next Game Persisted");
     const updatedGame = { ...finishedGame, nextGameId: nextGame.id };
     // Pre-set the ref so the redirect effect treats the Firebase echo as
@@ -457,7 +457,7 @@ export function Game(props: Props) {
     // the effect), leaving a duplicate history entry that breaks the back
     // button.
     initialNextGameIdRef.current = nextGame.id;
-    await updateGame(updatedGame);
+    await updateGame(updatedGame, "restart-link");
     log("Link to nextGame updated");
     onGameChange(nextGame);
     log(`GameChange fired for ${nextGame.id}`);

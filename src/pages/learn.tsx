@@ -360,7 +360,7 @@ export default function Learn() {
       tutorial: true,
     });
 
-    await updateGame(game);
+    await updateGame(game, "learn-create");
 
     logEvent("Game", "Tutorial created");
 

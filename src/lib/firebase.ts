@@ -78,18 +78,73 @@ export async function loadGame(gameId: string) {
   });
 }
 
+let debugClientId: string;
+function clientId() {
+  if (!debugClientId) {
+    debugClientId = Math.random().toString(36).slice(2, 8);
+  }
+  return debugClientId;
+}
+
+function logDebug(gameId: string, entry: Record<string, unknown>) {
+  try {
+    database()
+      .ref(`/logs/${gameId}`)
+      .push({ t: Date.now(), client: clientId(), ...entry })
+      .catch(logFailedPromise);
+  } catch (e) {
+    console.debug(`DB Error: logDebug\n ${e}`);
+  }
+}
+
+function lastActionLabel(game: IGameState) {
+  const turn = game.turnsHistory[game.turnsHistory.length - 1];
+  if (!turn) return "-";
+
+  const a = turn.action;
+  if (a.action === "hint") {
+    return `hint p${a.from}->p${a.to} ${a.type}:${a.value}`;
+  }
+  return `${a.action} p${a.from} c${a.cardIndex}`;
+}
+
 export function subscribeToGame(gameId: string, callback: (game: IGameState) => void) {
   const ref = database().ref(`/games/${gameId}`);
+  let lastTurns = -1;
 
   ref.on("value", (event) => {
-    callback(rebuildGame(fillEmptyValues(event.val() as IGameState)));
+    const game = rebuildGame(fillEmptyValues(event.val() as IGameState));
+
+    const turns = game.turnsHistory.length;
+    const dropBy = lastTurns > turns ? lastTurns - turns : 0;
+    logDebug(gameId, {
+      dir: "in",
+      source: "snapshot",
+      turns,
+      currentPlayer: game.currentPlayer,
+      status: game.status,
+      action: lastActionLabel(game),
+      ...(dropBy > 0 && { drop: dropBy }),
+    });
+    lastTurns = turns;
+
+    callback(game);
   });
 
   return () => ref.off();
 }
 
-export async function updateGame(game: IGameState) {
+export async function updateGame(game: IGameState, source = "unknown") {
   window["hanab"] = cloneDeep(game);
+
+  logDebug(game.id, {
+    dir: "out",
+    source,
+    turns: game.turnsHistory.length,
+    currentPlayer: game.currentPlayer,
+    status: game.status,
+    action: lastActionLabel(game),
+  });
 
   try {
     await database().ref(`/games/${game.id}`).set(cleanState(game));
