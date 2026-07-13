@@ -18,3 +18,6 @@ Notes
 !.yarn/versions
 .pnp.*
 
+.env*
+
+tsconfig.tsbuildinfo

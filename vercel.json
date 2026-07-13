@@ -1,6 +1,4 @@
 {
-  "version": 2,
-  "scope": "pelica",
   "rewrites": [
     {
       "source": "/service-worker.js",
