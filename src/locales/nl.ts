@@ -11,6 +11,8 @@ export const nl = {
   invitationByPlayers_plural: "{{playersNames}} hebben je uitgenodigd voor een spel Hanab 🎉",
   invitationNoPlayers: "Je bent uitgenodigd voor een spel Hanab 🎉",
   gameFull: "Iedereen is er!",
+  lobbyReady: "{{count}} spelers — klaar wanneer jij het bent!",
+  needMorePlayers: "Wachten op minstens 2 spelers…",
   gameNotFull: "{{count}} / {{playersCount}} neemt reeds deel",
   gameNotFull_plural: "{{count}} / {{playersCount}} nemen reeds deel",
   startGame: "Spel starten",
