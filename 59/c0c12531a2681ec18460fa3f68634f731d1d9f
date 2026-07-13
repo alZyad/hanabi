@@ -1,0 +1,42 @@
+src/components/reviewComments.tsx
+  s_a46e5bb093ac6d::t_1f0e3b339488c6 115
+src/pages/learn.tsx
+  s_a46e5bb093ac6d::t_0f4e8f41b4d041 363
+src/components/game.tsx
+  s_a46e5bb093ac6d::t_78609773d4647d 460
+  s_a46e5bb093ac6d::t_5b848194d65dcb 294
+  s_a46e5bb093ac6d::t_fa99e247dfb24f 181
+  s_a46e5bb093ac6d::t_b3a37b7f113b33 303
+  s_a46e5bb093ac6d::t_5b1b490186bfb3 323
+  s_a46e5bb093ac6d::t_8661dba69cdae5 277
+  s_a46e5bb093ac6d::t_b8ded6e4356b38 107,114
+  s_a46e5bb093ac6d::t_2d6ad82c8e0c6d 451
+  s_a46e5bb093ac6d::t_28217c99728719 226
+src/components/rollbackArea.tsx
+  s_a46e5bb093ac6d::t_0609cd4cf55d90 45
+src/components/chatPopover.tsx
+  s_a46e5bb093ac6d::t_cbcfe49fddab6a 35
+src/pages/[gameId]/summary.tsx
+  s_a46e5bb093ac6d::t_0fcd88e77d9646 222-223
+src/pages/new-game.tsx
+  s_a46e5bb093ac6d::t_f053f5a00ff811 89-90
+src/lib/firebase.ts
+  s_a46e5bb093ac6d::t_61ad7260dc0d9e 81-99,102,105-119,125,128-134
+  s_a46e5bb093ac6d::t_9d2f534f0e7a65 135
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "59c0c12531a2681ec18460fa3f68634f731d1d9f",
+  "prompts": {},
+  "sessions": {
+    "s_a46e5bb093ac6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f85c993e-c880-4705-822f-933a8356bd46",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
