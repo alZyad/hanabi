@@ -13,12 +13,12 @@
     "@sentry/nextjs": "^8.25.0",
     "@types/classnames": "^2.2.11",
     "@types/lodash": "^4.14.168",
-    "@types/react-dom": "17",
+    "@types/react-dom": "18",
     "classnames": "^2.2.6",
     "firebase": "^8.3.0",
     "fireworks-canvas": "^2.6.0",
-    "i18next": "^19.9.2",
-    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next": "25",
+    "i18next-browser-languagedetector": "8",
     "lodash": "^4.17.21",
     "mem": "^8.0.0",
     "moment": "^2.29.1",
@@ -30,7 +30,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
-    "react-i18next": "^11.8.10",
+    "react-i18next": "15",
     "react-modal": "^3.12.1",
     "react-pose": "^4.0.10",
     "react-tiny-popover": "^8.1.4",
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "@types/nprogress": "^0.2.0",
-    "@types/react": "17.0.46",
-    "@types/react-modal": "^3.12.0",
+    "@types/react": "18",
+    "@types/react-modal": "^3.16.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "^4.18.0",
     "cross-env": "^7.0.3",
@@ -60,6 +60,10 @@
   },
   "engines": {
     "node": "24.x"
+  },
+  "resolutions": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
   },
   "dependenciesMeta": {
     "@sentry/cli": {
