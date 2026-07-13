@@ -1,0 +1,22 @@
+vercel.json
+  s_a46e5bb093ac6d::t_a35163c388e520 1-23
+.gitignore
+  s_a46e5bb093ac6d::t_4ae23f33c9b8f4 12
+  s_a46e5bb093ac6d::t_1c607b2ba6ef34 13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "f4e8a2605705b9238e5c6536dc1eca0086b8c5a7",
+  "prompts": {},
+  "sessions": {
+    "s_a46e5bb093ac6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f85c993e-c880-4705-822f-933a8356bd46",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
