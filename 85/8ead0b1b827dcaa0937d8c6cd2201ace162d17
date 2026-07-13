@@ -1,0 +1,42 @@
+.yarnrc.yml
+  s_7bcad2c85cd586::t_c7f01d343c6480 1
+package.json
+  s_7bcad2c85cd586::t_8b57a1df19b596 63,69
+  s_8a98ee712f1a11::t_3e8b24b107594f 40
+  s_8a98ee712f1a11::t_6158fe6aeac141 64-68
+  s_8a98ee712f1a11::t_0410bc7a545a53 58
+.gitignore
+  s_8a98ee712f1a11::t_774eca5e50b8d2 7
+  s_7bcad2c85cd586::t_0e99de11fca048 13-20
+yarn.lock
+  s_8a98ee712f1a11::t_9d0fb699ea781e 1-7328,7331-8237,8240-8308
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "858ead0b1b827dcaa0937d8c6cd2201ace162d17",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_7bcad2c85cd586": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3071cfcb-8812-4b7a-9018-3715b09bf8fb",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_8a98ee712f1a11": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39d038b2-3ff4-41f4-8ad4-55981e1e0e26",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
