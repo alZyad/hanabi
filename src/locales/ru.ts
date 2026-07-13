@@ -17,6 +17,8 @@ export const ru = {
   invitationByPlayers_plural: "{{playersNames}} приглашают Вас сыграть в Ханаби 🎉",
   invitationNoPlayers: "Вас приглашают сыграть в Ханаби 🎉",
   gameFull: "Все в сборе!",
+  lobbyReady: "{{count}} игроков — можно начинать!",
+  needMorePlayers: "Ожидаем минимум 2 игроков…",
   gameNotFull_0: "{{count}} / {{playersCount}} уже присоединился", // 1
   gameNotFull_1: "{{count}} / {{playersCount}} уже присоединились", // 2, 3, 4
   startGame: "Начать игру",

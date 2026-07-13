@@ -7,13 +7,11 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import { Checkbox, Field, Select, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
-import { newGame } from "~/lib/actions";
+import { MAX_PLAYERS, newGame } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
 import { generateShuffleSeed, readableUniqueId } from "~/lib/id";
 import { GameMode, GameVariant, IGameHintsLevel } from "~/lib/state";
-
-const PlayerCounts = [2, 3, 4, 5];
 
 const Variants = {
   [GameVariant.CLASSIC]: "classicVariant",
@@ -51,7 +49,6 @@ export default function NewGame() {
   const [offline, setOffline] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [seed, setSeed] = useState<string>();
-  const [playersCount, setPlayersCount] = useState(3);
   const [variant, setVariant] = useState(GameVariant.CLASSIC);
   const [allowRollback, setAllowRollback] = useState(true);
   const [preventLoss, setPreventLoss] = useState(false);
@@ -79,7 +76,7 @@ export default function NewGame() {
       newGame({
         id: gameId,
         variant,
-        playersCount,
+        playersCount: MAX_PLAYERS,
         seed,
         allowRollback,
         preventLoss,
@@ -101,31 +98,6 @@ export default function NewGame() {
     <div className="w-100 h-100 overflow-y-scroll pv4 flex items-center pv6-l relative bg-main-dark ph2 ph3-l shadow-5 br3">
       <HomeButton className="absolute top-1 right-1" />
       <div className="flex flex-column w-75-m w-70-l w-80" style={{ margin: "auto" }}>
-        <div className="flex justify-between ph1 items-center pb4 mb4 bb b--yellow-light">
-          <Txt size={TxtSize.MEDIUM} value={t("players", "Players")} />
-          <div className="flex">
-            {PlayerCounts.map((count) => {
-              return (
-                <Button
-                  key={count}
-                  className={classnames("ph3 ph4-l pv2", {
-                    "bg-lavender": playersCount !== count,
-                    "z-5": playersCount === count,
-                  })}
-                  size={ButtonSize.SMALL}
-                  style={{
-                    ...(playersCount === count && {
-                      transform: "scale(1.20)",
-                    }),
-                  }}
-                  text={`${count}`}
-                  onClick={() => setPlayersCount(count)}
-                />
-              );
-            })}
-          </div>
-        </div>
-
         <div className="flex flex-column pb2 mb2 bb b--yellow-light ph1">
           <div className="flex justify-between items-center">
             <Txt size={TxtSize.MEDIUM} value={t("mode", "Mode")} />
