@@ -1,0 +1,19 @@
+src/pages/[gameId]/index.tsx
+  s_93d17a3cb55dc5::t_2a7bfd0e07ea4c 12-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "f0cd18d63827f08acf4e3589276ce10c3db2d267",
+  "prompts": {},
+  "sessions": {
+    "s_93d17a3cb55dc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "42b4930b-94f3-49d1-ab31-330488220e4d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
