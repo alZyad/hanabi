@@ -86,7 +86,8 @@ export default function NewGame() {
         botsWait,
         colorBlindMode,
         gameMode: offline ? GameMode.PASS_AND_PLAY : GameMode.NETWORK,
-      })
+      }),
+      "create"
     );
 
     logEvent("Game", "Game created");

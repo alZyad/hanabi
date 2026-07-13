@@ -219,8 +219,8 @@ export default function Summary(props: Props) {
                   id: nextGameId,
                 });
 
-                await updateGame(nextGame);
-                await updateGame({ ...game, nextGameId: nextGameId });
+                await updateGame(nextGame, "summary-restart-create");
+                await updateGame({ ...game, nextGameId: nextGameId }, "summary-restart-link");
 
                 logEvent("Game", "Game created");
 

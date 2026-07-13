@@ -112,7 +112,7 @@ export function ReviewCommentPopover({
                     afterTurnNumber: turnNumber,
                     comment: msg,
                   });
-                  updateGame(game.originalGame ? game.originalGame : game);
+                  updateGame(game.originalGame ? game.originalGame : game, "review-comment");
                   setReviewCommentOpenForTurn(undefined);
                 }}
               />
