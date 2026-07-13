@@ -1,0 +1,33 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "895de4365d97dc3a31ecfceb1cc3b2d5433f0f4d",
+  "prompts": {},
+  "sessions": {
+    "s_30a09d92c8cd68": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbc82d11-f342-47c6-a3dd-64cafeee9002",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_331745ae35af5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1d31d84-09df-4b88-af37-24705618800d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    },
+    "s_93fe5bcdd63990": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "11f3c4bb-f5ee-433b-97e2-fc8027f72a04",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
