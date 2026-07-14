@@ -14,7 +14,6 @@ import IGameState, {
   IHand,
   IHintAction,
   IHintLevel,
-  IMessage,
   INumber,
   IPlayer,
   isCardAction,

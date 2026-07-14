@@ -1,7 +1,15 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { cloneDeep } from "lodash";
-import IGameState, { cleanState, fillEmptyValues, GameMode, IGameStatus, IMessage, IPlayer, rebuildGame } from "~/lib/state";
+import IGameState, {
+  cleanState,
+  fillEmptyValues,
+  GameMode,
+  IGameStatus,
+  IMessage,
+  IPlayer,
+  rebuildGame,
+} from "~/lib/state";
 import { MAX_PLAYERS } from "~/lib/actions";
 import { logFailedPromise } from "~/lib/errors";
 
