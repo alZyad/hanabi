@@ -2,8 +2,7 @@ import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button, { ButtonSize } from "~/components/ui/button";
 import { useGame, useSelfPlayer } from "~/hooks/game";
-import { sendMessage } from "~/lib/actions";
-import { updateGame } from "~/lib/firebase";
+import { addMessage } from "~/lib/firebase";
 import { uniqueId } from "~/lib/id";
 import { logFailedPromise } from "~/lib/errors";
 
@@ -26,13 +25,12 @@ export default function ChatPopover(props: Props) {
   }, [messageRef]);
 
   function onSubmit() {
-    const newGame = sendMessage(game, {
+    addMessage(game.id, {
       id: uniqueId(),
       content: message,
       from: selfPlayer.index,
       turn: game.turnsHistory.length,
-    });
-    updateGame(newGame, "chat").catch(logFailedPromise);
+    }).catch(logFailedPromise);
 
     setMessage("");
     onClose();
