@@ -7,6 +7,7 @@ import posed, { PoseGroup } from "react-pose";
 import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import ChatPopover from "~/components/chatPopover";
 import CardNotesArea from "~/components/cardNotesArea";
+import CardNotesOnboarding from "~/components/cardNotesOnboarding";
 import PlayerName, { PlayerNameSize } from "~/components/playerName";
 import PlayerStats from "~/components/playerStats";
 import ReactionsPopover from "~/components/reactionsPopover";
@@ -16,6 +17,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import Vignettes from "~/components/vignettes";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
+import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
 import { useReplay } from "~/hooks/replay";
 import { matchColor, matchNumber, MaxHints } from "~/lib/actions";
 import IGameState, {
@@ -118,6 +120,7 @@ export default function PlayerGame(props: Props) {
   const selfPlayer = useSelfPlayer(game);
   const currentPlayer = useCurrentPlayer(game);
   const tutorialAction = useTutorialAction();
+  const onboarding = useCardNotesOnboarding();
 
   function nothingInvoked() {
     return chatOpen === false && reactionsOpen === false;
@@ -148,6 +151,11 @@ export default function PlayerGame(props: Props) {
   }, [game.status, revealCards, game.options.gameMode, selfPlayer, self]);
 
   const canPlay = [IGameStatus.ONGOING, IGameStatus.OVER].includes(game.status) && !replay.cursor;
+
+  const isSelf = self && player === selfPlayer && !replay.cursor;
+  const showCardNotes = isSelf && selected;
+  const onboardingCardIndex =
+    showCardNotes && onboarding.active ? player.hand.length - 3 : null;
 
   const hasSelectedCard = selectedCard !== null;
   const cardContext = selected
@@ -369,7 +377,19 @@ export default function PlayerGame(props: Props) {
                           }
                         }}
                       />
-                      {selected && player === selfPlayer && !replay.cursor && <CardNotesArea card={card} />}
+                      {showCardNotes && (
+                        <CardNotesOnboarding
+                          body={"Use these to track implicit hints you've deduced.\nOnly you can see them."}
+                          isOpen={onboardingCardIndex === i}
+                          positions={["bottom", "right"]}
+                          title="Card notes"
+                          onDismiss={onboarding.dismiss}
+                        >
+                          <div>
+                            <CardNotesArea card={card} />
+                          </div>
+                        </CardNotesOnboarding>
+                      )}
                     </div>
                   </AnimatedCard>
                 ))}
