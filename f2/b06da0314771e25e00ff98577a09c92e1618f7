@@ -1,0 +1,39 @@
+src/components/playerGame.tsx
+  s_b9053c6fb3a276::t_a5a628105ec38c 384,387
+src/locales/de.ts
+  s_b9053c6fb3a276::t_a689f08b77daeb 2-4
+src/locales/en.ts
+  s_b9053c6fb3a276::t_5f84589562bce8 4-5
+src/locales/es.ts
+  s_b9053c6fb3a276::t_26ea9ac70cb8de 2-4
+src/locales/fr.ts
+  s_b9053c6fb3a276::t_18c7277f767444 2-4
+src/locales/it.ts
+  s_b9053c6fb3a276::t_85c93598d8d9f5 2-4
+src/locales/nl.ts
+  s_b9053c6fb3a276::t_e166c84929d319 2-4
+src/locales/pt.ts
+  s_b9053c6fb3a276::t_db2ed288c2b0ab 2-4
+src/locales/ru.ts
+  s_b9053c6fb3a276::t_18f16539e36271 7-9
+src/locales/sk.ts
+  s_b9053c6fb3a276::t_8ef4eba567a097 2-4
+src/locales/zh.ts
+  s_b9053c6fb3a276::t_8ffa183eb95f2a 2-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "f2b06da0314771e25e00ff98577a09c92e1618f7",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
