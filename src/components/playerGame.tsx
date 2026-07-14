@@ -18,6 +18,7 @@ import Txt, { TxtSize } from "~/components/ui/txt";
 import Vignettes from "~/components/vignettes";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
 import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
+import { useUserPreferences } from "~/hooks/userPreferences";
 import { useReplay } from "~/hooks/replay";
 import { matchColor, matchNumber, MaxHints } from "~/lib/actions";
 import IGameState, {
@@ -121,6 +122,7 @@ export default function PlayerGame(props: Props) {
   const currentPlayer = useCurrentPlayer(game);
   const tutorialAction = useTutorialAction();
   const onboarding = useCardNotesOnboarding();
+  const [userPreferences] = useUserPreferences();
 
   function nothingInvoked() {
     return chatOpen === false && reactionsOpen === false;
@@ -153,9 +155,8 @@ export default function PlayerGame(props: Props) {
   const canPlay = [IGameStatus.ONGOING, IGameStatus.OVER].includes(game.status) && !replay.cursor;
 
   const isSelf = self && player === selfPlayer && !replay.cursor;
-  const showCardNotes = isSelf && selected;
-  const onboardingCardIndex =
-    showCardNotes && onboarding.active ? player.hand.length - 3 : null;
+  const showCardNotes = isSelf && selected && !userPreferences.disableCardNotes;
+  const onboardingCardIndex = showCardNotes && onboarding.active ? player.hand.length - 3 : null;
 
   const hasSelectedCard = selectedCard !== null;
   const cardContext = selected

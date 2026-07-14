@@ -1,5 +1,6 @@
 export const en = {
   codedHintMarkers: "Coded hint markers on cards",
+  disableCardNotes: "Disable personal card notes",
   hanab: "Hanab",
   turn: "Turn",
   save: "Save",
