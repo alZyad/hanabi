@@ -380,10 +380,10 @@ export default function PlayerGame(props: Props) {
                       />
                       {showCardNotes && (
                         <CardNotesOnboarding
-                          body={"Use these to track implicit hints you've deduced.\nOnly you can see them."}
+                          body={t("cardNotesOnboardingBody")}
                           isOpen={onboardingCardIndex === i}
                           positions={["bottom", "right"]}
-                          title="Card notes"
+                          title={t("cardNotesOnboardingTitle")}
                           onDismiss={onboarding.dismiss}
                         >
                           <div>

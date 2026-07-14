@@ -1,4 +1,8 @@
 export const nl = {
+  disableCardNotes: "Persoonlijke kaartnotities uitschakelen",
+  cardNotesOnboardingTitle: "Kaartnotities",
+  cardNotesOnboardingBody:
+    "Gebruik ze om impliciete hints die je hebt afgeleid bij te houden.\nAlleen jij kunt ze zien.",
   hanab: "Hanab",
   welcome: "Welkom",
   newGame: "Nieuw spel",
