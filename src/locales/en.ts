@@ -18,6 +18,8 @@ export const en = {
   invitationByPlayers_plural: "{{playersNames}} are inviting you to a game of Hanab 🎉",
   invitationNoPlayers: "You're being invited to a game of Hanab 🎉",
   gameFull: "Everybody's here!",
+  lobbyReady: "{{count}} players — ready when you are!",
+  needMorePlayers: "Waiting for at least 2 players…",
   gameNotFull: "{{count}} / {{playersCount}} joined already",
   gameNotFull_plural: "{{count}} / {{playersCount}} joined already", // necessary in French
   startGame: "Start game",

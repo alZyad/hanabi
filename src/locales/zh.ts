@@ -13,6 +13,8 @@ export const zh = {
   invitationByPlayers_plural: "{{playersNames}} 邀请你来一局华火 🎉",
   invitationNoPlayers: "有人邀请你来一局华火 🎉",
   gameFull: "人齐了！",
+  lobbyReady: "{{count}} 名玩家 — 随时可以开始！",
+  needMorePlayers: "至少需要 2 名玩家…",
   gameNotFull: "{{count}} / {{playersCount}} 已加入",
   gameNotFull_plural: "{{count}} / {{playersCount}} 已加入", // necessary in French
   startGame: "开始游戏",

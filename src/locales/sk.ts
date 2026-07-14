@@ -12,6 +12,8 @@ export const sk = {
   invitationByPlayers_1: "{{playersNames}} ťa pozývajú zahrať si Hanab 🎉",
   invitationNoPlayers: "Boli ste pozvaní zahrať si Hanab 🎉",
   gameFull: "Všetci sú tu!",
+  lobbyReady: "{{count}} hráči — začni, keď budeš chcieť!",
+  needMorePlayers: "Čaká sa aspoň na 2 hráčov…",
   gameNotFull_0: "{{count}} z {{playersCount}} hráčov sa pripojil",
   gameNotFull_1: "{{count}} z {{playersCount}} hráčov sa pripojili",
   gameNotFull_2: "{{count}} z {{playersCount}} hráčov sa pripojilo",

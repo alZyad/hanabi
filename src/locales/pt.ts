@@ -12,6 +12,8 @@ export const pt = {
   invitationByPlayers_plural: "{{playerNames}} estão te convidando para um jogo de Hanab 🎉",
   invitationNoPlayers: "Você está sendo convidado para um jogo de Hanab 🎉",
   gameFull: "Todos estão aqui!",
+  lobbyReady: "{{count}} jogadores — quando quiser!",
+  needMorePlayers: "Aguardando pelo menos 2 jogadores…",
   gameNotFull: "{{count}} / {{playersCount}} já entrou",
   gameNotFull_plural: "{{count}} / {{playersCount}} já entraram",
   startGame: "Começar jogo",
