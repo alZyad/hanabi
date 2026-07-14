@@ -1,0 +1,37 @@
+src/hooks/cardNotesOnboarding.ts
+  s_ebab056c1f5ea1::t_d5ba98f02f0f12 1-19
+src/components/cardNotesOnboarding.tsx
+  s_ebab056c1f5ea1::t_610412a22e6c1d 1-51,53
+  s_b9053c6fb3a276::t_f5c5c05b63d94c 52,54
+src/components/playerGame.tsx
+  s_ebab056c1f5ea1::t_09514bbf77b680 10
+  s_ebab056c1f5ea1::t_326fe60d2be0e1 123
+  s_ebab056c1f5ea1::t_d3dd7b16791fde 20
+  s_ebab056c1f5ea1::t_b7fd63162c2362 155-158
+  s_ebab056c1f5ea1::t_0c3c629548f642 380-390
+  s_b9053c6fb3a276::t_2ee1868849a5a5 159,391-392
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "a57423190fd861a238263dfd0dcb6fa711158b72",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_ebab056c1f5ea1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8443ed34-92df-4418-be06-9fa5337ee366",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
