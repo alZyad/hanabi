@@ -1,0 +1,31 @@
+.gitignore
+  s_b9053c6fb3a276::t_0901f012618b67 7,13-20
+.vscode/settings.json
+  s_b9053c6fb3a276::t_5b5549a71ef88a 9,11-13
+.yarnrc.yml
+  s_b9053c6fb3a276::t_98b191facc0e48 1
+package.json
+  s_b9053c6fb3a276::t_d7bc7d613832f9 16,20-21,33,40,44-45,58,63-73
+src/components/gameActionsStats.tsx
+  s_b9053c6fb3a276::t_a9aa9d028e9413 40,42
+src/pages/[gameId]/index.tsx
+  s_b9053c6fb3a276::t_40bd8dcb1d450c 12-16
+yarn.lock
+  s_b9053c6fb3a276::t_838fec268912a2 1-7311,7314-8220,8223-8291
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "4256534a039a0411879b8518e8d2a16f88ff0fa7",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
