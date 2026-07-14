@@ -6,8 +6,9 @@
       "typescript",
       "typescriptreact"
     ],
-    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "js/ts.preferences.importModuleSpecifier": "non-relative",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    }
+      "source.fixAll.eslint": "always"
+    },
+    "js/ts.tsdk.path": "node_modules/typescript/lib"
   }

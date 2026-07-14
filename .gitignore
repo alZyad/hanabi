@@ -4,10 +4,19 @@
 .next
 node_modules
 .DS_Store
+*.tsbuildinfo
 
 .now
 .vercel
 Notes
+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 .env*
 
