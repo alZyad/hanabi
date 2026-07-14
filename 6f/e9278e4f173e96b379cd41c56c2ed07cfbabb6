@@ -1,0 +1,25 @@
+src/components/playerGame.tsx
+  s_b9053c6fb3a276::t_8fb5b3f57e3679 21,125,158
+src/components/userPreferencesDialog.tsx
+  s_b9053c6fb3a276::t_e8708ccf041f10 28-31,58-62
+src/hooks/userPreferences.ts
+  s_b9053c6fb3a276::t_8d3b0891fc83f0 7,16
+src/locales/en.ts
+  s_b9053c6fb3a276::t_f5765a4129c843 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "6fe9278e4f173e96b379cd41c56c2ed07cfbabb6",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
