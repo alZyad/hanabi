@@ -1,0 +1,23 @@
+src/locales/de.ts
+  s_b9053c6fb3a276::t_525216ba00a019 4-5
+src/locales/nl.ts
+  s_b9053c6fb3a276::t_525216ba00a019 4-5
+src/components/playerGame.tsx
+  s_b9053c6fb3a276::t_525216ba00a019 159
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "e1a7d256ed6207513ddbd9a0ba000a0369b7a745",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
