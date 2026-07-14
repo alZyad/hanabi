@@ -25,6 +25,10 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
     const modifiedPreferences = { ...userPreferences, codedHintMarkers: !userPreferences.codedHintMarkers };
     saveUserPreferences(modifiedPreferences);
   }
+  function toggleDisableCardNotes() {
+    const modifiedPreferences = { ...userPreferences, disableCardNotes: !userPreferences.disableCardNotes };
+    saveUserPreferences(modifiedPreferences);
+  }
 
   return (
     <Modal isOpen onRequestClose={() => onCloseArea()}>
@@ -50,6 +54,11 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
               <Checkbox checked={userPreferences.codedHintMarkers} onChange={() => toggleCodedHintMarkers()} />
               &nbsp;
               <Txt value={t("codedHintMarkers")} />
+            </div>
+            <div className="flex flex-row justify-start-l items-center">
+              <Checkbox checked={userPreferences.disableCardNotes} onChange={() => toggleDisableCardNotes()} />
+              &nbsp;
+              <Txt value={t("disableCardNotes")} />
             </div>
           </div>
         </div>

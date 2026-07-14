@@ -1,4 +1,8 @@
 export const de = {
+  disableCardNotes: "Persönliche Kartennotizen deaktivieren",
+  cardNotesOnboardingTitle: "Kartennotizen",
+  cardNotesOnboardingBody:
+    "Nutze sie, um implizite Hinweise festzuhalten, die du abgeleitet hast.\nNur du kannst sie sehen.",
   hanab: "Hanab",
   welcome: "Willkommen",
   newGame: "Neues Spiel",

@@ -4,6 +4,9 @@
 // * _2 is for 0, 5, 6, 20, 25...
 
 export const ru = {
+  disableCardNotes: "Отключить личные заметки на картах",
+  cardNotesOnboardingTitle: "Заметки на картах",
+  cardNotesOnboardingBody: "Используй их, чтобы отмечать неявные подсказки, которые ты вывел.\nИх видишь только ты.",
   hanab: "Ханаби",
   welcome: "Добро пожаловать",
   newGame: "Новая игра",

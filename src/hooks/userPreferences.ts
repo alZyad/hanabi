@@ -4,6 +4,7 @@ export interface UserPreferences {
   soundOnStrike?: boolean;
   showFireworksAtGameEnd?: boolean;
   codedHintMarkers?: boolean;
+  disableCardNotes?: boolean;
 }
 
 type ValueAndSetter<T> = [T, (newValue: T) => void];
@@ -12,6 +13,7 @@ const DefaultPreferences: UserPreferences = {
   soundOnStrike: true,
   showFireworksAtGameEnd: true,
   codedHintMarkers: false,
+  disableCardNotes: false,
 };
 export function loadUserPreferences(): UserPreferences {
   if (window) {
