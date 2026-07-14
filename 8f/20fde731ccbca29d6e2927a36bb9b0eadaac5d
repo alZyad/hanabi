@@ -1,0 +1,63 @@
+src/lib/state.ts
+  s_0269aeee716591::t_ce65fb02697124 34-49
+  s_0269aeee716591::t_dd04b53c1a7c11 227-240,245-248,255
+  s_0269aeee716591::t_cab8362746c6c7 270-271,276-283
+  s_0269aeee716591::t_a9e90d8c1d789d 226
+  s_0269aeee716591::t_d4895ecc30323c 256
+  s_0269aeee716591::t_9b829b5c3e394e 2
+src/components/GameIndex.tsx
+  s_0269aeee716591::t_6b234ceb3e9015 39
+  s_0269aeee716591::t_e4973dcd409e98 5,10,12,15,34-38,40-42
+src/components/game.tsx
+  s_0269aeee716591::t_aef996eab9bafb 40,44
+  s_0269aeee716591::t_61c7e407bb03bb 36
+  s_0269aeee716591::t_8c9e6d898b3687 24,151-152
+src/components/gameBoard.tsx
+  s_0269aeee716591::t_b9e4659ac866b8 3,6
+  s_0269aeee716591::t_a12188618b3f81 54-59
+src/lib/firebase.ts
+  s_0269aeee716591::t_396f838b5f05fa 82,89,99
+  s_0269aeee716591::t_bbf288d2c03522 4-12
+src/pages/[gameId]/summary.tsx
+  s_0269aeee716591::t_3e806538460ecc 18
+  s_0269aeee716591::t_4d6857ffb5a797 116-119
+src/pages/new-game.tsx
+  s_0269aeee716591::t_dae0afbc4d919c 10
+  s_0269aeee716591::t_bc9d54be1aa441 76
+src/components/playedCards.tsx
+  s_0269aeee716591::t_0e178cbab3be76 7,11,15,19
+src/components/lobbyView.tsx
+  s_0269aeee716591::t_f9d6345d163780 1-162,170-199,205-264
+  s_0269aeee716591::t_e99b14cf22478d 163-169
+  s_0269aeee716591::t_87daf151adbd7a 200-204
+src/lib/actions.ts
+  s_0269aeee716591::t_65d5f610421769 17
+  s_0269aeee716591::t_abf9a1b1c711cd 35,365,367,369,432-464
+  s_0269aeee716591::t_b06328476449b7 492-493,495,499-500,503-504,509-510,517,520
+  s_0269aeee716591::t_b764f67c7ff09c 33-34
+  s_0269aeee716591::t_6067b685f3f567 36
+  s_0269aeee716591::t_7f88dfa1891096 362-364
+  s_0269aeee716591::t_e03b3663a05884 351,356-361
+src/components/faceDownHand.tsx
+  s_0269aeee716591::t_a8a3fa3e3508e0 1-14
+src/components/board.tsx
+  s_0269aeee716591::t_5657a3483188a6 39,43,49
+  s_0269aeee716591::t_710f1cdf7df4c1 1-6,8-38,40-42,44-48,50-60
+  s_0269aeee716591::t_6d37bbd16d4784 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "8f20fde731ccbca29d6e2927a36bb9b0eadaac5d",
+  "prompts": {},
+  "sessions": {
+    "s_0269aeee716591": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fce6faaf-66f8-469a-a339-afc4f9aac45b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
