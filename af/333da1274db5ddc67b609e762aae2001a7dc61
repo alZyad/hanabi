@@ -1,0 +1,39 @@
+src/components/cardNotesArea.tsx
+  s_287f26bc5e33fc::t_6711be83e6eb1c 6
+  s_287f26bc5e33fc::t_040559e8d93ec8 25
+  s_287f26bc5e33fc::t_e93b5082501d0e 52
+  s_287f26bc5e33fc::t_79e9a5898406ac 3-5
+  s_287f26bc5e33fc::t_b21068e7b57695 7-9,22-24
+  s_287f26bc5e33fc::t_09fc14851cd1d7 26-28,49-51
+  s_287f26bc5e33fc::t_797de8280420b8 53-55
+  s_287f26bc5e33fc::t_c64053da596642 1-2,10-21,29-48,56-90
+src/components/playerGame.tsx
+  s_287f26bc5e33fc::t_9e6c3312a73fee 372
+  s_287f26bc5e33fc::t_868050a846bdd9 9
+  s_287f26bc5e33fc::t_f12310b4e7b8de 369-371
+  s_287f26bc5e33fc::t_dd404a60681880 373
+  s_287f26bc5e33fc::t_008ad342f73105 346-358,360-368
+src/hooks/cardNotes.ts
+  s_287f26bc5e33fc::t_c790ca92355910 1-94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "af333da1274db5ddc67b609e762aae2001a7dc61",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_287f26bc5e33fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7f4c6b2-0bae-413c-9b91-3729a4288941",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
