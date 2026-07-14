@@ -1,0 +1,66 @@
+tsconfig.tsbuildinfo
+  s_a46e5bb093ac6d::t_f365dc8612a2e4 1
+src/locales/ru.ts
+  s_a46e5bb093ac6d::t_d4924f3e3e62c5 20-21
+src/locales/it.ts
+  s_a46e5bb093ac6d::t_969ea12b3d7c8c 15-16
+src/locales/sk.ts
+  s_a46e5bb093ac6d::t_124349eddbcf07 15-16
+src/pages/join-game.tsx
+  s_a46e5bb093ac6d::t_f149fdefecb473 7
+  s_a46e5bb093ac6d::t_a758c3a1a3b7f2 61
+src/locales/pt.ts
+  s_a46e5bb093ac6d::t_e3af0e5e11e452 15-16
+src/locales/zh.ts
+  s_a46e5bb093ac6d::t_b0ab20e671b4f1 16-17
+src/locales/es.ts
+  s_a46e5bb093ac6d::t_57c2f6283456b2 15-16
+src/locales/en.ts
+  s_a46e5bb093ac6d::t_05d13e52679e72 21-22
+src/lib/actions.ts
+  s_a46e5bb093ac6d::t_04b6c9d4ebfe9a 459-473
+  s_a46e5bb093ac6d::t_6298334a896787 29-31
+  s_a46e5bb093ac6d::t_74c7be2777308f 355
+src/components/game.tsx
+  s_a46e5bb093ac6d::t_ef7ed0cc700281 25-33
+  s_a46e5bb093ac6d::t_934409fc9874c2 300
+src/lib/firebase.ts
+  s_a46e5bb093ac6d::t_9b0d1df57256ee 116
+  s_a46e5bb093ac6d::t_59d76598a87edc 5
+src/locales/nl.ts
+  s_a46e5bb093ac6d::t_3ca9d5c5659064 14-15
+src/locales/fr.ts
+  s_a46e5bb093ac6d::t_e04f148a14c74a 15-16
+src/pages/new-game.tsx
+  s_a46e5bb093ac6d::t_ed8ea802f0ec36 79
+  s_a46e5bb093ac6d::t_8e374ecb636386 10
+src/locales/de.ts
+  s_a46e5bb093ac6d::t_15b63531650f08 15-16
+src/components/lobby.tsx
+  s_a46e5bb093ac6d::t_fd8901ef741cd2 11
+  s_a46e5bb093ac6d::t_b0b4a6763f6a68 68,70
+  s_a46e5bb093ac6d::t_6650ff6b51a765 122-124
+pnpm-lock.yaml
+  s_a46e5bb093ac6d::t_593a23ff0fed84 1-13305
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "5084b14e97925676d0b75d838be50a23a1f0bdd8",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_a46e5bb093ac6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f85c993e-c880-4705-822f-933a8356bd46",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
