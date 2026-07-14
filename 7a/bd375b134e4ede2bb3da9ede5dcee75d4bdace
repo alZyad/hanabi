@@ -1,0 +1,19 @@
+src/lib/firebase.ts
+  s_0495c0c4a84b3f::t_5b55834fd0b950 4-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "7abd375b134e4ede2bb3da9ede5dcee75d4bdace",
+  "prompts": {},
+  "sessions": {
+    "s_0495c0c4a84b3f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "25d72a7a-323f-41e0-93c2-2dbe66863c10",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
