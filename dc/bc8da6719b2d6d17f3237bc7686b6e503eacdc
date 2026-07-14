@@ -1,0 +1,37 @@
+src/locales/de.ts
+  s_b9053c6fb3a276::t_615d2ad5a5f970 15-16
+src/locales/en.ts
+  s_b9053c6fb3a276::t_260e697d100c7f 21-22
+src/locales/es.ts
+  s_b9053c6fb3a276::t_07e4c1bc86381f 15-16
+src/locales/fr.ts
+  s_b9053c6fb3a276::t_50a4cc6b1b05d8 15-16
+src/locales/it.ts
+  s_b9053c6fb3a276::t_4c46d03bdeec52 15-16
+src/locales/nl.ts
+  s_b9053c6fb3a276::t_6688a9ba946639 14-15
+src/locales/pt.ts
+  s_b9053c6fb3a276::t_0b2f9a144d1799 15-16
+src/locales/ru.ts
+  s_b9053c6fb3a276::t_5ae312d9eb36a8 20-21
+src/locales/sk.ts
+  s_b9053c6fb3a276::t_9d69db937c1bc3 15-16
+src/locales/zh.ts
+  s_b9053c6fb3a276::t_b5706f0be26562 16-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "dcbc8da6719b2d6d17f3237bc7686b6e503eacdc",
+  "prompts": {},
+  "sessions": {
+    "s_b9053c6fb3a276": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "701bb685-eef4-4625-ad0a-71197c98d166",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
