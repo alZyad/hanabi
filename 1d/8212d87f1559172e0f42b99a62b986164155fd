@@ -1,0 +1,22 @@
+src/components/chatPopover.tsx
+  s_0495c0c4a84b3f::t_110c6e2e4a1569 5,28,33
+src/lib/firebase.ts
+  s_0495c0c4a84b3f::t_110c6e2e4a1569 4,157-162
+  s_0495c0c4a84b3f::t_69197f44210d35 163-164
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "1d8212d87f1559172e0f42b99a62b986164155fd",
+  "prompts": {},
+  "sessions": {
+    "s_0495c0c4a84b3f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "25d72a7a-323f-41e0-93c2-2dbe66863c10",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
