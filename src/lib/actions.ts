@@ -226,14 +226,6 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
   return s;
 }
 
-export function sendMessage(state: IGameState, message: IMessage) {
-  const newGame = cloneDeep(state);
-
-  newGame.messages.push(message);
-
-  return newGame;
-}
-
 /**
  * Rollback the state for the given amount of turns
  */
