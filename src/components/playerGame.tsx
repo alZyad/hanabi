@@ -6,6 +6,7 @@ import { ArrowContainer, Popover } from "react-tiny-popover";
 import posed, { PoseGroup } from "react-pose";
 import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import ChatPopover from "~/components/chatPopover";
+import CardNotesArea from "~/components/cardNotesArea";
 import PlayerName, { PlayerNameSize } from "~/components/playerName";
 import PlayerStats from "~/components/playerStats";
 import ReactionsPopover from "~/components/reactionsPopover";
@@ -342,31 +343,34 @@ export default function PlayerGame(props: Props) {
               <PoseGroup>
                 {player.hand.map((card, i) => (
                   <AnimatedCard key={card.id}>
-                    <Card
-                      card={card}
-                      className={classnames({
-                        "ma1": selected,
-                        "mr1 mr2-l": i < player.hand.length - 1,
-                      })}
-                      context={cardContext}
-                      hidden={hideCards}
-                      position={i}
-                      selected={
-                        selected &&
-                        (player === selfPlayer ? selectedCard === i : isCardHintable(game, pendingHint, card))
-                      }
-                      size={selected ? CardSize.LARGE : CardSize.MEDIUM}
-                      style={{
-                        ...(selected && { transition: "all 50ms ease-in-out" }),
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectPlayer(player, i);
-                        if (player === selfPlayer) {
-                          selectCard(i);
+                    <div className="flex flex-column items-center">
+                      <Card
+                        card={card}
+                        className={classnames({
+                          "ma1": selected,
+                          "mr1 mr2-l": i < player.hand.length - 1,
+                        })}
+                        context={cardContext}
+                        hidden={hideCards}
+                        position={i}
+                        selected={
+                          selected &&
+                          (player === selfPlayer ? selectedCard === i : isCardHintable(game, pendingHint, card))
                         }
-                      }}
-                    />
+                        size={selected ? CardSize.LARGE : CardSize.MEDIUM}
+                        style={{
+                          ...(selected && { transition: "all 50ms ease-in-out" }),
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectPlayer(player, i);
+                          if (player === selfPlayer) {
+                            selectCard(i);
+                          }
+                        }}
+                      />
+                      {selected && player === selfPlayer && !replay.cursor && <CardNotesArea card={card} />}
+                    </div>
                   </AnimatedCard>
                 ))}
               </PoseGroup>
