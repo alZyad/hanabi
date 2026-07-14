@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/database";
 import { cloneDeep } from "lodash";
 import IGameState, { cleanState, fillEmptyValues, GameMode, IGameStatus, IPlayer, rebuildGame } from "~/lib/state";
+import { MAX_PLAYERS } from "~/lib/actions";
 import { logFailedPromise } from "~/lib/errors";
 
 function database() {
@@ -112,6 +113,6 @@ function gameIsPublic(game: IGameState) {
     game.status === IGameStatus.LOBBY &&
     game.options.gameMode === GameMode.NETWORK &&
     game.players.length &&
-    game.players.length < game.options.playersCount
+    game.players.length < MAX_PLAYERS
   );
 }

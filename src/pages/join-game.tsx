@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import HomeButton from "~/components/homeButton";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
+import { MAX_PLAYERS } from "~/lib/actions";
 import { loadPublicGames, subscribeToPublicGames } from "~/lib/firebase";
 import IGameState from "~/lib/state";
 
@@ -57,7 +58,7 @@ export default function JoinGame(props: Props) {
             <Txt className="nowrap mb6" size={TxtSize.LARGE} value={t("availableRooms", "Available rooms")} />
             {games.map((game) => (
               <div key={game.id} className="flex justify-between items-center mb3 w-100 mt3">
-                <Txt className="mr4 silver" value={`${game.players.length} / ${game.options.playersCount}`} />
+                <Txt className="mr4 silver" value={`${game.players.length} / ${MAX_PLAYERS}`} />
                 <Txt className="flex-grow-1" value={`${game.players.map((p) => p.name).join(", ")}`} />
                 <Button
                   className="ml2 flex justify-center"

@@ -8,6 +8,7 @@ import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
+import { MAX_PLAYERS, MIN_PLAYERS } from "~/lib/actions";
 import { GameMode, IPlayer } from "~/lib/state";
 
 function listPlayerNames(players: IPlayer[]) {
@@ -64,9 +65,9 @@ export default function Lobby(props: Props) {
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const gameFull = game.players.length === game.options.playersCount;
+  const gameFull = game.players.length === MAX_PLAYERS;
   const canJoin = (game.options.gameMode === GameMode.PASS_AND_PLAY || !selfPlayer) && !gameFull;
-  const canStart = gameFull;
+  const canStart = game.players.length >= MIN_PLAYERS;
 
   const shareLink = `${host}/${router.query.gameId}`;
   const inputRef = React.createRef<HTMLInputElement>();
@@ -118,17 +119,15 @@ export default function Lobby(props: Props) {
                     value={
                       gameFull
                         ? t("gameFull")
-                        : t("gameNotFull", {
-                            count: game.players.length,
-                            playersCount: game.options.playersCount,
-                          })
+                        : canStart
+                        ? t("lobbyReady", { count: game.players.length })
+                        : t("needMorePlayers")
                     }
                   />
                   {canStart && (
                     <Button
                       primary
                       className="ml3"
-                      disabled={!gameFull}
                       id="start-game"
                       text={t("startGame")}
                       onClick={() => onStartGame()}
