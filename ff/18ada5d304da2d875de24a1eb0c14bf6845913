@@ -1,0 +1,19 @@
+src/lib/actions.ts
+  s_e0a7a8d330ff29::t_08aac8fab9f10a 275-276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "ff18ada5d304da2d875de24a1eb0c14bf6845913",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7a8d330ff29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "28d65c07-4abf-4121-a279-30f9a4d7c6f9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
