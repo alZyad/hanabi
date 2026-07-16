@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-export const SessionContext = React.createContext<Session>(null);
+export const SessionContext = React.createContext<Session | null>(null);
 
 export interface Session {
   playerId: string;

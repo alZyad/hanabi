@@ -35,16 +35,18 @@ export default function Turn(props: Props) {
   const isViewingOwnActions = turn.action.from === selfPlayer?.index;
   const isViewingOwnReceivedHint = isHintAction(turn.action) && turn.action.to === selfPlayer?.index;
 
-  const playerNameFrom = (
-    <PlayerName explicit={game.options.gameMode === GameMode.PASS_AND_PLAY} player={game.players[turn.action.from]} />
-  );
+  const fromPlayer = game.players[turn.action.from];
+  if (!fromPlayer) return null;
+
+  const playerNameFrom = <PlayerName explicit={game.options.gameMode === GameMode.PASS_AND_PLAY} player={fromPlayer} />;
 
   let textualTurn: React.ReactNode;
   let drawnTurn: React.ReactNode;
 
   if (isHintAction(turn.action)) {
-    const playerNameTo = (
-      <PlayerName explicit={game.options.gameMode === GameMode.PASS_AND_PLAY} player={game.players[turn.action.to]} />
+    const toPlayer = game.players[turn.action.to];
+    const playerNameTo = toPlayer && (
+      <PlayerName explicit={game.options.gameMode === GameMode.PASS_AND_PLAY} player={toPlayer} />
     );
 
     if (isViewingOwnActions) {
@@ -75,7 +77,7 @@ export default function Turn(props: Props) {
         </>
       );
     }
-  } else if (isDiscardAction(turn.action)) {
+  } else if (isDiscardAction(turn.action) && turn.action.card) {
     textualTurn = isViewingOwnActions ? (
       <Trans i18nKey="youDiscardedTurn">
         You discarded your <TurnCard card={turn.action.card} context={ICardContext.DISCARDED} />
@@ -94,7 +96,7 @@ export default function Turn(props: Props) {
         </>
       );
     }
-  } else if (isPlayAction(turn.action)) {
+  } else if (isPlayAction(turn.action) && turn.action.card) {
     textualTurn = isViewingOwnActions ? (
       turn.failed ? (
         <Trans i18nKey="youPlayedStrikeTurn">
@@ -149,7 +151,7 @@ export default function Turn(props: Props) {
       <span>&nbsp;</span>
       <Txt className="di">
         {/* The player action and the card they have drawn, if applicable */}
-        <ReviewCommentPopover showAlways={false} turnNumber={props.turnNumber} />
+        {props.turnNumber !== undefined && <ReviewCommentPopover showAlways={false} turnNumber={props.turnNumber} />}
         &nbsp;
         {textualTurn}
         {drawnTurn}

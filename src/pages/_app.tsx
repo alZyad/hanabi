@@ -20,7 +20,7 @@ Sentry.init({
 
 Router.events.on("routeChangeComplete", () => logPageView());
 
-let nprogressTimeout: NodeJS.Timeout = null;
+let nprogressTimeout: NodeJS.Timeout | undefined;
 
 Router.events.on("routeChangeStart", () => {
   nprogressTimeout = setTimeout(() => NProgress.start(), 200);

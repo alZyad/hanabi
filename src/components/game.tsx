@@ -58,7 +58,7 @@ export function Game(props: Props) {
   const currentPlayer = useCurrentPlayer(game);
   const selfPlayer = useSelfPlayer(game);
   const replay = useReplay();
-  const reactionTimeoutRef = useRef<NodeJS.Timeout>(null);
+  const reactionTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const tutorial = useContext(TutorialContext);
   const [userPreferences] = useUserPreferences();
   useNotifications();

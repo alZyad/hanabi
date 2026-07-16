@@ -4,6 +4,7 @@ import IGameState, {
   GameVariant,
   IAction,
   ICard,
+  IHandCard,
   ICardHint,
   IColor,
   IDiscardAction,
@@ -138,7 +139,8 @@ export function getHintDeductions(hint: ICardHint, possibleCards: ICard[], game:
 }
 
 function getPossibleCards(state: IGameState, player: number): ICard[] {
-  return [...state.drawPile, ...Object.values(state.players)[player].hand].map((c) => ({
+  const hand = Object.values(state.players)[player]?.hand ?? [];
+  return [...state.drawPile, ...hand].map((c) => ({
     color: c.color,
     number: c.number,
   }));
@@ -173,9 +175,16 @@ export function getLastOptimistCardOfPlayer(state: IGameState, player: number): 
     return null;
   }
 
-  const lastHintReceived = state.turnsHistory[lastTimeHinted].action as IHintAction;
+  const lastHintTurn = state.turnsHistory[lastTimeHinted];
+  if (!lastHintTurn) {
+    return null;
+  }
+  const lastHintReceived = lastHintTurn.action as IHintAction;
 
-  const gameWhenLastHinted = getStateAtTurn(state, lastTimeHinted).players[player].hand;
+  const gameWhenLastHinted = getStateAtTurn(state, lastTimeHinted).players[player]?.hand;
+  if (!gameWhenLastHinted) {
+    return null;
+  }
 
   const firstHintedCard = gameWhenLastHinted.find((card) => card[lastHintReceived.type] === lastHintReceived.value);
 
@@ -191,9 +200,9 @@ export function gameStateToGameView(gameState: IGameState): IGameView {
   // and make all level 0 deductions
   Object.values(state.players).forEach((player: IPlayer, i) => {
     const lastOptimistCard = getLastOptimistCardOfPlayer(state, i);
-    const gameView = { hand: [] };
+    const gameView: IPlayerView = { hand: [] };
     const possibleCards = getPossibleCards(state, i);
-    player.hand.forEach((card: ICard) => {
+    player.hand.forEach((card) => {
       gameView.hand.push({
         hint: card.hint,
         deductions: getHintDeductions(card.hint, possibleCards, state),
@@ -219,7 +228,7 @@ export function commitViewAction(state: IGameView, action: IAction): IGameView {
   return newState;
 }
 
-function findGivableHint(hand: ICard[], pIndex: number, state: IGameState): IHintAction | undefined {
+function findGivableHint(hand: IHandCard[], pIndex: number, state: IGameState): IHintAction | undefined {
   // find the first playable card and give a hint on it.
   // if possible, give an optimist hint.
 
@@ -228,22 +237,26 @@ function findGivableHint(hand: ICard[], pIndex: number, state: IGameState): IHin
   let hasPlayableCard = false;
   for (let i = 0; i < hand.length; i++) {
     const card = hand[i];
+    if (!card) {
+      continue;
+    }
+    const hint = card.hint;
 
     if (isPlayable(card, state.playedCards)) {
       hasPlayableCard = true;
       // we don't hint the first hinted card.
       const shouldHint = isFirstHintedCardOrBefore
-        ? card.hint.color[card.color] < 2 && card.hint.number[card.number] < 2
-        : card.hint.color[card.color] < 2 || card.hint.number[card.number] < 2;
+        ? hint.color[card.color] < 2 && hint.number[card.number] < 2
+        : hint.color[card.color] < 2 || hint.number[card.number] < 2;
 
       if (shouldHint) {
         // find the type of hint to give, trying to find the most optimist one
         // (if there's a card with the same color, give the number hint)
         let type;
         if (hand.slice(0, i).find((c) => c.color === card.color)) {
-          type = card.hint.number[card.number] < 2 ? "number" : "color";
+          type = hint.number[card.number] < 2 ? "number" : "color";
         } else {
-          type = card.hint.color[card.color] < 2 ? "color" : "number";
+          type = hint.color[card.color] < 2 ? "color" : "number";
         }
         return {
           action: "hint",
@@ -256,28 +269,32 @@ function findGivableHint(hand: ICard[], pIndex: number, state: IGameState): IHin
     }
 
     // if the card has hints, we switch the condition
-    if (card.hint.color[card.color] < 2 || card.hint.number[card.number] < 2) {
+    if (hint.color[card.color] < 2 || hint.number[card.number] < 2) {
       isFirstHintedCardOrBefore = false;
     }
   }
 
   // give a hint on the last card to avoid discard if possible
   const lastCard = hand[hand.length - 1];
+  if (!lastCard) {
+    return;
+  }
+  const lastCardHint = lastCard.hint;
   if (
     isCardDangerous(lastCard, state) &&
-    lastCard.hint.color[lastCard.color] < 2 &&
-    lastCard.hint.number[lastCard.number] < 2 &&
+    lastCardHint.color[lastCard.color] < 2 &&
+    lastCardHint.number[lastCard.number] < 2 &&
     !hasPlayableCard
   ) {
     const type =
       // if it's a 5 and the number hint is not given
-      lastCard.number === 5 && lastCard.hint.number[lastCard.number] < 2
+      lastCard.number === 5 && lastCardHint.number[lastCard.number] < 2
         ? "number"
         : // if it's a multicolor and the color hint is not given
-        lastCard.color === "multicolor" && lastCard.hint.color[lastCard.color] < 2
+        lastCard.color === "multicolor" && lastCardHint.color[lastCard.color] < 2
         ? "color"
         : // otherwise give a non given hint
-        lastCard.hint.number[lastCard.number] < 2
+        lastCardHint.number[lastCard.number] < 2
         ? "number"
         : "color";
     return {
@@ -307,23 +324,29 @@ export function chooseAction(state: IGameView): IAction {
   // if current player has a playable card, play
   const currentGameView = state.gameViews[state.currentPlayer];
   // try to find a definitely playable card
-  for (let i = 0; i < currentGameView.hand.length; i++) {
-    const card = currentGameView.hand[i];
-    if (card.deductions.every((deduction) => isPlayable(deduction, state.playedCards))) {
-      return {
-        action: "play",
-        from: state.currentPlayer,
-        cardIndex: i,
-      };
+  if (currentGameView) {
+    for (let i = 0; i < currentGameView.hand.length; i++) {
+      const card = currentGameView.hand[i];
+      if (!card) {
+        continue;
+      }
+      if (card.deductions.every((deduction) => isPlayable(deduction, state.playedCards))) {
+        return {
+          action: "play",
+          from: state.currentPlayer,
+          cardIndex: i,
+        };
+      }
     }
   }
 
-  if (state.tokens.strikes < 2) {
+  if (currentGameView && state.tokens.strikes < 2) {
     // find the most recent optimist card that may be playable and play it
     const optimistCardIndex = currentGameView.hand.findIndex((c) => c.optimist);
+    const optimistCard = optimistCardIndex > -1 ? currentGameView.hand[optimistCardIndex] : undefined;
     if (
-      optimistCardIndex > -1 &&
-      currentGameView.hand[optimistCardIndex].deductions.some((c) => isPlayable(c, state.playedCards)) &&
+      optimistCard &&
+      optimistCard.deductions.some((c) => isPlayable(c, state.playedCards)) &&
       !isLastDiscardableCard(currentGameView.hand, optimistCardIndex, state)
     ) {
       return {
@@ -338,9 +361,12 @@ export function chooseAction(state: IGameView): IAction {
     // if someone has a playable card (but with some hint uncertainty), give hint
     for (let i = 1; i < state.options.playersCount; i++) {
       const pIndex = (state.currentPlayer + i) % state.options.playersCount;
-      const player = Object.values(state.players)[pIndex];
+      const hand = Object.values(state.players)[pIndex]?.hand;
+      if (!hand) {
+        continue;
+      }
       if (!playerKnowsWhatToPlay(pIndex, state)) {
-        const action = findGivableHint(player.hand, pIndex, state);
+        const action = findGivableHint(hand, pIndex, state);
         if (action) {
           return action;
         }
@@ -349,7 +375,7 @@ export function chooseAction(state: IGameView): IAction {
   }
 
   // discard otherwise
-  if (state.tokens.hints < 8) {
+  if (currentGameView && state.tokens.hints < 8) {
     const discardableIndex = findBestDiscardIndex(currentGameView, state);
 
     if (discardableIndex > -1) {
@@ -364,8 +390,8 @@ export function chooseAction(state: IGameView): IAction {
   // if 1st play and no playable cards in next player hand, give a hint on 5s or 2s
   if (state.turnsHistory.length === 0) {
     const pIndex = (state.currentPlayer + 1) % state.options.playersCount;
-    const nextPlayerHand = state.players[pIndex].hand;
-    if (nextPlayerHand.find((c) => c.number === 5)) {
+    const nextPlayerHand = state.players[pIndex]?.hand;
+    if (nextPlayerHand?.find((c) => c.number === 5)) {
       return {
         action: "hint",
         from: state.currentPlayer,
@@ -396,7 +422,11 @@ export function chooseAction(state: IGameView): IAction {
 function isLastDiscardableCard(hand: IHiddenCard[], cardIndex: number, state: IGameState) {
   let lastDiscardableCard = true;
   for (let i = hand.length - 1; i >= cardIndex + 1; i--) {
-    if (isCardDiscardable(hand[i], state)) {
+    const card = hand[i];
+    if (!card) {
+      continue;
+    }
+    if (isCardDiscardable(card, state)) {
       lastDiscardableCard = false;
       return lastDiscardableCard;
     }
@@ -414,6 +444,9 @@ function findBestDiscardIndex(playerView: IPlayerView, state: IGameState) {
 
   for (let i = playerView.hand.length - 1; i >= 0; i--) {
     const card = playerView.hand[i];
+    if (!card) {
+      continue;
+    }
     // if the card is definitely discardable (never playable)
     if (card.deductions.every((deduction) => !isCardEverPlayable(deduction, state))) {
       discardableIndex = i;
@@ -466,10 +499,13 @@ export function play(state: IGameState): IGameState {
 function playerKnowsWhatToPlay(pIndex: number, state: IGameView) {
   // we should not be looking at that player's game view but
   // if we only look at the optimist property that's ok
-  const playerGameViewHand = state.gameViews[pIndex].hand;
-  const playerHand = Object.values(state.players)[pIndex].hand;
+  const playerGameViewHand = state.gameViews[pIndex]?.hand ?? [];
+  const playerHand = Object.values(state.players)[pIndex]?.hand ?? [];
   const hasOptimistPlayableCard =
-    playerGameViewHand.filter((c, i) => c.optimist && isPlayable(playerHand[i], state.playedCards)).length > 0;
+    playerGameViewHand.filter((c, i) => {
+      const card = playerHand[i];
+      return c.optimist && !!card && isPlayable(card, state.playedCards);
+    }).length > 0;
 
   return hasOptimistPlayableCard;
 }

@@ -215,6 +215,7 @@ function CodedHintMarks(props: {
 
   const colorHints = props.hints.filter(isColorHintTurn);
   const numberHints = props.hints.filter(isNumberHintTurn);
+  const firstNumberHint = numberHints[0];
   return (
     <>
       <HintsPopover closePopover={() => props.onActivationChange(false)} hints={props.hints} open={allHintsOpen}>
@@ -233,9 +234,9 @@ function CodedHintMarks(props: {
         />
       </HintsPopover>
       <HintsPopover closePopover={() => setNumberHintsOpen(false)} hints={numberHints} open={numberHintsOpen}>
-        {numberHints.length > 0 ? (
+        {firstNumberHint ? (
           <NumberHintMark
-            hintAction={numberHints[0].action}
+            hintAction={firstNumberHint.action}
             onActivationChange={(activateNumber) => {
               if (activateNumber && allHintsOpen) {
                 return;
@@ -244,7 +245,9 @@ function CodedHintMarks(props: {
               setNumberHintsOpen(activateNumber);
             }}
           />
-        ) : null}
+        ) : (
+          <></>
+        )}
       </HintsPopover>
     </>
   );

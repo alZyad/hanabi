@@ -17,9 +17,10 @@ function getLastRollbackableTurn(game: IGameState) {
   let lastNonAI = 1;
 
   while (lastNonAI <= game.turnsHistory.length) {
-    const playerIndex = game.turnsHistory[game.turnsHistory.length - lastNonAI].action.from;
+    const turn = game.turnsHistory[game.turnsHistory.length - lastNonAI];
+    const player = turn && game.players[turn.action.from];
 
-    if (!game.players[playerIndex].bot) {
+    if (!player?.bot) {
       break;
     }
 

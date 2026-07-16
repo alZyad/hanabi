@@ -36,6 +36,10 @@ export function cheat(game: IGameState): IGameState {
   const currentPlayer = game.players[game.currentPlayer];
   const canDiscardCards = game.tokens.hints < MaxHints;
 
+  if (!currentPlayer?.hand) {
+    return game;
+  }
+
   const playableCards = currentPlayer.hand.filter((card) => canPlay(game, card));
   const [playableCard] = sortBy(
     sortBy(playableCards, (card) => card.number),
@@ -90,6 +94,10 @@ export function cheat(game: IGameState): IGameState {
   ]);
 
   // TODO one day, optimize game end
+
+  if (!despairDiscardedCard) {
+    return game;
+  }
 
   return commitAction(game, {
     action: "discard",

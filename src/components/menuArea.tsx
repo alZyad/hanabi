@@ -19,7 +19,7 @@ export default function MenuArea(props: Props) {
   const { onCloseArea } = props;
 
   const [showRules, setShowRules] = useState(false);
-  const { reset } = useContext(TutorialContext);
+  const tutorial = useContext(TutorialContext);
   const router = useRouter();
   const { t } = useTranslation();
   const [showUserPreferences, setShowUserPreferences] = useState(false);
@@ -33,7 +33,7 @@ export default function MenuArea(props: Props) {
   }
 
   function onTutorialClick() {
-    reset();
+    tutorial?.reset();
     onCloseArea();
   }
 

@@ -134,11 +134,12 @@ export default function GameStats() {
   });
   const { t } = useTranslation();
 
-  if (!game.turnsHistory.length) {
+  const firstTurn = game.turnsHistory[0];
+  if (!firstTurn) {
     return null;
   }
 
-  const firstPlayerIndex = game.turnsHistory[0].action.from;
+  const firstPlayerIndex = firstTurn.action.from;
   const orderedPlayers = [...game.players.slice(firstPlayerIndex), ...game.players.slice(0, firstPlayerIndex)];
 
   return (
@@ -183,7 +184,8 @@ export default function GameStats() {
         </div>
 
         {orderedPlayers.map((player, playerIndex) => {
-          const firstHand = getStateAtTurn(game, 0).players[player.index].hand;
+          const originalIndex = player.index;
+          const firstHand = getStateAtTurn(game, 0).players[originalIndex]?.hand ?? [];
 
           return (
             <div key={player.id} className="flex flex-column items-center mr4">
@@ -206,7 +208,17 @@ export default function GameStats() {
               </div>
               {game.turnsHistory.map((turn, i) => {
                 const state = getStateAtTurn(game, i);
-                const playerState = state.players[(player.index + state.players.length) % state.players.length];
+                const playerState = state.players[(originalIndex + state.players.length) % state.players.length];
+
+                if (!playerState) {
+                  return null;
+                }
+
+                const filledState = fillEmptyValues(state);
+
+                if (!filledState) {
+                  return null;
+                }
 
                 return (
                   <div key={i} className="flex items-center justify-end w-100">
@@ -226,9 +238,7 @@ export default function GameStats() {
                               style={{ margin: "1px" }}
                             />
                           )}
-                          {!displayCards && (
-                            <CardState colors={cardToStateColor(fillEmptyValues(state), playerState, card)} />
-                          )}
+                          {!displayCards && <CardState colors={cardToStateColor(filledState, playerState, card)} />}
                         </div>
                       );
                     })}

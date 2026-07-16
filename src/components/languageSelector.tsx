@@ -40,7 +40,7 @@ export default function LanguageSelector(props: Props) {
         value={router.locale}
         onChange={(e) => {
           if (e.target.value === "new") {
-            window.open("https://github.com/bstnfrmry/hanabi/issues/180", "_blank").focus();
+            window.open("https://github.com/bstnfrmry/hanabi/issues/180", "_blank")?.focus();
             return;
           }
 

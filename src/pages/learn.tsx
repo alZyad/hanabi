@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import posed, { PoseGroup } from "react-pose";
+import { PoseGroup } from "react-pose";
 import Card, { CardSize, ICardContext } from "~/components/card";
 import HomeButton from "~/components/homeButton";
 import PlayedCards from "~/components/playedCards";
@@ -14,6 +14,7 @@ import { Paragraph, Subtitle, Title } from "~/components/ui/typography";
 import Vignette from "~/components/vignette";
 import useLocalStorage from "~/hooks/localStorage";
 import { getColors, newGame, numbers } from "~/lib/actions";
+import { posedDiv } from "~/lib/posed";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
 import { readableUniqueId } from "~/lib/id";
@@ -322,7 +323,7 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
   ];
 }
 
-const Step = posed.div({
+const Step = posedDiv({
   enter: {
     opacity: 1,
   },
@@ -382,13 +383,15 @@ export default function Learn() {
 
       <div className="relative flex items-center h-90 w-90 w-50-l center">
         <PoseGroup>
-          {steps.map((step, i) => {
-            return i === currentStep ? (
-              <Step key={i} className="flex flex-column">
-                {step.html}
-              </Step>
-            ) : null;
-          })}
+          {steps
+            .map((step, i) => {
+              return i === currentStep ? (
+                <Step key={i} className="flex flex-column">
+                  {step.html}
+                </Step>
+              ) : null;
+            })
+            .filter((step): step is JSX.Element => step !== null)}
         </PoseGroup>
         <div className="absolute left-0 right-0 bottom-1 flex justify-between items-center mh2">
           <Txt className="lavender nowrap" size={TxtSize.XXSMALL} value={`${currentStep + 1} / ${steps.length}`} />

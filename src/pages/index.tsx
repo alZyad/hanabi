@@ -16,8 +16,8 @@ export default function Home() {
   const { t } = useTranslation();
   const [gameId] = useLocalStorage("gameId", null);
   const [playerId] = useLocalStorage("playerId", null);
-  const rulesRef = useRef<HTMLDivElement>();
-  const fireworksRef = useRef();
+  const rulesRef = useRef<HTMLDivElement>(null);
+  const fireworksRef = useRef<HTMLDivElement>(null);
 
   const lastGame = gameId && playerId ? { gameId } : null;
 
@@ -31,6 +31,8 @@ export default function Home() {
    * Display fireworks animation when game ends
    */
   useEffect(() => {
+    if (!fireworksRef.current) return;
+
     const fireworks = new Fireworks(fireworksRef.current, {
       maxRockets: 15, // max # of rockets to spawn
       rocketSpawnInterval: 150, // milliseconds to check if new rockets should spawn
@@ -125,7 +127,7 @@ export default function Home() {
           <span
             className="flex flex-column items-center link white pointer mt4"
             onClick={() => {
-              rulesRef.current.scrollIntoView({ behavior: "smooth" });
+              rulesRef.current?.scrollIntoView({ behavior: "smooth" });
             }}
           >
             <span>{t("whatsHanab", "What's Hanab?")}</span>

@@ -13,7 +13,7 @@ interface Props {
 export default function TextFieldDialog(props: PropsWithChildren<Props>) {
   const { onClose } = props;
 
-  const messageRef = useRef<HTMLInputElement>();
+  const messageRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<undefined | string>();
   useEffect(() => {
     if (message === undefined) {
@@ -28,7 +28,7 @@ export default function TextFieldDialog(props: PropsWithChildren<Props>) {
   function onSubmit() {
     const m = message;
     setMessage(undefined);
-    onClose(m);
+    onClose(m ?? props.initialValue);
   }
 
   return (

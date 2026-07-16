@@ -17,7 +17,7 @@ export default function ChatPopover(props: Props) {
   const { t } = useTranslation();
   const game = useGame();
   const selfPlayer = useSelfPlayer(game);
-  const messageRef = useRef<HTMLTextAreaElement>();
+  const messageRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -25,6 +25,8 @@ export default function ChatPopover(props: Props) {
   }, [messageRef]);
 
   function onSubmit() {
+    if (selfPlayer?.index === undefined) return;
+
     addMessage(game.id, {
       id: uniqueId(),
       content: message,

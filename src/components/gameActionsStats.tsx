@@ -56,6 +56,11 @@ export default function GameActionsStats() {
               <div className="mt1">
                 {Object.values(groupedPlayers).map((actionTurns, playerIndex) => {
                   const player = game.players[playerIndex];
+
+                  if (!player) {
+                    return null;
+                  }
+
                   const count = actionTurns.filter((turn) => turn.action.action === column).length;
 
                   return (

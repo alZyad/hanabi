@@ -52,7 +52,7 @@ export default function ReplayViewer(props: Props) {
   const selfPlayer: IPlayer | undefined = useSelfPlayer(game);
   const replay = useReplay();
   const comment = findComment(game, selfPlayer?.id, replay.cursor);
-  const maxTurns = game.originalGame.turnsHistory.length;
+  const maxTurns = game.originalGame?.turnsHistory.length ?? 0;
 
   const marks: Record<string | number, React.ReactNode | MarkObj> = {};
   const selfReviewComments = game.reviewComments.filter((rc) => rc.playerId === selfPlayer?.id);

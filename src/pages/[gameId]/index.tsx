@@ -39,13 +39,14 @@ interface Props {
 export default function Play(props: Props) {
   const { game: initialGame, session, host } = props;
 
-  const [replayCursor, setReplayCursor] = useState<number>(null);
+  const [replayCursor, setReplayCursor] = useState<number | null>(null);
 
   return (
     // eslint-disable-next-line react/jsx-no-undef
     <TutorialProvider>
       <SessionContext.Provider value={session}>
-        <ReplayContext.Provider value={{ cursor: replayCursor, moveCursor: setReplayCursor }}>
+        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+        <ReplayContext.Provider value={{ cursor: replayCursor!, moveCursor: setReplayCursor }}>
           <GameIndex key={initialGame.id} game={initialGame} host={host}></GameIndex>
         </ReplayContext.Provider>
       </SessionContext.Provider>

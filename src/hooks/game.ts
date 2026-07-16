@@ -5,7 +5,8 @@ import { getStateAtTurn } from "~/lib/actions";
 import IGameState, { fillEmptyValues, GameMode, IPlayer } from "~/lib/state";
 import useLocalStorage from "~/hooks/localStorage";
 
-export const GameContext = React.createContext<IGameState>(null);
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+export const GameContext = React.createContext<IGameState>(null!);
 
 export function useColorBlindMode() {
   const game = useGame();
@@ -21,7 +22,7 @@ export function useGame() {
 
   if (replay && replay.cursor !== null) {
     return {
-      ...fillEmptyValues(getStateAtTurn(game, replay.cursor)),
+      ...(fillEmptyValues(getStateAtTurn(game, replay.cursor)) ?? game),
       originalGame: game,
       reviewComments: [...game.reviewComments],
     };
@@ -51,6 +52,6 @@ export function useSelfPlayer(game: IGameState): IPlayer | undefined {
   }
 
   if (game.options.gameMode === GameMode.PASS_AND_PLAY) {
-    return currentPlayer;
+    return currentPlayer ?? undefined;
   }
 }

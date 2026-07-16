@@ -1,12 +1,13 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import posed, { PoseGroup } from "react-pose";
+import { PoseGroup } from "react-pose";
 import { ReviewCommentPopover } from "~/components/reviewComments";
 import Turn from "~/components/turn";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
 import { useReplay } from "~/hooks/replay";
+import { posedDiv } from "~/lib/posed";
 import { IMessage } from "~/lib/state";
 
 interface Props {
@@ -21,7 +22,7 @@ export default function Logs(props: Props) {
   const replay = useReplay();
   const selfPlayer = useSelfPlayer(game);
 
-  const PoseItem = replay.cursor ? posed.div() : Item;
+  const PoseItem = replay.cursor ? posedDiv() : Item;
   const firstMessages = game.messages.filter((message) => message.turn === 0).reverse();
 
   return (
@@ -40,7 +41,7 @@ export default function Logs(props: Props) {
                 })}
                 <Turn
                   key={key}
-                  showDrawn={!interturn && game.players[turn.action.from].id !== selfPlayer?.id}
+                  showDrawn={!interturn && game.players[turn.action.from]?.id !== selfPlayer?.id}
                   turn={turn}
                   turnNumber={turnNumber}
                 />
@@ -80,11 +81,11 @@ function Message(props: MessageProps) {
   return (
     <div key={message.id} className="lavender">
       <Trans i18nKey="message">
-        <Txt size={TxtSize.SMALL} value={player.name} />
+        <Txt size={TxtSize.SMALL} value={player?.name} />
         <Txt className="white" size={TxtSize.SMALL} value={message.content} />
       </Trans>
     </div>
   );
 }
 
-const Item = posed.div({ enter: { y: 0 }, exit: { y: -100 } });
+const Item = posedDiv({ enter: { y: 0 }, exit: { y: -100 } });

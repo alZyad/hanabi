@@ -24,11 +24,11 @@ function Chip(props: ChipProps) {
   const colorBlindMode = useColorBlindMode();
   const { isOff, toggle } = useCardNotes(game.id);
 
-  const level = kind === "color" ? card.hint.color[value] : card.hint.number[value];
+  const level = kind === "color" ? card.hint?.color[value] : card.hint?.number[value];
   const impossible = level === IHintLevel.IMPOSSIBLE;
   const sure = level === IHintLevel.SURE;
   const toggleable = level === IHintLevel.POSSIBLE;
-  const off = toggleable && isOff(card.id, kind, value);
+  const off = toggleable && card.id !== undefined && isOff(card.id, kind, value);
   const dimmed = impossible || off;
 
   return (
@@ -40,7 +40,7 @@ function Chip(props: ChipProps) {
         [`bg-${value}`]: kind === "color",
         "bg-white-20 ba b--white-40": kind === "number",
       })}
-      onClick={() => toggleable && toggle(card.id, kind, value)}
+      onClick={() => toggleable && card.id !== undefined && toggle(card.id, kind, value)}
     >
       {kind === "number" && <Txt className="white b" size={TxtSize.XSMALL} value={value} />}
       {kind === "color" && colorBlindMode && <ColorSymbol color={value as IColor} />}

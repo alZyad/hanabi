@@ -3,7 +3,8 @@ import { ID, uniqueId } from "~/lib/id";
 
 export default function withSession(handler) {
   return withIronSession(handler, {
-    password: process.env.COOKIE_PASSWORD,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    password: process.env.COOKIE_PASSWORD!,
     cookieName: "hanab.cards",
     cookieOptions: {
       secure: process.env.NODE_ENV === "production" ? true : false,

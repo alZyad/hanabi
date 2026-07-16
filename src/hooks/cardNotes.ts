@@ -19,7 +19,8 @@ function pruneExpiredGames(store: NotesStore): boolean {
   const now = Date.now();
   let changed = false;
   for (const gameId of Object.keys(store)) {
-    if (now - store[gameId].updatedAt > EXPIRATION_MS) {
+    const game = store[gameId];
+    if (game && now - game.updatedAt > EXPIRATION_MS) {
       delete store[gameId];
       changed = true;
     }
