@@ -1,0 +1,151 @@
+src/hooks/sounds.ts
+  s_e0a7a8d330ff29::t_e4018fb8a3328b 89
+  s_e0a7a8d330ff29::t_02a880aba02ad1 13
+  s_e0a7a8d330ff29::t_ca9f4571163021 52-53
+  s_e0a7a8d330ff29::t_bdafa830123f3c 71
+src/components/chatPopover.tsx
+  s_e0a7a8d330ff29::t_fa7424620c22fc 21
+  s_e0a7a8d330ff29::t_bf614aa0469748 29-30
+src/components/rollbackArea.tsx
+  s_e0a7a8d330ff29::t_e0389e80fede81 20,22
+src/components/card.tsx
+  s_e0a7a8d330ff29::t_e5b461306f8373 10
+  s_e0a7a8d330ff29::t_c713e0d669f210 133-136
+  s_e0a7a8d330ff29::t_bdd6c63f22b110 149,152
+  s_e0a7a8d330ff29::t_688f1cb119fc5f 119,123
+  s_e0a7a8d330ff29::t_39860a54ff6d01 190
+  s_e0a7a8d330ff29::t_47f4a135efc7bd 208
+  s_e0a7a8d330ff29::t_6a4bebe240c038 219
+  s_e0a7a8d330ff29::t_0b992727891d30 266,270,278
+src/lib/ai-cheater.ts
+  s_e0a7a8d330ff29::t_d709efd5ecf326 39-42
+  s_e0a7a8d330ff29::t_ad1260a6200cb2 98-100
+  s_e0a7a8d330ff29::t_2182fbd2378eaf 101
+src/pages/_app.tsx
+  s_e0a7a8d330ff29::t_655b0489ba67b8 23
+src/pages/[gameId]/index.tsx
+  s_e0a7a8d330ff29::t_98e9c14f78f08e 48
+  s_e0a7a8d330ff29::t_9bf70eb1828d78 42
+src/components/gameActionsStats.tsx
+  s_e0a7a8d330ff29::t_86d6c4e6f395e7 58
+src/components/logs.tsx
+  s_e0a7a8d330ff29::t_b4327867c708df 24
+  s_e0a7a8d330ff29::t_ab303a1de312a7 83
+  s_e0a7a8d330ff29::t_dee0f7f8419eda 90
+  s_e0a7a8d330ff29::t_af75469e9c0732 43
+src/components/gameStats.tsx
+  s_e0a7a8d330ff29::t_2ff04e75e4ecfc 141
+  s_e0a7a8d330ff29::t_a2614b80bc3838 190-191
+  s_e0a7a8d330ff29::t_3b38254654fc27 186-188
+  s_e0a7a8d330ff29::t_9ac80f9f68fea7 245
+  s_e0a7a8d330ff29::t_32888479a2d962 216,223-224,233
+  s_e0a7a8d330ff29::t_8826628f21eb35 214,217-222
+  s_e0a7a8d330ff29::t_0ffcca51d0f344 215
+  s_e0a7a8d330ff29::t_0aad10db26e926 189
+src/components/replayViewer.tsx
+  s_e0a7a8d330ff29::t_9c7869ea2cdfc1 55
+src/hooks/previous.ts
+  s_e0a7a8d330ff29::t_78a10c4351e321 7
+src/components/receivedHintsPopover.tsx
+  s_e0a7a8d330ff29::t_8d533938c5b7fe 247-249
+  s_e0a7a8d330ff29::t_8a9985425deb0e 238
+src/lib/reviewComments.ts
+  s_e0a7a8d330ff29::t_4df9feb99220a7 10
+src/components/tutorial.tsx
+  s_e0a7a8d330ff29::t_674a526ad3fdd9 152
+  s_e0a7a8d330ff29::t_42e097b2b4c28d 95
+  s_e0a7a8d330ff29::t_0c8ef6628f777e 135,138
+  s_e0a7a8d330ff29::t_956984c35abb89 9-21,25
+src/lib/ai.ts
+  s_e0a7a8d330ff29::t_ae12a4e0644a4d 141
+  s_e0a7a8d330ff29::t_e662fffd3b7393 176,178
+  s_e0a7a8d330ff29::t_786f23b3c35e06 244,246
+  s_e0a7a8d330ff29::t_f600e682bc8319 469-470,472
+  s_e0a7a8d330ff29::t_2112528fc1f619 259
+  s_e0a7a8d330ff29::t_c1e1285f33adc6 308,311
+  s_e0a7a8d330ff29::t_6c2a22011db08a 367
+  s_e0a7a8d330ff29::t_614ac34ed71468 265,268-269,274,277,280
+  s_e0a7a8d330ff29::t_9bff1ac36aabff 399
+  s_e0a7a8d330ff29::t_44b7bdd4bd67c1 230,236-237
+  s_e0a7a8d330ff29::t_4ed9aae97690d8 120
+  s_e0a7a8d330ff29::t_d1488f09b24a9a 194,196,198-199
+  s_e0a7a8d330ff29::t_aa9194f6307963 416
+  s_e0a7a8d330ff29::t_68c1462a055c42 326
+  s_e0a7a8d330ff29::t_2fd80602ffa896 341,343
+src/lib/session.ts
+  s_e0a7a8d330ff29::t_47d8ff5fe1bc71 6
+src/components/reactionsPopover.tsx
+  s_e0a7a8d330ff29::t_6601f23affd384 38
+  s_e0a7a8d330ff29::t_d831d4667c0eec 9
+src/hooks/session.ts
+  s_e0a7a8d330ff29::t_adeb48c3a321dc 3
+src/components/playersBoard.tsx
+  s_e0a7a8d330ff29::t_a61a7251a575dd 76
+  s_e0a7a8d330ff29::t_8b890b8830449b 19
+  s_e0a7a8d330ff29::t_b7bd9e7e6c8de6 58
+  s_e0a7a8d330ff29::t_6c9f8dc3abe53b 31,34-35
+tsconfig.json
+  s_e0a7a8d330ff29::t_f3801b14692993 12
+  s_e0a7a8d330ff29::t_14be1988f4de7e 13
+src/components/turn.tsx
+  s_e0a7a8d330ff29::t_f207ad44774599 152
+  s_e0a7a8d330ff29::t_a8a39189512ae5 39
+  s_e0a7a8d330ff29::t_e9f9651714b5ef 81,85,102,107,113,118
+  s_e0a7a8d330ff29::t_da35309b698528 47
+src/hooks/replay.ts
+  s_e0a7a8d330ff29::t_8b7b75fca3caa6 8
+  s_e0a7a8d330ff29::t_05cd3a073180e7 5
+src/components/menuArea.tsx
+  s_e0a7a8d330ff29::t_eb621b0e913269 36
+  s_e0a7a8d330ff29::t_3a02ba548c8100 22
+src/components/reviewComments.tsx
+  s_e0a7a8d330ff29::t_1993bf8d8d2f2b 107-108,111
+  s_e0a7a8d330ff29::t_e6d4a97acb9390 52
+src/components/languageSelector.tsx
+  s_e0a7a8d330ff29::t_efe119f9fd2a87 43
+src/pages/index.tsx
+  s_e0a7a8d330ff29::t_312fe35bd63a56 19-20
+  s_e0a7a8d330ff29::t_733bd97f7188a9 128
+  s_e0a7a8d330ff29::t_a45937855c12d5 34
+src/hooks/game.ts
+  s_e0a7a8d330ff29::t_0c6890b0057782 54
+  s_e0a7a8d330ff29::t_34a72b0456a112 24
+  s_e0a7a8d330ff29::t_3a5993abbd4f0c 8
+src/components/loadingScreen.tsx
+  s_e0a7a8d330ff29::t_4c0c4a8a669303 6
+  s_e0a7a8d330ff29::t_18fbacf37dd88f 18
+src/components/textFieldDialog.tsx
+  s_e0a7a8d330ff29::t_cb1295a67c890b 16
+  s_e0a7a8d330ff29::t_99c49e3ea6628b 31
+src/components/playerGame.tsx
+  s_e0a7a8d330ff29::t_f6f81d040a1d34 296
+  s_e0a7a8d330ff29::t_8a9bd75ef70bef 454
+  s_e0a7a8d330ff29::t_50ed5cf38c96a4 463-468,473,475,480
+  s_e0a7a8d330ff29::t_cd95441539e1c2 387,394,402-408,413,420
+  s_e0a7a8d330ff29::t_86f684187d05bb 507
+  s_e0a7a8d330ff29::t_41ddd39afb9228 110
+  s_e0a7a8d330ff29::t_704300f04f1259 340,346
+  s_e0a7a8d330ff29::t_f5646e46b8d234 215
+  s_e0a7a8d330ff29::t_eab2b0bd505115 112
+src/hooks/longPress.ts
+  s_e0a7a8d330ff29::t_21e039eddd0a08 7
+src/pages/learn.tsx
+  s_e0a7a8d330ff29::t_0a754eaff8b066 325
+  s_e0a7a8d330ff29::t_50953049ab0c84 385-393
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "abcef77f133580b1893e251a6e19f327b260f45f",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7a8d330ff29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "28d65c07-4abf-4121-a279-30f9a4d7c6f9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
