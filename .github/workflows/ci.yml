@@ -31,7 +31,9 @@ jobs:
         run: yarn tsc --noEmit
 
       - name: Write .env
-        run: printf '%s' "${{ secrets.DOTENV }}" > .env
+        env:
+          DOTENV: ${{ secrets.DOTENV }}
+        run: printf '%s' "$DOTENV" > .env
 
       - name: Build
         run: yarn build
