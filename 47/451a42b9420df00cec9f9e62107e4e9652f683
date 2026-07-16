@@ -1,0 +1,21 @@
+.github/workflows/deploy.yml
+  s_b3e88396a0d456::t_d67d338778a475 24-26
+.github/workflows/ci.yml
+  s_b3e88396a0d456::t_d2c8e945fb9509 33-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "47451a42b9420df00cec9f9e62107e4e9652f683",
+  "prompts": {},
+  "sessions": {
+    "s_b3e88396a0d456": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ec61017-ae82-4057-ba56-fa64812373c0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
