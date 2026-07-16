@@ -1,0 +1,236 @@
+src/hooks/sounds.ts
+  s_e0a7a8d330ff29::t_02a880aba02ad1 13
+  s_e0a7a8d330ff29::t_ca9f4571163021 52-53
+  s_e0a7a8d330ff29::t_e4018fb8a3328b 89
+  s_e0a7a8d330ff29::t_bdafa830123f3c 71
+src/pages/learn.tsx
+  s_e0a7a8d330ff29::t_8af8d51f292f7c 325
+  s_e0a7a8d330ff29::t_0a754eaff8b066 326
+  s_e0a7a8d330ff29::t_50953049ab0c84 386-394
+src/components/gameStats.tsx
+  s_e0a7a8d330ff29::t_bc848de116ff58 188
+  s_e0a7a8d330ff29::t_8826628f21eb35 213-218
+  s_e0a7a8d330ff29::t_2ff04e75e4ecfc 141
+  s_e0a7a8d330ff29::t_ac15c7a8e1c02b 142
+  s_e0a7a8d330ff29::t_a2614b80bc3838 187
+  s_e0a7a8d330ff29::t_32888479a2d962 212,219-220
+  s_e0a7a8d330ff29::t_0ffcca51d0f344 211
+  s_e0a7a8d330ff29::t_d43a4a0d6b8adb 221
+  s_5c905574534a6d::t_42e5b20b2fe0ba 241
+src/components/turn.tsx
+  s_5ae4a5967095cd::t_a6161b3d0403c7 80
+  s_e0a7a8d330ff29::t_b517521a57ef2f 41
+  s_e0a7a8d330ff29::t_f338c59c4dc4e1 48
+  s_e0a7a8d330ff29::t_da35309b698528 49
+  s_e0a7a8d330ff29::t_a8a39189512ae5 40
+  s_e0a7a8d330ff29::t_deb104091344db 38-39
+  s_e0a7a8d330ff29::t_dc6417276d170d 47
+  s_5ae4a5967095cd::t_255072f5112f5e 99,154
+src/components/receivedHintsPopover.tsx
+  s_5ae4a5967095cd::t_6999d002a76503 218,237
+  s_e0a7a8d330ff29::t_8a9985425deb0e 239
+  s_e0a7a8d330ff29::t_8d533938c5b7fe 248-250
+src/components/loadingScreen.tsx
+  s_e0a7a8d330ff29::t_7cdcca6055e38e 6
+  s_e0a7a8d330ff29::t_4c0c4a8a669303 7
+  s_e0a7a8d330ff29::t_18fbacf37dd88f 19
+src/components/rollbackArea.tsx
+  s_e0a7a8d330ff29::t_e0389e80fede81 20
+  s_e0a7a8d330ff29::t_5d53e05c0c1c79 21
+  s_5ae4a5967095cd::t_9cdcea65a82b4d 23
+src/components/menuArea.tsx
+  s_e0a7a8d330ff29::t_3a02ba548c8100 22
+  s_e0a7a8d330ff29::t_eb621b0e913269 36
+src/hooks/replay.ts
+  s_e0a7a8d330ff29::t_05cd3a073180e7 5
+  s_e0a7a8d330ff29::t_cfd91f195e5dbf 8
+  s_e0a7a8d330ff29::t_8b7b75fca3caa6 9
+src/lib/reviewComments.ts
+  s_e0a7a8d330ff29::t_4df9feb99220a7 10
+src/components/logs.tsx
+  s_e0a7a8d330ff29::t_bf9563f9bed3a6 91
+  s_e0a7a8d330ff29::t_dee0f7f8419eda 92
+  s_e0a7a8d330ff29::t_b4327867c708df 25
+  s_e0a7a8d330ff29::t_ab303a1de312a7 84
+  s_e0a7a8d330ff29::t_af75469e9c0732 44
+  s_e0a7a8d330ff29::t_266c9ba792456f 24
+src/components/lobbyView.tsx
+  s_be6fc853ea1b13::t_5bab2d70cd9b5a 29
+  s_be6fc853ea1b13::t_4b3197b67ad381 109
+  s_be6fc853ea1b13::t_5af7e324078060 27
+  s_be6fc853ea1b13::t_da3e6a0ccfcda8 49
+src/lib/state.ts
+  s_be6fc853ea1b13::t_d362079d75e1a2 37,46-57
+  s_be6fc853ea1b13::t_2304590f0a0768 296,298,307-309
+  s_be6fc853ea1b13::t_f6fd3e8af6c930 262
+  s_be6fc853ea1b13::t_9046908bd0af73 149,159-160
+  s_be6fc853ea1b13::t_79a4464b280a90 295
+  s_be6fc853ea1b13::t_b511bf97db3162 228,231,236
+  s_be6fc853ea1b13::t_2ad5ec4ada142b 245
+  s_be6fc853ea1b13::t_cb79d2f38189aa 69
+  s_be6fc853ea1b13::t_7b2c5407aff94c 315,332
+  s_be6fc853ea1b13::t_45b6af97319163 58
+  s_be6fc853ea1b13::t_b02d0affcad856 161-162
+  s_be6fc853ea1b13::t_27ed079c5a9a6b 237
+src/lib/benchmark.ts
+  s_be6fc853ea1b13::t_540a8fea1f5e44 3
+  s_be6fc853ea1b13::t_e43c494fd21338 22
+src/components/playerGame.tsx
+  s_e0a7a8d330ff29::t_f5646e46b8d234 215
+  s_e0a7a8d330ff29::t_cd95441539e1c2 387,394,403-408,419
+  s_e0a7a8d330ff29::t_41ddd39afb9228 110
+  s_e0a7a8d330ff29::t_f6f81d040a1d34 296
+  s_e0a7a8d330ff29::t_50ed5cf38c96a4 462-465,467,474,479
+  s_e0a7a8d330ff29::t_86f684187d05bb 507
+  s_e0a7a8d330ff29::t_eab2b0bd505115 112
+  s_e0a7a8d330ff29::t_526b1ccb5215f5 506
+  s_be6fc853ea1b13::t_19b5fe7b3189fe 466
+  s_be6fc853ea1b13::t_a30d17f00d1f52 472
+src/components/chatPopover.tsx
+  s_e0a7a8d330ff29::t_fa7424620c22fc 21
+  s_e0a7a8d330ff29::t_bf614aa0469748 29-30
+src/hooks/longPress.ts
+  s_e0a7a8d330ff29::t_21e039eddd0a08 7
+src/hooks/game.ts
+  s_e0a7a8d330ff29::t_3a5993abbd4f0c 8
+  s_e0a7a8d330ff29::t_b29af8da069935 9
+  s_672067214ec403::t_b6ce893e564050 55
+  s_672067214ec403::t_a3aa09613bbe56 25
+src/pages/_app.tsx
+  s_e0a7a8d330ff29::t_655b0489ba67b8 23
+src/components/languageSelector.tsx
+  s_e0a7a8d330ff29::t_efe119f9fd2a87 43
+src/components/playersBoard.tsx
+  s_e0a7a8d330ff29::t_f2db8a05187cb9 19
+  s_e0a7a8d330ff29::t_8b890b8830449b 20
+  s_e0a7a8d330ff29::t_6c9f8dc3abe53b 32,35-36
+  s_e0a7a8d330ff29::t_a61a7251a575dd 77
+  s_e0a7a8d330ff29::t_b7bd9e7e6c8de6 59
+src/components/replayViewer.tsx
+  s_e0a7a8d330ff29::t_9c7869ea2cdfc1 55
+src/components/reactionsPopover.tsx
+  s_e0a7a8d330ff29::t_d831d4667c0eec 9
+  s_e0a7a8d330ff29::t_6601f23affd384 38
+src/lib/session.ts
+  s_e0a7a8d330ff29::t_1cb57c30c11b89 6
+  s_e0a7a8d330ff29::t_47d8ff5fe1bc71 7
+src/components/tutorial.tsx
+  s_e0a7a8d330ff29::t_956984c35abb89 9-21,25-26
+  s_e0a7a8d330ff29::t_42e097b2b4c28d 96
+  s_e0a7a8d330ff29::t_674a526ad3fdd9 153
+  s_e0a7a8d330ff29::t_0c8ef6628f777e 136,139
+src/lib/ai.ts
+  s_be6fc853ea1b13::t_9d81c286f23db1 7
+  s_e0a7a8d330ff29::t_2fd80602ffa896 368
+  s_e0a7a8d330ff29::t_e0194ccb3e617d 143
+  s_e0a7a8d330ff29::t_44b7bdd4bd67c1 249-250
+  s_a212c2d3303ede::t_f677f63469c3c8 184-187,203,240-243,257,259,279-282,285-286,291,294,297,325-326,330-332,345,347-348,363-366,393,424-428,446-448,501-502,504-505
+  s_be6fc853ea1b13::t_c13041188f5feb 231
+  s_e0a7a8d330ff29::t_ae12a4e0644a4d 142
+  s_e0a7a8d330ff29::t_2112528fc1f619 272
+  s_be6fc853ea1b13::t_d2970a9511dcf0 205
+  s_e0a7a8d330ff29::t_6b042cc3ce67a0 180-181
+  s_e0a7a8d330ff29::t_b6ddabe6185b3e 178-179
+  s_e0a7a8d330ff29::t_7affc7881eb90c 182
+  s_a212c2d3303ede::t_dae9f944403187 392
+  s_a212c2d3303ede::t_74e0d14084404e 506-507
+tsconfig.json
+  s_e0a7a8d330ff29::t_f3801b14692993 12
+  s_e0a7a8d330ff29::t_14be1988f4de7e 13
+src/hooks/session.ts
+  s_e0a7a8d330ff29::t_adeb48c3a321dc 3
+src/components/reviewComments.tsx
+  s_e0a7a8d330ff29::t_1993bf8d8d2f2b 107-108,111
+  s_e0a7a8d330ff29::t_e6d4a97acb9390 52
+src/lib/ai-cheater.ts
+  s_e0a7a8d330ff29::t_49eec18bc62c79 101
+  s_e0a7a8d330ff29::t_ad1260a6200cb2 98-100
+  s_e0a7a8d330ff29::t_d709efd5ecf326 39-42
+src/components/card.tsx
+  s_be6fc853ea1b13::t_420163dc5637af 190
+  s_e0a7a8d330ff29::t_47f4a135efc7bd 208
+  s_e0a7a8d330ff29::t_c713e0d669f210 133-136
+  s_e0a7a8d330ff29::t_688f1cb119fc5f 119,123
+  s_e0a7a8d330ff29::t_bdd6c63f22b110 149,152
+  s_e0a7a8d330ff29::t_6a4bebe240c038 219
+  s_e0a7a8d330ff29::t_0b992727891d30 266,270,278
+src/components/textFieldDialog.tsx
+  s_e0a7a8d330ff29::t_99c49e3ea6628b 31
+  s_e0a7a8d330ff29::t_cb1295a67c890b 16
+src/hooks/previous.ts
+  s_e0a7a8d330ff29::t_78a10c4351e321 7
+src/lib/actions.ts
+  s_be6fc853ea1b13::t_cc19181446f657 375
+  s_be6fc853ea1b13::t_f9484a1cf7e333 492-493
+  s_be6fc853ea1b13::t_88236c648f8d3a 225
+  s_be6fc853ea1b13::t_5266ae04837b01 19
+  s_be6fc853ea1b13::t_9596d8a2a08270 480,484
+  s_be6fc853ea1b13::t_d10797e090b33b 388-389
+src/pages/[gameId]/index.tsx
+  s_e0a7a8d330ff29::t_98e9c14f78f08e 49
+  s_e0a7a8d330ff29::t_63fe77cbf6fc32 48
+  s_e0a7a8d330ff29::t_9bf70eb1828d78 42
+src/pages/index.tsx
+  s_e0a7a8d330ff29::t_f0a4289d5a41de 35
+  s_e0a7a8d330ff29::t_a45937855c12d5 34
+  s_672067214ec403::t_3a3e76119386ac 130
+  s_e0a7a8d330ff29::t_312fe35bd63a56 19-20
+src/components/gameActionsStats.tsx
+  s_5c905574534a6d::t_5d2a5874e5f57f 59-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "9631ba046b4509aa5e822781803d09c9aa552f01",
+  "prompts": {},
+  "sessions": {
+    "s_5ae4a5967095cd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-ae84781603978677e",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_5c905574534a6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-aa272f19fca92df8a",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_672067214ec403": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-ae2c69b11b4ef8591",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_a212c2d3303ede": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-aa5a1f5b91ef52d7c",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_be6fc853ea1b13": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "94d7abcb-cc3b-47fd-813b-d867f5c5ca9d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    },
+    "s_e0a7a8d330ff29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "28d65c07-4abf-4121-a279-30f9a4d7c6f9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
