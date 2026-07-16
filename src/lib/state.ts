@@ -1,5 +1,5 @@
 import { defaults, omit } from "lodash";
-import { commitAction, joinGame, newGame } from "./actions";
+import { commitAction, dealHands, joinGame, newGame } from "./actions";
 import { ID } from "./id";
 
 /**
@@ -29,6 +29,22 @@ export default interface IGameState {
   // Replay mode
   originalGame?: IGameState;
   nextGameId?: string;
+}
+
+export interface ILobbyState {
+  id: string;
+  status: IGameStatus.LOBBY;
+  players: IPlayer[];
+  options: IGameOptions;
+  messages: IMessage[];
+  reviewComments: IReviewComment[];
+  createdAt: number;
+  synced: boolean;
+  nextGameId?: string;
+}
+
+export function isLobby(state: IGameState | ILobbyState): state is ILobbyState {
+  return state.status === IGameStatus.LOBBY;
 }
 
 /**
@@ -207,36 +223,70 @@ export interface ITokens {
   strikes: number;
 }
 
-export function rebuildGame(state: Partial<IGameState>) {
+export function rebuildLobby(state: Partial<IGameState>): ILobbyState {
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    id: state.id!,
+    status: IGameStatus.LOBBY,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    options: state.options!,
+    players: (state.players || []).map((player, index) => ({ ...omit(player, "hand"), index })),
+    messages: state.messages ?? [],
+    reviewComments: state.reviewComments ?? [],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    createdAt: state.createdAt!,
+    synced: false,
+    nextGameId: state.nextGameId,
+  };
+}
+
+export function rebuildGame(state: Partial<IGameState> | null): IGameState | ILobbyState | null {
   if (!state) {
     return null;
   }
 
-  let newState = newGame(state.options);
+  if (state.status === IGameStatus.LOBBY) {
+    return rebuildLobby(state);
+  }
 
-  state.players.forEach((player) => {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  let newState = newGame(state.options!);
+
+  (state.players || []).forEach((player) => {
     newState = joinGame(newState, player);
   });
 
-  state.turnsHistory.forEach((turn) => {
+  newState = dealHands(newState);
+
+  (state.turnsHistory || []).forEach((turn) => {
     newState = commitAction(newState, turn.action);
   });
 
-  newState.messages = state.messages;
-  newState.status = state.status;
-  newState.createdAt = state.createdAt;
-  newState.nextGameId = state.nextGameId ?? null;
-  newState.reviewComments = state.reviewComments;
+  newState.messages = state.messages ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  newState.status = state.status!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  newState.createdAt = state.createdAt!;
+  newState.nextGameId = state.nextGameId;
+  newState.reviewComments = state.reviewComments ?? [];
 
   return newState;
 }
 
-export function cleanState(state: IGameState): Partial<IGameState> {
-  return {
+export function cleanState(state: IGameState | ILobbyState): Partial<IGameState> {
+  const base = {
     ...omit(state, ["playedCards", "drawPile", "discardPile"]),
     players: state.players.map((player) => {
       return omit(player, "hand");
     }),
+  };
+
+  if (isLobby(state)) {
+    return base;
+  }
+
+  return {
+    ...base,
     turnsHistory: state.turnsHistory.map((turn) => {
       return {
         action: omit(turn.action, ["card"]) as IAction,
@@ -247,7 +297,7 @@ export function cleanState(state: IGameState): Partial<IGameState> {
 
 // empty arrays are returned as null in Firebase, so we fill
 // them back to avoid having to type check everywhere
-export function fillEmptyValues(state: IGameState): IGameState {
+export function fillEmptyValues(state: IGameState | null): IGameState | null {
   if (!state) {
     return null;
   }

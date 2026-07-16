@@ -1,11 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { CardWrapper } from "~/components/card";
+import Board from "~/components/board";
 import HomeButton from "~/components/homeButton";
-import PlayedCards from "~/components/playedCards";
-import TokenSpace from "~/components/tokenSpace";
 import Button, { ButtonSize } from "~/components/ui/button";
-import Txt, { TxtSize } from "~/components/ui/txt";
+import Txt from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
 import { getMaximumPossibleScore, getMaximumScore, getScore } from "~/lib/actions";
 import { IGameStatus } from "~/lib/state";
@@ -53,33 +51,12 @@ export default function GameBoard(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-end justify-between">
-        <div className="flex flex-column mb3">
-          <PlayedCards cards={game.playedCards} />
-        </div>
-        <div className="flex flex-row mt2 justify-right items-end ml2">
-          <div className="mr2 relative flex flex-column items-center">
-            <CardWrapper color={game.drawPile.length > 5 ? "main" : "strikes"}>
-              {game.drawPile.map((card, i) => (
-                <div key={i} className="absolute" style={{ top: `-${i / 2}px` }}>
-                  <CardWrapper key={card.id} color={game.drawPile.length > 5 ? "main" : "strikes"}>
-                    <Txt className="outline-main-dark" size={TxtSize.MEDIUM} value={i + 1} />
-                  </CardWrapper>
-                </div>
-              ))}
-            </CardWrapper>
-            {game.drawPile.length <= 5 ? (
-              <Txt className="red mt1" value={t("cardLeft", { pileLength: game.drawPile.length })} />
-            ) : (
-              <Txt className="gray mt1" value={t("deck")} />
-            )}
-          </div>
-          <div className="tc">
-            <TokenSpace hints={game.tokens.hints} strikes={game.tokens.strikes} />
-            <Txt className="gray mt1" value={t("tokens")} />
-          </div>
-        </div>
-      </div>
+      <Board
+        deckCount={game.drawPile.length}
+        hints={game.tokens.hints}
+        playedCards={game.playedCards}
+        strikes={game.tokens.strikes}
+      />
     </div>
   );
 }

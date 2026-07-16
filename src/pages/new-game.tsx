@@ -7,7 +7,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import { Checkbox, Field, Select, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
-import { MAX_PLAYERS, newGame } from "~/lib/actions";
+import { createLobby, MAX_PLAYERS } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
 import { generateShuffleSeed, readableUniqueId } from "~/lib/id";
@@ -68,12 +68,14 @@ export default function NewGame() {
   }, []);
 
   async function onCreateGame() {
+    if (seed === undefined) return;
+
     const gameId = readableUniqueId();
 
     setCreatingGame(true);
 
     await updateGame(
-      newGame({
+      createLobby({
         id: gameId,
         variant,
         playersCount: MAX_PLAYERS,
@@ -86,8 +88,7 @@ export default function NewGame() {
         botsWait,
         colorBlindMode,
         gameMode: offline ? GameMode.PASS_AND_PLAY : GameMode.NETWORK,
-      }),
-      "create"
+      })
     );
 
     logEvent("Game", "Game created");

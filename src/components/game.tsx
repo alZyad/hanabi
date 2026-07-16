@@ -5,7 +5,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
 import DiscardArea from "~/components/discardArea";
 import GameBoard from "~/components/gameBoard";
-import Lobby from "~/components/lobby";
 import Logs from "~/components/logs";
 import MenuArea from "~/components/menuArea";
 import PlayersBoard from "~/components/playersBoard";
@@ -16,49 +15,44 @@ import TutorialInstructions from "~/components/tutorialInstructions";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
-import useLocalStorage from "~/hooks/localStorage";
 import { useNotifications } from "~/hooks/notifications";
 import { useReplay } from "~/hooks/replay";
-import { useSession } from "~/hooks/session";
 import { useSoundEffects } from "~/hooks/sounds";
 import { useUserPreferences } from "~/hooks/userPreferences";
 import {
   commitAction,
+  dealHands,
   getMaximumPossibleScore,
   getScore,
   joinGame,
   newGame,
   recreateGame,
-  startGameFromLobby,
 } from "~/lib/actions";
 import { play } from "~/lib/ai";
 import { cheat } from "~/lib/ai-cheater";
 import { logEvent } from "~/lib/analytics";
 import { setNotification, setReaction, updateGame } from "~/lib/firebase";
 import { uniqueId } from "~/lib/id";
-import IGameState, { GameMode, IAction, IGameHintsLevel, IGameStatus, IPlayer } from "~/lib/state";
+import IGameState, { GameMode, IAction, IGameHintsLevel, IGameStatus, ILobbyState, IPlayer } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
 
 interface Props {
-  host: string;
-  onGameChange: (game: IGameState) => void;
+  onGameChange: (game: IGameState | ILobbyState) => void;
 }
 
 export function Game(props: Props) {
-  const { host, onGameChange } = props;
+  const { onGameChange } = props;
   const { t } = useTranslation();
 
   const router = useRouter();
   const [displayStats, setDisplayStats] = useState(false);
-  const [reachableScore, setReachableScore] = useState<number>(null);
+  const [reachableScore, setReachableScore] = useState<number | null>(null);
   const [interturn, setInterturn] = useState(false);
-  const { playerId } = useSession();
-  const [, setGameId] = useLocalStorage("gameId", null);
   const [selectedArea, selectArea] = useState<ISelectedArea>({
     id: "logs",
     type: ActionAreaType.LOGS,
   });
-  const fireworksRef = useRef();
+  const fireworksRef = useRef<HTMLDivElement>(null);
 
   const game = useGame();
   const currentPlayer = useCurrentPlayer(game);
@@ -101,18 +95,19 @@ export function Game(props: Props) {
     if (!game.synced) return;
     if (game.status !== IGameStatus.ONGOING) return;
     if (!selfPlayer) return;
+    if (!currentPlayer) return;
     if (!currentPlayer.bot) return;
 
     try {
       if (game.options.botsWait === 0) {
-        updateGame(play(game), "bot").catch(logFailedPromise);
+        updateGame(play(game)).catch(logFailedPromise);
         return;
       }
 
       setReaction(game, currentPlayer, "🧠").catch(logFailedPromise);
       const timeout = setTimeout(() => {
         try {
-          updateGame(play(game), "bot-timeout").catch(logFailedPromise);
+          updateGame(play(game)).catch(logFailedPromise);
           game.options.botsWait && setReaction(game, currentPlayer, null);
         } catch (e) {
           console.error(`[Bot] Error during play:`, e);
@@ -155,6 +150,8 @@ export function Game(props: Props) {
       });
     });
 
+    sameGame = dealHands(sameGame);
+
     while (sameGame.status !== IGameStatus.OVER) {
       sameGame = cheat(sameGame);
     }
@@ -179,7 +176,7 @@ export function Game(props: Props) {
 
       newState = joinGame(newState, { id: playerId, name: botsName[i - 1] + " 🤖", bot: true });
 
-      await updateGame(newState, "fill-bots");
+      await updateGame(newState);
     }
   }, [game]);
 
@@ -198,6 +195,7 @@ export function Game(props: Props) {
   useEffect(() => {
     if (game.status !== IGameStatus.OVER) return;
     if (!userPreferences.showFireworksAtGameEnd) return;
+    if (!fireworksRef.current) return;
     const fireworks = new Fireworks(fireworksRef.current, {
       maxRockets: 5, // max # of rockets to spawn
       rocketSpawnInterval: 150, // milliseconds to check if new rockets should spawn
@@ -224,7 +222,7 @@ export function Game(props: Props) {
       startedAt: Date.now(),
     };
 
-    updateGame(newState, "start-tutorial").then(() => {
+    updateGame(newState).then(() => {
       logEvent("Game", "Tutorial started");
     });
   }, [game]);
@@ -271,41 +269,6 @@ export function Game(props: Props) {
     location.assign(`/${game.nextGameId}`);
   }, [game.synced, game.nextGameId]);
 
-  function onJoinGame(player: Omit<IPlayer, "id">) {
-    const newState = joinGame(game, { id: playerId, ...player });
-
-    onGameChange({ ...newState, synced: false });
-    updateGame(newState, "join").catch(logFailedPromise);
-
-    logEvent("Game", "Player joined");
-
-    setGameId(game.id);
-  }
-
-  function onAddBot() {
-    const playerId = uniqueId();
-    const botsCount = game.players.filter((p) => p.bot).length;
-
-    const bot = {
-      name: `AI #${botsCount + 1}`,
-    };
-    const newState = joinGame(game, { id: playerId, ...bot, bot: true });
-
-    onGameChange({ ...newState, synced: false });
-    updateGame(newState, "add-bot").catch(logFailedPromise);
-
-    logEvent("Game", "Bot added");
-  }
-
-  async function onStartGame() {
-    const newState = startGameFromLobby(game, Date.now());
-
-    onGameChange({ ...newState, synced: false });
-    await updateGame(newState, "start");
-
-    logEvent("Game", "Game started");
-  }
-
   async function onCommitAction(action: IAction) {
     const newState = commitAction(game, action);
 
@@ -321,7 +284,7 @@ export function Game(props: Props) {
     }
 
     onGameChange({ ...newState, synced: false });
-    await updateGame(newState, "commit");
+    await updateGame(newState);
 
     logEvent("Game", "Turn played");
   }
@@ -347,6 +310,7 @@ export function Game(props: Props) {
   }
 
   async function onReaction(reaction: string) {
+    if (!selfPlayer) return;
     clearTimeout(reactionTimeoutRef.current);
     await setReaction(game, selfPlayer, reaction);
     if (reaction) {
@@ -455,7 +419,7 @@ export function Game(props: Props) {
     onStopReplay();
     const finishedGame = liveGame();
     const nextGame = recreateGame(finishedGame);
-    await updateGame(nextGame, "restart-create");
+    await updateGame(nextGame);
     log("Next Game Persisted");
     const updatedGame = { ...finishedGame, nextGameId: nextGame.id };
     // Pre-set the ref so the redirect effect treats the Firebase echo as
@@ -464,7 +428,7 @@ export function Game(props: Props) {
     // the effect), leaving a duplicate history entry that breaks the back
     // button.
     initialNextGameIdRef.current = nextGame.id;
-    await updateGame(updatedGame, "restart-link");
+    await updateGame(updatedGame);
     log("Link to nextGame updated");
     onGameChange(nextGame);
     log(`GameChange fired for ${nextGame.id}`);
@@ -485,10 +449,6 @@ export function Game(props: Props) {
         </div>
         <div className="flex flex-column bg-black-50 bb b--yellow ph6.5-m">
           {selectedArea.type === ActionAreaType.MENU && <MenuArea onCloseArea={onCloseArea} />}
-
-          {game.status === IGameStatus.LOBBY && (
-            <Lobby host={host} onAddBot={onAddBot} onJoinGame={onJoinGame} onStartGame={onStartGame} />
-          )}
 
           {selectedArea.type === ActionAreaType.ROLLBACK && (
             <div className="h4 pa2 ph3-l">
@@ -525,7 +485,7 @@ export function Game(props: Props) {
 
         {interturn && (
           <div className="flex-grow-1 flex flex-column items-center justify-center">
-            <Txt size={TxtSize.MEDIUM} value={t("theirTurn", { currentPlayerName: currentPlayer.name })} />
+            <Txt size={TxtSize.MEDIUM} value={t("theirTurn", { currentPlayerName: currentPlayer?.name })} />
             <Button
               primary
               className="mt4"
@@ -551,7 +511,7 @@ export function Game(props: Props) {
           </div>
         )}
 
-        {game.status === IGameStatus.ONGOING && game.options.tutorial && tutorial.isOver && <TutorialInstructions />}
+        {game.status === IGameStatus.ONGOING && game.options.tutorial && tutorial?.isOver && <TutorialInstructions />}
 
         {replay.cursor !== null && (
           <div className="flex flex-column bg-black-50 bt b--yellow pv3 ph6.5-m">
