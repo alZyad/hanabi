@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Write .env
+        run: printf '%s' "${{ secrets.DOTENV }}" > .env
+
       - name: Deploy
         run: npx --yes vercel@latest deploy --prod --yes --token="${{ secrets.VERCEL_TOKEN }}"
 
