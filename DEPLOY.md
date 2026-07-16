@@ -21,3 +21,5 @@ npx --yes vercel@latest deploy --prod --yes --token="$VERCEL_TOKEN"
 - Config lives in vercel.json. Build uses pnpm + `npm run build` (has --openssl-legacy-provider).
 - First-time only: `npx vercel@latest link --yes --project hanabi --token="$VERCEL_TOKEN"`.
 - Verify live: `curl -sko /dev/null -w '%{http_code}' https://hanabi-zeta-tan.vercel.app` (expect 200)
+
+<!-- ci pipeline verification -->
