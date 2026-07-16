@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Enable corepack
+        run: corepack enable
+
       - name: Pull Vercel environment
         run: npx --yes vercel@latest pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
 
