@@ -64,6 +64,7 @@ export function Game(props: Props) {
   const currentPlayer = useCurrentPlayer(game);
   const selfPlayer = useSelfPlayer(game);
   const replay = useReplay();
+  const reactionTimeoutRef = useRef<NodeJS.Timeout>(null);
   const tutorial = useContext(TutorialContext);
   const [userPreferences] = useUserPreferences();
   useNotifications();
@@ -346,7 +347,13 @@ export function Game(props: Props) {
   }
 
   async function onReaction(reaction: string) {
+    clearTimeout(reactionTimeoutRef.current);
     await setReaction(game, selfPlayer, reaction);
+    if (reaction) {
+      reactionTimeoutRef.current = setTimeout(() => {
+        setReaction(game, selfPlayer, null);
+      }, 10_000);
+    }
   }
 
   function onSelectArea(area: ISelectedArea) {
