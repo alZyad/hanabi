@@ -1,0 +1,14 @@
+src/styles/tachyons-overrides.css
+  h_78d9c443c6c3a1 162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "dd1983b5d5c60913d0e9e19ed838f9c6ca76f9a4",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
