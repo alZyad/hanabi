@@ -1,0 +1,21 @@
+src/pages/play.tsx
+  s_4e3a7775ab3d40::t_d79b60a9d18248 21
+src/pages/summary.tsx
+  s_4e3a7775ab3d40::t_ddf450be952428 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "ddf6cf8f0ecc913082834a1d426d5e300f1fafe4",
+  "prompts": {},
+  "sessions": {
+    "s_4e3a7775ab3d40": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "91bb6f1d-3755-4cfc-811b-9af8308f7d9c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
