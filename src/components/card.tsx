@@ -205,7 +205,7 @@ interface Props {
   size?: CardSize;
   className?: string;
   style?: CSSProperties;
-  onClick?: MouseEventHandler;
+  onSelectCard?: (position: number) => void;
 }
 
 function Card(props: Props) {
@@ -215,7 +215,6 @@ function Card(props: Props) {
     variant,
     colorBlindMode,
     hintsLevel,
-    onClick,
     hidden = false,
     playable = true,
     size = CardSize.MEDIUM,
@@ -223,6 +222,7 @@ function Card(props: Props) {
     style = {},
     position = null,
     selected = false,
+    onSelectCard,
   } = props;
 
   const [allHintsPopoverIsOpen, setAllHintsPopoverIsOpen] = useState(false);
@@ -264,7 +264,11 @@ function Card(props: Props) {
           e.stopPropagation();
           return;
         }
-        onClick?.(e);
+        if (onSelectCard && position !== null) {
+          e.stopPropagation();
+          onSelectCard(position);
+          return;
+        }
       }}
       {...longPressProps}
     >
@@ -375,18 +379,4 @@ function Card(props: Props) {
   );
 }
 
-export default React.memo(
-  Card,
-  (prev, next) =>
-    prev.card === next.card &&
-    prev.context === next.context &&
-    prev.variant === next.variant &&
-    prev.colorBlindMode === next.colorBlindMode &&
-    prev.hintsLevel === next.hintsLevel &&
-    prev.hidden === next.hidden &&
-    prev.position === next.position &&
-    prev.selected === next.selected &&
-    prev.playable === next.playable &&
-    prev.size === next.size &&
-    prev.className === next.className
-);
+export default React.memo(Card);

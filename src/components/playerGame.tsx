@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { TFunction } from "i18next";
-import React, { HTMLAttributes, useEffect, useState } from "react";
+import React, { CSSProperties, HTMLAttributes, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowContainer, Popover } from "react-tiny-popover";
 import { PoseGroup } from "react-pose";
@@ -36,6 +36,8 @@ import IGameState, {
 } from "~/lib/state";
 import { isTutorialAction, useTutorialAction } from "~/lib/tutorial";
 import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
+
+const FOCUSED_CARD_STYLE: CSSProperties = { transition: "transform 120ms ease-out" };
 
 function isCardHintable(game: IGameState, hint: IHintAction, card: ICard) {
   return hint.type === "color"
@@ -166,6 +168,17 @@ function PlayerGame(props: Props) {
 
   const showReviewCommentPopover =
     self && game.status === IGameStatus.ONGOING && game.originalGame?.status !== IGameStatus.OVER;
+
+  const onSelectCard = useCallback(
+    (position: number) => {
+      onSelectPlayer(player, position);
+      if (player === selfPlayer) {
+        selectCard(position);
+      }
+    },
+    [onSelectPlayer, player, selfPlayer]
+  );
+
   return (
     <>
       <PlayerRow
@@ -371,17 +384,9 @@ function PlayerGame(props: Props) {
                             (player === selfPlayer ? selectedCard === i : isCardHintable(game, pendingHint, card))
                           }
                           size={selected ? CardSize.LARGE : CardSize.MEDIUM}
-                          style={{
-                            ...(selected && { transition: "transform 120ms ease-out" }),
-                          }}
+                          style={selected ? FOCUSED_CARD_STYLE : undefined}
                           variant={game.options.variant}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onSelectPlayer(player, i);
-                            if (player === selfPlayer) {
-                              selectCard(i);
-                            }
-                          }}
+                          onSelectCard={onSelectCard}
                         />
                         {showCardNotes && (
                           <CardNotesOnboarding
