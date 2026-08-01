@@ -190,6 +190,13 @@ src/components/loadingScreen.tsx
   s_be6fc853ea1b13::t_666c6edcdbee38 6
 src/components/gameActionsStats.tsx
   s_5c905574534a6d::t_3f1035c8819595 59-63
+src/components/game.tsx
+  s_a69de368d3f754::t_704342fc6e0b9e 61
+src/hooks/cardNotes.ts
+  s_a69de368d3f754::t_2ac53654c90a89 22-23
+src/components/cardNotesArea.tsx
+  s_a69de368d3f754::t_ab6f190d3ff03f 43
+  s_a69de368d3f754::t_954d278a50cb30 27,31
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -226,6 +233,14 @@ src/components/gameActionsStats.tsx
         "tool": "claude",
         "id": "agent-aa5a1f5b91ef52d7c",
         "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
       },
       "human_author": "alZyad <zyad.alalgui@theodo.com>"
     },
