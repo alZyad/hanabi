@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Board from "~/components/board";
 import FaceDownHand from "~/components/faceDownHand";
 import HomeButton from "~/components/homeButton";
+import PlayerRow, { HandStrip } from "~/components/playerRow";
 import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
@@ -254,12 +255,16 @@ export default function LobbyView(props: Props) {
         )}
       </div>
 
-      <div className="flex flex-grow-1 flex-column ph6.5-m pa2">
+      <div className="flex flex-grow-1 flex-column">
         {lobby.players.map((player) => (
-          <div key={player.id} className="flex items-center mb2 bb b--yellow-light pb2">
-            <Txt className="mr3 truncate" style={{ width: "7rem" }} value={player.name} />
-            <FaceDownHand size={lobbyHandSize} />
-          </div>
+          <PlayerRow key={player.id} className="bb b--yellow-light">
+            <div className="flex items-center">
+              <Txt className="mr3 truncate" style={{ width: "7rem" }} value={player.name} />
+            </div>
+            <HandStrip>
+              <FaceDownHand size={lobbyHandSize} />
+            </HandStrip>
+          </PlayerRow>
         ))}
       </div>
     </div>

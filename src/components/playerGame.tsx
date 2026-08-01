@@ -9,6 +9,7 @@ import ChatPopover from "~/components/chatPopover";
 import CardNotesArea from "~/components/cardNotesArea";
 import CardNotesOnboarding from "~/components/cardNotesOnboarding";
 import PlayerName, { PlayerNameSize } from "~/components/playerName";
+import PlayerRow, { HandStrip } from "~/components/playerRow";
 import PlayerStats from "~/components/playerStats";
 import ReactionsPopover from "~/components/reactionsPopover";
 import { ReviewCommentPopover } from "~/components/reviewComments";
@@ -169,10 +170,8 @@ export default function PlayerGame(props: Props) {
     self && game.status === IGameStatus.ONGOING && game.originalGame?.status !== IGameStatus.OVER;
   return (
     <>
-      <div
-        className={classnames("cards flex justify-between bg-main-dark pa2 pv2-l ph6.5-m relative", {
-          "flex-column": selected,
-        })}
+      <PlayerRow
+        vertical={selected}
         onClick={() => {
           if (!selected) onSelectPlayer(player, 0);
         }}
@@ -321,7 +320,7 @@ export default function PlayerGame(props: Props) {
           )}
         </div>
 
-        <div className={classnames("flex justify-end self-end flex-grow-1 dib")}>
+        <HandStrip>
           {displayStats && (
             <div className="ml3">
               <PlayerStats className="w4.5" player={player} />
@@ -397,8 +396,8 @@ export default function PlayerGame(props: Props) {
               </PoseGroup>
             </div>
           )}
-        </div>
-      </div>
+        </HandStrip>
+      </PlayerRow>
 
       {/* Self player actions */}
       <div
