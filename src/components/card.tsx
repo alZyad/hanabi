@@ -208,7 +208,7 @@ interface Props {
   onClick?: MouseEventHandler;
 }
 
-export default function Card(props: Props) {
+function Card(props: Props) {
   const {
     card,
     context,
@@ -381,3 +381,19 @@ export default function Card(props: Props) {
     </CardWrapper>
   );
 }
+
+export default React.memo(
+  Card,
+  (prev, next) =>
+    prev.card === next.card &&
+    prev.context === next.context &&
+    prev.variant === next.variant &&
+    prev.colorBlindMode === next.colorBlindMode &&
+    prev.hintsLevel === next.hintsLevel &&
+    prev.hidden === next.hidden &&
+    prev.position === next.position &&
+    prev.selected === next.selected &&
+    prev.playable === next.playable &&
+    prev.size === next.size &&
+    prev.className === next.className
+);

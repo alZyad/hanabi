@@ -269,32 +269,35 @@ export function Game(props: Props) {
     location.assign(`/${game.nextGameId}`);
   }, [game.synced, game.nextGameId]);
 
-  async function onCommitAction(action: IAction) {
-    const newState = commitAction(game, action);
+  const onCommitAction = useCallback(
+    async (action: IAction) => {
+      const newState = commitAction(game, action);
 
-    const misplay = getMaximumPossibleScore(game) !== getMaximumPossibleScore(newState);
-    if (game.options.preventLoss && misplay) {
-      if (!window.confirm(t("preventLossContent"))) {
-        return;
+      const misplay = getMaximumPossibleScore(game) !== getMaximumPossibleScore(newState);
+      if (game.options.preventLoss && misplay) {
+        if (!window.confirm(t("preventLossContent"))) {
+          return;
+        }
       }
-    }
 
-    if (game.options.gameMode === GameMode.PASS_AND_PLAY) {
-      setInterturn(true);
-    }
+      if (game.options.gameMode === GameMode.PASS_AND_PLAY) {
+        setInterturn(true);
+      }
 
-    onGameChange({ ...newState, synced: false });
-    await updateGame(newState);
+      onGameChange({ ...newState, synced: false });
+      await updateGame(newState);
 
-    logEvent("Game", "Turn played");
-  }
+      logEvent("Game", "Turn played");
+    },
+    [game, t, onGameChange]
+  );
 
-  function onCloseArea() {
+  const onCloseArea = useCallback(() => {
     selectArea({
       id: "logs",
       type: ActionAreaType.LOGS,
     });
-  }
+  }, []);
 
   function onRollbackClick() {
     onSelectArea({
@@ -305,46 +308,48 @@ export function Game(props: Props) {
     logEvent("Game", "Game rolled back");
   }
 
-  async function onNotifyPlayer(player: IPlayer) {
-    await setNotification(game, player, true);
-  }
+  const onNotifyPlayer = useCallback(
+    async (player: IPlayer) => {
+      await setNotification(game, player, true);
+    },
+    [game]
+  );
 
-  async function onReaction(reaction: string) {
-    if (!selfPlayer) return;
-    clearTimeout(reactionTimeoutRef.current);
-    await setReaction(game, selfPlayer, reaction);
-    if (reaction) {
-      reactionTimeoutRef.current = setTimeout(() => {
-        setReaction(game, selfPlayer, null);
-      }, 10_000);
-    }
-  }
+  const onReaction = useCallback(
+    async (reaction: string) => {
+      if (!selfPlayer) return;
+      clearTimeout(reactionTimeoutRef.current);
+      await setReaction(game, selfPlayer, reaction);
+      if (reaction) {
+        reactionTimeoutRef.current = setTimeout(() => {
+          setReaction(game, selfPlayer, null);
+        }, 10_000);
+      }
+    },
+    [game, selfPlayer]
+  );
 
-  function onSelectArea(area: ISelectedArea) {
-    if (area.id === selectedArea.id) {
-      return selectArea({
-        id: "logs",
-        type: ActionAreaType.LOGS,
+  const onSelectArea = useCallback((area: ISelectedArea) => {
+    selectArea((current) => (current.id === area.id ? { id: "logs", type: ActionAreaType.LOGS } : area));
+  }, []);
+
+  const onSelectPlayer = useCallback(
+    (player, cardIndex) => {
+      const self = player.id === selfPlayer?.id;
+
+      if (displayStats) {
+        return;
+      }
+
+      onSelectArea({
+        id: self ? `game-${player.id}-${cardIndex}` : `game-${player.id}`,
+        type: self ? ActionAreaType.SELF_PLAYER : ActionAreaType.OTHER_PLAYER,
+        player,
+        cardIndex,
       });
-    }
-
-    selectArea(area);
-  }
-
-  function onSelectPlayer(player, cardIndex) {
-    const self = player.id === selfPlayer?.id;
-
-    if (displayStats) {
-      return;
-    }
-
-    onSelectArea({
-      id: self ? `game-${player.id}-${cardIndex}` : `game-${player.id}`,
-      type: self ? ActionAreaType.SELF_PLAYER : ActionAreaType.OTHER_PLAYER,
-      player,
-      cardIndex,
-    });
-  }
+    },
+    [displayStats, selfPlayer, onSelectArea]
+  );
 
   function onMenuClick() {
     onSelectArea({

@@ -91,7 +91,7 @@ interface Props extends HTMLAttributes<HTMLElement> {
   onCloseArea: () => void;
 }
 
-export default function PlayerGame(props: Props) {
+function PlayerGame(props: Props) {
   const {
     player,
     self = false,
@@ -536,6 +536,8 @@ export default function PlayerGame(props: Props) {
     </>
   );
 }
+
+export default React.memo(PlayerGame);
 
 const AnimatedCard = posedDiv({
   enter: {
