@@ -1,0 +1,31 @@
+src/components/playerGame.tsx
+  s_c4578372e94e2c::t_700de441dee1b4 12
+  s_c4578372e94e2c::t_3749719c56a8a7 323
+  s_c4578372e94e2c::t_0bd903d3c9b4da 173-174
+  s_c4578372e94e2c::t_9edfebcf8e4a1e 399-400
+src/components/faceDownHand.tsx
+  s_c4578372e94e2c::t_44eb83a539ed59 1
+  s_c4578372e94e2c::t_6303e42a9f9a53 11-16
+src/components/lobbyView.tsx
+  s_c4578372e94e2c::t_76d66933614bdc 258,260-267
+  s_c4578372e94e2c::t_f454153312bf84 9
+src/components/playerRow.tsx
+  s_c4578372e94e2c::t_e1e34a6310358b 17-21
+  s_c4578372e94e2c::t_6a42720c9edf48 1-16,22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "f58a383ebc2103c2a99331679ab8662a03c91bf6",
+  "prompts": {},
+  "sessions": {
+    "s_c4578372e94e2c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6f330b4-a6ba-4090-9cc1-5d9eada89904",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
