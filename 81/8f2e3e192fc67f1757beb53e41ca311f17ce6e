@@ -1,0 +1,25 @@
+src/components/replayViewer.tsx
+  s_a69de368d3f754::t_dc21e06ce3640c 54-60,86,89,103,109,112
+src/hooks/replay.ts
+  s_a69de368d3f754::t_dc21e06ce3640c 3-4,8-11,13-16
+src/pages/[gameId]/index.tsx
+  s_a69de368d3f754::t_b6d63e37aa63b7 57
+src/components/game.tsx
+  s_a69de368d3f754::t_dc21e06ce3640c 396
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "818f2e3e192fc67f1757beb53e41ca311f17ce6e",
+  "prompts": {},
+  "sessions": {
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
