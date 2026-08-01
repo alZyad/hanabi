@@ -1,0 +1,94 @@
+src/hooks/cardNotes.ts
+  s_a69de368d3f754::t_feea844ab01d84 2
+  s_a69de368d3f754::t_7f21db44c85447 34-37,39
+src/lib/schemas/storage.ts
+  s_a69de368d3f754::t_d4b26f5c3020a3 1-45
+src/pages/play.tsx
+  s_a69de368d3f754::t_529672114aabb6 4,15,17-21
+src/pages/index.tsx
+  s_a69de368d3f754::t_56964d0e6ddba4 66-73
+src/components/GameIndex.tsx
+  s_a69de368d3f754::t_9305ad590ed3d9 24-30,32
+src/pages/join-game.tsx
+  s_a69de368d3f754::t_ef6d3b39171a66 9,12
+  s_a69de368d3f754::t_822bc8ddf48a3f 31
+src/pages/[gameId]/index.tsx
+  s_a69de368d3f754::t_09341681b5d323 7,12,14,18
+  s_a69de368d3f754::t_91795efe20cc3c 19-25,36
+src/pages/summary.tsx
+  s_a69de368d3f754::t_03c14447affc77 4,15,17-21
+src/components/tutorial.tsx
+  s_a69de368d3f754::t_f8a82b74a8b6e0 5
+  s_a69de368d3f754::t_30bac25ed130b2 93,95
+  s_a69de368d3f754::t_79887009034b23 96
+yarn.lock
+  s_a69de368d3f754::t_b7ae50f5de81f2 4617,8293-8299
+package.json
+  s_a69de368d3f754::t_05e2970b777595 40-41
+src/pages/[gameId]/summary.tsx
+  s_a69de368d3f754::t_77a447c87ec8fb 51-57
+  s_a69de368d3f754::t_bb0de7ce467852 59-63,67
+  s_a69de368d3f754::t_ac35e2f495ccd7 58
+  s_a69de368d3f754::t_16d18ba6460206 124-134,136
+  s_a69de368d3f754::t_836ace57b4d15a 18
+src/hooks/localStorage.ts
+  s_a69de368d3f754::t_0dfa3986005809 3,5-9,14-19,32,37-39
+  s_a69de368d3f754::t_7e704cbaa0bc29 41
+src/lib/schemas/gameState.ts
+  s_a69de368d3f754::t_e8fd3f7e9ca487 110-127,136
+  s_a69de368d3f754::t_a9c9aebaf66ffd 1-2,4-89,91-96,101-105,129-132,134-135,137
+  s_a69de368d3f754::t_e1b0a5fdf1f765 90
+  s_a69de368d3f754::t_4d02808252bc1f 106-109,128,133
+  s_a69de368d3f754::t_517891124ebbec 3,97-100
+src/pages/learn.tsx
+  s_a69de368d3f754::t_8740886173d666 21
+  s_a69de368d3f754::t_8c7a721be69889 58
+  s_a69de368d3f754::t_c14a4bdcd0eaad 370
+  s_a69de368d3f754::t_3fdeb79b211ce1 16
+  s_a69de368d3f754::t_5405ab39ef220d 339
+src/lib/session.ts
+  s_a69de368d3f754::t_2160ce2a350316 20-22,25-27
+  s_a69de368d3f754::t_c38ae4d6f8a062 7
+  s_a69de368d3f754::t_8974d4f367a6d1 2,6
+  s_a69de368d3f754::t_ea9d589a5b6f11 28
+src/hooks/userPreferences.ts
+  s_a69de368d3f754::t_7024c67d0384b7 21
+  s_a69de368d3f754::t_79cd87250966b7 3
+src/components/tutorialInstructions.tsx
+  s_a69de368d3f754::t_e7705b678355b6 6
+  s_a69de368d3f754::t_ba474db4996d27 14
+src/lib/schemas/params.ts
+  s_a69de368d3f754::t_64401bac632591 1-12
+src/pages/new-game.tsx
+  s_a69de368d3f754::t_29d36b6a6c47e4 10
+  s_a69de368d3f754::t_f3e21ec750c835 59
+src/lib/firebase.ts
+  s_a69de368d3f754::t_4f74c4bd4ab641 15
+  s_a69de368d3f754::t_1f596459056f9b 42-48,59,65,73
+  s_a69de368d3f754::t_9d5fa56281af32 79-83
+  s_a69de368d3f754::t_85db6b0f585d67 170
+  s_a69de368d3f754::t_29242f1c1a9c51 95
+  s_a69de368d3f754::t_29150de89a7690 86,88,93-94,96-123,132-136
+  s_a69de368d3f754::t_342b63d78881be 16
+  s_a69de368d3f754::t_c74ff7a5fdd4af 124-128
+  s_a69de368d3f754::t_8171b2df707c53 10
+src/hooks/game.ts
+  s_a69de368d3f754::t_180c2b8df81972 7
+  s_a69de368d3f754::t_b8998bdcab7508 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "16801551295c657be718074fff74981df89d11bb",
+  "prompts": {},
+  "sessions": {
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
