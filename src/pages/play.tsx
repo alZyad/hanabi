@@ -18,7 +18,7 @@ export default function Play() {
     const destination = gameId ? `/${gameId}` : "/?error=invalid-game";
 
     router.replace(destination).catch(logFailedPromise);
-  }, [router]);
+  }, [router, router.isReady, router.query.gameId]);
 
   return <LoadingScreen />;
 }
