@@ -18,7 +18,7 @@ export function useNotifications() {
     if (Notification.permission !== "granted") {
       Notification.requestPermission().catch((e) => console.error(`Error Requesting Permissions:\n${e}`));
     }
-  }, [game, game.status]);
+  }, [game, game?.status]);
 
   /**
    * Notify player it's time to play when document isn't focused.

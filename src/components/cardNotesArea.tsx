@@ -2,7 +2,7 @@ import classnames from "classnames";
 import React from "react";
 import ColorSymbol from "~/components/colorSymbol";
 import Txt, { TxtSize } from "~/components/ui/txt";
-import { useColorBlindMode, useGame } from "~/hooks/game";
+import { useGame } from "~/hooks/game";
 import { useCardNotes } from "~/hooks/cardNotes";
 import { getColors, numbers } from "~/lib/actions";
 import { ICard, IColor, IHintLevel, IHintType, INumber } from "~/lib/state";
@@ -21,7 +21,7 @@ function Chip(props: ChipProps) {
   const { card, kind, value } = props;
 
   const game = useGame();
-  const colorBlindMode = useColorBlindMode();
+  const colorBlindMode = game.options.colorBlindMode;
   const { isOff, toggle } = useCardNotes(game.id);
 
   const level = kind === "color" ? card.hint?.color[value] : card.hint?.number[value];

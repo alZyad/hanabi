@@ -3,23 +3,16 @@ import { useReplay } from "~/hooks/replay";
 import { useSession } from "~/hooks/session";
 import { getStateAtTurn } from "~/lib/actions";
 import IGameState, { fillEmptyValues, GameMode, IPlayer } from "~/lib/state";
-import useLocalStorage from "~/hooks/localStorage";
-import { colorBlindModeSchema } from "~/lib/schemas/storage";
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-export const GameContext = React.createContext<IGameState>(null!);
+export const GameContext = React.createContext<IGameState | null>(null);
 
-export function useColorBlindMode() {
-  const game = useGame();
-  const [persistedColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
-  if (game) {
-    return game.options.colorBlindMode;
-  }
-  return persistedColorBlindMode;
-}
-export function useGame() {
-  const game = useContext<IGameState>(GameContext);
+export function useGame(): IGameState {
+  const game = useContext(GameContext);
   const replay = useReplay();
+
+  if (!game) {
+    throw new Error("useGame must be used within a GameContext.Provider holding an active game");
+  }
 
   if (replay && replay.cursor !== null) {
     return {
@@ -33,20 +26,12 @@ export function useGame() {
 }
 
 export function useCurrentPlayer(game: IGameState) {
-  if (!game) {
-    return null;
-  }
-
   return game.players[game.currentPlayer];
 }
 
 export function useSelfPlayer(game: IGameState): IPlayer | undefined {
   const { playerId } = useSession();
   const currentPlayer = useCurrentPlayer(game);
-
-  if (!game) {
-    return undefined;
-  }
 
   if (game.options.gameMode === GameMode.NETWORK) {
     return game.players.find((p) => p.id === playerId);
