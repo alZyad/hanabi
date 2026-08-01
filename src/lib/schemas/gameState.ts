@@ -107,24 +107,6 @@ export const GAME_EXISTS_BUT_INVALID = Symbol("game-exists-but-invalid");
 
 export type ParsedGame = IMinimalGameState | null | typeof GAME_EXISTS_BUT_INVALID;
 
-function omitUndefinedDeep<T>(value: T): T {
-  if (Array.isArray(value)) {
-    return value.map(omitUndefinedDeep) as T;
-  }
-
-  if (value && typeof value === "object") {
-    const output: Record<string, unknown> = {};
-    for (const [key, entry] of Object.entries(value)) {
-      if (entry !== undefined) {
-        output[key] = omitUndefinedDeep(entry);
-      }
-    }
-    return output as T;
-  }
-
-  return value;
-}
-
 export function parseGameState(raw: unknown): ParsedGame {
   if (raw == null) return null;
 
@@ -133,5 +115,5 @@ export function parseGameState(raw: unknown): ParsedGame {
     return GAME_EXISTS_BUT_INVALID;
   }
 
-  return omitUndefinedDeep(result.data) as IMinimalGameState;
+  return result.data as IMinimalGameState;
 }

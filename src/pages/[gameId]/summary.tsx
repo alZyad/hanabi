@@ -15,6 +15,7 @@ import { GameContext } from "~/hooks/game";
 import { newGame } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { loadGame, subscribeToGame, updateGame } from "~/lib/firebase";
+import { serializable } from "~/lib/serialize";
 import { parseGameId } from "~/lib/schemas/params";
 import IGameState, { GameVariant, isLobby } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
@@ -63,9 +64,9 @@ export const getServerSideProps = async function ({ params }) {
   }
 
   return {
-    props: {
+    props: serializable({
       game: result.game,
-    },
+    }),
   };
 };
 

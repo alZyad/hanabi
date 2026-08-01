@@ -5,6 +5,7 @@ import { ReplayContext } from "~/hooks/replay";
 import { Session, SessionContext } from "~/hooks/session";
 import { loadGame } from "~/lib/firebase";
 import { parseGameId } from "~/lib/schemas/params";
+import { serializable } from "~/lib/serialize";
 import withSession, { getPlayerIdFromSession } from "~/lib/session";
 import IGameState from "~/lib/state";
 
@@ -29,13 +30,13 @@ export const getServerSideProps = withSession(async function ({ req, params }) {
   const { host } = req.headers;
 
   return {
-    props: {
+    props: serializable({
       session: {
         playerId,
       },
       game: result.game,
       host: `${protocol}//${host}`,
-    },
+    }),
   };
 });
 

@@ -6,6 +6,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { MAX_PLAYERS } from "~/lib/actions";
 import { loadPublicGames, subscribeToPublicGames } from "~/lib/firebase";
+import { serializable } from "~/lib/serialize";
 import { IMinimalGameState } from "~/lib/state";
 
 interface Props {
@@ -16,9 +17,9 @@ export const getServerSideProps = async () => {
   const games = await loadPublicGames();
 
   return {
-    props: {
+    props: serializable({
       games,
-    },
+    }),
   };
 };
 

@@ -19,6 +19,7 @@ import IGameState, {
   INumber,
   isCardAction,
   isHintAction,
+  ITurn,
 } from "./state";
 
 export const numbers: INumber[] = [1, 2, 3, 4, 5];
@@ -249,7 +250,14 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
   s.currentPlayer = (s.currentPlayer + 1) % s.options.playersCount;
 
   // update history
-  s.turnsHistory.push({ action: action, card: newCard ?? undefined, failed: playFailed ?? undefined });
+  const turn: ITurn = { action };
+  if (newCard) {
+    turn.card = newCard;
+  }
+  if (playFailed !== null) {
+    turn.failed = playFailed;
+  }
+  s.turnsHistory.push(turn);
 
   if (isGameOver(s)) {
     s.status = IGameStatus.OVER;
