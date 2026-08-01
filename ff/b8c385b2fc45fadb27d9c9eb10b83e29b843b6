@@ -1,0 +1,147 @@
+src/lib/schemas/gameState.ts
+  s_a69de368d3f754::t_80d138bd04603c 118
+src/lib/session.ts
+  s_a69de368d3f754::t_8a310f3c8320d1 4,10
+src/components/gameBoard.tsx
+  s_a69de368d3f754::t_6ba738ced17fe0 55,60
+src/components/cardNotesArea.tsx
+  s_a69de368d3f754::t_bebcb7a8a87580 5
+  s_a69de368d3f754::t_b7b34bf5d8c8d6 24
+src/components/replayViewer.tsx
+  s_a69de368d3f754::t_343cf4106e53d3 54-58
+  s_a69de368d3f754::t_f9641d85aab685 103
+  s_a69de368d3f754::t_37d1d1a3226e5c 109,112
+  s_a69de368d3f754::t_64f23522d0a0d0 86,89
+  s_a69de368d3f754::t_85f5d7402efd67 59-60
+tsconfig.json
+  s_a69de368d3f754::t_536ea0d15cf56b 13
+src/components/receivedHintsPopover.tsx
+  s_a69de368d3f754::t_c3387cee53f7dc 184
+src/pages/learn.tsx
+  s_a69de368d3f754::t_db4ba16012e73a 26,31,33,35,41,45,49
+  s_a69de368d3f754::t_1f189b7c15ddc9 128,183-184
+  s_a69de368d3f754::t_324ef47aaf31a8 127
+  s_a69de368d3f754::t_e1204cda651a59 192-194
+  s_a69de368d3f754::t_c4ad0935c6d56c 142
+  s_a69de368d3f754::t_e9b95395241080 243-247
+  s_a69de368d3f754::t_9c42c1f8f5fb0b 36
+src/lib/serialize.ts
+  s_a69de368d3f754::t_57a5d2c58aa972 1-21
+src/lib/schemas/env.ts
+  s_a69de368d3f754::t_204ff0b258d868 1-7
+src/hooks/userPreferences.ts
+  s_a69de368d3f754::t_453cf6dc00aab4 21-29
+src/components/reviewComments.tsx
+  s_a69de368d3f754::t_e03413ec7538a9 99
+  s_a69de368d3f754::t_1871988ecbfe6a 103
+src/hooks/game.ts
+  s_a69de368d3f754::t_2bd630b21618fc 7
+  s_a69de368d3f754::t_c1754868612b42 9,14
+  s_a69de368d3f754::t_549b7fd9375ab7 10,13,15
+  s_a69de368d3f754::t_260280ec9ae655 16
+src/components/playerGame.tsx
+  s_a69de368d3f754::t_1f189b7c15ddc9 373
+  s_a69de368d3f754::t_4a38d871f86c3b 221
+  s_a69de368d3f754::t_3c781611a4a866 295
+  s_a69de368d3f754::t_24e60506896685 267
+  s_a69de368d3f754::t_27a371767134c6 360,363
+src/pages/_app.tsx
+  s_a69de368d3f754::t_c9a3e0bdaf7cd3 17
+src/components/playedCards.tsx
+  s_a69de368d3f754::t_6f78d939b98895 28,36,39-45,51,53,58
+  s_a69de368d3f754::t_1f189b7c15ddc9 29-35
+  s_a69de368d3f754::t_067cefaf298201 6,10-11,15,18
+src/components/faceDownHand.tsx
+  s_a69de368d3f754::t_e63ebe0646e2ff 10
+src/components/cardNotesOnboarding.tsx
+  s_a69de368d3f754::t_9e3658a286bd67 30
+src/components/board.tsx
+  s_a69de368d3f754::t_3f70b037954cb9 39-40,44,50
+  s_a69de368d3f754::t_8368dd88562e61 16,19
+src/components/vignettes.tsx
+  s_a69de368d3f754::t_17306a2e440381 26,30
+  s_a69de368d3f754::t_5e0a8cefd94ac6 42,46
+src/components/game.tsx
+  s_a69de368d3f754::t_2f1a0f0ce51fd9 396
+  s_a69de368d3f754::t_e17fbefe40a05a 74
+src/components/discardArea.tsx
+  s_a69de368d3f754::t_a9aed1a822e7cd 60-69
+  s_a69de368d3f754::t_ec8256416e6a17 9,14-16,20,31,33,35
+src/lib/tutorial.tsx
+  s_a69de368d3f754::t_3951f1dc454d72 141-143
+  s_a69de368d3f754::t_c852428a858eec 7,10
+  s_a69de368d3f754::t_472495e190fc18 207-211
+  s_a69de368d3f754::t_c8a92b91f878ff 91,93
+  s_a69de368d3f754::t_5c4a76d530fb58 99
+  s_a69de368d3f754::t_0fafcfab458426 194-196
+  s_a69de368d3f754::t_1f189b7c15ddc9 109-110,158-159,200-201
+  s_a69de368d3f754::t_be60d44b195e30 20,25,27,30,35,39,43
+  s_a69de368d3f754::t_50f338d13bc814 129
+  s_a69de368d3f754::t_a7e40ce10c1524 148
+src/components/lobbyView.tsx
+  s_a69de368d3f754::t_3914fbb7544dea 13
+  s_a69de368d3f754::t_14ce9e4b25f032 78
+  s_a69de368d3f754::t_3351bef982f0ad 171
+src/pages/[gameId]/index.tsx
+  s_a69de368d3f754::t_9e44d0398dca3a 8
+  s_a69de368d3f754::t_d008c5a756acc4 33,39
+  s_a69de368d3f754::t_b81b1f4d6442c5 58
+src/hooks/replay.ts
+  s_a69de368d3f754::t_7aae72194ac87c 3-4,16
+  s_a69de368d3f754::t_022268f33f8ba3 8-11,13-15
+src/components/card.tsx
+  s_a69de368d3f754::t_d99207a06ab169 105
+  s_a69de368d3f754::t_15bb1bbe0b3e08 221
+  s_a69de368d3f754::t_4e4a128812434a 161-163,178-180,193,199
+  s_a69de368d3f754::t_2695739ee5ce7a 267
+  s_a69de368d3f754::t_570677016217eb 54,67
+  s_a69de368d3f754::t_c74eaf31127867 116,118
+src/components/tutorial.tsx
+  s_a69de368d3f754::t_c8d50061654ed8 167
+  s_a69de368d3f754::t_8485f93c38729f 212,214
+src/components/loadingScreen.tsx
+  s_a69de368d3f754::t_2844b9aa0fbcf1 29
+src/lib/actions.ts
+  s_a69de368d3f754::t_4db32b9c61390e 22
+  s_a69de368d3f754::t_ffaa591719a5b4 253-260
+src/components/homeButton.tsx
+  s_a69de368d3f754::t_b11169de6dabd1 25-33
+src/pages/[gameId]/summary.tsx
+  s_a69de368d3f754::t_a2d5ceb5d67685 18
+  s_a69de368d3f754::t_75a38dd2049c5f 67,69
+src/components/playersBoard.tsx
+  s_a69de368d3f754::t_bcc050fa2eeffe 73
+src/hooks/notifications.ts
+  s_a69de368d3f754::t_22d80c45d88772 21
+src/pages/join-game.tsx
+  s_a69de368d3f754::t_69800c3f4bfbef 9
+  s_a69de368d3f754::t_76a30a9a0eb07c 20,22
+src/components/gameStats.tsx
+  s_a69de368d3f754::t_1a03dbb288d13d 236,238,241
+src/components/vignette.tsx
+  s_a69de368d3f754::t_ab402003fe5dd4 10-11,19,21
+  s_a69de368d3f754::t_1f189b7c15ddc9 43
+src/components/turn.tsx
+  s_a69de368d3f754::t_1f189b7c15ddc9 85-86,95-96,119-123,129-133,171-172
+  s_a69de368d3f754::t_516bac16c955ba 87-91,97-101
+  s_a69de368d3f754::t_4c4a34c7952337 12,15
+  s_a69de368d3f754::t_dc22c500ea6ebe 239-247,249-257
+  s_a69de368d3f754::t_093f93bc3c706f 198-208,210-218
+  s_a69de368d3f754::t_be5024990f28d6 118,128,139-144,149-154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "ffb8c385b2fc45fadb27d9c9eb10b83e29b843b6",
+  "prompts": {},
+  "sessions": {
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
