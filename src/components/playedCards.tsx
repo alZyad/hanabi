@@ -1,9 +1,18 @@
 import { groupBy, last } from "lodash";
-import React from "react";
+import React, { CSSProperties } from "react";
 import Card, { CardSize, CardWrapper, ICardContext } from "~/components/card";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
+import { useStableCards } from "~/hooks/stableCards";
 import { getColors } from "~/lib/actions";
 import { GameVariant, IGameHintsLevel, ICard } from "~/lib/state";
+
+const stackedCardStyles = new Map<number, CSSProperties>();
+function getStackedCardStyle(depth: number): CSSProperties {
+  if (!stackedCardStyles.has(depth)) {
+    stackedCardStyles.set(depth, { top: `-${depth * 2}px` });
+  }
+  return stackedCardStyles.get(depth) as CSSProperties;
+}
 
 interface Props {
   cards: ICard[];
@@ -14,7 +23,8 @@ interface Props {
 export default function PlayedCards(props: Props) {
   const { cards, variant, colorBlindMode } = props;
 
-  const groupedCards = groupBy(cards, (c) => c.color);
+  const stableCards = useStableCards(cards);
+  const groupedCards = groupBy(stableCards, (c) => c.color);
   const colors = getColors(variant);
 
   return (
@@ -52,9 +62,7 @@ export default function PlayedCards(props: Props) {
                   context={ICardContext.PLAYED}
                   hintsLevel={IGameHintsLevel.NONE}
                   size={CardSize.MEDIUM}
-                  style={{
-                    top: `-${i * 2}px`,
-                  }}
+                  style={getStackedCardStyle(i)}
                   variant={variant}
                 />
               ))}

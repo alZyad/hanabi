@@ -18,6 +18,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import Vignettes from "~/components/vignettes";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
+import { useStableCards } from "~/hooks/stableCards";
 import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
 import { useUserPreferences } from "~/hooks/userPreferences";
 import { useReplay } from "~/hooks/replay";
@@ -124,6 +125,7 @@ function PlayerGame(props: Props) {
   const currentPlayer = useCurrentPlayer(game);
   const tutorialAction = useTutorialAction();
   const onboarding = useCardNotesOnboarding();
+  const hand = useStableCards(player.hand);
   const [userPreferences] = useUserPreferences();
 
   function nothingInvoked() {
@@ -371,7 +373,7 @@ function PlayerGame(props: Props) {
                 )}
               >
                 <PoseGroup>
-                  {player.hand.map((card, i) => (
+                  {hand.map((card, i) => (
                     <AnimatedCard key={card.id}>
                       <div className="flex flex-column items-center">
                         <Card
@@ -403,7 +405,12 @@ function PlayerGame(props: Props) {
                             onDismiss={onboarding.dismiss}
                           >
                             <div>
-                              <CardNotesArea card={card} />
+                              <CardNotesArea
+                                card={card}
+                                colorBlindMode={game.options.colorBlindMode}
+                                gameId={game.id}
+                                variant={game.options.variant}
+                              />
                             </div>
                           </CardNotesOnboarding>
                         )}

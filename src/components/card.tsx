@@ -5,7 +5,7 @@ import { ReceivedHints } from "~/components/receivedHintsPopover";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLongPress from "~/hooks/longPress";
 import { getColors, numbers } from "~/lib/actions";
-import { GameVariant, ICard, IColor, IGameHintsLevel, IHintLevel, IHintType, INumber } from "~/lib/state";
+import { GameVariant, ICard, ICardHint, IColor, IGameHintsLevel, IHintLevel, IHintType, INumber } from "~/lib/state";
 
 export enum CardSize {
   XSMALL = "xsmall",
@@ -192,6 +192,41 @@ function FocusValueArea(props: { children: ReactNode }) {
   return <div className="fh-value-area absolute flex items-center justify-center">{props.children}</div>;
 }
 
+interface FocusHintPanelProps {
+  variant: GameVariant;
+  cardHint: ICardHint;
+  colorBlindMode: boolean;
+}
+
+const FocusHintPanel = React.memo(function FocusHintPanel(props: FocusHintPanelProps) {
+  const { variant, cardHint, colorBlindMode } = props;
+  const colors = getColors(variant);
+
+  return (
+    <div className="fh-panel absolute left-0 right-0 bottom-0 flex flex-column items-center bg-black-60 br1">
+      <div className="fh-row">
+        {colors.map((color) => (
+          <div key={color} className="fh-cell">
+            <FocusHintChip colorBlindMode={colorBlindMode} kind="color" level={cardHint.color[color]} value={color} />
+          </div>
+        ))}
+      </div>
+      <div className="fh-row">
+        {numbers.map((number) => (
+          <div key={number} className="fh-cell fh-cell--number">
+            <FocusHintChip
+              colorBlindMode={colorBlindMode}
+              kind="number"
+              level={cardHint.number[number]}
+              value={number}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
 interface Props {
   card: ICard;
   context: ICardContext;
@@ -229,7 +264,6 @@ function Card(props: Props) {
 
   const [allHintsPopoverIsOpen, setAllHintsPopoverIsOpen] = useState(false);
 
-  const colors = getColors(variant);
   const color = hidden ? "gray-light" : card.color;
 
   const number = hidden ? null : card.number;
@@ -312,70 +346,7 @@ function Card(props: Props) {
 
       {/* show other hints, including negative hints */}
       {displayHints && size === CardSize.LARGE && cardHint && focusPanelReady && (
-        <div className="fh-panel absolute left-0 right-0 bottom-0 flex flex-column items-center bg-black-60 br1">
-          <div className="fh-row">
-            {colors.map((color) => (
-              <div key={color} className="fh-cell">
-                <FocusHintChip
-                  colorBlindMode={colorBlindMode}
-                  kind="color"
-                  level={cardHint.color[color]}
-                  value={color}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="fh-row">
-            {numbers.map((number) => (
-              <div key={number} className="fh-cell fh-cell--number">
-                <FocusHintChip
-                  colorBlindMode={colorBlindMode}
-                  kind="number"
-                  level={cardHint.number[number]}
-                  value={number}
-                />
-              </div>
-            ))}
-          </div>
-          <style global jsx>{`
-            .fh-panel {
-              padding: 0.15rem;
-              row-gap: 0.1rem;
-            }
-            .fh-row {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              width: 100%;
-            }
-            .fh-cell {
-              flex: 0 0 30%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: 1px 0;
-            }
-            .fh-cell--number {
-              flex-basis: 18%;
-            }
-            .fh-chip--color {
-              width: 0.65rem;
-              height: 0.65rem;
-              border-radius: 100%;
-            }
-            .fh-chip--number {
-              width: 90%;
-              aspect-ratio: 1 / 1;
-              border-radius: 100%;
-            }
-            @media screen and (min-width: 60em) {
-              .fh-chip--color {
-                width: 0.75rem;
-                height: 0.75rem;
-              }
-            }
-          `}</style>
-        </div>
+        <FocusHintPanel cardHint={cardHint} colorBlindMode={colorBlindMode} variant={variant} />
       )}
     </CardWrapper>
   );

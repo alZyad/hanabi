@@ -170,6 +170,55 @@
   padding-bottom: 2.5rem;
 }
 
+.fh-panel {
+  padding: 0.15rem;
+  row-gap: 0.1rem;
+}
+
+.fh-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.fh-cell {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 0;
+}
+
+.fh-cell--number {
+  flex-basis: 18%;
+}
+
+.fh-chip--color {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 100%;
+}
+
+.fh-chip--number {
+  width: 90%;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+}
+
+.ph-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.ph-chip {
+  flex: 0 0 28%;
+  aspect-ratio: 1 / 1;
+  margin: 1px;
+}
+
 @media screen and (min-width: 60em) {
   .card-large,
   .w-card-large {
@@ -182,5 +231,10 @@
 
   .fh-value-area {
     padding-bottom: 2.8rem;
+  }
+
+  .fh-chip--color {
+    width: 0.75rem;
+    height: 0.75rem;
   }
 }
