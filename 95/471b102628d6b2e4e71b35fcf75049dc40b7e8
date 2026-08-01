@@ -1,0 +1,61 @@
+src/components/playerGame.tsx
+  s_daf10a1dffea25::t_bdca8a0bd73c60 349-363
+  s_daf10a1dffea25::t_6ea73d79123bce 400-403
+  s_daf10a1dffea25::t_10ec07532da3ae 364-371,373-399
+src/components/cardNotesArea.tsx
+  s_daf10a1dffea25::t_4dccb58525b169 78
+  s_daf10a1dffea25::t_1820550fa3e9d3 60,75
+  s_daf10a1dffea25::t_d279ff848571a5 59
+  s_daf10a1dffea25::t_d484f945f3ad5c 45
+src/components/card.tsx
+  s_daf10a1dffea25::t_40723db383aca0 368-370
+  s_daf10a1dffea25::t_033a566e0d8a76 331
+  s_daf10a1dffea25::t_3dbadb588f32b9 359-361
+  s_daf10a1dffea25::t_b257af0b424697 191-194
+  s_daf10a1dffea25::t_99a1769405fff4 319,326,332-338,343-344,352-357,371-373,376
+  s_daf10a1dffea25::t_b1baa93d0edcf0 304-306,308,310-312
+  s_daf10a1dffea25::t_0f076bac097e77 320-325
+  s_daf10a1dffea25::t_1caf7bbfc03217 146,149
+  s_daf10a1dffea25::t_3ad0bee786f559 279,283,285
+  s_daf10a1dffea25::t_8c649573c12ab9 363-364,374-375
+  s_daf10a1dffea25::t_105a5ba5bd8ff4 316-317,329,341-342,345-351,358,362,365-367,377-378
+  s_daf10a1dffea25::t_e6882f3fb620a1 8
+  s_daf10a1dffea25::t_a234de191c8d3a 280-282,284
+  s_daf10a1dffea25::t_104cdc2987b42e 158-190
+  s_daf10a1dffea25::t_e3a363e537b86d 307,309
+  s_daf10a1dffea25::t_3856e772e0d6ec 235-236
+  s_daf10a1dffea25::t_a7abc0e8234f22 22
+src/components/receivedHintsPopover.tsx
+  s_daf10a1dffea25::t_bf1bce8fbaf7cb 136
+src/styles/tachyons-overrides.css
+  s_daf10a1dffea25::t_6a3a9696df2148 163-164,173,181,189-190
+  s_daf10a1dffea25::t_dc7ac984d77752 153
+  s_daf10a1dffea25::t_f96d878b9cff99 165-172,187-188
+  s_daf10a1dffea25::t_5d000c767daf25 156-161
+  s_daf10a1dffea25::t_8bd2bb9ab72047 174-179
+  s_daf10a1dffea25::t_33c1e2e34c471a 152
+  s_daf10a1dffea25::t_dd011ad06f50c4 147-151
+  s_daf10a1dffea25::t_adf04a5fa43243 154-155
+  s_daf10a1dffea25::t_3e12a7a8ef9a54 183,185-186
+  s_daf10a1dffea25::t_41cdf847f5686c 184
+  s_daf10a1dffea25::t_985afa1eedb947 146
+  s_daf10a1dffea25::t_148355457dd59b 162
+  s_daf10a1dffea25::t_640d4ca3f689a5 180
+  s_daf10a1dffea25::t_2f0e84d32c6baf 182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "95471b102628d6b2e4e71b35fcf75049dc40b7e8",
+  "prompts": {},
+  "sessions": {
+    "s_daf10a1dffea25": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c233957a-e1e6-400a-bd94-dc3a5605165a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
