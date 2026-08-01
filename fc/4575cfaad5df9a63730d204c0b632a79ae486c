@@ -1,0 +1,268 @@
+src/lib/benchmark.ts
+  s_be6fc853ea1b13::t_540a8fea1f5e44 3
+  s_be6fc853ea1b13::t_e43c494fd21338 22
+src/hooks/game.ts
+  s_e0a7a8d330ff29::t_3a5993abbd4f0c 8
+  s_672067214ec403::t_b6ce893e564050 55
+  s_e0a7a8d330ff29::t_b29af8da069935 9
+  s_672067214ec403::t_a3aa09613bbe56 25
+src/hooks/previous.ts
+  s_e0a7a8d330ff29::t_78a10c4351e321 7
+src/lib/ai.ts
+  s_e0a7a8d330ff29::t_ae12a4e0644a4d 142
+  s_a212c2d3303ede::t_f677f63469c3c8 184-187,203,240-243,257,259,279-282,285-286,291,294,297,346,348-349,364-367,394,425-429,447-449,502-503,505-506
+  s_e0a7a8d330ff29::t_7affc7881eb90c 182
+  s_e0a7a8d330ff29::t_e0194ccb3e617d 143
+  s_a212c2d3303ede::t_74e0d14084404e 507-508
+  s_e0a7a8d330ff29::t_44b7bdd4bd67c1 249-250
+  s_be6fc853ea1b13::t_38f4e083c8497e 327-339,343
+  s_be6fc853ea1b13::t_c13041188f5feb 231
+  s_e0a7a8d330ff29::t_2112528fc1f619 272
+  s_be6fc853ea1b13::t_11b5ad7c953d6e 378
+  s_e0a7a8d330ff29::t_2fd80602ffa896 369
+  s_be6fc853ea1b13::t_9d81c286f23db1 7
+  s_e0a7a8d330ff29::t_6b042cc3ce67a0 180-181
+  s_be6fc853ea1b13::t_d2970a9511dcf0 205
+  s_a212c2d3303ede::t_dae9f944403187 393
+  s_e0a7a8d330ff29::t_b6ddabe6185b3e 178-179
+src/components/card.tsx
+  s_e0a7a8d330ff29::t_c713e0d669f210 133-136
+  s_e0a7a8d330ff29::t_47f4a135efc7bd 208
+  s_e0a7a8d330ff29::t_6a4bebe240c038 219
+  s_be6fc853ea1b13::t_4aa5ce5a0c9656 190
+  s_e0a7a8d330ff29::t_688f1cb119fc5f 119,123
+  s_be6fc853ea1b13::t_510b5b180e03ba 10
+  s_e0a7a8d330ff29::t_bdd6c63f22b110 149,152
+  s_e0a7a8d330ff29::t_0b992727891d30 266,270,278
+src/components/reactionsPopover.tsx
+  s_e0a7a8d330ff29::t_6601f23affd384 49
+  s_e0a7a8d330ff29::t_d831d4667c0eec 13
+src/components/gameActionsStats.tsx
+  s_5c905574534a6d::t_3f1035c8819595 59-63
+src/components/chatPopover.tsx
+  s_e0a7a8d330ff29::t_fa7424620c22fc 20
+  s_e0a7a8d330ff29::t_bf614aa0469748 28-29
+tsconfig.json
+  s_e0a7a8d330ff29::t_f3801b14692993 12
+  s_e0a7a8d330ff29::t_14be1988f4de7e 13
+src/lib/state.ts
+  s_be6fc853ea1b13::t_d362079d75e1a2 37,46-57
+  s_a69de368d3f754::t_ea0f16cd1b50e4 43
+  s_a69de368d3f754::t_370bfcdebebc43 31
+  s_be6fc853ea1b13::t_79a4464b280a90 289
+  s_be6fc853ea1b13::t_b511bf97db3162 228,231,236
+  s_be6fc853ea1b13::t_9046908bd0af73 149,159-160
+  s_be6fc853ea1b13::t_749fe0e5fafc42 281-282
+  s_be6fc853ea1b13::t_2304590f0a0768 290,292,301-303
+  s_be6fc853ea1b13::t_45b6af97319163 58
+  s_be6fc853ea1b13::t_f6fd3e8af6c930 259
+  s_a69de368d3f754::t_a3e9a1b1abce43 255
+  s_a69de368d3f754::t_6e612e23613574 283
+  s_be6fc853ea1b13::t_2ad5ec4ada142b 245
+  s_be6fc853ea1b13::t_7b2c5407aff94c 309,326
+  s_be6fc853ea1b13::t_66df4bf0874787 247,249,253
+  s_be6fc853ea1b13::t_cb79d2f38189aa 69
+  s_be6fc853ea1b13::t_27ed079c5a9a6b 237
+  s_be6fc853ea1b13::t_ad039a2fac8248 268
+  s_be6fc853ea1b13::t_b02d0affcad856 161-162
+src/components/tutorial.tsx
+  s_be6fc853ea1b13::t_585b876a24307e 25
+  s_e0a7a8d330ff29::t_0c8ef6628f777e 135,138
+  s_e0a7a8d330ff29::t_674a526ad3fdd9 152
+  s_e0a7a8d330ff29::t_956984c35abb89 9-21
+  s_e0a7a8d330ff29::t_42e097b2b4c28d 95
+  s_be6fc853ea1b13::t_3620dde46582bf 4
+src/components/languageSelector.tsx
+  s_e0a7a8d330ff29::t_efe119f9fd2a87 43
+src/hooks/replay.ts
+  s_e0a7a8d330ff29::t_cfd91f195e5dbf 8
+  s_e0a7a8d330ff29::t_8b7b75fca3caa6 9
+  s_e0a7a8d330ff29::t_05cd3a073180e7 5
+src/components/replayViewer.tsx
+  s_e0a7a8d330ff29::t_9c7869ea2cdfc1 55
+src/lib/reviewComments.ts
+  s_e0a7a8d330ff29::t_4df9feb99220a7 10
+src/pages/learn.tsx
+  s_be6fc853ea1b13::t_adaff440d6aed5 6
+  s_be6fc853ea1b13::t_3485ce08454e2d 326
+  s_be6fc853ea1b13::t_0c90736a951774 17
+  s_e0a7a8d330ff29::t_50953049ab0c84 386-394
+src/hooks/sounds.ts
+  s_e0a7a8d330ff29::t_bdafa830123f3c 71
+  s_e0a7a8d330ff29::t_02a880aba02ad1 13
+  s_e0a7a8d330ff29::t_ca9f4571163021 52-53
+  s_e0a7a8d330ff29::t_e4018fb8a3328b 89
+src/hooks/session.ts
+  s_e0a7a8d330ff29::t_adeb48c3a321dc 3
+src/hooks/longPress.ts
+  s_e0a7a8d330ff29::t_21e039eddd0a08 7
+src/pages/[gameId]/index.tsx
+  s_e0a7a8d330ff29::t_63fe77cbf6fc32 48
+  s_e0a7a8d330ff29::t_9bf70eb1828d78 42
+  s_e0a7a8d330ff29::t_98e9c14f78f08e 49
+src/components/reviewComments.tsx
+  s_e0a7a8d330ff29::t_1993bf8d8d2f2b 107-108,111
+  s_e0a7a8d330ff29::t_e6d4a97acb9390 52
+src/components/loadingScreen.tsx
+  s_be6fc853ea1b13::t_666c6edcdbee38 6
+  s_e0a7a8d330ff29::t_18fbacf37dd88f 18
+  s_be6fc853ea1b13::t_ddcd9032d111ac 3
+src/lib/actions.ts
+  s_be6fc853ea1b13::t_cc19181446f657 366
+  s_be6fc853ea1b13::t_88236c648f8d3a 224
+  s_be6fc853ea1b13::t_5266ae04837b01 18
+  s_be6fc853ea1b13::t_9596d8a2a08270 471,475
+  s_be6fc853ea1b13::t_f9484a1cf7e333 483-484
+  s_be6fc853ea1b13::t_d10797e090b33b 379-380
+src/lib/session.ts
+  s_e0a7a8d330ff29::t_1cb57c30c11b89 6
+  s_e0a7a8d330ff29::t_47d8ff5fe1bc71 7
+src/components/turn.tsx
+  s_5ae4a5967095cd::t_a6161b3d0403c7 80
+  s_e0a7a8d330ff29::t_45fdd8bf364c1d 47
+  s_e0a7a8d330ff29::t_deb104091344db 38-40
+  s_e0a7a8d330ff29::t_a8a39189512ae5 41
+  s_e0a7a8d330ff29::t_da35309b698528 49
+  s_5ae4a5967095cd::t_b31bfb04cd8227 99,154
+  s_e0a7a8d330ff29::t_dc6417276d170d 48
+src/components/receivedHintsPopover.tsx
+  s_e0a7a8d330ff29::t_8d533938c5b7fe 248-250
+  s_5ae4a5967095cd::t_6999d002a76503 218,237
+  s_e0a7a8d330ff29::t_8a9985425deb0e 239
+src/components/menuArea.tsx
+  s_e0a7a8d330ff29::t_eb621b0e913269 36
+  s_e0a7a8d330ff29::t_3a02ba548c8100 22
+src/hooks/cardNotes.ts
+  s_a69de368d3f754::t_2ac53654c90a89 22-23
+src/components/playersBoard.tsx
+  s_be6fc853ea1b13::t_56758d520c34d9 19
+  s_e0a7a8d330ff29::t_b7bd9e7e6c8de6 58
+  s_e0a7a8d330ff29::t_6c9f8dc3abe53b 31,34-35
+  s_be6fc853ea1b13::t_391c9a15363031 2
+  s_e0a7a8d330ff29::t_a61a7251a575dd 76
+src/components/textFieldDialog.tsx
+  s_e0a7a8d330ff29::t_cb1295a67c890b 16
+  s_e0a7a8d330ff29::t_99c49e3ea6628b 31
+src/lib/ai-cheater.ts
+  s_e0a7a8d330ff29::t_ad1260a6200cb2 98-100
+  s_e0a7a8d330ff29::t_49eec18bc62c79 101
+  s_e0a7a8d330ff29::t_d709efd5ecf326 39-42
+src/components/rollbackArea.tsx
+  s_e0a7a8d330ff29::t_e0389e80fede81 20
+  s_5ae4a5967095cd::t_3cde82f04ccbcb 23
+  s_e0a7a8d330ff29::t_0de04ef41a98c4 21
+src/components/gameStats.tsx
+  s_be6fc853ea1b13::t_e776974133978d 137-138,142
+  s_e0a7a8d330ff29::t_a2614b80bc3838 187
+  s_e0a7a8d330ff29::t_bc848de116ff58 188
+  s_e0a7a8d330ff29::t_32888479a2d962 212,219-220
+  s_e0a7a8d330ff29::t_8826628f21eb35 213-218
+  s_e0a7a8d330ff29::t_d43a4a0d6b8adb 221
+  s_5c905574534a6d::t_42e5b20b2fe0ba 241
+  s_e0a7a8d330ff29::t_0ffcca51d0f344 211
+src/components/logs.tsx
+  s_e0a7a8d330ff29::t_ab303a1de312a7 84
+  s_be6fc853ea1b13::t_1eef2fbd97dc9e 91
+  s_be6fc853ea1b13::t_99093cbb9ef6fa 3
+  s_e0a7a8d330ff29::t_af75469e9c0732 44
+  s_be6fc853ea1b13::t_484c674bbb336a 25
+  s_be6fc853ea1b13::t_44b60292fd95ae 10
+src/components/game.tsx
+  s_a69de368d3f754::t_704342fc6e0b9e 61
+src/pages/index.tsx
+  s_e0a7a8d330ff29::t_312fe35bd63a56 19-20
+  s_e0a7a8d330ff29::t_f0a4289d5a41de 35
+  s_672067214ec403::t_3a3e76119386ac 130
+  s_e0a7a8d330ff29::t_a45937855c12d5 34
+src/pages/_app.tsx
+  s_e0a7a8d330ff29::t_655b0489ba67b8 23
+src/components/playerGame.tsx
+  s_be6fc853ea1b13::t_9cbe7f936cd199 6
+  s_be6fc853ea1b13::t_97b60ca2094ff5 532
+  s_e0a7a8d330ff29::t_eab2b0bd505115 117
+  s_e0a7a8d330ff29::t_41ddd39afb9228 115
+  s_e0a7a8d330ff29::t_f6f81d040a1d34 307
+  s_be6fc853ea1b13::t_a30d17f00d1f52 498
+  s_e0a7a8d330ff29::t_50ed5cf38c96a4 488-491,493,500,505
+  s_e0a7a8d330ff29::t_cd95441539e1c2 413,420,429-434,445
+  s_e0a7a8d330ff29::t_f5646e46b8d234 226
+  s_be6fc853ea1b13::t_19b5fe7b3189fe 492
+  s_be6fc853ea1b13::t_06d95434884713 24
+src/components/cardNotesArea.tsx
+  s_a69de368d3f754::t_954d278a50cb30 27,31
+  s_a69de368d3f754::t_ab6f190d3ff03f 43
+src/components/lobbyView.tsx
+  s_be6fc853ea1b13::t_da3e6a0ccfcda8 48
+  s_be6fc853ea1b13::t_5bab2d70cd9b5a 29
+  s_be6fc853ea1b13::t_413e1b536b16ce 30-31,35-37,45
+  s_be6fc853ea1b13::t_4b3197b67ad381 108
+  s_be6fc853ea1b13::t_9b7c75661d57e6 109-113
+  s_be6fc853ea1b13::t_5af7e324078060 27
+src/lib/posed.ts
+  s_be6fc853ea1b13::t_497523140fecd9 3
+  s_be6fc853ea1b13::t_46b80a07d8a53c 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "fc4575cfaad5df9a63730d204c0b632a79ae486c",
+  "prompts": {},
+  "sessions": {
+    "s_5ae4a5967095cd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-ae84781603978677e",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_5c905574534a6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-aa272f19fca92df8a",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_672067214ec403": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-ae2c69b11b4ef8591",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_a212c2d3303ede": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-aa5a1f5b91ef52d7c",
+        "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    },
+    "s_be6fc853ea1b13": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "94d7abcb-cc3b-47fd-813b-d867f5c5ca9d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    },
+    "s_e0a7a8d330ff29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "28d65c07-4abf-4121-a279-30f9a4d7c6f9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
