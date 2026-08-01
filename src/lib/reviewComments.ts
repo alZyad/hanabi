@@ -7,7 +7,7 @@ export function addOrReplaceReviewComment(game: IGameState, newComment: IReviewC
   const comments = game.reviewComments.filter(
     (rc) => !(rc.afterTurnNumber === newComment.afterTurnNumber && rc.playerId === newComment.playerId)
   );
-  if (!newComment.comment.match(/^\s*$/)) {
+  if (!newComment.comment?.match(/^\s*$/)) {
     comments.push(newComment);
   }
   game.reviewComments = comments;

@@ -1,16 +1,29 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Popover, ArrowContainer, PopoverPosition } from "react-tiny-popover";
-import posed from "react-pose";
+import { posedDiv } from "~/lib/posed";
+import { readLocalStorage, tutorialStepSchema } from "~/lib/schemas/storage";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
 
-export const TutorialContext = React.createContext(null);
+interface ITutorialContext {
+  currentStep: number;
+  totalSteps: number;
+  lastStep: boolean;
+  previousStep: () => void;
+  nextStep: () => void;
+  skip: () => void;
+  reset: () => void;
+  hardReset: () => void;
+  isOver: boolean;
+}
+
+export const TutorialContext = React.createContext<ITutorialContext | null>(null);
 
 const LocalStorageKey = "tutorialStep";
 
-const HighlightedArea = posed.div({
+const HighlightedArea = posedDiv({
   attention: {
     opacity: 0.7,
     transition: {
@@ -77,10 +90,10 @@ export function TutorialProvider(props: TutorialProviderProps) {
   const [currentStep, setCurrentStep] = useState(-1);
 
   useEffect(() => {
-    const storedStep = localStorage.getItem(LocalStorageKey);
+    const storedStep = readLocalStorage(LocalStorageKey, tutorialStepSchema, -1);
 
-    if (storedStep) {
-      setCurrentStep(+localStorage.getItem(LocalStorageKey));
+    if (storedStep >= 0) {
+      setCurrentStep(storedStep);
     }
   }, []);
 
@@ -120,10 +133,10 @@ export default function Tutorial(props: Props) {
   const { step, placement, children } = props;
   const { t } = useTranslation();
 
-  const [pose, setPose] = useState(null);
+  const [pose, setPose] = useState<string>();
   const context = useContext(TutorialContext);
 
-  const { currentStep, previousStep, nextStep, lastStep, skip, totalSteps } = context || {};
+  const currentStep = context?.currentStep;
 
   useEffect(() => {
     if (step !== currentStep) return;
@@ -137,6 +150,7 @@ export default function Tutorial(props: Props) {
     return children ? <>{children}</> : null;
   }
 
+  const { previousStep, nextStep, lastStep, skip, totalSteps } = context;
   const { title, body } = steps[step];
 
   return (

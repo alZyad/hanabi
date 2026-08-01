@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import LoadingScreen from "~/components/loadingScreen";
+import { parseGameId } from "~/lib/schemas/params";
 import { logFailedPromise } from "~/lib/errors";
 
 /**
@@ -9,13 +10,15 @@ import { logFailedPromise } from "~/lib/errors";
  */
 export default function Play() {
   const router = useRouter();
-  const { gameId } = router.query;
 
   useEffect(() => {
-    if (!gameId) return;
+    if (!router.isReady) return;
 
-    router.replace(`/${gameId}`).catch(logFailedPromise);
-  }, [gameId, router]);
+    const gameId = parseGameId(router.query.gameId);
+    const destination = gameId ? `/${gameId}` : "/?error=invalid-game";
+
+    router.replace(destination).catch(logFailedPromise);
+  }, [router, router.isReady, router.query.gameId]);
 
   return <LoadingScreen />;
 }

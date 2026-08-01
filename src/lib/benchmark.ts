@@ -1,6 +1,6 @@
 import { dealHands, isGameOver, joinGame, newGame } from "./actions";
 import { play } from "./ai";
-import { GameMode, GameVariant, IGameHintsLevel, IGameOptions, IPlayer } from "./state";
+import { GameMode, GameVariant, IGameHintsLevel, IGameOptions, IMinimalPlayer } from "./state";
 
 const scoresDistribution = {};
 
@@ -19,7 +19,7 @@ const options: IGameOptions = {
   colorBlindMode: false,
 };
 
-const defaultPlayer: IPlayer = {
+const defaultPlayer: IMinimalPlayer = {
   id: Math.random.toString(),
   name: "name",
   bot: true,

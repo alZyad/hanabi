@@ -4,10 +4,9 @@ import ColorSymbol from "~/components/colorSymbol";
 import Hint from "~/components/hint";
 import { ReceivedHints } from "~/components/receivedHintsPopover";
 import Txt, { TxtSize } from "~/components/ui/txt";
-import { useColorBlindMode, useGame } from "~/hooks/game";
 import useLongPress from "~/hooks/longPress";
 import { getColors, numbers } from "~/lib/actions";
-import { ICard, IColor, IGameHintsLevel, IHintLevel } from "~/lib/state";
+import { GameVariant, ICard, IColor, IGameHintsLevel, IHintLevel } from "~/lib/state";
 
 export enum CardSize {
   XSMALL = "xsmall",
@@ -52,6 +51,7 @@ export enum ICardContext {
 
 interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
   color: string;
+  colorBlindMode: boolean;
   size?: CardSize;
   playable?: boolean;
   context?: ICardContext;
@@ -64,6 +64,7 @@ interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
 export function CardWrapper(props: CardWrapperProps) {
   const {
     color,
+    colorBlindMode,
     size = CardSize.MEDIUM,
     playable = false,
     context,
@@ -74,7 +75,6 @@ export function CardWrapper(props: CardWrapperProps) {
     ...attributes
   } = props;
 
-  const colorBlindMode = useColorBlindMode();
   const sizeClass = CardClasses[size];
 
   return (
@@ -102,6 +102,7 @@ export function CardWrapper(props: CardWrapperProps) {
 interface CardPartialHintProps {
   card: ICard;
   size: CardSize;
+  colorBlindMode: boolean;
 }
 
 /**
@@ -112,15 +113,13 @@ interface CardPartialHintProps {
  * - Sure (including rainbow) colors will display a rainbow background and a colored border
  */
 function CardPartialHint(props: CardPartialHintProps) {
-  const { card, size } = props;
+  const { card, size, colorBlindMode } = props;
 
-  const game = useGame();
-
-  const displayColorSymbol = game.options.colorBlindMode && card.hint.color[card.color] === IHintLevel.SURE;
+  const displayColorSymbol = colorBlindMode && card.hint?.color[card.color] === IHintLevel.SURE;
   let className = "";
 
   // when card is sure, apply a colored background and border using the card color
-  if (card.hint.color[card.color] === IHintLevel.SURE) {
+  if (card.hint?.color[card.color] === IHintLevel.SURE) {
     const color = card.color === IColor.RAINBOW ? `rainbow-circle` : card.color;
 
     className = classnames(`txt-${card.color}-dark`, {
@@ -130,8 +129,10 @@ function CardPartialHint(props: CardPartialHintProps) {
 
   // when they are only 2 possible cards and one of them is rainbow,
   // apply a rainbow background and a thick border using the other possible color
-  const possibleColors = Object.keys(card.hint.color).filter((color) => card.hint.color[color] === IHintLevel.POSSIBLE);
-  if (card.hint.color.rainbow === IHintLevel.POSSIBLE && possibleColors.length === 2) {
+  const possibleColors = Object.keys(card.hint?.color ?? {}).filter(
+    (color) => card.hint?.color[color] === IHintLevel.POSSIBLE
+  );
+  if (card.hint?.color.rainbow === IHintLevel.POSSIBLE && possibleColors.length === 2) {
     const possibleColor = possibleColors.find((color) => color !== IColor.RAINBOW);
 
     className = classnames(`bg-rainbow-circle ba b--${possibleColor}-clear`, {
@@ -144,10 +145,10 @@ function CardPartialHint(props: CardPartialHintProps) {
     <>
       <div
         className={classnames("top-0 br-100 w-50 h-50 flex justify-center items-center", className, {
-          [`txt-white-dark`]: card.hint.color[card.color] !== IHintLevel.SURE,
+          [`txt-white-dark`]: card.hint?.color[card.color] !== IHintLevel.SURE,
         })}
       >
-        {card.hint.number[card.number] === IHintLevel.SURE && <Txt className="z-1" value={card.number} />}
+        {card.hint?.number[card.number] === IHintLevel.SURE && <Txt className="z-1" value={card.number} />}
       </div>
       {displayColorSymbol && <ColorSymbol color={card.color} />}
     </>
@@ -157,6 +158,9 @@ function CardPartialHint(props: CardPartialHintProps) {
 interface Props {
   card: ICard;
   context: ICardContext;
+  variant: GameVariant;
+  colorBlindMode: boolean;
+  hintsLevel: IGameHintsLevel;
   hidden?: boolean;
   position?: number;
   selected?: boolean;
@@ -171,6 +175,9 @@ export default function Card(props: Props) {
   const {
     card,
     context,
+    variant,
+    colorBlindMode,
+    hintsLevel,
     onClick,
     hidden = false,
     playable = true,
@@ -181,17 +188,15 @@ export default function Card(props: Props) {
     selected = false,
   } = props;
 
-  const game = useGame();
   const [allHintsPopoverIsOpen, setAllHintsPopoverIsOpen] = useState(false);
-  const colorBlindMode = useColorBlindMode();
 
-  const colors = getColors(game?.options?.variant);
+  const colors = getColors(variant);
   const color = hidden ? "gray-light" : card.color;
 
   const number = hidden ? null : card.number;
 
   const displayHints =
-    game?.options.hintsLevel !== IGameHintsLevel.NONE &&
+    hintsLevel !== IGameHintsLevel.NONE &&
     [ICardContext.OTHER_PLAYER, ICardContext.TARGETED_PLAYER, ICardContext.SELF_PLAYER].includes(context);
 
   if (selected) {
@@ -203,6 +208,7 @@ export default function Card(props: Props) {
     }
   }
   const hints = card.receivedHints || [];
+  const cardHint = card.hint;
   const longPressProps = useLongPress(() => {
     if (hints.length > 0) {
       setAllHintsPopoverIsOpen(true);
@@ -212,8 +218,9 @@ export default function Card(props: Props) {
     <CardWrapper
       className={classnames({ "bw1 z-5": selected }, className)}
       color={color}
+      colorBlindMode={colorBlindMode}
       context={context}
-      data-card={PositionMap[position]}
+      data-card={position !== null ? PositionMap[position] : undefined}
       playable={playable}
       size={size}
       style={{
@@ -257,14 +264,14 @@ export default function Card(props: Props) {
       )}
 
       {/* show positive hints with a larger type */}
-      {displayHints && hidden && <CardPartialHint card={card} size={size} />}
+      {displayHints && hidden && <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />}
 
       {/* show other hints, including negative hints */}
-      {displayHints && size === CardSize.LARGE && (
+      {displayHints && size === CardSize.LARGE && cardHint && (
         <div className="flex absolute w-100 right-0 bottom-0 pv1 flex-l items-center flex-column bg-black-50">
           <div className="flex justify-around w-100">
             {colors.map((color) => (
-              <Hint key={color} hint={card.hint.color[color]} type="color" value={color} />
+              <Hint key={color} hint={cardHint.color[color]} type="color" value={color} />
             ))}
           </div>
           <div
@@ -272,7 +279,7 @@ export default function Card(props: Props) {
             style={{ width: `${(numbers.length / colors.length) * 100}%` }}
           >
             {numbers.map((number) => (
-              <Hint key={number} hint={card.hint.number[number]} type="number" value={number} />
+              <Hint key={number} hint={cardHint.number[number]} type="number" value={number} />
             ))}
           </div>
         </div>

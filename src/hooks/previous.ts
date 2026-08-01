@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
  * Store the previous value of the given value for later comparison
  * @see https://usehooks.com/usePrevious/
  */
-export default function usePrevious<T>(value: T): T {
+export default function usePrevious<T>(value: T): T | undefined {
   // The ref object is a generic container whose current property is mutable ...
   // ... and can hold any value, similar to an instance property on a class
   const ref = useRef<T>();

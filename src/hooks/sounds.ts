@@ -10,7 +10,7 @@ import { isCardAction, isDiscardAction, isHintAction } from "~/lib/state";
 
 type RecognizedAction = "Rewind" | "Hint" | "Discard" | "Strike" | "SilentStrike" | "Played" | "Played-5" | undefined;
 type ActionSoundMap = {
-  [key in RecognizedAction]: string | undefined;
+  [key in NonNullable<RecognizedAction>]: string | undefined;
 };
 
 const SoundsForAction: ActionSoundMap = {
@@ -49,7 +49,8 @@ export function useSoundEffects() {
 
   useEffect(() => {
     function determineLastGameEvent(): RecognizedAction {
-      if (turnsCount < previousTurnsCount) {
+      if (!turn) return undefined;
+      if (previousTurnsCount !== undefined && turnsCount < previousTurnsCount) {
         return "Rewind";
       }
       if (turnsCount === previousTurnsCount) {
@@ -67,7 +68,7 @@ export function useSoundEffects() {
             return "SilentStrike";
           }
         } else {
-          if (turn.action.card.number === 5) {
+          if (turn.action.card?.number === 5) {
             return "Played-5";
           } else {
             return "Played";
@@ -85,6 +86,6 @@ export function useSoundEffects() {
     if (!namedEvent) return;
     const soundFile = SoundsForAction[namedEvent];
 
-    playSound(soundFile);
+    if (soundFile) playSound(soundFile);
   }, [turnsCount, previousTurnsCount, turn, userPreferences.soundOnStrike, isReplaying]);
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import posed from "react-pose";
+import { posedDiv } from "~/lib/posed";
 import Txt, { TxtSize } from "~/components/ui/txt";
 
-const Animation = posed.div({
+const Animation = posedDiv({
   attention: {
     opacity: 0.7,
     transition: {
@@ -15,7 +15,7 @@ const Animation = posed.div({
 });
 
 export default function LoadingScreen() {
-  const [pose, setPose] = useState(null);
+  const [pose, setPose] = useState<string>();
   const { t } = useTranslation();
 
   useEffect(() => {

@@ -13,10 +13,10 @@ export function DeckPile(props: { count: number }) {
 
   return (
     <div className="mr2 relative flex flex-column items-center">
-      <CardWrapper color={low ? "strikes" : "main"}>
+      <CardWrapper color={low ? "strikes" : "main"} colorBlindMode={false}>
         {Array.from({ length: count }).map((_, i) => (
           <div key={i} className="absolute" style={{ top: `-${i / 2}px` }}>
-            <CardWrapper color={low ? "strikes" : "main"}>
+            <CardWrapper color={low ? "strikes" : "main"} colorBlindMode={false}>
               <Txt className="outline-main-dark" size={TxtSize.MEDIUM} value={i + 1} />
             </CardWrapper>
           </div>
@@ -36,17 +36,18 @@ interface Props {
   deckCount: number;
   hints: number;
   strikes: number;
-  variant?: GameVariant;
+  variant: GameVariant;
+  colorBlindMode: boolean;
 }
 
 export default function Board(props: Props) {
-  const { playedCards, deckCount, hints, strikes, variant } = props;
+  const { playedCards, deckCount, hints, strikes, variant, colorBlindMode } = props;
   const { t } = useTranslation();
 
   return (
     <div className="flex flex-wrap items-end justify-between">
       <div className="flex flex-column mb3">
-        <PlayedCards cards={playedCards} variant={variant} />
+        <PlayedCards cards={playedCards} colorBlindMode={colorBlindMode} variant={variant} />
       </div>
       <div className="flex flex-row mt2 justify-right items-end ml2">
         <DeckPile count={deckCount} />

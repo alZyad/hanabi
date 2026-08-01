@@ -28,20 +28,33 @@ export default interface IGameState {
   synced: boolean;
   // Replay mode
   originalGame?: IGameState;
-  nextGameId?: string;
+  nextGameId?: string | null;
 }
 
 export interface ILobbyState {
   id: string;
   status: IGameStatus.LOBBY;
-  players: IPlayer[];
+  players: IMinimalPlayer[];
   options: IGameOptions;
   messages: IMessage[];
   reviewComments: IReviewComment[];
   createdAt: number;
   synced: boolean;
-  nextGameId?: string;
+  nextGameId?: string | null;
 }
+
+export type IMinimalTurn = { action: IAction };
+
+export type IMinimalGameState = Omit<
+  IGameState,
+  "players" | "turnsHistory" | "playedCards" | "drawPile" | "discardPile" | "originalGame"
+> & {
+  players: IMinimalPlayer[];
+  turnsHistory?: IMinimalTurn[];
+  playedCards?: ICard[];
+  drawPile?: ICard[];
+  discardPile?: ICard[];
+};
 
 export function isLobby(state: IGameState | ILobbyState): state is ILobbyState {
   return state.status === IGameStatus.LOBBY;
@@ -53,7 +66,7 @@ export function isLobby(state: IGameState | ILobbyState): state is ILobbyState {
 
 export interface IGameOptions {
   id: string;
-  variant?: GameVariant;
+  variant: GameVariant;
   playersCount: number;
   allowRollback: boolean;
   preventLoss: boolean;
@@ -133,7 +146,7 @@ export interface ICardHint {
   number: { [key in 0 | 1 | 2 | 3 | 4 | 5]: IHintLevel };
 }
 
-export type IHand = ICard[];
+export type IHand = IHandCard[];
 
 export interface ICard {
   color: IColor;
@@ -141,6 +154,10 @@ export interface ICard {
   hint?: ICardHint;
   id?: number;
   receivedHints?: ITurn<IHintAction>[];
+}
+
+export interface IHandCard extends ICard {
+  hint: ICardHint;
 }
 
 export type IAction = ICardAction | IDiscardAction | IPlayAction | IHintAction;
@@ -208,13 +225,15 @@ export interface IMessage {
 export interface IPlayer {
   id: string;
   name: string;
-  hand?: IHand;
+  hand: IHand;
   reaction?: string;
   lastAction?: IAction;
-  index?: number;
+  index: number;
   notified?: boolean;
   bot: boolean;
 }
+
+export type IMinimalPlayer = Omit<IPlayer, "hand" | "index"> & { index?: number };
 
 // the *remaining* strikes and hints.
 // There are 8 hints and 3 strikes to begin with.
@@ -223,24 +242,21 @@ export interface ITokens {
   strikes: number;
 }
 
-export function rebuildLobby(state: Partial<IGameState>): ILobbyState {
+export function rebuildLobby(state: IMinimalGameState): ILobbyState {
   return {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    id: state.id!,
+    id: state.id,
     status: IGameStatus.LOBBY,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    options: state.options!,
+    options: state.options,
     players: (state.players || []).map((player, index) => ({ ...omit(player, "hand"), index })),
     messages: state.messages ?? [],
     reviewComments: state.reviewComments ?? [],
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    createdAt: state.createdAt!,
+    createdAt: state.createdAt,
     synced: false,
-    nextGameId: state.nextGameId,
+    nextGameId: state.nextGameId ?? null,
   };
 }
 
-export function rebuildGame(state: Partial<IGameState> | null): IGameState | ILobbyState | null {
+export function rebuildGame(state: IMinimalGameState | null): IGameState | ILobbyState | null {
   if (!state) {
     return null;
   }
@@ -249,8 +265,7 @@ export function rebuildGame(state: Partial<IGameState> | null): IGameState | ILo
     return rebuildLobby(state);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  let newState = newGame(state.options!);
+  let newState = newGame(state.options);
 
   (state.players || []).forEach((player) => {
     newState = joinGame(newState, player);
@@ -263,22 +278,18 @@ export function rebuildGame(state: Partial<IGameState> | null): IGameState | ILo
   });
 
   newState.messages = state.messages ?? [];
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  newState.status = state.status!;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  newState.createdAt = state.createdAt!;
-  newState.nextGameId = state.nextGameId;
+  newState.status = state.status;
+  newState.createdAt = state.createdAt;
+  newState.nextGameId = state.nextGameId ?? null;
   newState.reviewComments = state.reviewComments ?? [];
 
   return newState;
 }
 
-export function cleanState(state: IGameState | ILobbyState): Partial<IGameState> {
-  const base = {
+export function cleanState(state: IGameState | ILobbyState): Partial<IMinimalGameState> {
+  const base: Partial<IMinimalGameState> = {
     ...omit(state, ["playedCards", "drawPile", "discardPile"]),
-    players: state.players.map((player) => {
-      return omit(player, "hand");
-    }),
+    players: state.players.map((player) => omit(player, "hand")) as IMinimalPlayer[],
   };
 
   if (isLobby(state)) {
@@ -287,17 +298,15 @@ export function cleanState(state: IGameState | ILobbyState): Partial<IGameState>
 
   return {
     ...base,
-    turnsHistory: state.turnsHistory.map((turn) => {
-      return {
-        action: omit(turn.action, ["card"]) as IAction,
-      };
-    }),
+    turnsHistory: state.turnsHistory.map((turn) => ({
+      action: omit(turn.action, ["card"]) as IAction,
+    })),
   };
 }
 
 // empty arrays are returned as null in Firebase, so we fill
 // them back to avoid having to type check everywhere
-export function fillEmptyValues(state: IGameState | null): IGameState | null {
+export function fillEmptyValues<T extends IMinimalGameState>(state: T | null): T | null {
   if (!state) {
     return null;
   }
@@ -314,7 +323,7 @@ export function fillEmptyValues(state: IGameState | null): IGameState | null {
     ),
     turnsHistory: [],
     reviewComments: [],
-  });
+  }) as T;
 }
 
 export function isHintAction(action: IAction): action is IHintAction {

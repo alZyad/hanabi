@@ -49,7 +49,7 @@ function EnterReviewComment(props: {
   );
 }
 
-export function StaticReviewComment(props: { comment: IReviewComment }) {
+export function StaticReviewComment(props: { comment?: IReviewComment }) {
   return <Txt className={"b--none ma0 white"}>{props.comment?.comment}</Txt>;
 }
 
@@ -104,11 +104,11 @@ export function ReviewCommentPopover({
               </div>
             ) : (
               <EnterReviewComment
-                afterTurnNumber={reviewCommentOpenForTurn}
-                existingComment={comment?.comment}
+                afterTurnNumber={reviewCommentOpenForTurn ?? turnNumber}
+                existingComment={comment?.comment ?? ""}
                 onClose={(msg, turnNumber: number) => {
                   addOrReplaceReviewComment(game, {
-                    playerId: selfPlayer?.id,
+                    playerId: selfPlayer?.id ?? "",
                     afterTurnNumber: turnNumber,
                     comment: msg,
                   });

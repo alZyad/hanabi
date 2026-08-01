@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
+import { parseGameId } from "~/lib/schemas/params";
 import { useTutorialAction } from "~/lib/tutorial";
 
 export default function TutorialInstructions() {
@@ -10,7 +11,7 @@ export default function TutorialInstructions() {
   const router = useRouter();
   const action = useTutorialAction();
   const { t } = useTranslation();
-  const originalGameId = router.query["back-to-game"];
+  const originalGameId = parseGameId(router.query["back-to-game"]);
 
   if (!showTutorial) {
     return null;

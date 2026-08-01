@@ -1,12 +1,17 @@
 import React, { useContext } from "react";
 
-interface ReplayProps {
-  cursor: number;
-  moveCursor: (to: number) => void;
+export interface ReplayProps {
+  cursor: number | null;
+  moveCursor: (to: number | null) => void;
 }
 
-export const ReplayContext = React.createContext<ReplayProps>(null);
+const defaultReplay: ReplayProps = {
+  cursor: null,
+  moveCursor: () => undefined,
+};
 
-export function useReplay() {
-  return useContext<ReplayProps>(ReplayContext);
+export const ReplayContext = React.createContext<ReplayProps>(defaultReplay);
+
+export function useReplay(): ReplayProps {
+  return useContext(ReplayContext);
 }

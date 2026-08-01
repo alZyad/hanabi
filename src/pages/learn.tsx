@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import posed, { PoseGroup } from "react-pose";
+import { PoseGroup } from "react-pose";
 import Card, { CardSize, ICardContext } from "~/components/card";
 import HomeButton from "~/components/homeButton";
 import PlayedCards from "~/components/playedCards";
@@ -13,32 +13,40 @@ import Txt, { TxtSize } from "~/components/ui/txt";
 import { Paragraph, Subtitle, Title } from "~/components/ui/typography";
 import Vignette from "~/components/vignette";
 import useLocalStorage from "~/hooks/localStorage";
+import { colorBlindModeSchema } from "~/lib/schemas/storage";
 import { getColors, newGame, numbers } from "~/lib/actions";
+import { posedDiv } from "~/lib/posed";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
+import { parseGameId } from "~/lib/schemas/params";
 import { readableUniqueId } from "~/lib/id";
 import { GameMode, GameVariant, IColor, IGameHintsLevel, IHintType, INumber } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
 
-function card(color: IColor, number: INumber, size = CardSize.XSMALL, position?: number) {
+function card(color: IColor, number: INumber, colorBlindMode: boolean, size = CardSize.XSMALL, position?: number) {
   return (
     <Card
       card={{ color, number }}
       className="inline-flex ml1"
+      colorBlindMode={colorBlindMode}
       context={ICardContext.OTHER}
+      hintsLevel={IGameHintsLevel.NONE}
       position={position}
       size={size}
+      variant={GameVariant.CLASSIC}
     />
   );
 }
 
-function vignette(type: IHintType, value: string | number) {
+function vignette(type: IHintType, value: string | number, colorBlindMode: boolean) {
   return (
     <Vignette
       className="inline-flex items-center"
+      colorBlindMode={colorBlindMode}
       style={{ width: "22px", height: "22px", color: "white", marginRight: 0 }}
       type={type}
       value={value}
+      variant={GameVariant.CLASSIC}
     />
   );
 }
@@ -52,7 +60,7 @@ const Divider = () => <div className="mv4 bt b--yellow w4" />;
 function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode: boolean) => void) {
   const { t } = useTranslation();
   const router = useRouter();
-  const gameId = router.query["back-to-game"];
+  const gameId = parseGameId(router.query["back-to-game"]);
 
   const amountPerNumber = {
     1: 3,
@@ -116,8 +124,8 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
         <>
           <Title className="ttu mb4">{t("learn.cards.title", "Cards")}</Title>
           <Paragraph>
-            {t("learn.cards.1.1", "Cards are numbered from")} {vignette("number", 1)} {t("learn.cards.1.2", "to")}{" "}
-            {vignette("number", 5)} {t("learn.cards.1.3", "and colored")}{" "}
+            {t("learn.cards.1.1", "Cards are numbered from")} {vignette("number", 1, colorBlindMode)}{" "}
+            {t("learn.cards.1.2", "to")} {vignette("number", 5, colorBlindMode)} {t("learn.cards.1.3", "and colored")}{" "}
             <span className="txt-red">{t("red", "red")}</span>,{" "}
             <span className="txt-yellow">{t("yellow", "yellow")}</span>,{" "}
             <span className="txt-green">{t("green", "green")}</span>,{" "}
@@ -131,7 +139,7 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
                   {numbers.map((number) => {
                     return (
                       <div key={number} className="flex items-center">
-                        {card(color, number, CardSize.MEDIUM)}
+                        {card(color, number, colorBlindMode, CardSize.MEDIUM)}
                         <Txt className="lavender ml1 mr2" size={TxtSize.XSMALL} value={`x${amountPerNumber[number]}`} />
                       </div>
                     );
@@ -172,6 +180,8 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
                 { color: IColor.YELLOW, number: 3 },
                 { color: IColor.YELLOW, number: 4 },
               ]}
+              colorBlindMode={colorBlindMode}
+              variant={GameVariant.CLASSIC}
             />
             <Txt className="lavender ml2" size={TxtSize.XSMALL} value={t("5 + 3 + 1 + 4 = 13 / 25")} />
           </div>
@@ -179,8 +189,9 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
             <Paragraph>
               {t("learn.goal.2", "Piles from each color must be built in ascending order.")}
               <br />
-              {t("learn.goal.3", "For instance, in the example above, you must play")} {card(IColor.GREEN, 4)}{" "}
-              {t("learn.goal.4", "before playing")} {card(IColor.GREEN, 5)} {t("learn.goal.5", ".")}
+              {t("learn.goal.3", "For instance, in the example above, you must play")}{" "}
+              {card(IColor.GREEN, 4, colorBlindMode)} {t("learn.goal.4", "before playing")}{" "}
+              {card(IColor.GREEN, 5, colorBlindMode)} {t("learn.goal.5", ".")}
             </Paragraph>
           </div>
         </>
@@ -229,11 +240,11 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
             <br />
             {t("learn.actions.hint.4", "For instance, in the hand below:")}
             <div className="flex mt3 mb4">
-              {card(IColor.BLUE, 2, CardSize.LARGE, 0)}
-              {card(IColor.BLUE, 3, CardSize.LARGE, 1)}
-              {card(IColor.RED, 2, CardSize.LARGE, 2)}
-              {card(IColor.RED, 4, CardSize.LARGE, 3)}
-              {card(IColor.YELLOW, 5, CardSize.LARGE, 4)}
+              {card(IColor.BLUE, 2, colorBlindMode, CardSize.LARGE, 0)}
+              {card(IColor.BLUE, 3, colorBlindMode, CardSize.LARGE, 1)}
+              {card(IColor.RED, 2, colorBlindMode, CardSize.LARGE, 2)}
+              {card(IColor.RED, 4, colorBlindMode, CardSize.LARGE, 3)}
+              {card(IColor.YELLOW, 5, colorBlindMode, CardSize.LARGE, 4)}
             </div>
             {t("learn.actions.hint.5", "You could give the following hints:")}
             <br />
@@ -322,7 +333,7 @@ function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode
   ];
 }
 
-const Step = posed.div({
+const Step = posedDiv({
   enter: {
     opacity: 1,
   },
@@ -333,7 +344,7 @@ const Step = posed.div({
 
 export default function Learn() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false);
+  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
   const steps = useSteps(colorBlindMode, setColorBlindMode);
   const router = useRouter();
   const { t } = useTranslation();
@@ -364,7 +375,7 @@ export default function Learn() {
 
     logEvent("Game", "Tutorial created");
 
-    const originalGameId = router.query["back-to-game"];
+    const originalGameId = parseGameId(router.query["back-to-game"]);
     if (originalGameId) {
       await router.push(`/${id}?back-to-game=${originalGameId}`);
     } else {
@@ -382,13 +393,15 @@ export default function Learn() {
 
       <div className="relative flex items-center h-90 w-90 w-50-l center">
         <PoseGroup>
-          {steps.map((step, i) => {
-            return i === currentStep ? (
-              <Step key={i} className="flex flex-column">
-                {step.html}
-              </Step>
-            ) : null;
-          })}
+          {steps
+            .map((step, i) => {
+              return i === currentStep ? (
+                <Step key={i} className="flex flex-column">
+                  {step.html}
+                </Step>
+              ) : null;
+            })
+            .filter((step): step is JSX.Element => step !== null)}
         </PoseGroup>
         <div className="absolute left-0 right-0 bottom-1 flex justify-between items-center mh2">
           <Txt className="lavender nowrap" size={TxtSize.XXSMALL} value={`${currentStep + 1} / ${steps.length}`} />

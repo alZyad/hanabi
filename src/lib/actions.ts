@@ -15,10 +15,11 @@ import IGameState, {
   IHintAction,
   IHintLevel,
   ILobbyState,
+  IMinimalPlayer,
   INumber,
-  IPlayer,
   isCardAction,
   isHintAction,
+  ITurn,
 } from "./state";
 
 export const numbers: INumber[] = [1, 2, 3, 4, 5];
@@ -221,8 +222,7 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
     if (s.drawPile && s.drawPile.length) {
       newCard = s.drawPile.pop() ?? null;
       if (newCard) {
-        newCard.hint = emptyHint(state.options);
-        player.hand.unshift(newCard);
+        player.hand.unshift({ ...newCard, hint: emptyHint(state.options) });
       }
     }
   }
@@ -250,7 +250,14 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
   s.currentPlayer = (s.currentPlayer + 1) % s.options.playersCount;
 
   // update history
-  s.turnsHistory.push({ action: action, card: newCard ?? undefined, failed: playFailed ?? undefined });
+  const turn: ITurn = { action };
+  if (newCard) {
+    turn.card = newCard;
+  }
+  if (playFailed !== null) {
+    turn.failed = playFailed;
+  }
+  s.turnsHistory.push(turn);
 
   if (isGameOver(s)) {
     s.status = IGameStatus.OVER;
@@ -364,7 +371,7 @@ export function getMaximumPossibleScore(state: IGameState): number {
   return maxScore;
 }
 
-export function joinGame(state: IGameState, player: IPlayer): IGameState {
+export function joinGame(state: IGameState, player: IMinimalPlayer): IGameState {
   const game = cloneDeep(state) as IGameState;
 
   game.players = game.players || [];
@@ -377,8 +384,8 @@ export function dealHands(state: IGameState): IGameState {
   const game = cloneDeep(state) as IGameState;
 
   game.players.forEach((player) => {
-    player.hand = game.drawPile.splice(0, startingHandSize[game.options.playersCount]);
-    player.hand.forEach((card) => (card.hint = emptyHint(game.options)));
+    const dealt = game.drawPile.splice(0, startingHandSize[game.options.playersCount]);
+    player.hand = dealt.map((card) => ({ ...card, hint: emptyHint(game.options) }));
   });
 
   return game;
@@ -469,17 +476,19 @@ export function createLobby(options: IGameOptions): ILobbyState {
   };
 }
 
-export function joinLobby(lobby: ILobbyState, player: IPlayer): ILobbyState {
+export function joinLobby(lobby: ILobbyState, player: IMinimalPlayer): ILobbyState {
   const nextLobby = cloneDeep(lobby) as ILobbyState;
 
   nextLobby.players = nextLobby.players || [];
-  nextLobby.players.push({ ...player, hand: [], index: nextLobby.players.length });
+  nextLobby.players.push({ ...player, index: nextLobby.players.length });
 
   return nextLobby;
 }
 
 export function newGame(options: IGameOptions): IGameState {
   assert(options.playersCount >= MIN_PLAYERS && options.playersCount <= MAX_PLAYERS);
+
+  options = { ...options, variant: options.variant ?? GameVariant.CLASSIC };
 
   const cards = buildDeck(options).map((c, i) => ({ ...c, id: i }));
 

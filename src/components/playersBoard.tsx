@@ -1,5 +1,5 @@
 import React from "react";
-import posed from "react-pose";
+import { posedDiv } from "~/lib/posed";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
 import PlayerGame from "~/components/playerGame";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
@@ -16,7 +16,7 @@ interface Props {
   onCommitAction: (action: IAction) => void;
 }
 
-const Item = posed.div({
+const Item = posedDiv({
   selected: { height: "auto" },
   notSelected: { height: "auto" },
 });
@@ -28,11 +28,11 @@ export default function PlayersBoard(props: Props) {
   const selfPlayer = useSelfPlayer(game);
   const currentPlayer = useCurrentPlayer(game);
 
-  const position = selfPlayer ? selfPlayer.index : game.players.length;
+  const position = selfPlayer?.index ?? game.players.length;
   const otherPlayers = [...game.players.slice(position + 1), ...game.players.slice(0, position)];
 
-  let selectedPlayer = null;
-  let cardIndex = null;
+  let selectedPlayer: IPlayer | undefined;
+  let cardIndex: number | undefined;
   if (selectedArea.type === ActionAreaType.SELF_PLAYER) {
     selectedPlayer = game.players.find((player) => player.id === selectedArea.player.id);
     cardIndex = selectedArea.cardIndex;
@@ -55,7 +55,7 @@ export default function PlayersBoard(props: Props) {
               displayStats={displayStats}
               id={`player-game-${i + 1}`}
               player={otherPlayer}
-              selected={selectedPlayer && selectedPlayer === otherPlayer}
+              selected={selectedPlayer === otherPlayer}
               onCloseArea={onCloseArea}
               onCommitAction={onCommitAction}
               onNotifyPlayer={onNotifyPlayer}
@@ -73,7 +73,7 @@ export default function PlayersBoard(props: Props) {
               displayStats={displayStats}
               id="player-game-self"
               player={selfPlayer}
-              selected={selectedPlayer && selectedPlayer === selfPlayer}
+              selected={selectedPlayer === selfPlayer}
               self={true}
               onCloseArea={onCloseArea}
               onCommitAction={onCommitAction}

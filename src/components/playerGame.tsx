@@ -3,7 +3,7 @@ import { TFunction } from "i18next";
 import React, { HTMLAttributes, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowContainer, Popover } from "react-tiny-popover";
-import posed, { PoseGroup } from "react-pose";
+import { PoseGroup } from "react-pose";
 import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import ChatPopover from "~/components/chatPopover";
 import CardNotesArea from "~/components/cardNotesArea";
@@ -22,6 +22,7 @@ import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
 import { useUserPreferences } from "~/hooks/userPreferences";
 import { useReplay } from "~/hooks/replay";
 import { matchColor, matchNumber, MaxHints } from "~/lib/actions";
+import { posedDiv } from "~/lib/posed";
 import IGameState, {
   GameMode,
   GameVariant,
@@ -112,12 +113,9 @@ export default function PlayerGame(props: Props) {
   const [reactionsOpen, setReactionsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [hideCards, setHideCards] = useState(true);
-  const [selectedCard, selectCard] = useState<number>(cardIndex);
+  const [selectedCard, selectCard] = useState<number | null>(cardIndex ?? null);
   const [revealCards, setRevealCards] = useState(false);
-  const [pendingHint, setPendingHint] = useState<IHintAction>({
-    type: null,
-    value: null,
-  } as IHintAction);
+  const [pendingHint, setPendingHint] = useState<IHintAction>({} as IHintAction);
 
   const selfPlayer = useSelfPlayer(game);
   const currentPlayer = useCurrentPlayer(game);
@@ -224,7 +222,7 @@ export default function PlayerGame(props: Props) {
                           <ReactionsPopover
                             style={POPOVER_CONTENT_STYLE}
                             onClose={() => setReactionsOpen(false)}
-                            onReaction={onReaction}
+                            onReaction={onReaction ?? (() => undefined)}
                           />
                         </ArrowContainer>
                       );
@@ -305,7 +303,7 @@ export default function PlayerGame(props: Props) {
                   className="ml1 ml4-l pointer"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onNotifyPlayer(player);
+                    onNotifyPlayer?.(player);
                   }}
                 >
                   <Txt value="🔔" />
@@ -358,8 +356,10 @@ export default function PlayerGame(props: Props) {
                           "ma1": selected,
                           "mr1 mr2-l": i < player.hand.length - 1,
                         })}
+                        colorBlindMode={game.options.colorBlindMode}
                         context={cardContext}
                         hidden={hideCards}
+                        hintsLevel={game.options.hintsLevel}
                         position={i}
                         selected={
                           selected &&
@@ -369,6 +369,7 @@ export default function PlayerGame(props: Props) {
                         style={{
                           ...(selected && { transition: "all 50ms ease-in-out" }),
                         }}
+                        variant={game.options.variant}
                         onClick={(e) => {
                           e.stopPropagation();
                           onSelectPlayer(player, i);
@@ -411,14 +412,14 @@ export default function PlayerGame(props: Props) {
         {canPlay && selected && player === selfPlayer && selfPlayer === currentPlayer && (
           <div className="flex flex-column items-end mb2">
             <div className="flex justify-end items-center h-100-l">
-              {hasSelectedCard && (
+              {selectedCard !== null && (
                 <Txt
                   className="pb1 pb2-l ml1 mb2 mr3 ml2-l"
                   value={t("cardSelected", { position: PositionMap[selectedCard] })}
                 />
               )}
 
-              {hasSelectedCard && (
+              {selectedCard !== null && (
                 <div className="flex flex pb2">
                   {["discard", "play"].map((action) => (
                     <Button
@@ -427,11 +428,12 @@ export default function PlayerGame(props: Props) {
                       disabled={
                         (action === "discard" && game.tokens.hints === 8) ||
                         (action === "discard" && player.hand.length === 0) ||
-                        !isTutorialAction(game, tutorialAction?.action, {
-                          action: action as "discard" | "play",
-                          from: 0,
-                          cardIndex: selectedCard,
-                        })
+                        (tutorialAction?.action != null &&
+                          !isTutorialAction(game, tutorialAction.action, {
+                            action: action as "discard" | "play",
+                            from: 0,
+                            cardIndex: selectedCard,
+                          }))
                       }
                       id={action}
                       text={t(action)}
@@ -442,7 +444,7 @@ export default function PlayerGame(props: Props) {
                           from: selfPlayer.index,
                           cardIndex: cardIdx,
                         });
-                        setPendingHint({ value: null, type: null } as IHintAction);
+                        setPendingHint({} as IHintAction);
                         selectCard(cardIdx);
                       }}
                     />
@@ -485,18 +487,24 @@ export default function PlayerGame(props: Props) {
                 disabled={
                   !pendingHint.type ||
                   game.tokens.hints === 0 ||
-                  !isTutorialAction(game, tutorialAction?.action, { action: "hint", to: player.index, ...pendingHint })
+                  (tutorialAction?.action != null &&
+                    !isTutorialAction(game, tutorialAction.action, {
+                      ...pendingHint,
+                      action: "hint",
+                      to: player.index,
+                    }))
                 }
                 id="give-hint"
                 text={t("hint")}
                 onClick={() => {
+                  if (!currentPlayer) return;
                   onCommitAction({
+                    ...pendingHint,
                     action: "hint",
                     from: currentPlayer.index,
                     to: player.index,
-                    ...pendingHint,
                   });
-                  setPendingHint({ value: null, type: null } as IHintAction);
+                  setPendingHint({} as IHintAction);
                   selectCard(null);
                 }}
               />
@@ -523,7 +531,7 @@ export default function PlayerGame(props: Props) {
   );
 }
 
-const AnimatedCard = posed.div({
+const AnimatedCard = posedDiv({
   enter: {
     opacity: 1,
     transition: {

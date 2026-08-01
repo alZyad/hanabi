@@ -10,7 +10,7 @@ const Reactions = [
 ];
 
 interface Props {
-  onReaction: (reaction: string) => void;
+  onReaction: (reaction: string | null) => void;
   onClose: () => void;
   style?: CSSProperties;
 }
@@ -46,7 +46,7 @@ export default function ReactionsPopover(props: Props) {
           ))}
         </div>
       ))}
-      {selfPlayer.reaction && (
+      {selfPlayer?.reaction && (
         <a
           className="mt2 pointer"
           onClick={(e) => {

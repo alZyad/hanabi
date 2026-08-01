@@ -21,13 +21,15 @@ function SsrFreeGameIndex(props: { host: string; game: IGameState | ILobbyState 
   useEffect(() => {
     if (!online) return;
 
-    return subscribeToGame(game.id as string, (game) => {
-      if (!game) {
-        return router.push("/404");
+    return subscribeToGame(
+      game.id as string,
+      (game) => {
+        setGame({ ...game, synced: true });
+      },
+      (reason) => {
+        router.push(reason === "not-found" ? "/404" : "/?error=invalid-game");
       }
-
-      setGame({ ...game, synced: true });
-    });
+    );
   }, [online, game?.id, router]);
 
   return (

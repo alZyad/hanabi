@@ -12,6 +12,7 @@ export default function FaceDownHand(props: { size: number }) {
           key={i}
           className={classnames({ "mr1 mr2-l": i < size - 1 })}
           color="gray-light"
+          colorBlindMode={false}
           size={CardSize.MEDIUM}
         />
       ))}

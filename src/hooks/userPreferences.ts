@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { defaults } from "lodash";
+import { readLocalStorage, userPreferencesSchema } from "~/lib/schemas/storage";
 
 export interface UserPreferences {
   soundOnStrike?: boolean;
@@ -16,14 +18,8 @@ const DefaultPreferences: UserPreferences = {
   disableCardNotes: false,
 };
 export function loadUserPreferences(): UserPreferences {
-  if (window) {
-    const preferenceJson = window.localStorage.getItem("userPreferences");
-    if (preferenceJson) {
-      const loadedPreferences = JSON.parse(preferenceJson);
-      return { ...DefaultPreferences, ...loadedPreferences };
-    }
-  }
-  return DefaultPreferences;
+  const loadedPreferences = readLocalStorage("userPreferences", userPreferencesSchema, {});
+  return defaults({ ...loadedPreferences }, DefaultPreferences);
 }
 export const UserPreferencesContext = React.createContext<ValueAndSetter<UserPreferences>>([
   DefaultPreferences,

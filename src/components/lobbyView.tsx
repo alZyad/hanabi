@@ -11,6 +11,7 @@ import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
+import { colorBlindModeSchema } from "~/lib/schemas/storage";
 import { useSession } from "~/hooks/session";
 import {
   deckSize,
@@ -25,29 +26,28 @@ import { logEvent } from "~/lib/analytics";
 import { logFailedPromise } from "~/lib/errors";
 import { updateGame } from "~/lib/firebase";
 import { uniqueId } from "~/lib/id";
-import IGameState, { GameMode, ILobbyState, IPlayer } from "~/lib/state";
+import IGameState, { GameMode, ILobbyState, IMinimalPlayer } from "~/lib/state";
 
-function listPlayerNames(players: IPlayer[]) {
-  if (!players.length) {
+function listPlayerNames(players: IMinimalPlayer[]) {
+  const [firstPlayer] = players;
+  if (!firstPlayer) {
     return null;
   }
 
-  if (players.length === 1) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return players[0]!.name;
+  const lastPlayer = last(players);
+  if (players.length === 1 || !lastPlayer) {
+    return firstPlayer.name;
   }
 
   const firstNames = players
     .slice(0, -1)
     .map((player) => player.name)
     .join("& ");
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const lastName = last(players)!.name;
 
-  return `${firstNames} & ${lastName}`;
+  return `${firstNames} & ${lastPlayer.name}`;
 }
 
-function Meta(props: { players: IPlayer[] }) {
+function Meta(props: { players: IMinimalPlayer[] }) {
   const { t } = useTranslation();
   const inviters = props.players.filter((player) => !player.bot);
 
@@ -76,6 +76,7 @@ export default function LobbyView(props: Props) {
 
   const { playerId } = useSession();
   const [, setGameId] = useLocalStorage<string | null>("gameId", null);
+  const [colorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
   const [name, setName] = useState("");
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -107,9 +108,12 @@ export default function LobbyView(props: Props) {
     }
   }, [lobby.players.length, lobby.options.gameMode]);
 
-  function onJoinGame(player: Omit<IPlayer, "id">) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const nextLobby = joinLobby(lobby, { id: playerId!, ...player });
+  function onJoinGame(player: Omit<IMinimalPlayer, "id">) {
+    if (!playerId) {
+      return;
+    }
+
+    const nextLobby = joinLobby(lobby, { id: playerId, ...player });
 
     onStateChange({ ...nextLobby, synced: false });
     updateGame(nextLobby).catch(logFailedPromise);
@@ -165,6 +169,7 @@ export default function LobbyView(props: Props) {
           <HomeButton void />
         </div>
         <Board
+          colorBlindMode={colorBlindMode}
           deckCount={deckSize(lobby.options)}
           hints={MaxHints}
           playedCards={[]}

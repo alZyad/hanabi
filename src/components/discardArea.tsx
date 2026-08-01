@@ -6,15 +6,18 @@ import Card, { CardSize, ICardContext } from "~/components/card";
 import Txt from "~/components/ui/txt";
 import { useGame } from "~/hooks/game";
 import { getColors } from "~/lib/actions";
-import { ICard, IColor } from "~/lib/state";
+import { GameVariant, ICard, IColor, IGameHintsLevel } from "~/lib/state";
 
 interface CardPileProps {
   cards: ICard[];
   color: IColor;
+  variant: GameVariant;
+  colorBlindMode: boolean;
+  hintsLevel: IGameHintsLevel;
 }
 
 function CardPile(props: CardPileProps) {
-  const { cards } = props;
+  const { cards, variant, colorBlindMode, hintsLevel } = props;
 
   const sortedCards = sortBy(cards, (card) => card.number);
 
@@ -25,8 +28,11 @@ function CardPile(props: CardPileProps) {
           key={i}
           card={card}
           className={classnames("mr1", { nl2: i > 0 })}
+          colorBlindMode={colorBlindMode}
           context={ICardContext.DISCARDED}
+          hintsLevel={hintsLevel}
           size={CardSize.XSMALL}
+          variant={variant}
         />
       ))}
     </div>
@@ -51,7 +57,16 @@ export default function DiscardArea() {
         return (
           <div key={i} className={"flex justify-end mt1"}>
             {colors.map((color) => {
-              return <CardPile key={color} cards={byColor[color] || []} color={color} />;
+              return (
+                <CardPile
+                  key={color}
+                  cards={byColor[color] || []}
+                  color={color}
+                  colorBlindMode={game.options.colorBlindMode}
+                  hintsLevel={game.options.hintsLevel}
+                  variant={game.options.variant}
+                />
+              );
             })}
           </div>
         );
