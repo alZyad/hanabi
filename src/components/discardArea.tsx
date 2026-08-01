@@ -25,9 +25,9 @@ function CardPile(props: CardPileProps) {
     <div className="flex mw">
       {sortedCards.map((card, i) => (
         <Card
-          key={i}
+          key={card.id ?? i}
           card={card}
-          className={classnames("mr1", { nl2: i > 0 })}
+          className={classnames("mr1 card-land", { nl2: i > 0 })}
           colorBlindMode={colorBlindMode}
           context={ICardContext.DISCARDED}
           hintsLevel={hintsLevel}

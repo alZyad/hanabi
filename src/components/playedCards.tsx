@@ -45,9 +45,9 @@ export default function PlayedCards(props: Props) {
             >
               {stack.map((card, i) => (
                 <Card
-                  key={i}
+                  key={card.id ?? i}
                   card={card}
-                  className="absolute"
+                  className="absolute card-land"
                   colorBlindMode={colorBlindMode}
                   context={ICardContext.PLAYED}
                   hintsLevel={IGameHintsLevel.NONE}
