@@ -24,6 +24,8 @@ src/components/lobbyView.tsx
   s_a69de368d3f754::t_9734450d3dc918 14,79,172
 src/components/discardArea.tsx
   s_a69de368d3f754::t_9734450d3dc918 9,14-16,20,31,33,35,60-69
+src/components/faceDownHand.tsx
+  s_c4578372e94e2c::t_8052f4b57aedb7 15
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -35,6 +37,14 @@ src/components/discardArea.tsx
       "agent_id": {
         "tool": "claude",
         "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_c4578372e94e2c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6f330b4-a6ba-4090-9cc1-5d9eada89904",
         "model": "claude-opus-4-8"
       },
       "human_author": "alZyad <zyad.alalgui@theodo.com>"
