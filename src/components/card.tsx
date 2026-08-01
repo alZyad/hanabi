@@ -238,14 +238,6 @@ function Card(props: Props) {
     hintsLevel !== IGameHintsLevel.NONE &&
     [ICardContext.OTHER_PLAYER, ICardContext.TARGETED_PLAYER, ICardContext.SELF_PLAYER].includes(context);
 
-  if (selected) {
-    try {
-      style.transform = "scale(1.20)";
-    } catch (e) {
-      // This operation sometimes crashes because of a conflict with react-popover
-      // This try/catch aims to prevent it and inhibate the error.
-    }
-  }
   const hints = card.receivedHints || [];
   const cardHint = card.hint;
   const longPressProps = useLongPress(() => {
@@ -264,6 +256,7 @@ function Card(props: Props) {
       size={size}
       style={{
         ...style,
+        ...(selected && { transform: "scale(1.20)" }),
         userSelect: "none",
       }}
       onClick={(e) => {

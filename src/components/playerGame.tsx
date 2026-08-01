@@ -372,7 +372,7 @@ function PlayerGame(props: Props) {
                           }
                           size={selected ? CardSize.LARGE : CardSize.MEDIUM}
                           style={{
-                            ...(selected && { transition: "all 50ms ease-in-out" }),
+                            ...(selected && { transition: "transform 120ms ease-out" }),
                           }}
                           variant={game.options.variant}
                           onClick={(e) => {
