@@ -1,0 +1,21 @@
+src/components/card.tsx
+  s_23093bdf7f201c::t_b3dee30a6af8c2 261
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_0349dad0fa0191 378
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "38ef0816c5ce451a408abaa7ac1b25916c177273",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
