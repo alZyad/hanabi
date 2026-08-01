@@ -118,6 +118,7 @@ function PlayerGame(props: Props) {
   const [selectedCard, selectCard] = useState<number | null>(cardIndex ?? null);
   const [revealCards, setRevealCards] = useState(false);
   const [pendingHint, setPendingHint] = useState<IHintAction>({} as IHintAction);
+  const [focusReady, setFocusReady] = useState(false);
 
   const selfPlayer = useSelfPlayer(game);
   const currentPlayer = useCurrentPlayer(game);
@@ -152,6 +153,15 @@ function PlayerGame(props: Props) {
     }
     setHideCards(tempHideCards);
   }, [game.status, revealCards, game.options.gameMode, selfPlayer, self]);
+
+  useEffect(() => {
+    if (!selected) {
+      setFocusReady(false);
+      return;
+    }
+    const frame = requestAnimationFrame(() => setFocusReady(true));
+    return () => cancelAnimationFrame(frame);
+  }, [selected]);
 
   const canPlay = [IGameStatus.ONGOING, IGameStatus.OVER].includes(game.status) && !replay.cursor;
 
@@ -376,6 +386,7 @@ function PlayerGame(props: Props) {
                           })}
                           colorBlindMode={game.options.colorBlindMode}
                           context={cardContext}
+                          focusPanelReady={focusReady}
                           hidden={hideCards}
                           hintsLevel={game.options.hintsLevel}
                           position={i}
@@ -388,7 +399,7 @@ function PlayerGame(props: Props) {
                           variant={game.options.variant}
                           onSelectCard={onSelectCard}
                         />
-                        {showCardNotes && (
+                        {showCardNotes && focusReady && (
                           <CardNotesOnboarding
                             body={t("cardNotesOnboardingBody")}
                             isOpen={onboardingCardIndex === i}

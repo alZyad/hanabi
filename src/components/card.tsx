@@ -206,6 +206,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   onSelectCard?: (position: number) => void;
+  focusPanelReady?: boolean;
 }
 
 function Card(props: Props) {
@@ -223,6 +224,7 @@ function Card(props: Props) {
     position = null,
     selected = false,
     onSelectCard,
+    focusPanelReady = true,
   } = props;
 
   const [allHintsPopoverIsOpen, setAllHintsPopoverIsOpen] = useState(false);
@@ -309,7 +311,7 @@ function Card(props: Props) {
         ))}
 
       {/* show other hints, including negative hints */}
-      {displayHints && size === CardSize.LARGE && cardHint && (
+      {displayHints && size === CardSize.LARGE && cardHint && focusPanelReady && (
         <div className="fh-panel absolute left-0 right-0 bottom-0 flex flex-column items-center bg-black-60 br1">
           <div className="fh-row">
             {colors.map((color) => (
