@@ -13,10 +13,12 @@ import Txt, { TxtSize } from "~/components/ui/txt";
 import { Paragraph, Subtitle, Title } from "~/components/ui/typography";
 import Vignette from "~/components/vignette";
 import useLocalStorage from "~/hooks/localStorage";
+import { colorBlindModeSchema } from "~/lib/schemas/storage";
 import { getColors, newGame, numbers } from "~/lib/actions";
 import { posedDiv } from "~/lib/posed";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
+import { parseGameId } from "~/lib/schemas/params";
 import { readableUniqueId } from "~/lib/id";
 import { GameMode, GameVariant, IColor, IGameHintsLevel, IHintType, INumber } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
@@ -53,7 +55,7 @@ const Divider = () => <div className="mv4 bt b--yellow w4" />;
 function useSteps(colorBlindMode: boolean, setColorBlindMode: (newColorBlindMode: boolean) => void) {
   const { t } = useTranslation();
   const router = useRouter();
-  const gameId = router.query["back-to-game"];
+  const gameId = parseGameId(router.query["back-to-game"]);
 
   const amountPerNumber = {
     1: 3,
@@ -334,7 +336,7 @@ const Step = posedDiv({
 
 export default function Learn() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false);
+  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
   const steps = useSteps(colorBlindMode, setColorBlindMode);
   const router = useRouter();
   const { t } = useTranslation();
@@ -365,7 +367,7 @@ export default function Learn() {
 
     logEvent("Game", "Tutorial created");
 
-    const originalGameId = router.query["back-to-game"];
+    const originalGameId = parseGameId(router.query["back-to-game"]);
     if (originalGameId) {
       await router.push(`/${id}?back-to-game=${originalGameId}`);
     } else {

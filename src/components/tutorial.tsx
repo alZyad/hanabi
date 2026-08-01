@@ -2,6 +2,7 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Popover, ArrowContainer, PopoverPosition } from "react-tiny-popover";
 import { posedDiv } from "~/lib/posed";
+import { readLocalStorage, tutorialStepSchema } from "~/lib/schemas/storage";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
@@ -89,10 +90,10 @@ export function TutorialProvider(props: TutorialProviderProps) {
   const [currentStep, setCurrentStep] = useState(-1);
 
   useEffect(() => {
-    const storedStep = localStorage.getItem(LocalStorageKey);
+    const storedStep = readLocalStorage(LocalStorageKey, tutorialStepSchema, -1);
 
-    if (storedStep) {
-      setCurrentStep(+storedStep);
+    if (storedStep >= 0) {
+      setCurrentStep(storedStep);
     }
   }, []);
 

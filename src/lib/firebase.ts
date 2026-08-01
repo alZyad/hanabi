@@ -3,15 +3,17 @@ import "firebase/database";
 import { cloneDeep } from "lodash";
 import IGameState, {
   cleanState,
-  fillEmptyValues,
   GameMode,
   IGameStatus,
   ILobbyState,
   IMessage,
+  IMinimalGameState,
   IPlayer,
   rebuildGame,
 } from "~/lib/state";
 import { MAX_PLAYERS } from "~/lib/actions";
+import { GAME_EXISTS_BUT_INVALID, parseGameState } from "~/lib/schemas/gameState";
+import { parseGameId } from "~/lib/schemas/params";
 import { logFailedPromise } from "~/lib/errors";
 
 function database() {
@@ -37,6 +39,13 @@ function database() {
   return firebase.database();
 }
 
+function toPublicGames(raw: unknown): IMinimalGameState[] {
+  return Object.values((raw ?? {}) as Record<string, unknown>)
+    .map(parseGameState)
+    .filter((game): game is IMinimalGameState => game !== null && game !== GAME_EXISTS_BUT_INVALID)
+    .filter(gameIsPublic);
+}
+
 export function loadPublicGames() {
   const ref = database()
     .ref("/games")
@@ -47,18 +56,13 @@ export function loadPublicGames() {
   return new Promise((resolve) => {
     ref
       .once("value", (event) => {
-        const games = Object.values(event.val() || {})
-          .map(fillEmptyValues)
-          // Game is public
-          .filter(gameIsPublic);
-
-        resolve(games);
+        resolve(toPublicGames(event.val()));
       })
       .catch(logFailedPromise);
   });
 }
 
-export function subscribeToPublicGames(callback: (games: IGameState[]) => void) {
+export function subscribeToPublicGames(callback: (games: IMinimalGameState[]) => void) {
   const ref = database()
     .ref("/games")
     // Only games created less than 10 minutes ago
@@ -66,35 +70,70 @@ export function subscribeToPublicGames(callback: (games: IGameState[]) => void) 
     .startAt(Date.now() - 10 * 60 * 1000);
 
   ref.on("value", (event) => {
-    const games = Object.values(event.val() || {})
-      .map(fillEmptyValues)
-      .filter((game): game is IGameState => game !== null)
-      // Game is public
-      .filter(gameIsPublic);
-
-    callback(games);
+    callback(toPublicGames(event.val()));
   });
 
   return () => ref.off();
 }
 
-export async function loadGame(gameId: string) {
+export async function loadGame(gameId: string): Promise<LoadGameResult> {
+  if (!parseGameId(gameId)) {
+    return { ok: false, reason: "not-found" };
+  }
+
   const ref = database().ref(`/games/${gameId}`);
 
-  return new Promise<IGameState | ILobbyState | null>((resolve) => {
+  return new Promise<LoadGameResult>((resolve) => {
     ref.once("value", (event) => {
-      resolve(rebuildGame(fillEmptyValues(event.val())));
+      resolve(toLoadResult(event.val()));
     });
   });
 }
 
-export function subscribeToGame(gameId: string, callback: (game: IGameState | ILobbyState) => void) {
+export type GameLoadFailure = "not-found" | "invalid";
+
+export type LoadGameResult = { ok: true; game: IGameState | ILobbyState } | { ok: false; reason: GameLoadFailure };
+
+function toLoadResult(raw: unknown): LoadGameResult {
+  const parsed = parseGameState(raw);
+
+  if (parsed === null) {
+    return { ok: false, reason: "not-found" };
+  }
+
+  if (parsed === GAME_EXISTS_BUT_INVALID) {
+    return { ok: false, reason: "invalid" };
+  }
+
+  try {
+    const game = rebuildGame(parsed);
+    if (!game) {
+      return { ok: false, reason: "invalid" };
+    }
+    return { ok: true, game };
+  } catch {
+    return { ok: false, reason: "invalid" };
+  }
+}
+
+export function subscribeToGame(
+  gameId: string,
+  callback: (game: IGameState | ILobbyState) => void,
+  onFailure?: (reason: GameLoadFailure) => void
+) {
+  if (!parseGameId(gameId)) {
+    onFailure?.("not-found");
+    return () => undefined;
+  }
+
   const ref = database().ref(`/games/${gameId}`);
 
   ref.on("value", (event) => {
-    const game = rebuildGame(fillEmptyValues(event.val()));
-    if (game) {
-      callback(game);
+    const result = toLoadResult(event.val());
+    if (result.ok) {
+      callback(result.game);
+    } else {
+      onFailure?.(result.reason);
     }
   });
 
@@ -128,7 +167,7 @@ export async function setNotification(game: IGameState, player: IPlayer, notifie
   await database().ref(`/games/${game.id}/players/${player.index}/notified`).set(notified);
 }
 
-function gameIsPublic(game: IGameState) {
+function gameIsPublic(game: IMinimalGameState) {
   return (
     !game.options.private &&
     game.status === IGameStatus.LOBBY &&

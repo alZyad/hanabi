@@ -4,13 +4,14 @@ import { useSession } from "~/hooks/session";
 import { getStateAtTurn } from "~/lib/actions";
 import IGameState, { fillEmptyValues, GameMode, IPlayer } from "~/lib/state";
 import useLocalStorage from "~/hooks/localStorage";
+import { colorBlindModeSchema } from "~/lib/schemas/storage";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const GameContext = React.createContext<IGameState>(null!);
 
 export function useColorBlindMode() {
   const game = useGame();
-  const [persistedColorBlindMode] = useLocalStorage("colorBlindMode", false);
+  const [persistedColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
   if (game) {
     return game.options.colorBlindMode;
   }

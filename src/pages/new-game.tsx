@@ -7,6 +7,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import { Checkbox, Field, Select, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
+import { colorBlindModeSchema } from "~/lib/schemas/storage";
 import { createLobby, MAX_PLAYERS } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { updateGame } from "~/lib/firebase";
@@ -55,7 +56,7 @@ export default function NewGame() {
   const [private_, setPrivate] = useState(false);
   const [hintsLevel, setHintsLevel] = useState(IGameHintsLevel.DIRECT);
   const [turnsHistory] = useState(true);
-  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false);
+  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
   const [botsWait, setBotsWait] = useState(process.env.NODE_ENV === "production" ? 1000 : 0);
 
   const [creatingGame, setCreatingGame] = useState(false);

@@ -6,10 +6,10 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { MAX_PLAYERS } from "~/lib/actions";
 import { loadPublicGames, subscribeToPublicGames } from "~/lib/firebase";
-import IGameState from "~/lib/state";
+import { IMinimalGameState } from "~/lib/state";
 
 interface Props {
-  games: IGameState[];
+  games: IMinimalGameState[];
 }
 
 export const getServerSideProps = async () => {
@@ -28,7 +28,7 @@ export default function JoinGame(props: Props) {
   const router = useRouter();
   const { t } = useTranslation();
 
-  const [games, setGames] = useState<IGameState[]>(initialGames);
+  const [games, setGames] = useState<IMinimalGameState[]>(initialGames);
 
   useEffect(() => {
     subscribeToPublicGames((games) => {

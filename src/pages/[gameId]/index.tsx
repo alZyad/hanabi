@@ -4,14 +4,23 @@ import { TutorialProvider } from "~/components/tutorial";
 import { ReplayContext } from "~/hooks/replay";
 import { Session, SessionContext } from "~/hooks/session";
 import { loadGame } from "~/lib/firebase";
+import { parseGameId } from "~/lib/schemas/params";
 import withSession, { getPlayerIdFromSession } from "~/lib/session";
 import IGameState from "~/lib/state";
 
 export const getServerSideProps = withSession(async function ({ req, params }) {
-  const game = await loadGame(params.gameId);
+  const gameId = parseGameId(params.gameId);
 
-  if (!game) {
+  if (!gameId) {
     return { notFound: true };
+  }
+
+  const result = await loadGame(gameId);
+
+  if (!result.ok) {
+    return result.reason === "not-found"
+      ? { notFound: true }
+      : { redirect: { destination: "/?error=invalid-game", permanent: false } };
   }
 
   const playerId = await getPlayerIdFromSession(req);
@@ -24,7 +33,7 @@ export const getServerSideProps = withSession(async function ({ req, params }) {
       session: {
         playerId,
       },
-      game,
+      game: result.game,
       host: `${protocol}//${host}`,
     },
   };

@@ -1,4 +1,5 @@
 import { useCallback, useSyncExternalStore } from "react";
+import { notesStoreSchema, readLocalStorage } from "~/lib/schemas/storage";
 import { IColor, IHintType, INumber } from "~/lib/state";
 
 const STORAGE_KEY = "cardNotes";
@@ -30,16 +31,12 @@ function pruneExpiredGames(store: NotesStore): boolean {
 
 function loadStore(): NotesStore {
   if (typeof window === "undefined") return EMPTY_STORE;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    const store: NotesStore = raw ? JSON.parse(raw) : {};
-    if (pruneExpiredGames(store)) {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-    }
-    return store;
-  } catch {
-    return {};
+
+  const store = readLocalStorage(STORAGE_KEY, notesStoreSchema, {});
+  if (pruneExpiredGames(store)) {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
   }
+  return store;
 }
 
 function read(): NotesStore {

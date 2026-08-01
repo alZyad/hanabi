@@ -15,6 +15,7 @@ import { GameContext } from "~/hooks/game";
 import { newGame } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { loadGame, subscribeToGame, updateGame } from "~/lib/firebase";
+import { parseGameId } from "~/lib/schemas/params";
 import IGameState, { GameVariant, isLobby } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
 
@@ -47,11 +48,23 @@ function formatDuration(start: number, end: number) {
 }
 
 export const getServerSideProps = async function ({ params }) {
-  const game = await loadGame(params.gameId);
+  const gameId = parseGameId(params.gameId);
+
+  if (!gameId) {
+    return { notFound: true };
+  }
+
+  const result = await loadGame(gameId);
+
+  if (!result.ok) {
+    return result.reason === "not-found"
+      ? { notFound: true }
+      : { redirect: { destination: "/?error=invalid-game", permanent: false } };
+  }
 
   return {
     props: {
-      game,
+      game: result.game,
     },
   };
 };
@@ -108,17 +121,19 @@ export default function Summary(props: Props) {
    * Load game from database
    */
   useEffect(() => {
-    return subscribeToGame(game.id as string, (game) => {
-      if (!game) {
-        return router.push("/404");
-      }
+    return subscribeToGame(
+      game.id as string,
+      (game) => {
+        if (isLobby(game)) {
+          return;
+        }
 
-      if (isLobby(game)) {
-        return;
+        setGame(game);
+      },
+      (reason) => {
+        router.push(reason === "not-found" ? "/404" : "/?error=invalid-game");
       }
-
-      setGame(game);
-    });
+    );
   }, [game.id, router]);
 
   function onBackClick() {

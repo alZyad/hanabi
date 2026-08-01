@@ -63,6 +63,14 @@ export default function Home() {
           <link key={locale} href={`/${locale}`} hrefLang={locale} rel="alternate" />
         ))}
       </Head>
+      {router.query.error === "invalid-game" && (
+        <div
+          className="fixed z-999 bg-white dark-red ph3 pv2 br2 shadow-2 f6 fw5 tc"
+          style={{ top: "1rem", left: "50%", transform: "translateX(-50%)", maxWidth: "90vw" }}
+        >
+          {t("invalidGameError", "This game couldn't be loaded — its data is corrupted or unreadable.")}
+        </div>
+      )}
       <div className="absolute top-1 right-2">
         <LanguageSelector outlined />
       </div>
