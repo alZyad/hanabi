@@ -547,15 +547,18 @@ export default React.memo(PlayerGame);
 const AnimatedCard = posedDiv({
   enter: {
     opacity: 1,
+    scale: 1,
+    y: 0,
     transition: {
-      delay: 200,
-      duration: 100,
+      duration: 180,
     },
   },
   exit: {
-    opacity: 0.1,
+    opacity: 0,
+    scale: 0.85,
+    y: 8,
     transition: {
-      duration: 100,
+      duration: 140,
     },
   },
 });
