@@ -1,0 +1,21 @@
+src/components/turn.tsx
+  s_a73cb7a9f2d7c7::t_b553021732591d 171
+  s_a73cb7a9f2d7c7::t_029f38595ac8fd 85
+  s_a73cb7a9f2d7c7::t_58f0ca3d5e52dd 95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "2b2e7bee1b8dd33b1009c6a716194784ce6f0cd2",
+  "prompts": {},
+  "sessions": {
+    "s_a73cb7a9f2d7c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0bd2f61-27bf-44fd-9f79-b99b6c0c8623",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
