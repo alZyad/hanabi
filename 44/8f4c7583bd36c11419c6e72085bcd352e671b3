@@ -6,6 +6,7 @@ src/pages/new-game.tsx
   s_e0a7a8d330ff29::t_8a5ecdf63ffa3a 71-72
   s_0269aeee716591::t_bc9d54be1aa441 78
   s_0269aeee716591::t_dae0afbc4d919c 10
+  s_a69de368d3f754::t_d97f6707fd0842 91
 src/components/game.tsx
   s_e0a7a8d330ff29::t_1028a5b3054194 488
   s_0269aeee716591::t_61c7e407bb03bb 36
@@ -17,6 +18,7 @@ src/components/game.tsx
   s_e0a7a8d330ff29::t_b8dfb69a56ffd8 514
   s_0269aeee716591::t_aef996eab9bafb 40,44
   s_e0a7a8d330ff29::t_8a4219b0a62e60 55
+  s_a69de368d3f754::t_b60802d7ae651c 103,110,179,225,287,422,431
 src/components/lobbyView.tsx
   s_0269aeee716591::t_87daf151adbd7a 203-207
   s_e0a7a8d330ff29::t_6485ba3e02fc24 44
@@ -28,6 +30,7 @@ src/components/lobbyView.tsx
   s_0269aeee716591::t_e99b14cf22478d 166-172
   s_e0a7a8d330ff29::t_f3e5cefbc09247 35
   s_e0a7a8d330ff29::t_2be95610866708 43
+  s_a69de368d3f754::t_7fe3e48f9593fd 1-5,28-31,33-34,37-42,46-47,78-81,93-94,96,98-101,165,265-267
 src/components/playedCards.tsx
   s_0269aeee716591::t_0e178cbab3be76 7,11,15,19
   s_e0a7a8d330ff29::t_3991cae833c8e6 33
@@ -36,6 +39,7 @@ src/pages/[gameId]/summary.tsx
   s_0269aeee716591::t_3e806538460ecc 18
   s_e0a7a8d330ff29::t_d3c51f47da5d10 128
   s_0269aeee716591::t_4d6857ffb5a797 116-119
+  s_a69de368d3f754::t_b60802d7ae651c 226-227
 src/lib/actions.ts
   s_0269aeee716591::t_7f88dfa1891096 371
   s_0269aeee716591::t_b764f67c7ff09c 32-33
@@ -85,6 +89,12 @@ src/lib/firebase.ts
   s_e0a7a8d330ff29::t_3a1b32e7288a00 95-98
   s_e0a7a8d330ff29::t_db5caa746a1082 84
   s_e0a7a8d330ff29::t_e68584c9ab24f0 123
+src/components/rollbackArea.tsx
+  s_a69de368d3f754::t_b60802d7ae651c 45
+src/components/reviewComments.tsx
+  s_a69de368d3f754::t_b60802d7ae651c 115
+src/pages/learn.tsx
+  s_a69de368d3f754::t_b60802d7ae651c 363
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -113,6 +123,14 @@ src/lib/firebase.ts
         "tool": "claude",
         "id": "agent-aa272f19fca92df8a",
         "model": "unknown"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
       },
       "human_author": "alZyad <zyad.alalgui@theodo.com>"
     },
