@@ -54,8 +54,7 @@ export default function Play(props: Props) {
     // eslint-disable-next-line react/jsx-no-undef
     <TutorialProvider>
       <SessionContext.Provider value={session}>
-        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-        <ReplayContext.Provider value={{ cursor: replayCursor!, moveCursor: setReplayCursor }}>
+        <ReplayContext.Provider value={{ cursor: replayCursor, moveCursor: setReplayCursor }}>
           <GameIndex key={initialGame.id} game={initialGame} host={host}></GameIndex>
         </ReplayContext.Provider>
       </SessionContext.Provider>

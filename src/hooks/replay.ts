@@ -1,13 +1,17 @@
 import React, { useContext } from "react";
 
-interface ReplayProps {
-  cursor: number;
+export interface ReplayProps {
+  cursor: number | null;
   moveCursor: (to: number | null) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-export const ReplayContext = React.createContext<ReplayProps>(null!);
+const defaultReplay: ReplayProps = {
+  cursor: null,
+  moveCursor: () => undefined,
+};
 
-export function useReplay() {
-  return useContext<ReplayProps>(ReplayContext);
+export const ReplayContext = React.createContext<ReplayProps>(defaultReplay);
+
+export function useReplay(): ReplayProps {
+  return useContext(ReplayContext);
 }

@@ -51,7 +51,13 @@ export default function ReplayViewer(props: Props) {
   const game = useGame();
   const selfPlayer: IPlayer | undefined = useSelfPlayer(game);
   const replay = useReplay();
-  const comment = findComment(game, selfPlayer?.id, replay.cursor);
+
+  if (replay.cursor === null) {
+    return null;
+  }
+
+  const cursor = replay.cursor;
+  const comment = findComment(game, selfPlayer?.id, cursor);
   const maxTurns = game.originalGame?.turnsHistory.length ?? 0;
 
   const marks: Record<string | number, React.ReactNode | MarkObj> = {};
@@ -77,10 +83,10 @@ export default function ReplayViewer(props: Props) {
         <Button
           void
           className="ml3"
-          disabled={replay.cursor === 0}
+          disabled={cursor === 0}
           size={ButtonSize.TINY}
           text="<"
-          onClick={() => onReplayCursorChange(replay.cursor - 1)}
+          onClick={() => onReplayCursorChange(cursor - 1)}
         />
         <Slider
           className="ml3 nt1"
@@ -94,16 +100,16 @@ export default function ReplayViewer(props: Props) {
             track: SliderStyle.TRACK,
             handle: SliderStyle.HANDLE,
           }}
-          value={replay.cursor}
+          value={cursor}
           onChange={onReplayCursorChange}
         />
         <Button
           void
           className="ml3"
-          disabled={replay.cursor === maxTurns}
+          disabled={cursor === maxTurns}
           size={ButtonSize.TINY}
           text=">"
-          onClick={() => onReplayCursorChange(replay.cursor + 1)}
+          onClick={() => onReplayCursorChange(cursor + 1)}
         />
         <Button void className="ml3 pointer:hover" size={ButtonSize.TINY} text="&times;" onClick={onStopReplay} />
       </div>

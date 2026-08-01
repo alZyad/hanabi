@@ -393,7 +393,7 @@ export function Game(props: Props) {
         onReplay();
       }
       // left arrow: slide the cursor to the left, if possible
-      else if (event.key === "ArrowLeft" && cursor !== 0) {
+      else if (event.key === "ArrowLeft" && cursor !== null && cursor !== 0) {
         onReplayCursorChange(cursor - 1);
       }
       // right arrow: slide the cursor to the right, if possible
