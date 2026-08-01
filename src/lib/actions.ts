@@ -14,6 +14,7 @@ import IGameState, {
   IHand,
   IHintAction,
   IHintLevel,
+  ILobbyState,
   INumber,
   IPlayer,
   isCardAction,
@@ -27,6 +28,10 @@ export const MaxHints = 8;
 
 export const MIN_PLAYERS = 2;
 export const MAX_PLAYERS = 5;
+
+export function handSizeForPlayerCount(playersCount: number): number {
+  return startingHandSize[Math.max(MIN_PLAYERS, Math.min(playersCount, MAX_PLAYERS))];
+}
 
 export function isPlayable(card: ICard, playedCards: ICard[]): boolean {
   const isPreviousHere =
@@ -45,11 +50,17 @@ function applyHint(hand: IHand, hint: IHintAction, game: IGameState) {
     game.options.variant === GameVariant.RAINBOW || game.options.variant === GameVariant.CRITICAL_RAINBOW;
   const isSequenceVariant = game.options.variant === GameVariant.SEQUENCE;
 
-  hint.cardsIndex = [];
+  const cardsIndex: number[] = [];
+  hint.cardsIndex = cardsIndex;
 
   hand.forEach((card, index) => {
+    const cardHint = card.hint;
+    if (!cardHint) {
+      return;
+    }
+
     if (matchHint(game, hint, card)) {
-      hint.cardsIndex.push(index);
+      cardsIndex.push(index);
 
       if (!card.receivedHints) {
         card.receivedHints = [];
@@ -57,7 +68,7 @@ function applyHint(hand: IHand, hint: IHintAction, game: IGameState) {
       card.receivedHints.push({ action: hint });
 
       // positive hint on card - mark all other values as impossible (except rainbow)
-      Object.keys(card.hint[hint.type])
+      Object.keys(cardHint[hint.type])
         .filter((value) => {
           return isRainbowVariant ? value !== IColor.RAINBOW : true;
         })
@@ -68,38 +79,44 @@ function applyHint(hand: IHand, hint: IHintAction, game: IGameState) {
           return value != hint.value;
         })
         .forEach((value) => {
-          card.hint[hint.type][value] = IHintLevel.IMPOSSIBLE;
+          cardHint[hint.type][value] = IHintLevel.IMPOSSIBLE;
         });
     } else {
       // negative hint on card - mark as impossible
-      card.hint[hint.type][hint.value] = IHintLevel.IMPOSSIBLE;
+      cardHint[hint.type][hint.value] = IHintLevel.IMPOSSIBLE;
 
       if (hint.type === "number" && isSequenceVariant) {
         range(hint.value as INumber, 6).forEach((n) => {
-          card.hint.number[n] = IHintLevel.IMPOSSIBLE;
+          cardHint.number[n] = IHintLevel.IMPOSSIBLE;
         });
       }
 
       // for color hints, also mark rainbow as impossible
       if (hint.type === "color") {
-        card.hint.color.rainbow = IHintLevel.IMPOSSIBLE;
+        cardHint.color.rainbow = IHintLevel.IMPOSSIBLE;
       }
     }
 
     // if there's only one possible color, make it sure
-    const onlyPossibleColors = Object.keys(card.hint.color).filter(
-      (color) => card.hint.color[color] === IHintLevel.POSSIBLE
+    const onlyPossibleColors = Object.keys(cardHint.color).filter(
+      (color) => cardHint.color[color] === IHintLevel.POSSIBLE
     );
     if (onlyPossibleColors.length === 1) {
-      card.hint.color[onlyPossibleColors[0]] = IHintLevel.SURE;
+      const [onlyColor] = onlyPossibleColors;
+      if (onlyColor) {
+        cardHint.color[onlyColor] = IHintLevel.SURE;
+      }
     }
 
     // if there's only one possible number, make it sure
-    const onlyPossibleNumbers = Object.keys(card.hint.number).filter(
-      (number) => card.hint.number[number] === IHintLevel.POSSIBLE
+    const onlyPossibleNumbers = Object.keys(cardHint.number).filter(
+      (number) => cardHint.number[number] === IHintLevel.POSSIBLE
     );
     if (onlyPossibleNumbers.length === 1) {
-      card.hint.number[onlyPossibleNumbers[0]] = IHintLevel.SURE;
+      const [onlyNumber] = onlyPossibleNumbers;
+      if (onlyNumber) {
+        cardHint.number[onlyNumber] = IHintLevel.SURE;
+      }
     }
   });
 }
@@ -157,14 +174,23 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
 
   // the function should be pure
   const s = cloneDeep(state) as IGameState;
-  let playFailed: boolean = null;
+  let playFailed: boolean | null = null;
 
   const player = s.players[action.from];
 
-  let newCard = null as ICard;
+  if (!player) {
+    return state;
+  }
+
+  let newCard: ICard | null = null;
   if (isCardAction(action)) {
-    // remove the card from hand
+    if (!player.hand) {
+      return state;
+    }
     const [card] = player.hand.splice(action.cardIndex, 1);
+    if (!card) {
+      throw new Error(`Invalid action: no card at index ${action.cardIndex} for player ${action.from}`);
+    }
     action.card = card;
     /** PLAY */
     if (action.action === "play") {
@@ -193,18 +219,24 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
 
     // in both cases (play, discard) we need to remove a card from the hand and get a new one
     if (s.drawPile && s.drawPile.length) {
-      newCard = s.drawPile.pop();
-      newCard.hint = emptyHint(state.options);
-      player.hand.unshift(newCard);
+      newCard = s.drawPile.pop() ?? null;
+      if (newCard) {
+        newCard.hint = emptyHint(state.options);
+        player.hand.unshift(newCard);
+      }
     }
   }
 
   /** HINT */
   if (isHintAction(action)) {
-    s.tokens.hints -= 1;
+    const toPlayer = s.players[action.to];
 
-    const hand = s.players[action.to].hand;
-    applyHint(hand, action, s);
+    if (!toPlayer?.hand) {
+      return state;
+    }
+
+    s.tokens.hints -= 1;
+    applyHint(toPlayer.hand, action, s);
   }
 
   // there's no card in the pile (or the last card was just drawn)
@@ -218,7 +250,7 @@ export function commitAction<A extends IAction>(state: IGameState, action: A): I
   s.currentPlayer = (s.currentPlayer + 1) % s.options.playersCount;
 
   // update history
-  s.turnsHistory.push({ action: action, card: newCard, failed: playFailed });
+  s.turnsHistory.push({ action: action, card: newCard ?? undefined, failed: playFailed ?? undefined });
 
   if (isGameOver(s)) {
     s.status = IGameStatus.OVER;
@@ -239,6 +271,8 @@ export const getStateAtTurn = mem(
       newState = joinGame(newState, player);
     });
 
+    newState = dealHands(newState);
+
     state.turnsHistory.slice(0, turnIndex).forEach((turn) => {
       newState = commitAction(newState, turn.action);
     });
@@ -254,7 +288,7 @@ export const getStateAtTurn = mem(
   }
 );
 
-export function getColors(variant: GameVariant) {
+export function getColors(variant?: GameVariant) {
   switch (variant) {
     case GameVariant.MULTICOLOR:
       return [IColor.BLUE, IColor.GREEN, IColor.RED, IColor.WHITE, IColor.YELLOW, IColor.MULTICOLOR];
@@ -308,7 +342,7 @@ export function getPlayedCardsPile(state: IGameState): { [key in IColor]: INumbe
  * Doesn't take in account remaining turns
  */
 export function getMaximumPossibleScore(state: IGameState): number {
-  const playableCards = [...state.drawPile, ...flatMap(state.players, (p) => p.hand)];
+  const playableCards = [...state.drawPile, ...flatMap(state.players, (p) => p.hand ?? [])];
   const playedCardsPile = getPlayedCardsPile(state);
 
   let maxScore = getMaximumScore(state);
@@ -332,22 +366,27 @@ export function getMaximumPossibleScore(state: IGameState): number {
 
 export function joinGame(state: IGameState, player: IPlayer): IGameState {
   const game = cloneDeep(state) as IGameState;
-  const hand = game.drawPile.splice(0, startingHandSize[game.options.playersCount]);
 
   game.players = game.players || [];
-  game.players.push({ ...player, hand, index: game.players.length });
-
-  hand.forEach((card) => (card.hint = emptyHint(state.options)));
+  game.players.push({ ...player, hand: [], index: game.players.length });
 
   return game;
 }
 
-export function newGame(options: IGameOptions): IGameState {
-  assert(options.playersCount >= MIN_PLAYERS && options.playersCount <= MAX_PLAYERS);
+export function dealHands(state: IGameState): IGameState {
+  const game = cloneDeep(state) as IGameState;
 
-  // All base cards
+  game.players.forEach((player) => {
+    player.hand = game.drawPile.splice(0, startingHandSize[game.options.playersCount]);
+    player.hand.forEach((card) => (card.hint = emptyHint(game.options)));
+  });
+
+  return game;
+}
+
+export function buildDeck(options: IGameOptions) {
   const baseColors = [IColor.WHITE, IColor.BLUE, IColor.RED, IColor.GREEN, IColor.YELLOW];
-  let cards = flatMap(baseColors, (color) => [
+  const cards = flatMap(baseColors, (color) => [
     { number: 1, color },
     { number: 1, color },
     { number: 1, color },
@@ -360,7 +399,6 @@ export function newGame(options: IGameOptions): IGameState {
     { number: 5, color },
   ]);
 
-  // Add multicolor cards when applicable
   if (options.variant === GameVariant.MULTICOLOR) {
     cards.push(
       { number: 1, color: IColor.MULTICOLOR },
@@ -371,7 +409,6 @@ export function newGame(options: IGameOptions): IGameState {
     );
   }
 
-  // Add orange cards when applicable
   if (options.variant === GameVariant.ORANGE) {
     cards.push(
       { number: 1, color: IColor.ORANGE },
@@ -387,7 +424,6 @@ export function newGame(options: IGameOptions): IGameState {
     );
   }
 
-  // Add rainbow cards when applicable
   if (options.variant === GameVariant.RAINBOW) {
     cards.push(
       { number: 1, color: IColor.RAINBOW },
@@ -403,7 +439,6 @@ export function newGame(options: IGameOptions): IGameState {
     );
   }
 
-  // Add rainbow cards when applicable
   if (options.variant === GameVariant.CRITICAL_RAINBOW) {
     cards.push(
       { number: 1, color: IColor.RAINBOW },
@@ -414,12 +449,39 @@ export function newGame(options: IGameOptions): IGameState {
     );
   }
 
-  cards = cards.map((c, i) => {
-    return {
-      ...c,
-      id: i,
-    };
-  });
+  return cards;
+}
+
+export function deckSize(options: IGameOptions): number {
+  return buildDeck(options).length;
+}
+
+export function createLobby(options: IGameOptions): ILobbyState {
+  return {
+    id: options.id,
+    status: IGameStatus.LOBBY,
+    players: [],
+    options,
+    messages: [],
+    reviewComments: [],
+    createdAt: Date.now(),
+    synced: false,
+  };
+}
+
+export function joinLobby(lobby: ILobbyState, player: IPlayer): ILobbyState {
+  const nextLobby = cloneDeep(lobby) as ILobbyState;
+
+  nextLobby.players = nextLobby.players || [];
+  nextLobby.players.push({ ...player, hand: [], index: nextLobby.players.length });
+
+  return nextLobby;
+}
+
+export function newGame(options: IGameOptions): IGameState {
+  assert(options.playersCount >= MIN_PLAYERS && options.playersCount <= MAX_PLAYERS);
+
+  const cards = buildDeck(options).map((c, i) => ({ ...c, id: i }));
 
   const deck = shuffleSeed(cards, options.seed);
 
@@ -447,31 +509,33 @@ export function newGame(options: IGameOptions): IGameState {
   };
 }
 
-export function startGameFromLobby(game: IGameState, startedAt: number): IGameState {
-  let nextGame = newGame({ ...game.options, playersCount: game.players.length });
+export function startGameFromLobby(lobby: ILobbyState, startedAt: number): IGameState {
+  let nextGame = newGame({ ...lobby.options, playersCount: lobby.players.length });
 
-  game.players.forEach((player) => {
+  lobby.players.forEach((player) => {
     nextGame = joinGame(nextGame, player);
   });
 
+  nextGame = dealHands(nextGame);
+
   nextGame.status = IGameStatus.ONGOING;
   nextGame.startedAt = startedAt;
-  nextGame.createdAt = game.createdAt;
-  nextGame.messages = game.messages;
+  nextGame.createdAt = lobby.createdAt;
+  nextGame.messages = lobby.messages;
 
   return nextGame;
 }
 
-export function recreateGame(game: IGameState) {
-  let nextGame = newGame({
+export function recreateGame(game: IGameState): ILobbyState {
+  let nextLobby = createLobby({
     ...game.options,
     id: game.nextGameId || nextGameId(),
     seed: generateShuffleSeed(),
   });
 
   shuffle(game.players).forEach((player) => {
-    nextGame = joinGame(nextGame, player);
+    nextLobby = joinLobby(nextLobby, player);
   });
 
-  return nextGame;
+  return nextLobby;
 }

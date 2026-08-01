@@ -2,16 +2,17 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Game } from "~/components/game";
+import LobbyView from "~/components/lobbyView";
 import useConnectivity from "~/hooks/connectivity";
 import { GameContext } from "~/hooks/game";
 import { loadUserPreferences, UserPreferencesContext } from "~/hooks/userPreferences";
 import { subscribeToGame } from "~/lib/firebase";
-import IGameState from "~/lib/state";
+import IGameState, { ILobbyState, isLobby } from "~/lib/state";
 
-function SsrFreeGameIndex(props: { host: string; game: IGameState }) {
+function SsrFreeGameIndex(props: { host: string; game: IGameState | ILobbyState }) {
   const { game: initialGame, host } = props;
   const [userPreferences, setUserPreferences] = useState(loadUserPreferences());
-  const [game, setGame] = useState<IGameState>(initialGame);
+  const [game, setGame] = useState<IGameState | ILobbyState>(initialGame);
   const online = useConnectivity();
   const router = useRouter();
   /**
@@ -30,11 +31,15 @@ function SsrFreeGameIndex(props: { host: string; game: IGameState }) {
   }, [online, game?.id, router]);
 
   return (
-    <GameContext.Provider value={game}>
-      <UserPreferencesContext.Provider value={[userPreferences, setUserPreferences]}>
-        <Game host={host} onGameChange={setGame} />
-      </UserPreferencesContext.Provider>
-    </GameContext.Provider>
+    <UserPreferencesContext.Provider value={[userPreferences, setUserPreferences]}>
+      {isLobby(game) ? (
+        <LobbyView host={host} lobby={game} onStateChange={setGame} />
+      ) : (
+        <GameContext.Provider value={game}>
+          <Game onGameChange={setGame} />
+        </GameContext.Provider>
+      )}
+    </UserPreferencesContext.Provider>
   );
 }
 

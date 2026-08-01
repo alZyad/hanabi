@@ -15,7 +15,7 @@ import { GameContext } from "~/hooks/game";
 import { newGame } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { loadGame, subscribeToGame, updateGame } from "~/lib/firebase";
-import IGameState, { GameVariant } from "~/lib/state";
+import IGameState, { GameVariant, isLobby } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
 
 interface SectionProps {
@@ -113,6 +113,10 @@ export default function Summary(props: Props) {
         return router.push("/404");
       }
 
+      if (isLobby(game)) {
+        return;
+      }
+
       setGame(game);
     });
   }, [game.id, router]);
@@ -121,7 +125,7 @@ export default function Summary(props: Props) {
     router.push(`/${game.id}`).catch(logFailedPromise);
   }
 
-  function gameVariantToText(gameVariant: GameVariant) {
+  function gameVariantToText(gameVariant?: GameVariant) {
     switch (gameVariant) {
       case GameVariant.CLASSIC:
         return t("classicVariant");
@@ -219,8 +223,8 @@ export default function Summary(props: Props) {
                   id: nextGameId,
                 });
 
-                await updateGame(nextGame, "summary-restart-create");
-                await updateGame({ ...game, nextGameId: nextGameId }, "summary-restart-link");
+                await updateGame(nextGame);
+                await updateGame({ ...game, nextGameId: nextGameId });
 
                 logEvent("Game", "Game created");
 

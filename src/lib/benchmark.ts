@@ -1,4 +1,4 @@
-import { isGameOver, joinGame, newGame } from "./actions";
+import { dealHands, isGameOver, joinGame, newGame } from "./actions";
 import { play } from "./ai";
 import { GameMode, GameVariant, IGameHintsLevel, IGameOptions, IPlayer } from "./state";
 
@@ -30,6 +30,7 @@ for (let i = 0; i < 1000; i++) {
   for (let i = 0; i < options.playersCount; i++) {
     game = joinGame(game, { ...defaultPlayer });
   }
+  game = dealHands(game);
   while (!isGameOver(game)) {
     game = play(game);
   }

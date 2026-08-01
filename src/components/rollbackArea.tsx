@@ -42,7 +42,7 @@ export default function RollbackArea(props: Props) {
       ...getStateAtTurn(game, lastRollbackableTurn),
       reviewComments: game.reviewComments.filter((rc) => rc.afterTurnNumber <= lastRollbackableTurn),
     };
-    updateGame(gameAtTurn, "rollback").catch(logFailedPromise);
+    updateGame(gameAtTurn).catch(logFailedPromise);
   }
 
   return (
