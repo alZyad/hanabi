@@ -1,0 +1,33 @@
+src/styles/style.css
+  s_daf10a1dffea25::t_d461b0313a440c 279
+  s_daf10a1dffea25::t_f9d29a6eb7e3af 278,280-281
+src/components/card.tsx
+  s_daf10a1dffea25::t_2a1a83edf9bef1 308
+  s_daf10a1dffea25::t_a9dc0c8527aae2 291
+  s_daf10a1dffea25::t_9ef4a4af333a5a 227
+  s_daf10a1dffea25::t_5cda2bcacef31b 204
+  s_daf10a1dffea25::t_00ce3171304e46 305-306,311-312
+  s_daf10a1dffea25::t_702ad62e450f3b 307,309-310
+src/components/playerGame.tsx
+  s_daf10a1dffea25::t_702ad62e450f3b 363
+  s_daf10a1dffea25::t_1c92d8eb84f619 21
+  s_daf10a1dffea25::t_af95a3a87a797d 125
+src/components/cardNotesArea.tsx
+  s_daf10a1dffea25::t_9b245c88b0e838 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "15bd18d53a223da83b9e822f4b758c1f43b765d2",
+  "prompts": {},
+  "sessions": {
+    "s_daf10a1dffea25": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c233957a-e1e6-400a-bd94-dc3a5605165a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
