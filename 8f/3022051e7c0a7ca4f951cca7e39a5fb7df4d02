@@ -1,0 +1,29 @@
+src/lib/serialize.ts
+  s_a69de368d3f754::t_57a5d2c58aa972 1-21
+src/lib/actions.ts
+  s_a69de368d3f754::t_65e95c21720f2a 22,253-260
+src/pages/[gameId]/summary.tsx
+  s_a69de368d3f754::t_65e95c21720f2a 18,67,69
+src/pages/join-game.tsx
+  s_a69de368d3f754::t_65e95c21720f2a 9,20,22
+src/pages/[gameId]/index.tsx
+  s_a69de368d3f754::t_65e95c21720f2a 8,33,39
+src/lib/schemas/gameState.ts
+  s_a69de368d3f754::t_65e95c21720f2a 118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "8f3022051e7c0a7ca4f951cca7e39a5fb7df4d02",
+  "prompts": {},
+  "sessions": {
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
