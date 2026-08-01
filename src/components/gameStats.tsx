@@ -233,9 +233,12 @@ export default function GameStats() {
                           {displayCards && (
                             <Card
                               card={card}
+                              colorBlindMode={game.options.colorBlindMode}
                               context={ICardContext.OTHER}
+                              hintsLevel={game.options.hintsLevel}
                               size={CardSize.XSMALL}
                               style={{ margin: "1px" }}
+                              variant={game.options.variant}
                             />
                           )}
                           {!displayCards && <CardState colors={cardToStateColor(filledState, playerState, card)} />}

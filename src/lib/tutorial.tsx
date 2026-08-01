@@ -4,8 +4,10 @@ import Card, { CardSize, ICardContext } from "~/components/card";
 import Vignette from "~/components/vignette";
 import { useGame } from "~/hooks/game";
 import IGameState, {
+  GameVariant,
   IAction,
   IColor,
+  IGameHintsLevel,
   IHintType,
   INumber,
   isDiscardAction,
@@ -15,25 +17,30 @@ import IGameState, {
 
 export type TutorialAction = { action: IAction; content: ReactNode; todo: ReactNode };
 
-function card(color: IColor, number: INumber) {
+function card(color: IColor, number: INumber, colorBlindMode: boolean) {
   return (
     <Card
       card={{ color, number }}
       className="inline-flex mh1"
+      colorBlindMode={colorBlindMode}
       context={ICardContext.OTHER}
+      hintsLevel={IGameHintsLevel.NONE}
       size={CardSize.XSMALL}
       style={{ marginBottom: "-6px" }}
+      variant={GameVariant.CLASSIC}
     />
   );
 }
 
-function vignette(type: IHintType, value: string | number) {
+function vignette(type: IHintType, value: string | number, colorBlindMode: boolean) {
   return (
     <Vignette
       className="inline-flex items-center"
+      colorBlindMode={colorBlindMode}
       style={{ width: "12px", height: "12px", color: "white" }}
       type={type}
       value={value}
+      variant={GameVariant.CLASSIC}
     />
   );
 }
@@ -81,15 +88,15 @@ export function useTutorialAction() {
           At the beginning of the game, you know nothing about your hand, so discarding or playing a card could be
           dangerous. <br />
           It is safer to give a hint. Adam here has two playable cards:
-          {card(IColor.YELLOW, 1)}
+          {card(IColor.YELLOW, 1, game.options.colorBlindMode)}
           and
-          {card(IColor.BLUE, 1)}.<br />
+          {card(IColor.BLUE, 1, game.options.colorBlindMode)}.<br />
           Let's tell him by hinting him 1s.
         </Trans>
       ),
       todo: (
         <Trans i18nKey="tutorialActions.beginning.todo">
-          Tap Adam's game, select {vignette("number", 1)}, then click "Hint"
+          Tap Adam's game, select {vignette("number", 1, game.options.colorBlindMode)}, then click "Hint"
         </Trans>
       ),
     },
@@ -99,8 +106,8 @@ export function useTutorialAction() {
         <Trans i18nKey="tutorialActions.playFirstRed.content">
           Nice! Adam played his first card from the hint you gave him.
           <br />
-          Jane also gave you a {vignette("color", IColor.RED)} hint on 2 cards. It might mean those cards are
-          interesting to play right now.
+          Jane also gave you a {vignette("color", IColor.RED, game.options.colorBlindMode)} hint on 2 cards. It might
+          mean those cards are interesting to play right now.
           <br />
           <span className="txt-blue db mt1">Convention: Left-most principle</span>
           When receiving a "play" hint on multiple cards, let's assume it the leftmost one is the interesting one.
@@ -119,7 +126,7 @@ export function useTutorialAction() {
           right. If it's not the case, let's trust our team to give us a "stop" hint to prevent us from making a
           mistake.
           <br />
-          Let's be optimistic and assume that our third card is {card(IColor.RED, 2)}
+          Let's be optimistic and assume that our third card is {card(IColor.RED, 2, game.options.colorBlindMode)}
         </Trans>
       ),
       todo: t("tutorialActions.playSecondRed.todo", "Select your game, then play your third card."),
@@ -131,13 +138,14 @@ export function useTutorialAction() {
           We don't know anything about our hand and we still have 4 hints {token("hints")} left to give hints.
           <br />
           <br />
-          Adam know that his 3rd card is blue. Maybe that if you hint Jane about her {card(IColor.BLUE, 3)} and she
-          plays it, Adam will understand he can play his {card(IColor.BLUE, 4)}
+          Adam know that his 3rd card is blue. Maybe that if you hint Jane about her{" "}
+          {card(IColor.BLUE, 3, game.options.colorBlindMode)} and she plays it, Adam will understand he can play his{" "}
+          {card(IColor.BLUE, 4, game.options.colorBlindMode)}
         </Trans>
       ),
       todo: (
         <Trans i18nKey="tutorialActions.hint.todo">
-          Tap Jane's game and hint her {vignette("color", IColor.BLUE)}s
+          Tap Jane's game and hint her {vignette("color", IColor.BLUE, game.options.colorBlindMode)}s
         </Trans>
       ),
     },
@@ -147,7 +155,8 @@ export function useTutorialAction() {
         <Trans i18nKey="tutorialActions.interpret.content">
           Hmmm, looks like Adam didn't understand you. No big deal though, no mistakes have been made.
           <br />
-          We received a {vignette("color", IColor.YELLOW)} hint. Can you guess what it means?
+          We received a {vignette("color", IColor.YELLOW, game.options.colorBlindMode)} hint. Can you guess what it
+          means?
         </Trans>
       ),
       todo: t("tutorialActions.interpret.todo", "Interpret the hint you just received 😉"),
@@ -182,18 +191,24 @@ export function useTutorialAction() {
       action: { action: "hint", type: "number", value: 5, to: 1, from: 0 },
       content: (
         <Trans i18nKey="tutorialActions.save.content">
-          😅 Adam just discarded {card(IColor.GREEN, 5)}. There's only one {vignette("number", 5)} for each color in the
-          deck so it should never be discarded!
+          😅 Adam just discarded {card(IColor.GREEN, 5, game.options.colorBlindMode)}. There's only one{" "}
+          {vignette("number", 5, game.options.colorBlindMode)} for each color in the deck so it should never be
+          discarded!
           <br />
           <br />
           It might have been predicted using the <span className="txt-blue">right-most discard</span> convention. Adam
-          had info about his latest card, so he chose to discard {card(IColor.GREEN, 5)} instead.
+          had info about his latest card, so he chose to discard {card(IColor.GREEN, 5, game.options.colorBlindMode)}{" "}
+          instead.
           <br />
           <br />
           Always be mindful of what your teammates are likely to do next!
         </Trans>
       ),
-      todo: <Trans i18nKey="tutorialActions.save.todo">Tell Jane about her {card(IColor.YELLOW, 5)}</Trans>,
+      todo: (
+        <Trans i18nKey="tutorialActions.save.todo">
+          Tell Jane about her {card(IColor.YELLOW, 5, game.options.colorBlindMode)}
+        </Trans>
+      ),
     },
   ];
 

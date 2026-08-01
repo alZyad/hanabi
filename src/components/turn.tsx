@@ -9,8 +9,10 @@ import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
 import {
   GameMode,
+  GameVariant,
   ICard,
   IDiscardAction,
+  IGameHintsLevel,
   IHintAction,
   IHintLevel,
   IPlayAction,
@@ -80,11 +82,23 @@ export default function Turn(props: Props) {
   } else if (isDiscardAction(turn.action) && turn.action.card) {
     textualTurn = isViewingOwnActions ? (
       <Trans i18nKey="youDiscardedTurn">
-        You discarded your <TurnCard card={turn.action.card} context={ICardContext.DISCARDED} />
+        You discarded your
+        <TurnCard
+          card={turn.action.card}
+          colorBlindMode={game.options.colorBlindMode}
+          context={ICardContext.DISCARDED}
+          variant={game.options.variant}
+        />
       </Trans>
     ) : (
       <Trans i18nKey="somebodyDiscardedTurn">
-        {playerNameFrom} discarded their <TurnCard card={turn.action.card} context={ICardContext.DISCARDED} />
+        {playerNameFrom} discarded their
+        <TurnCard
+          card={turn.action.card}
+          colorBlindMode={game.options.colorBlindMode}
+          context={ICardContext.DISCARDED}
+          variant={game.options.variant}
+        />
       </Trans>
     );
 
@@ -101,23 +115,43 @@ export default function Turn(props: Props) {
       turn.failed ? (
         <Trans i18nKey="youPlayedStrikeTurn">
           You caused a <span className="txt-strike">strike</span> playing
-          <TurnCard card={turn.action.card} context={ICardContext.PLAYED} />
+          <TurnCard
+            card={turn.action.card}
+            colorBlindMode={game.options.colorBlindMode}
+            context={ICardContext.PLAYED}
+            variant={game.options.variant}
+          />
         </Trans>
       ) : (
         <Trans i18nKey="youPlayedTurn">
           You played
-          <TurnCard card={turn.action.card} context={ICardContext.PLAYED} />
+          <TurnCard
+            card={turn.action.card}
+            colorBlindMode={game.options.colorBlindMode}
+            context={ICardContext.PLAYED}
+            variant={game.options.variant}
+          />
         </Trans>
       )
     ) : turn.failed ? (
       <Trans i18nKey="somebodyPlayedStrikeTurn">
         {playerNameFrom} caused a <span className="txt-strike">strike</span> playing
-        <TurnCard card={turn.action.card} context={ICardContext.PLAYED} />
+        <TurnCard
+          card={turn.action.card}
+          colorBlindMode={game.options.colorBlindMode}
+          context={ICardContext.PLAYED}
+          variant={game.options.variant}
+        />
       </Trans>
     ) : (
       <Trans i18nKey="somebodyPlayedTurn">
         {playerNameFrom} played
-        <TurnCard card={turn.action.card} context={ICardContext.PLAYED} />
+        <TurnCard
+          card={turn.action.card}
+          colorBlindMode={game.options.colorBlindMode}
+          context={ICardContext.PLAYED}
+          variant={game.options.variant}
+        />
       </Trans>
     );
 
@@ -134,7 +168,8 @@ export default function Turn(props: Props) {
   if (showDrawn && turn.card) {
     drawnTurn = (
       <Trans i18nKey={isViewingOwnActions ? "whatYouDrewTurn" : "whatTheyDrewTurn"}>
-        and drew <DrawnCard card={turn.card} />
+        and drew
+        <DrawnCard card={turn.card} colorBlindMode={game.options.colorBlindMode} variant={game.options.variant} />
       </Trans>
     );
   }
@@ -160,9 +195,27 @@ export default function Turn(props: Props) {
   );
 }
 
-const TurnCard = ({ card, context }: { card: ICard; context: ICardContext }) => (
+const TurnCard = ({
+  card,
+  context,
+  variant,
+  colorBlindMode,
+}: {
+  card: ICard;
+  context: ICardContext;
+  variant: GameVariant;
+  colorBlindMode: boolean;
+}) => (
   <span className="dib">
-    <Card card={card} className="mr1" context={context} size={CardSize.XSMALL} />
+    <Card
+      card={card}
+      className="mr1"
+      colorBlindMode={colorBlindMode}
+      context={context}
+      hintsLevel={IGameHintsLevel.NONE}
+      size={CardSize.XSMALL}
+      variant={variant}
+    />
   </span>
 );
 
@@ -183,8 +236,24 @@ const CardPosition = ({ action }: { action: IDiscardAction | IPlayAction | IHint
     <Txt className="gray mr1" size={TxtSize.XSMALL} value={`${PositionMap[action.cardIndex]}`} />
   );
 
-const DrawnCard = ({ card }: { card: ICard }) => (
+const DrawnCard = ({
+  card,
+  variant,
+  colorBlindMode,
+}: {
+  card: ICard;
+  variant: GameVariant;
+  colorBlindMode: boolean;
+}) => (
   <span className="dib">
-    <Card card={card} className="mr1" context={ICardContext.DRAWN} size={CardSize.XSMALL} />
+    <Card
+      card={card}
+      className="mr1"
+      colorBlindMode={colorBlindMode}
+      context={ICardContext.DRAWN}
+      hintsLevel={IGameHintsLevel.NONE}
+      size={CardSize.XSMALL}
+      variant={variant}
+    />
   </span>
 );

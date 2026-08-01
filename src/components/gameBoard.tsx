@@ -52,10 +52,12 @@ export default function GameBoard(props: Props) {
       </div>
 
       <Board
+        colorBlindMode={game.options.colorBlindMode}
         deckCount={game.drawPile.length}
         hints={game.tokens.hints}
         playedCards={game.playedCards}
         strikes={game.tokens.strikes}
+        variant={game.options.variant}
       />
     </div>
   );

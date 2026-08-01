@@ -4,7 +4,6 @@ import ColorSymbol from "~/components/colorSymbol";
 import Hint from "~/components/hint";
 import { ReceivedHints } from "~/components/receivedHintsPopover";
 import Txt, { TxtSize } from "~/components/ui/txt";
-import { useColorBlindMode, useGame } from "~/hooks/game";
 import useLongPress from "~/hooks/longPress";
 import { getColors, numbers } from "~/lib/actions";
 import { GameVariant, ICard, IColor, IGameHintsLevel, IHintLevel } from "~/lib/state";
@@ -52,6 +51,7 @@ export enum ICardContext {
 
 interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
   color: string;
+  colorBlindMode: boolean;
   size?: CardSize;
   playable?: boolean;
   context?: ICardContext;
@@ -64,6 +64,7 @@ interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
 export function CardWrapper(props: CardWrapperProps) {
   const {
     color,
+    colorBlindMode,
     size = CardSize.MEDIUM,
     playable = false,
     context,
@@ -74,7 +75,6 @@ export function CardWrapper(props: CardWrapperProps) {
     ...attributes
   } = props;
 
-  const colorBlindMode = useColorBlindMode();
   const sizeClass = CardClasses[size];
 
   return (
@@ -102,6 +102,7 @@ export function CardWrapper(props: CardWrapperProps) {
 interface CardPartialHintProps {
   card: ICard;
   size: CardSize;
+  colorBlindMode: boolean;
 }
 
 /**
@@ -112,11 +113,9 @@ interface CardPartialHintProps {
  * - Sure (including rainbow) colors will display a rainbow background and a colored border
  */
 function CardPartialHint(props: CardPartialHintProps) {
-  const { card, size } = props;
+  const { card, size, colorBlindMode } = props;
 
-  const game = useGame();
-
-  const displayColorSymbol = game.options.colorBlindMode && card.hint?.color[card.color] === IHintLevel.SURE;
+  const displayColorSymbol = colorBlindMode && card.hint?.color[card.color] === IHintLevel.SURE;
   let className = "";
 
   // when card is sure, apply a colored background and border using the card color
@@ -159,6 +158,9 @@ function CardPartialHint(props: CardPartialHintProps) {
 interface Props {
   card: ICard;
   context: ICardContext;
+  variant: GameVariant;
+  colorBlindMode: boolean;
+  hintsLevel: IGameHintsLevel;
   hidden?: boolean;
   position?: number;
   selected?: boolean;
@@ -173,6 +175,9 @@ export default function Card(props: Props) {
   const {
     card,
     context,
+    variant,
+    colorBlindMode,
+    hintsLevel,
     onClick,
     hidden = false,
     playable = true,
@@ -183,17 +188,15 @@ export default function Card(props: Props) {
     selected = false,
   } = props;
 
-  const game = useGame();
   const [allHintsPopoverIsOpen, setAllHintsPopoverIsOpen] = useState(false);
-  const colorBlindMode = useColorBlindMode();
 
-  const colors = getColors(game?.options.variant ?? GameVariant.CLASSIC);
+  const colors = getColors(variant);
   const color = hidden ? "gray-light" : card.color;
 
   const number = hidden ? null : card.number;
 
   const displayHints =
-    game?.options.hintsLevel !== IGameHintsLevel.NONE &&
+    hintsLevel !== IGameHintsLevel.NONE &&
     [ICardContext.OTHER_PLAYER, ICardContext.TARGETED_PLAYER, ICardContext.SELF_PLAYER].includes(context);
 
   if (selected) {
@@ -215,6 +218,7 @@ export default function Card(props: Props) {
     <CardWrapper
       className={classnames({ "bw1 z-5": selected }, className)}
       color={color}
+      colorBlindMode={colorBlindMode}
       context={context}
       data-card={position !== null ? PositionMap[position] : undefined}
       playable={playable}
@@ -260,7 +264,7 @@ export default function Card(props: Props) {
       )}
 
       {/* show positive hints with a larger type */}
-      {displayHints && hidden && <CardPartialHint card={card} size={size} />}
+      {displayHints && hidden && <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />}
 
       {/* show other hints, including negative hints */}
       {displayHints && size === CardSize.LARGE && cardHint && (

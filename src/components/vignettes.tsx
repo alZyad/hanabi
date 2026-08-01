@@ -23,9 +23,11 @@ export default function Vignettes(props: Props) {
         {colors.map((color, i) => (
           <Vignette
             key={i}
+            colorBlindMode={game.options.colorBlindMode}
             selected={pendingHint.type === "color" && pendingHint.value === color}
             type="color"
             value={color}
+            variant={game.options.variant}
             onClick={onSelect}
           />
         ))}
@@ -37,9 +39,11 @@ export default function Vignettes(props: Props) {
         {hintableNumbers.map((number) => (
           <Vignette
             key={number}
+            colorBlindMode={game.options.colorBlindMode}
             selected={pendingHint.type === "number" && pendingHint.value === number}
             type="number"
             value={number}
+            variant={game.options.variant}
             onClick={onSelect}
           />
         ))}

@@ -356,8 +356,10 @@ export default function PlayerGame(props: Props) {
                           "ma1": selected,
                           "mr1 mr2-l": i < player.hand.length - 1,
                         })}
+                        colorBlindMode={game.options.colorBlindMode}
                         context={cardContext}
                         hidden={hideCards}
+                        hintsLevel={game.options.hintsLevel}
                         position={i}
                         selected={
                           selected &&
@@ -367,6 +369,7 @@ export default function PlayerGame(props: Props) {
                         style={{
                           ...(selected && { transition: "all 50ms ease-in-out" }),
                         }}
+                        variant={game.options.variant}
                         onClick={(e) => {
                           e.stopPropagation();
                           onSelectPlayer(player, i);
