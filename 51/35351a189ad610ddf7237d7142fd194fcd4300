@@ -1,0 +1,43 @@
+src/hooks/userPreferences.ts
+  s_a69de368d3f754::t_bbf14023aa5484 21-29
+src/components/playersBoard.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 73
+src/components/reviewComments.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 99,103
+src/components/receivedHintsPopover.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 184
+src/pages/_app.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 17
+src/components/cardNotesOnboarding.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 30
+src/components/playerGame.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 221,267,295
+tsconfig.json
+  s_a69de368d3f754::t_bbf14023aa5484 13
+src/components/homeButton.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 25-33
+src/pages/learn.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 36
+src/components/game.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 74
+src/components/loadingScreen.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 29
+src/components/tutorial.tsx
+  s_a69de368d3f754::t_bbf14023aa5484 167,212,214
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "5135351a189ad610ddf7237d7142fd194fcd4300",
+  "prompts": {},
+  "sessions": {
+    "s_a69de368d3f754": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7269fb1c-ca6e-4a8f-a8aa-abdf36fd0cbf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
