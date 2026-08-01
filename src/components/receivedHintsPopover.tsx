@@ -133,7 +133,7 @@ const CornerMark = forwardRef(
       <div
         ref={ref}
         className={"absolute right-0 br--left top-0 br--bottom br-100 bg-hints"}
-        style={{ width: "20%", height: "20%" }}
+        style={{ width: "20%", aspectRatio: "1" }}
         onMouseEnter={() => {
           props.onActivationChange(true);
         }}

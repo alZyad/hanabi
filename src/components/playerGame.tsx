@@ -346,55 +346,61 @@ export default function PlayerGame(props: Props) {
                 />
               )}
 
-              <PoseGroup>
-                {player.hand.map((card, i) => (
-                  <AnimatedCard key={card.id}>
-                    <div className="flex flex-column items-center">
-                      <Card
-                        card={card}
-                        className={classnames({
-                          "ma1": selected,
-                          "mr1 mr2-l": i < player.hand.length - 1,
-                        })}
-                        colorBlindMode={game.options.colorBlindMode}
-                        context={cardContext}
-                        hidden={hideCards}
-                        hintsLevel={game.options.hintsLevel}
-                        position={i}
-                        selected={
-                          selected &&
-                          (player === selfPlayer ? selectedCard === i : isCardHintable(game, pendingHint, card))
-                        }
-                        size={selected ? CardSize.LARGE : CardSize.MEDIUM}
-                        style={{
-                          ...(selected && { transition: "all 50ms ease-in-out" }),
-                        }}
-                        variant={game.options.variant}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onSelectPlayer(player, i);
-                          if (player === selfPlayer) {
-                            selectCard(i);
+              <div
+                className={classnames(
+                  "flex items-center",
+                  selected ? "justify-center flex-grow-1 hand-focused" : "justify-end"
+                )}
+              >
+                <PoseGroup>
+                  {player.hand.map((card, i) => (
+                    <AnimatedCard key={card.id}>
+                      <div className="flex flex-column items-center">
+                        <Card
+                          card={card}
+                          className={classnames({
+                            "mr1 mr2-l": !selected && i < player.hand.length - 1,
+                          })}
+                          colorBlindMode={game.options.colorBlindMode}
+                          context={cardContext}
+                          hidden={hideCards}
+                          hintsLevel={game.options.hintsLevel}
+                          position={i}
+                          selected={
+                            selected &&
+                            (player === selfPlayer ? selectedCard === i : isCardHintable(game, pendingHint, card))
                           }
-                        }}
-                      />
-                      {showCardNotes && (
-                        <CardNotesOnboarding
-                          body={t("cardNotesOnboardingBody")}
-                          isOpen={onboardingCardIndex === i}
-                          positions={["bottom", "right"]}
-                          title={t("cardNotesOnboardingTitle")}
-                          onDismiss={onboarding.dismiss}
-                        >
-                          <div>
-                            <CardNotesArea card={card} />
-                          </div>
-                        </CardNotesOnboarding>
-                      )}
-                    </div>
-                  </AnimatedCard>
-                ))}
-              </PoseGroup>
+                          size={selected ? CardSize.LARGE : CardSize.MEDIUM}
+                          style={{
+                            ...(selected && { transition: "all 50ms ease-in-out" }),
+                          }}
+                          variant={game.options.variant}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectPlayer(player, i);
+                            if (player === selfPlayer) {
+                              selectCard(i);
+                            }
+                          }}
+                        />
+                        {showCardNotes && (
+                          <CardNotesOnboarding
+                            body={t("cardNotesOnboardingBody")}
+                            isOpen={onboardingCardIndex === i}
+                            positions={["bottom", "right"]}
+                            title={t("cardNotesOnboardingTitle")}
+                            onDismiss={onboarding.dismiss}
+                          >
+                            <div>
+                              <CardNotesArea card={card} />
+                            </div>
+                          </CardNotesOnboarding>
+                        )}
+                      </div>
+                    </AnimatedCard>
+                  ))}
+                </PoseGroup>
+              </div>
             </div>
           )}
         </HandStrip>

@@ -42,7 +42,7 @@ function Chip(props: ChipProps) {
       })}
       onClick={() => toggleable && card.id !== undefined && toggle(card.id, kind, value)}
     >
-      {kind === "number" && <Txt className="white b" size={TxtSize.XSMALL} value={value} />}
+      {kind === "number" && <Txt className="white b" size={TxtSize.XXSMALL} value={value} />}
       {kind === "color" && colorBlindMode && <ColorSymbol color={value as IColor} />}
       {dimmed && <div className="absolute w-100 o-80 rotate-135 bg-white" style={{ height: "1px" }} />}
     </div>
@@ -56,8 +56,8 @@ export default function CardNotesArea(props: Props) {
   const colors = getColors(game.options.variant);
 
   return (
-    <div className="w3 w3.5-l flex flex-column items-center bg-black-30 br1 pa1 mt1 br1">
-      <div className="ph-row ph-row-colors">
+    <div className="w-card-large flex flex-column items-center bg-black-30 br1 pv1 ph0.5 mt1 br1">
+      <div className="ph-row">
         {colors.map((color) => (
           <Chip key={color} card={card} kind="color" value={color} />
         ))}
@@ -70,17 +70,12 @@ export default function CardNotesArea(props: Props) {
       <style global jsx>{`
         .ph-row {
           display: flex;
-          width: 100%;
-        }
-        .ph-row-colors {
           flex-wrap: wrap;
           justify-content: center;
-        }
-        .ph-row-colors .ph-chip {
-          flex: 0 0 calc(27%);
+          width: 100%;
         }
         .ph-chip {
-          flex: 1 1 0;
+          flex: 0 0 28%;
           aspect-ratio: 1 / 1;
           margin: 1px;
         }

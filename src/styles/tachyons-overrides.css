@@ -72,14 +72,6 @@
     width: 4rem;
   }
 
-  .h3\.5-l {
-    height: 5rem;
-  }
-
-  .w3\.5-l {
-    width: 5rem;
-  }
-
   .h4\.5-l {
     height: 12rem;
   }
@@ -151,3 +143,48 @@
 }
 
 .bw1\.5 { border-width: 0.15rem; }
+
+.ph0\.5 {
+  padding-left: 0.125rem;
+  padding-right: 0.125rem;
+}
+
+.hand-focused {
+  gap: 0.5rem;
+}
+
+.card-large,
+.w-card-large {
+  width: 3rem;
+}
+
+.card-large {
+  height: 5rem;
+}
+
+.fh-value-area {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 2.5rem;
+}
+
+@media screen and (min-width: 60em) {
+  .card-large,
+  .w-card-large {
+    width: 3.5rem;
+  }
+
+  .card-large {
+    height: 6rem;
+  }
+
+  .hand-focused {
+    gap: 0.75rem;
+  }
+
+  .fh-value-area {
+    padding-bottom: 2.8rem;
+  }
+}

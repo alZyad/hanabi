@@ -1,12 +1,11 @@
 import classnames from "classnames";
 import React, { CSSProperties, HTMLAttributes, MouseEventHandler, ReactNode, useState } from "react";
 import ColorSymbol from "~/components/colorSymbol";
-import Hint from "~/components/hint";
 import { ReceivedHints } from "~/components/receivedHintsPopover";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLongPress from "~/hooks/longPress";
 import { getColors, numbers } from "~/lib/actions";
-import { GameVariant, ICard, IColor, IGameHintsLevel, IHintLevel } from "~/lib/state";
+import { GameVariant, ICard, IColor, IGameHintsLevel, IHintLevel, IHintType, INumber } from "~/lib/state";
 
 export enum CardSize {
   XSMALL = "xsmall",
@@ -20,7 +19,7 @@ const CardClasses = {
   [CardSize.XSMALL]: "h1.25 w1.25 h2-l w2-l",
   [CardSize.SMALL]: "h1.5 w1.5",
   [CardSize.MEDIUM]: "h2 w2 h2.5-l w2.5-l",
-  [CardSize.LARGE]: "h3 w3 h3.5-l w3.5-l",
+  [CardSize.LARGE]: "card-large",
   [CardSize.FLEX]: "flex-square",
 };
 
@@ -144,15 +143,53 @@ function CardPartialHint(props: CardPartialHintProps) {
   return (
     <>
       <div
-        className={classnames("top-0 br-100 w-50 h-50 flex justify-center items-center", className, {
+        className={classnames("top-0 br-100 w-50 flex justify-center items-center", className, {
           [`txt-white-dark`]: card.hint?.color[card.color] !== IHintLevel.SURE,
         })}
+        style={{ aspectRatio: "1" }}
       >
         {card.hint?.number[card.number] === IHintLevel.SURE && <Txt className="z-1" value={card.number} />}
       </div>
       {displayColorSymbol && <ColorSymbol color={card.color} />}
     </>
   );
+}
+
+interface FocusHintChipProps {
+  kind: IHintType;
+  value: IColor | INumber;
+  level: IHintLevel;
+  colorBlindMode: boolean;
+}
+
+function FocusHintChip(props: FocusHintChipProps) {
+  const { kind, value, level, colorBlindMode } = props;
+
+  const impossible = level === IHintLevel.IMPOSSIBLE;
+  const sure = level === IHintLevel.SURE;
+  const displaySymbol = colorBlindMode && kind === "color";
+
+  return (
+    <div
+      className={classnames("fh-chip relative flex items-center justify-center outline-main-dark white", {
+        "fh-chip--color": kind === "color",
+        "fh-chip--number": kind === "number",
+        "o-30": impossible,
+        [`bg-${value}`]: kind === "color" && (!displaySymbol || sure),
+        "bg-white-20": kind === "number",
+        "ba b--white": sure,
+        "ba b--white-40": kind === "number" && !sure,
+      })}
+    >
+      {kind === "number" && <Txt className="b" size={TxtSize.XXSMALL} value={value} />}
+      {displaySymbol && <ColorSymbol color={value as IColor} />}
+      {impossible && <div className="absolute w-100 o-80 rotate-135 bg-white" style={{ height: "1px" }} />}
+    </div>
+  );
+}
+
+function FocusValueArea(props: { children: ReactNode }) {
+  return <div className="fh-value-area absolute flex items-center justify-center">{props.children}</div>;
 }
 
 interface Props {
@@ -194,6 +231,8 @@ export default function Card(props: Props) {
   const color = hidden ? "gray-light" : card.color;
 
   const number = hidden ? null : card.number;
+
+  const valueClassName = classnames("b", { [`txt-${color}-dark`]: !colorBlindMode, "main-dark": colorBlindMode });
 
   const displayHints =
     hintsLevel !== IGameHintsLevel.NONE &&
@@ -237,15 +276,13 @@ export default function Card(props: Props) {
       {...longPressProps}
     >
       {/* Card value */}
-      <Txt
-        className={classnames(`b absolute`, {
-          "bottom-1 mb3": displayHints && size === CardSize.LARGE,
-          [`txt-${color}-dark`]: !colorBlindMode,
-          "main-dark": colorBlindMode,
-        })}
-        size={CardTextSizes[size]}
-        value={number}
-      />
+      {displayHints && size === CardSize.LARGE ? (
+        <FocusValueArea>
+          <Txt className={valueClassName} size={CardTextSizes[size]} value={number} />
+        </FocusValueArea>
+      ) : (
+        <Txt className={classnames(valueClassName, "absolute")} size={CardTextSizes[size]} value={number} />
+      )}
 
       {/* Card position */}
       {position !== null && size === CardSize.LARGE && (
@@ -264,24 +301,81 @@ export default function Card(props: Props) {
       )}
 
       {/* show positive hints with a larger type */}
-      {displayHints && hidden && <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />}
+      {displayHints &&
+        hidden &&
+        (size === CardSize.LARGE ? (
+          <FocusValueArea>
+            <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />
+          </FocusValueArea>
+        ) : (
+          <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />
+        ))}
 
       {/* show other hints, including negative hints */}
       {displayHints && size === CardSize.LARGE && cardHint && (
-        <div className="flex absolute w-100 right-0 bottom-0 pv1 flex-l items-center flex-column bg-black-50">
-          <div className="flex justify-around w-100">
+        <div className="fh-panel absolute left-0 right-0 bottom-0 flex flex-column items-center bg-black-60 br1">
+          <div className="fh-row">
             {colors.map((color) => (
-              <Hint key={color} hint={cardHint.color[color]} type="color" value={color} />
+              <div key={color} className="fh-cell">
+                <FocusHintChip
+                  colorBlindMode={colorBlindMode}
+                  kind="color"
+                  level={cardHint.color[color]}
+                  value={color}
+                />
+              </div>
             ))}
           </div>
-          <div
-            className="flex justify-around white mt1 mt2-l"
-            style={{ width: `${(numbers.length / colors.length) * 100}%` }}
-          >
+          <div className="fh-row">
             {numbers.map((number) => (
-              <Hint key={number} hint={cardHint.number[number]} type="number" value={number} />
+              <div key={number} className="fh-cell fh-cell--number">
+                <FocusHintChip
+                  colorBlindMode={colorBlindMode}
+                  kind="number"
+                  level={cardHint.number[number]}
+                  value={number}
+                />
+              </div>
             ))}
           </div>
+          <style global jsx>{`
+            .fh-panel {
+              padding: 0.15rem;
+              row-gap: 0.1rem;
+            }
+            .fh-row {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              width: 100%;
+            }
+            .fh-cell {
+              flex: 0 0 30%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 1px 0;
+            }
+            .fh-cell--number {
+              flex-basis: 18%;
+            }
+            .fh-chip--color {
+              width: 0.65rem;
+              height: 0.65rem;
+              border-radius: 100%;
+            }
+            .fh-chip--number {
+              width: 90%;
+              aspect-ratio: 1 / 1;
+              border-radius: 100%;
+            }
+            @media screen and (min-width: 60em) {
+              .fh-chip--color {
+                width: 0.75rem;
+                height: 0.75rem;
+              }
+            }
+          `}</style>
         </div>
       )}
     </CardWrapper>
