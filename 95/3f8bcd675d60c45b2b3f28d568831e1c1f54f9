@@ -1,0 +1,44 @@
+src/components/userPreferencesDialog.tsx
+  s_3fbb7c6db7793f::t_674393df2a6f84 32-35,67-70
+  s_3fbb7c6db7793f::t_ec7bbdf161574a 71
+src/components/cardNotesArea.tsx
+  s_3fbb7c6db7793f::t_674393df2a6f84 3,59-60,63,74
+src/components/chopMoveButton.tsx
+  s_3fbb7c6db7793f::t_674393df2a6f84 1-24
+src/lib/schemas/storage.ts
+  s_3fbb7c6db7793f::t_674393df2a6f84 26,39
+src/styles/style.css
+  s_3fbb7c6db7793f::t_674393df2a6f84 278-281
+src/hooks/cardNotes.ts
+  s_3fbb7c6db7793f::t_674393df2a6f84 11,60-73,87-108,113
+src/hooks/userPreferences.ts
+  s_3fbb7c6db7793f::t_674393df2a6f84 10,20
+src/components/playerGame.tsx
+  s_3fbb7c6db7793f::t_674393df2a6f84 11,22,45-59,145,147-148,192,402,439-445
+  s_3fbb7c6db7793f::t_11e8e145a3d834 446
+src/components/card.tsx
+  s_3fbb7c6db7793f::t_674393df2a6f84 239,262,324,338-339
+  s_3fbb7c6db7793f::t_7a35fed70cbfe7 340
+src/locales/en.ts
+  s_3fbb7c6db7793f::t_674393df2a6f84 4
+src/styles/tachyons-overrides.css
+  s_3fbb7c6db7793f::t_674393df2a6f84 222-247,249-256,275-277
+  s_3fbb7c6db7793f::t_d68c4df36f91bf 248
+  s_3fbb7c6db7793f::t_4c14efbf6c6b8d 278
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "953f8bcd675d60c45b2b3f28d568831e1c1f54f9",
+  "prompts": {},
+  "sessions": {
+    "s_3fbb7c6db7793f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0d39eb7-be69-4f6c-bf2e-9ab67184220e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
