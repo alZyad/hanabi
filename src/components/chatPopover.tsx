@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Button, { ButtonSize } from "~/components/ui/button";
 import { useGame, useSelfPlayer } from "~/hooks/game";
@@ -8,17 +8,18 @@ import { logFailedPromise } from "~/lib/errors";
 
 interface Props {
   onClose: () => void;
+  message: string;
+  onMessageChange: (message: string) => void;
   style: CSSProperties;
 }
 
 export default function ChatPopover(props: Props) {
-  const { onClose } = props;
+  const { onClose, message, onMessageChange } = props;
 
   const { t } = useTranslation();
   const game = useGame();
   const selfPlayer = useSelfPlayer(game);
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     messageRef.current?.focus();
@@ -26,6 +27,7 @@ export default function ChatPopover(props: Props) {
 
   function onSubmit() {
     if (selfPlayer?.index === undefined) return;
+    if (!message.trim()) return;
 
     addMessage(game.id, {
       id: uniqueId(),
@@ -35,7 +37,7 @@ export default function ChatPopover(props: Props) {
       sentAt: Date.now(),
     }).catch(logFailedPromise);
 
-    setMessage("");
+    onMessageChange("");
     onClose();
   }
 
@@ -55,10 +57,11 @@ export default function ChatPopover(props: Props) {
         rows={4}
         value={message}
         onChange={(e) => {
-          setMessage(e.target.value);
+          onMessageChange(e.target.value);
         }}
         onKeyDown={(e) => {
-          if (e.keyCode === 13 /* enter */ && e.metaKey) {
+          if (e.keyCode === 13 /* enter */ && !e.shiftKey) {
+            e.preventDefault();
             onSubmit();
           }
         }}

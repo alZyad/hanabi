@@ -1,8 +1,12 @@
 import classnames from "classnames";
 import React, { HTMLAttributes, ReactNode } from "react";
 
-export function HandStrip(props: { children: ReactNode }) {
-  return <div className="flex justify-end self-end flex-grow-1 dib">{props.children}</div>;
+export function HandStrip(props: { children: ReactNode; className?: string }) {
+  return (
+    <div className={classnames("flex justify-end flex-grow-1 dib", props.className ?? "self-end")}>
+      {props.children}
+    </div>
+  );
 }
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
