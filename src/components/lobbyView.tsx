@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Board from "~/components/board";
 import FaceDownHand from "~/components/faceDownHand";
 import HomeButton from "~/components/homeButton";
+import MenuArea from "~/components/menuArea";
 import PlayerRow, { HandStrip } from "~/components/playerRow";
 import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
@@ -80,6 +81,7 @@ export default function LobbyView(props: Props) {
   const [name, setName] = useState("");
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const selfPlayer =
     lobby.options.gameMode === GameMode.NETWORK
@@ -163,10 +165,12 @@ export default function LobbyView(props: Props) {
       )}
       <Meta players={lobby.players} />
 
+      {showMenu && <MenuArea onCloseArea={() => setShowMenu(false)} />}
+
       <div className="bg-black-50 pa2 pv2-l ph6.5-m">
         <div className="flex justify-between items-center mb2">
           <Txt uppercase size={TxtSize.MEDIUM} value={t("lobby")} />
-          <HomeButton void />
+          <HomeButton void onClick={() => setShowMenu(true)} />
         </div>
         <Board
           colorBlindMode={colorBlindMode}
