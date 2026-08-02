@@ -1,0 +1,87 @@
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_396fb1a3ea87ab 430-435
+  s_23093bdf7f201c::t_45d25fff3d6cb2 23
+  s_23093bdf7f201c::t_6284dbb684d331 397
+  s_23093bdf7f201c::t_d4228190860926 146
+  s_23093bdf7f201c::t_6f28312260e2e4 11
+  s_23093bdf7f201c::t_c7243b883e1280 148
+  s_23093bdf7f201c::t_b9ed448e82ca65 45-47,51-59
+  s_23093bdf7f201c::t_ae01ecb256612e 439-446
+  s_23093bdf7f201c::t_e3ec148a6266b1 147
+  s_23093bdf7f201c::t_0fcca9a539b992 48-50
+  s_23093bdf7f201c::t_d25d013d8148fc 192
+  s_23093bdf7f201c::t_66631b81649105 145
+  s_23093bdf7f201c::t_150a684c73c48f 402
+src/styles/tachyons-overrides.css
+  s_23093bdf7f201c::t_6cf218c55f66eb 270-274
+  s_23093bdf7f201c::t_bb93a04c08c2b4 209-242
+  s_23093bdf7f201c::t_b9d522d020f9de 173-208
+  s_23093bdf7f201c::t_c69c9a7df61482 243,253
+  s_23093bdf7f201c::t_19516d33998734 277
+  s_23093bdf7f201c::t_647e6c55b05b69 244-252,255-256
+  s_23093bdf7f201c::t_b7d36bd347e3d7 275,278
+  s_23093bdf7f201c::t_acea1f6584424e 276
+  s_23093bdf7f201c::t_32cb07f84ce617 254
+src/components/cardNotesArea.tsx
+  s_23093bdf7f201c::t_04a2ebf2d202cc 71
+  s_23093bdf7f201c::t_f394fca1ef7d0d 55-56,58-59,66
+  s_23093bdf7f201c::t_a64abfabcf950d 8,12-14,21-22,26,28
+  s_23093bdf7f201c::t_26e888af8995d4 78-79
+  s_23093bdf7f201c::t_05e192f87d59f5 74
+  s_23093bdf7f201c::t_57affae40fb7a4 3
+src/components/playedCards.tsx
+  s_23093bdf7f201c::t_7b083dd66193ad 2,13,15
+  s_23093bdf7f201c::t_71d12e5c219e45 5
+  s_23093bdf7f201c::t_4a49f65ceb61bb 26-27
+  s_23093bdf7f201c::t_391a9e76fc8072 16
+  s_3fbb7c6db7793f::t_452d4f897e5a15 9-12,14
+  s_3fbb7c6db7793f::t_d4e88b3019432f 65
+src/hooks/stableCards.ts
+  s_23093bdf7f201c::t_84bdf5d2bc55c4 1-16
+src/components/card.tsx
+  s_23093bdf7f201c::t_c30ead4ae99e47 195-229
+  s_23093bdf7f201c::t_f0afd4e1dccf47 8
+  s_23093bdf7f201c::t_422b80c0134edd 354
+  s_23093bdf7f201c::t_e861942333c6f4 338-339
+  s_23093bdf7f201c::t_6cce90ecf79681 239
+  s_23093bdf7f201c::t_aead6ccefd8947 262
+src/components/discardArea.tsx
+  s_23093bdf7f201c::t_6cebe25be0f9ac 47,49
+  s_23093bdf7f201c::t_b56a4c927ad81f 8
+src/lib/schemas/storage.ts
+  s_23093bdf7f201c::t_7f2aad8f454049 26
+src/components/userPreferencesDialog.tsx
+  s_23093bdf7f201c::t_d112773ffdd8b6 67-71
+  s_23093bdf7f201c::t_78ab55a9408745 32-35
+src/hooks/userPreferences.ts
+  s_23093bdf7f201c::t_c4fdd1c0ed7634 10
+  s_23093bdf7f201c::t_80782344315571 20
+src/components/chopMoveButton.tsx
+  s_23093bdf7f201c::t_11fb369062e334 1-24
+src/locales/en.ts
+  s_23093bdf7f201c::t_ed805ea75802a7 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "640c085540fa556d2c04f2512ed8235a93e408a4",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_3fbb7c6db7793f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0d39eb7-be69-4f6c-bf2e-9ab67184220e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
