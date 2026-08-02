@@ -23,7 +23,7 @@ export const userPreferencesSchema = z
     showFireworksAtGameEnd: z.boolean().optional().catch(undefined),
     codedHintMarkers: z.boolean().optional().catch(undefined),
     disableCardNotes: z.boolean().optional().catch(undefined),
-    disableChopIndicator: z.boolean().optional().catch(undefined),
+    showChopIndicator: z.boolean().optional().catch(undefined),
     colorBlindMode: z.boolean().optional().catch(undefined),
   })
   .catch({});

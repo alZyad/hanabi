@@ -1,5 +1,6 @@
 export const sk = {
   disableCardNotes: "Vypnúť osobné poznámky ku kartám",
+  showChopIndicator: "Zobraziť indikátor pozície chop",
   cardNotesOnboardingTitle: "Poznámky ku kartám",
   cardNotesOnboardingBody: "Použi ich na zaznamenávanie implicitných nápovied, ktoré si odvodil.\nVidíš ich iba ty.",
   hanab: "Hanab",

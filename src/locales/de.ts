@@ -1,5 +1,6 @@
 export const de = {
   disableCardNotes: "Persönliche Kartennotizen deaktivieren",
+  showChopIndicator: "Chop-Positionsanzeige einblenden",
   cardNotesOnboardingTitle: "Kartennotizen",
   cardNotesOnboardingBody:
     "Nutze sie, um implizite Hinweise festzuhalten, die du abgeleitet hast.\nNur du kannst sie sehen.",

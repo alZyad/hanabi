@@ -1,5 +1,6 @@
 export const zh = {
   disableCardNotes: "禁用个人卡牌笔记",
+  showChopIndicator: "显示 chop 位置指示器",
   cardNotesOnboardingTitle: "卡牌笔记",
   cardNotesOnboardingBody: "用它们记录你推断出的隐含提示。\n只有你能看到。",
   hanab: "华火",

@@ -400,7 +400,7 @@ function PlayerGame(props: Props) {
                       <div className="flex flex-column items-center">
                         <Card
                           card={card}
-                          chop={!userPreferences.disableChopIndicator && (lockedHand || i === chopIndex)}
+                          chop={userPreferences.showChopIndicator && (lockedHand || i === chopIndex)}
                           className={classnames({
                             "mr1 mr2-l": !selected && i < player.hand.length - 1,
                           })}

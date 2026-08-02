@@ -1,5 +1,6 @@
 export const it = {
   disableCardNotes: "Disattiva le note personali delle carte",
+  showChopIndicator: "Mostra l'indicatore di posizione chop",
   cardNotesOnboardingTitle: "Note delle carte",
   cardNotesOnboardingBody: "Usale per annotare i suggerimenti impliciti che hai dedotto.\nSolo tu puoi vederle.",
   hanab: "Hanab",

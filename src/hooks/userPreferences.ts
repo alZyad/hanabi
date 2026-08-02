@@ -7,7 +7,7 @@ export interface UserPreferences {
   showFireworksAtGameEnd?: boolean;
   codedHintMarkers?: boolean;
   disableCardNotes?: boolean;
-  disableChopIndicator?: boolean;
+  showChopIndicator?: boolean;
   colorBlindMode?: boolean;
 }
 
@@ -18,7 +18,7 @@ const DefaultPreferences: UserPreferences = {
   showFireworksAtGameEnd: true,
   codedHintMarkers: false,
   disableCardNotes: false,
-  disableChopIndicator: false,
+  showChopIndicator: false,
   colorBlindMode: false,
 };
 export function loadUserPreferences(): UserPreferences {

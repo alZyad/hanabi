@@ -1,5 +1,6 @@
 export const nl = {
   disableCardNotes: "Persoonlijke kaartnotities uitschakelen",
+  showChopIndicator: "Chop-positie-indicator tonen",
   cardNotesOnboardingTitle: "Kaartnotities",
   cardNotesOnboardingBody:
     "Gebruik ze om impliciete hints die je hebt afgeleid bij te houden.\nAlleen jij kunt ze zien.",

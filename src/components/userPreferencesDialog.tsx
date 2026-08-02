@@ -29,8 +29,8 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
     const modifiedPreferences = { ...userPreferences, disableCardNotes: !userPreferences.disableCardNotes };
     saveUserPreferences(modifiedPreferences);
   }
-  function toggleDisableChopIndicator() {
-    const modifiedPreferences = { ...userPreferences, disableChopIndicator: !userPreferences.disableChopIndicator };
+  function toggleShowChopIndicator() {
+    const modifiedPreferences = { ...userPreferences, showChopIndicator: !userPreferences.showChopIndicator };
     saveUserPreferences(modifiedPreferences);
   }
   function toggleColorBlindMode() {
@@ -69,9 +69,9 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
               <Txt value={t("disableCardNotes")} />
             </div>
             <div className="flex flex-row justify-start-l items-center">
-              <Checkbox checked={userPreferences.disableChopIndicator} onChange={() => toggleDisableChopIndicator()} />
+              <Checkbox checked={userPreferences.showChopIndicator} onChange={() => toggleShowChopIndicator()} />
               &nbsp;
-              <Txt value={t("disableChopIndicator")} />
+              <Txt value={t("showChopIndicator")} />
             </div>
             <div className="flex flex-row justify-start-l items-center">
               <Checkbox checked={userPreferences.colorBlindMode} onChange={() => toggleColorBlindMode()} />
