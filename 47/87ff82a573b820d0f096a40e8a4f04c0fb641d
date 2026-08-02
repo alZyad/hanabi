@@ -1,0 +1,41 @@
+src/components/card.tsx
+  s_23093bdf7f201c::t_de6c66414e92e2 210
+  s_23093bdf7f201c::t_5a55d0eb993629 229
+  s_23093bdf7f201c::t_b46ba634b0c032 324
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_e47063e3052098 159-167
+  s_23093bdf7f201c::t_2a182bfc3cd731 400
+  s_23093bdf7f201c::t_a363d1d93ba410 122
+  s_c52fa518ba363f::t_77047155b8d288 359
+  s_23093bdf7f201c::t_7b95746c2f0d6c 387
+src/styles/animations.css
+  s_23093bdf7f201c::t_3b4fea4646251d 28-48
+src/components/discardArea.tsx
+  s_23093bdf7f201c::t_de2985c0ddf137 28,30
+src/components/playedCards.tsx
+  s_23093bdf7f201c::t_c4c4ce79ee7ac0 48,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "4787ff82a573b820d0f096a40e8a4f04c0fb641d",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_c52fa518ba363f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "99760bbe-16b4-4a32-b197-1947b8a883dd",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}

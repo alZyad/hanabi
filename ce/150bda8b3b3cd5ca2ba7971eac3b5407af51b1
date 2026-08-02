@@ -1,0 +1,53 @@
+src/lib/schemas/storage.ts
+  s_23093bdf7f201c::t_7f2aad8f454049 26
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_6f28312260e2e4 11
+  s_23093bdf7f201c::t_c7243b883e1280 148
+  s_23093bdf7f201c::t_b9ed448e82ca65 45-47,51-59
+  s_23093bdf7f201c::t_ae01ecb256612e 439-446
+  s_23093bdf7f201c::t_e3ec148a6266b1 147
+  s_23093bdf7f201c::t_0fcca9a539b992 48-50
+  s_23093bdf7f201c::t_d25d013d8148fc 192
+  s_23093bdf7f201c::t_66631b81649105 145
+  s_23093bdf7f201c::t_150a684c73c48f 402
+src/components/userPreferencesDialog.tsx
+  s_23093bdf7f201c::t_d112773ffdd8b6 67-71
+  s_23093bdf7f201c::t_78ab55a9408745 32-35
+src/hooks/userPreferences.ts
+  s_23093bdf7f201c::t_c4fdd1c0ed7634 10
+  s_23093bdf7f201c::t_80782344315571 20
+src/components/cardNotesArea.tsx
+  s_23093bdf7f201c::t_05e192f87d59f5 74
+  s_23093bdf7f201c::t_57affae40fb7a4 3
+src/styles/tachyons-overrides.css
+  s_23093bdf7f201c::t_c69c9a7df61482 243,253
+  s_23093bdf7f201c::t_19516d33998734 277
+  s_23093bdf7f201c::t_647e6c55b05b69 244-252,255-256
+  s_23093bdf7f201c::t_b7d36bd347e3d7 275,278
+  s_23093bdf7f201c::t_acea1f6584424e 276
+  s_23093bdf7f201c::t_32cb07f84ce617 254
+src/components/chopMoveButton.tsx
+  s_23093bdf7f201c::t_11fb369062e334 1-24
+src/components/card.tsx
+  s_23093bdf7f201c::t_e861942333c6f4 338-339
+  s_23093bdf7f201c::t_6cce90ecf79681 239
+  s_23093bdf7f201c::t_aead6ccefd8947 262
+src/locales/en.ts
+  s_23093bdf7f201c::t_ed805ea75802a7 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "ce150bda8b3b3cd5ca2ba7971eac3b5407af51b1",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
