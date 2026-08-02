@@ -1,0 +1,33 @@
+src/components/playerGame.tsx
+  s_6757fab085db50::t_f4fb891ae3ee43 419-420
+  s_6757fab085db50::t_162a9940c11184 189-208
+  s_6757fab085db50::t_5e01b357dd064c 245-247
+  s_6757fab085db50::t_8faff7e4e5c417 488
+  s_6757fab085db50::t_c4678631af8643 386,388
+  s_6757fab085db50::t_da8e401b008633 397-402
+  s_6757fab085db50::t_1c4b189907c89a 248-263,266-269,271-296,298-300,302-321,323-338,340-342,344-358,360-378,382-385
+  s_6757fab085db50::t_e6b058ee2c8807 3
+src/styles/tachyons-overrides.css
+  s_6757fab085db50::t_34ab9809a25f0e 162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "d098b9d274e63e0b90d8cf52a4efdb81910156ce",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_6757fab085db50": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b98fbde1-fa3e-4ae5-a6cb-28bba18bb298",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
