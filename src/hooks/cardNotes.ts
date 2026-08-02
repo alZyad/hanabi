@@ -8,7 +8,7 @@ const EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000;
 
 type RuledOutValue = { color: IColor; number: INumber };
 type CardNotes = { [K in IHintType]: RuledOutValue[K][] };
-type GameNotes = { updatedAt: number; cards: Record<string, CardNotes> };
+type GameNotes = { updatedAt: number; cards: Record<string, CardNotes>; chopMoved?: string[] };
 type NotesStore = Record<string, GameNotes>;
 
 const EMPTY_STORE: NotesStore = {};
@@ -57,6 +57,20 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
+function updateGame(gameId: string, update: (game: GameNotes) => GameNotes) {
+  const prev = read();
+  const game = prev[gameId] ?? { updatedAt: 0, cards: {} };
+  write({ ...prev, [gameId]: { ...update(game), updatedAt: Date.now() } });
+}
+
+function updateCard(gameId: string, cardId: number, update: (notes: CardNotes) => CardNotes) {
+  updateGame(gameId, (game) => {
+    const cards = { ...game.cards };
+    cards[cardId] = update({ color: [], number: [], ...cards[cardId] });
+    return { ...game, cards };
+  });
+}
+
 export function useCardNotes(gameId: string) {
   const store = useSyncExternalStore(subscribe, read, () => EMPTY_STORE);
 
@@ -70,23 +84,31 @@ export function useCardNotes(gameId: string) {
 
   const toggle = useCallback(
     <HintKind extends IHintType>(cardId: number, kind: HintKind, value: RuledOutValue[HintKind]) => {
-      const prev = read();
-      const next: NotesStore = { ...prev };
-      const game = next[gameId] ?? { updatedAt: 0, cards: {} };
-      const cards = { ...game.cards };
-      const cardNotes: CardNotes = { color: [], number: [], ...cards[cardId] };
-      const ruledOutForKind: RuledOutValue[HintKind][] = cardNotes[kind];
-      const updated = ruledOutForKind.includes(value)
-        ? ruledOutForKind.filter((v) => v !== value)
-        : [...ruledOutForKind, value];
-
-      cards[cardId] = { ...cardNotes, [kind]: updated };
-      next[gameId] = { updatedAt: Date.now(), cards };
-
-      write(next);
+      updateCard(gameId, cardId, (notes) => {
+        const ruledOut: RuledOutValue[HintKind][] = notes[kind];
+        const updated = ruledOut.includes(value) ? ruledOut.filter((v) => v !== value) : [...ruledOut, value];
+        return { ...notes, [kind]: updated };
+      });
     },
     [gameId]
   );
 
-  return { isOff, toggle };
+  const isChopMoved = useCallback((cardId: number) => store[gameId]?.chopMoved?.includes(String(cardId)) ?? false, [
+    store,
+    gameId,
+  ]);
+
+  const toggleChopMoved = useCallback(
+    (cardId: number) => {
+      updateGame(gameId, (game) => {
+        const key = String(cardId);
+        const current = game.chopMoved ?? [];
+        const chopMoved = current.includes(key) ? current.filter((id) => id !== key) : [...current, key];
+        return { ...game, chopMoved };
+      });
+    },
+    [gameId]
+  );
+
+  return { isOff, toggle, isChopMoved, toggleChopMoved };
 }

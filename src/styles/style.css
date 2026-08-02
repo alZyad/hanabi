@@ -275,6 +275,10 @@ button {
   );
 }
 
+.bg-cm {
+  background: linear-gradient(to bottom right, #858585, #000, #000);
+}
+
 .bg-strikes {
   background: linear-gradient(
     to bottom right,

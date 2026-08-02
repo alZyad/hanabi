@@ -29,6 +29,10 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
     const modifiedPreferences = { ...userPreferences, disableCardNotes: !userPreferences.disableCardNotes };
     saveUserPreferences(modifiedPreferences);
   }
+  function toggleDisableChopIndicator() {
+    const modifiedPreferences = { ...userPreferences, disableChopIndicator: !userPreferences.disableChopIndicator };
+    saveUserPreferences(modifiedPreferences);
+  }
 
   return (
     <Modal isOpen onRequestClose={() => onCloseArea()}>
@@ -59,6 +63,11 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
               <Checkbox checked={userPreferences.disableCardNotes} onChange={() => toggleDisableCardNotes()} />
               &nbsp;
               <Txt value={t("disableCardNotes")} />
+            </div>
+            <div className="flex flex-row justify-start-l items-center">
+              <Checkbox checked={userPreferences.disableChopIndicator} onChange={() => toggleDisableChopIndicator()} />
+              &nbsp;
+              <Txt value={t("disableChopIndicator")} />
             </div>
           </div>
         </div>

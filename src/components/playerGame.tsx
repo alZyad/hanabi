@@ -8,6 +8,7 @@ import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import ChatPopover from "~/components/chatPopover";
 import CardNotesArea from "~/components/cardNotesArea";
 import CardNotesOnboarding from "~/components/cardNotesOnboarding";
+import ChopMoveButton from "~/components/chopMoveButton";
 import PlayerName, { PlayerNameSize } from "~/components/playerName";
 import PlayerRow, { HandStrip } from "~/components/playerRow";
 import PlayerStats from "~/components/playerStats";
@@ -18,6 +19,7 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import Vignettes from "~/components/vignettes";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
+import { useCardNotes } from "~/hooks/cardNotes";
 import { useStableCards } from "~/hooks/stableCards";
 import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
 import { useUserPreferences } from "~/hooks/userPreferences";
@@ -39,6 +41,21 @@ import { isTutorialAction, useTutorialAction } from "~/lib/tutorial";
 import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
 
 const FOCUSED_CARD_STYLE: CSSProperties = { transition: "transform 120ms ease-out" };
+
+function getChopIndex(hand: ICard[], isChopMoved: (cardId: number) => boolean): number {
+  for (let i = hand.length - 1; i >= 0; i--) {
+    const card = hand[i];
+    if (!card) {
+      continue;
+    }
+    const hinted = (card.receivedHints?.length ?? 0) > 0;
+    const chopMoved = card.id !== undefined && isChopMoved(card.id);
+    if (!hinted && !chopMoved) {
+      return i;
+    }
+  }
+  return -1;
+}
 
 function isCardHintable(game: IGameState, hint: IHintAction, card: ICard) {
   return hint.type === "color"
@@ -125,7 +142,10 @@ function PlayerGame(props: Props) {
   const currentPlayer = useCurrentPlayer(game);
   const tutorialAction = useTutorialAction();
   const onboarding = useCardNotesOnboarding();
+  const { isChopMoved, toggleChopMoved } = useCardNotes(game.id);
   const hand = useStableCards(player.hand);
+  const chopIndex = getChopIndex(hand, isChopMoved);
+  const lockedHand = chopIndex === -1;
   const [userPreferences] = useUserPreferences();
 
   function nothingInvoked() {
@@ -169,6 +189,7 @@ function PlayerGame(props: Props) {
 
   const isSelf = self && player === selfPlayer && !replay.cursor;
   const showCardNotes = isSelf && selected && !userPreferences.disableCardNotes;
+  const showOtherPlayerCm = selected && !isSelf && !replay.cursor && !userPreferences.disableCardNotes;
   const onboardingCardIndex = showCardNotes && onboarding.active ? player.hand.length - 3 : null;
 
   const hasSelectedCard = selectedCard !== null;
@@ -378,6 +399,7 @@ function PlayerGame(props: Props) {
                       <div className="flex flex-column items-center">
                         <Card
                           card={card}
+                          chop={!userPreferences.disableChopIndicator && (lockedHand || i === chopIndex)}
                           className={classnames({
                             "mr1 mr2-l": !selected && i < player.hand.length - 1,
                           })}
@@ -413,6 +435,14 @@ function PlayerGame(props: Props) {
                               />
                             </div>
                           </CardNotesOnboarding>
+                        )}
+                        {showOtherPlayerCm && focusReady && (
+                          <div className="w-card-large flex justify-center mt2">
+                            <ChopMoveButton
+                              active={card.id !== undefined && isChopMoved(card.id)}
+                              onToggle={() => card.id !== undefined && toggleChopMoved(card.id)}
+                            />
+                          </div>
                         )}
                       </div>
                     </AnimatedCard>

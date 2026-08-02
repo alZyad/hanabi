@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import ChopMoveButton from "~/components/chopMoveButton";
 import ColorSymbol from "~/components/colorSymbol";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useCardNotes } from "~/hooks/cardNotes";
@@ -55,9 +56,11 @@ function CardNotesArea(props: Props) {
   const { card, gameId, variant, colorBlindMode } = props;
 
   const colors = getColors(variant);
+  const { isChopMoved, toggleChopMoved } = useCardNotes(gameId);
+  const chopMoved = card.id !== undefined && isChopMoved(card.id);
 
   return (
-    <div className="w-card-large flex flex-column items-center bg-black-30 br1 pv1 ph0.5 mt1 br1">
+    <div className="w-card-large flex flex-column items-center bg-black-30 br1 pv1 ph0.5 mt2 br1">
       <div className="ph-row">
         {colors.map((color) => (
           <Chip key={color} card={card} colorBlindMode={colorBlindMode} gameId={gameId} kind="color" value={color} />
@@ -68,6 +71,7 @@ function CardNotesArea(props: Props) {
           <Chip key={number} card={card} colorBlindMode={colorBlindMode} gameId={gameId} kind="number" value={number} />
         ))}
       </div>
+      <ChopMoveButton active={chopMoved} onToggle={() => card.id !== undefined && toggleChopMoved(card.id)} />
     </div>
   );
 }

@@ -219,6 +219,41 @@
   margin: 1px;
 }
 
+.cm-button {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.12rem 0;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #999;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.cm-button--active {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+
+.chop-marker {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0.25rem;
+  height: 0.1rem;
+  border-radius: 999px;
+  background: #000;
+}
+
+.chop-marker--large {
+  bottom: 3.1rem;
+}
+
 @media screen and (min-width: 60em) {
   .card-large,
   .w-card-large {
@@ -236,5 +271,9 @@
   .fh-chip--color {
     width: 0.75rem;
     height: 0.75rem;
+  }
+
+  .chop-marker--large {
+    bottom: 3.4rem;
   }
 }

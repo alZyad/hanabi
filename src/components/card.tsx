@@ -236,6 +236,7 @@ interface Props {
   hidden?: boolean;
   position?: number;
   selected?: boolean;
+  chop?: boolean;
   playable?: boolean;
   size?: CardSize;
   className?: string;
@@ -258,6 +259,7 @@ function Card(props: Props) {
     style = {},
     position = null,
     selected = false,
+    chop = false,
     onSelectCard,
     focusPanelReady = true,
   } = props;
@@ -319,7 +321,7 @@ function Card(props: Props) {
 
       {/* Card position */}
       {position !== null && size === CardSize.LARGE && (
-        <Txt className="absolute left-0 top-0 ma1 black-40" value={PositionMap[position]} />
+        <Txt className="absolute left-0 top-0 black-40" style={{ margin: "0.3rem" }} value={PositionMap[position]} />
       )}
 
       {/* Whether the card has received hints */}
@@ -332,6 +334,9 @@ function Card(props: Props) {
           }}
         />
       )}
+
+      {/* Whether the card is on the chop */}
+      {chop && <div className={classnames("chop-marker", { "chop-marker--large": size === CardSize.LARGE })} />}
 
       {/* show positive hints with a larger type */}
       {displayHints &&

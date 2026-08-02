@@ -23,6 +23,7 @@ export const userPreferencesSchema = z
     showFireworksAtGameEnd: z.boolean().optional().catch(undefined),
     codedHintMarkers: z.boolean().optional().catch(undefined),
     disableCardNotes: z.boolean().optional().catch(undefined),
+    disableChopIndicator: z.boolean().optional().catch(undefined),
   })
   .catch({});
 
@@ -35,6 +36,7 @@ const gameNotesSchema = z
   .object({
     updatedAt: z.number().catch(0),
     cards: z.record(z.string(), cardNotesSchema).catch({}),
+    chopMoved: z.array(z.string()).optional().catch(undefined),
   })
   .catch({ updatedAt: 0, cards: {} });
 

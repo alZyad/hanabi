@@ -7,6 +7,7 @@ export interface UserPreferences {
   showFireworksAtGameEnd?: boolean;
   codedHintMarkers?: boolean;
   disableCardNotes?: boolean;
+  disableChopIndicator?: boolean;
 }
 
 type ValueAndSetter<T> = [T, (newValue: T) => void];
@@ -16,6 +17,7 @@ const DefaultPreferences: UserPreferences = {
   showFireworksAtGameEnd: true,
   codedHintMarkers: false,
   disableCardNotes: false,
+  disableChopIndicator: false,
 };
 export function loadUserPreferences(): UserPreferences {
   const loadedPreferences = readLocalStorage("userPreferences", userPreferencesSchema, {});

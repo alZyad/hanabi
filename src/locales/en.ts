@@ -1,6 +1,7 @@
 export const en = {
   codedHintMarkers: "Coded hint markers on cards",
   disableCardNotes: "Disable personal card notes",
+  disableChopIndicator: "Disable chop position indicator",
   cardNotesOnboardingTitle: "Card notes",
   cardNotesOnboardingBody: "Use these to track implicit hints you've deduced.\nOnly you can see them.",
   hanab: "Hanab",
