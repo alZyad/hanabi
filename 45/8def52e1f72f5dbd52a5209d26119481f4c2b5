@@ -1,0 +1,24 @@
+package.json
+  s_99711484407657::t_2be3b3e73ba087 10
+  s_99711484407657::t_56f3c2b13a9c9f 59
+DEPLOY.md
+  s_99711484407657::t_1bbebe57f50964 6-16
+yarn.lock
+  s_99711484407657::t_82a5f4f1fedb03 4601,6532-6534,6537
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "458def52e1f72f5dbd52a5209d26119481f4c2b5",
+  "prompts": {},
+  "sessions": {
+    "s_99711484407657": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "edb17c91-01c6-4509-a371-9cd76ea8de12",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
