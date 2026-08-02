@@ -1,0 +1,20 @@
+src/components/playedCards.tsx
+  s_3fbb7c6db7793f::t_452d4f897e5a15 9-12,14
+  s_3fbb7c6db7793f::t_d4e88b3019432f 65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "477659d4a2d7a23917af06154acae6d2a1bc1919",
+  "prompts": {},
+  "sessions": {
+    "s_3fbb7c6db7793f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0d39eb7-be69-4f6c-bf2e-9ab67184220e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
