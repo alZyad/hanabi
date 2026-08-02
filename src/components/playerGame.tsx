@@ -354,12 +354,7 @@ function PlayerGame(props: Props) {
               {(game.endedAt || game.originalGame?.endedAt) && player === selfPlayer && (
                 <Button
                   void
-                  className={classnames(
-                    {
-                      revealCardButton: selected,
-                    },
-                    "tracked-tight"
-                  )}
+                  className="tracked-tight"
                   size={ButtonSize.TINY}
                   text={revealCards ? t("hide") : t("reveal")}
                   onClick={(e) => {
@@ -534,21 +529,6 @@ function PlayerGame(props: Props) {
           </div>
         )}
       </div>
-      <style global jsx>{`
-        .revealCardButton {
-          position: absolute;
-          top: -1.3rem;
-          right: 3.5rem;
-        }
-
-        @media screen and (min-width: 60em) {
-          .revealCardButton {
-            position: relative;
-            top: 0;
-            right: 0;
-          }
-        }
-      `}</style>
     </>
   );
 }
