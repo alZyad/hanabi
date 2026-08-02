@@ -1,0 +1,66 @@
+src/components/playerGame.tsx
+  s_d62df06ea866ac::t_859bd2ed623df0 43,45
+  s_d62df06ea866ac::t_cdfddd289836d1 612,619
+  s_d62df06ea866ac::t_8c65d4e309a36b 44
+src/components/playersBoard.tsx
+  s_d62df06ea866ac::t_91e680e86b0e22 80
+  s_d62df06ea866ac::t_a879b1d74c4248 38
+  s_d62df06ea866ac::t_50c0ece40141e3 1
+  s_d62df06ea866ac::t_5d5a9046175a9d 18-37,39-42
+  s_d62df06ea866ac::t_42a433374a45b4 68
+src/components/receivedHintsPopover.tsx
+  s_d62df06ea866ac::t_ba06f06d7f3880 148
+  s_d62df06ea866ac::t_f86dfd20889048 135
+  s_d62df06ea866ac::t_1b1fe091e23fa7 31-39
+src/components/card.tsx
+  s_d62df06ea866ac::t_3a9183e0b44532 163
+  s_d62df06ea866ac::t_c5ba181e79ba3c 170
+  s_d62df06ea866ac::t_7e1fa3be3b1172 169,171
+  s_d62df06ea866ac::t_8f297b063106b3 84
+  s_49974c0e1bbf02::t_629ccb1a6377b4 210-212
+  s_49974c0e1bbf02::t_310140edf62d6d 55
+  s_49974c0e1bbf02::t_857afcdcd343b9 315-319
+  s_49974c0e1bbf02::t_b96fbfc168e239 69,80-83,85-87,92-93,106-113
+  s_49974c0e1bbf02::t_2884de964ec73a 226
+  s_d62df06ea866ac::t_9e93c70ff896e7 368
+  s_49974c0e1bbf02::t_38d3b450d7524a 366
+src/components/colorSymbol.tsx
+  s_d62df06ea866ac::t_0192d3d7b78484 33
+  s_d62df06ea866ac::t_0bd1508cd91113 18,22,30-32,34-37
+  s_49974c0e1bbf02::t_ab6362d251a929 17
+  s_d62df06ea866ac::t_d68c3551b7a734 41
+  s_d62df06ea866ac::t_c0110efc0fb516 38-39
+src/styles/tachyons-overrides.css
+  s_d62df06ea866ac::t_c41a95d4a19e61 167-168
+  s_49974c0e1bbf02::t_3e47dd25406143 161-163
+  s_d62df06ea866ac::t_461fd120f6d6a4 283-284
+  s_d62df06ea866ac::t_408e64efb726b5 166,169-170
+  s_d62df06ea866ac::t_ed960392243ea8 287-307
+  s_d62df06ea866ac::t_a404c6856cb3fb 262-264,266
+  s_d62df06ea866ac::t_11f4f5c5ef6a40 171-187
+  s_d62df06ea866ac::t_47bc3454ca926c 282,285-286
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "f3b02532c7e9a7de625199104e98d76f0dea6983",
+  "prompts": {},
+  "sessions": {
+    "s_49974c0e1bbf02": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "82e87889-e0cd-42ee-a49d-1faa4adb6ff8",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    },
+    "s_d62df06ea866ac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b593d06a-0c8d-47f6-a832-ccfb0b00ad7d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
