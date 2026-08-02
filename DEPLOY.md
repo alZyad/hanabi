@@ -3,6 +3,17 @@
 Project: `hanabi` (scope: alzyads-projects). Prod alias: https://hanabi-zeta-tan.vercel.app
 Token: read from scratchpad file `vercel-token` (ask user for a new one at https://vercel.com/account/tokens if missing).
 
+Pre-flight (run before every prod deploy — reproduces what Vercel's `next build` checks):
+
+```sh
+yarn preflight   # next lint (incl. prettier/prettier rule) + tsc --noEmit
+```
+
+Vercel's build is `next build`, which runs `next lint` + type-checking with this repo's `.eslintrc.js`. Notes:
+- prettier is pinned to an exact version so local formatting matches Vercel's install; a caret (`^`) reintroduces drift where local passes but the build fails.
+- `yarn lint` uses a broader glob than `next lint` and can over-report — trust `yarn preflight`.
+- If `next lint` reports errors the CLI (`npx prettier --check`) disagrees with, the ESLint cache is stale after a dep change: `rm -rf .next/cache/eslint`.
+
 Deploy current working tree to production (no git push needed):
 
 ```sh
