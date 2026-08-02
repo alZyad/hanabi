@@ -25,18 +25,18 @@ const TombstoneHintMark = forwardRef<HTMLDivElement, TombstoneHintMarkProps>(
   (props: TombstoneHintMarkProps, ref: React.Ref<HTMLDivElement>) => {
     const heightFactor = props.heightFactor || 1;
     const verticalRadiusPercent = 100.0 / heightFactor / 2;
-    const heightPercent = heightFactor * 20;
     return (
       <div
         ref={ref}
-        className={classnames("absolute top-0 bg-hints flex justify-center flex-column items-center")}
-        style={{
-          ...props.style,
-          borderBottomRightRadius: `50%  ${verticalRadiusPercent}%`,
-          borderBottomLeftRadius: `50%  ${verticalRadiusPercent}%`,
-          width: "20%",
-          height: `${heightPercent}%`,
-        }}
+        className={classnames("absolute top-0 bg-hints flex justify-center flex-column items-center card-tomb")}
+        style={
+          {
+            ...props.style,
+            borderBottomRightRadius: `50%  ${verticalRadiusPercent}%`,
+            borderBottomLeftRadius: `50%  ${verticalRadiusPercent}%`,
+            ["--tomb-h"]: heightFactor,
+          } as CSSProperties
+        }
         onClick={function (e) {
           e.stopPropagation();
         }}
@@ -132,8 +132,7 @@ const CornerMark = forwardRef(
     return (
       <div
         ref={ref}
-        className={"absolute right-0 br--left top-0 br--bottom br-100 bg-hints"}
-        style={{ width: "20%", aspectRatio: "1" }}
+        className={"absolute right-0 br--left top-0 br--bottom br-100 bg-hints card-corner-mark"}
         onMouseEnter={() => {
           props.onActivationChange(true);
         }}
@@ -146,7 +145,7 @@ CornerMark.displayName = "CornerMark";
 
 const HiddenMark = forwardRef((_props: Record<string, never>, ref: React.Ref<HTMLDivElement>) => {
   return (
-    <div ref={ref} className={"absolute top-0 left-0 bg-hints-hidden"} style={{ width: "100%", height: "20%" }}>
+    <div ref={ref} className={"absolute top-0 left-0 w-100 bg-hints-hidden card-hidden-mark"}>
       <br />
     </div>
   );

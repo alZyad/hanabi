@@ -158,15 +158,33 @@
   width: 3rem;
 }
 
-.card-large {
-  height: 5.4rem;
+.card-face {
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
-.fh-value-area {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 2.5rem;
+.card-symbol-box {
+  width: 3rem;
+  height: 3rem;
+}
+
+.card-hint-circle {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.card-corner-mark {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.card-hidden-mark {
+  height: 0.5rem;
+}
+
+.card-tomb {
+  width: 0.5rem;
+  height: calc(var(--tomb-h, 1) * 0.5rem);
 }
 
 .fh-panel {
@@ -241,16 +259,14 @@
 
 .chop-marker {
   position: absolute;
-  left: 10%;
-  right: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   bottom: 0.25rem;
+  width: 2rem;
   height: 0.1rem;
   border-radius: 999px;
   background: #000;
-}
-
-.chop-marker--large {
-  bottom: 3.1rem;
 }
 
 @media screen and (min-width: 60em) {
@@ -263,16 +279,36 @@
     gap: 0.75rem;
   }
 
-  .fh-value-area {
-    bottom: 2.8rem;
+  .card-symbol-box {
+    width: 3.9rem;
+    height: 3.9rem;
+  }
+
+  .card-hint-circle {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .card-corner-mark {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .card-hidden-mark {
+    height: 0.65rem;
+  }
+
+  .card-tomb {
+    width: 0.65rem;
+    height: calc(var(--tomb-h, 1) * 0.65rem);
+  }
+
+  .chop-marker {
+    width: 2.6rem;
   }
 
   .fh-chip--color {
     width: 0.75rem;
     height: 0.75rem;
-  }
-
-  .chop-marker--large {
-    bottom: 3.4rem;
   }
 }

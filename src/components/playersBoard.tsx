@@ -1,5 +1,4 @@
-import React from "react";
-import { posedDiv } from "~/lib/posed";
+import React, { ReactNode, useLayoutEffect, useRef } from "react";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
 import PlayerGame from "~/components/playerGame";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
@@ -16,10 +15,31 @@ interface Props {
   onCommitAction: (action: IAction) => void;
 }
 
-const Item = posedDiv({
-  selected: { height: "auto" },
-  notSelected: { height: "auto" },
-});
+function AutoHeight(props: { className?: string; children: ReactNode }) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const outer = outerRef.current;
+    const inner = innerRef.current;
+    if (!outer || !inner) return;
+
+    const apply = () => {
+      outer.style.height = `${inner.offsetHeight}px`;
+    };
+    apply();
+
+    const observer = new ResizeObserver(apply);
+    observer.observe(inner);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={outerRef} className={props.className} style={{ overflow: "hidden", transition: "height 200ms ease-out" }}>
+      <div ref={innerRef}>{props.children}</div>
+    </div>
+  );
+}
 
 export default function PlayersBoard(props: Props) {
   const { displayStats, selectedArea, onSelectPlayer, onNotifyPlayer, onReaction, onCloseArea, onCommitAction } = props;
@@ -45,11 +65,7 @@ export default function PlayersBoard(props: Props) {
     <>
       <Tutorial step={ITutorialStep.OTHER_PLAYERS}>
         {otherPlayers.map((otherPlayer, i) => (
-          <Item
-            key={i}
-            className="bb b--yellow bg-main-dark"
-            pose={selectedPlayer == otherPlayer ? "selected" : "notSelected"}
-          >
+          <AutoHeight key={i} className="bb b--yellow bg-main-dark">
             <PlayerGame
               active={currentPlayer === otherPlayer}
               displayStats={displayStats}
@@ -61,7 +77,7 @@ export default function PlayersBoard(props: Props) {
               onNotifyPlayer={onNotifyPlayer}
               onSelectPlayer={onSelectPlayer}
             />
-          </Item>
+          </AutoHeight>
         ))}
       </Tutorial>
       {selfPlayer && (

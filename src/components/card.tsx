@@ -52,7 +52,7 @@ interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
   color: string;
   colorBlindMode: boolean;
   size?: CardSize;
-  symbolInValueArea?: boolean;
+  faceOverlay?: ReactNode;
   playable?: boolean;
   context?: ICardContext;
   className?: string;
@@ -66,7 +66,7 @@ export function CardWrapper(props: CardWrapperProps) {
     color,
     colorBlindMode,
     size = CardSize.MEDIUM,
-    symbolInValueArea = false,
+    faceOverlay,
     playable = false,
     context,
     className = "",
@@ -77,11 +77,20 @@ export function CardWrapper(props: CardWrapperProps) {
   } = props;
 
   const sizeClass = CardClasses[size];
+  const stacked = size === CardSize.LARGE;
+
+  const face = (
+    <>
+      {colorBlindMode && <ColorSymbol boxed={stacked || size === CardSize.MEDIUM} color={color as IColor} scale={1} />}
+      {children}
+    </>
+  );
 
   return (
     <div
       className={classnames(
-        "relative flex items-center justify-center br1 ba",
+        "relative br1 ba",
+        stacked ? "flex flex-column" : "flex items-center justify-center",
         sizeClass,
         className,
         `bg-${color}`,
@@ -94,15 +103,14 @@ export function CardWrapper(props: CardWrapperProps) {
       onClick={onClick}
       {...attributes}
     >
-      {colorBlindMode &&
-        (symbolInValueArea ? (
-          <div className="fh-value-area absolute">
-            <ColorSymbol color={color as IColor} />
-          </div>
-        ) : (
-          <ColorSymbol color={color as IColor} />
-        ))}
-      {children}
+      {stacked ? (
+        <>
+          <div className="card-face relative flex items-center justify-center">{face}</div>
+          {faceOverlay}
+        </>
+      ) : (
+        face
+      )}
     </div>
   );
 }
@@ -152,14 +160,15 @@ function CardPartialHint(props: CardPartialHintProps) {
   return (
     <>
       <div
-        className={classnames("top-0 br-100 w-50 flex justify-center items-center", className, {
+        className={classnames("top-0 br-100 card-hint-circle flex justify-center items-center", className, {
           [`txt-white-dark`]: card.hint?.color[card.color] !== IHintLevel.SURE,
         })}
-        style={{ aspectRatio: "1" }}
       >
         {card.hint?.number[card.number] === IHintLevel.SURE && <Txt className="z-1" value={card.number} />}
       </div>
-      {displayColorSymbol && <ColorSymbol color={card.color} />}
+      {displayColorSymbol && (
+        <ColorSymbol boxed={size === CardSize.LARGE || size === CardSize.MEDIUM} color={card.color} scale={1} />
+      )}
     </>
   );
 }
@@ -198,7 +207,9 @@ function FocusHintChip(props: FocusHintChipProps) {
 }
 
 function FocusValueArea(props: { children: ReactNode }) {
-  return <div className="fh-value-area absolute flex items-center justify-center">{props.children}</div>;
+  return (
+    <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">{props.children}</div>
+  );
 }
 
 interface FocusHintPanelProps {
@@ -212,7 +223,7 @@ const FocusHintPanel = React.memo(function FocusHintPanel(props: FocusHintPanelP
   const colors = getColors(variant);
 
   return (
-    <div className="fh-panel absolute left-0 right-0 bottom-0 flex flex-column items-center bg-black-60 br1">
+    <div className="fh-panel w-100 flex flex-column items-center bg-black-60 br1 br--bottom">
       <div className="fh-row">
         {colors.map((color) => (
           <div key={color} className="fh-cell">
@@ -301,9 +312,13 @@ function Card(props: Props) {
       colorBlindMode={colorBlindMode}
       context={context}
       data-card={position !== null ? PositionMap[position] : undefined}
+      faceOverlay={
+        displayHints && size === CardSize.LARGE && cardHint && focusPanelReady ? (
+          <FocusHintPanel cardHint={cardHint} colorBlindMode={colorBlindMode} variant={variant} />
+        ) : undefined
+      }
       playable={playable}
       size={size}
-      symbolInValueArea={displayHints && size === CardSize.LARGE}
       style={{
         ...style,
         ...(selected && { transform: "scale(1.20)" }),
@@ -348,14 +363,9 @@ function Card(props: Props) {
       )}
 
       {/* Whether the card is on the chop */}
-      {chop && <div className={classnames("chop-marker", { "chop-marker--large": size === CardSize.LARGE })} />}
+      {chop && <div className="chop-marker" />}
 
-      {chopMoved && (
-        <div
-          className="absolute left-0 top-0 br--right br--bottom br-100 bg-cm"
-          style={{ width: "20%", aspectRatio: "1" }}
-        />
-      )}
+      {chopMoved && <div className="absolute left-0 top-0 br--right br--bottom br-100 bg-cm card-corner-mark" />}
 
       {/* show positive hints with a larger type */}
       {displayHints &&
@@ -367,11 +377,6 @@ function Card(props: Props) {
         ) : (
           <CardPartialHint card={card} colorBlindMode={colorBlindMode} size={size} />
         ))}
-
-      {/* show other hints, including negative hints */}
-      {displayHints && size === CardSize.LARGE && cardHint && focusPanelReady && (
-        <FocusHintPanel cardHint={cardHint} colorBlindMode={colorBlindMode} variant={variant} />
-      )}
     </CardWrapper>
   );
 }

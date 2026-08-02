@@ -40,7 +40,9 @@ import IGameState, {
 import { isTutorialAction, useTutorialAction } from "~/lib/tutorial";
 import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
 
-const FOCUSED_CARD_STYLE: CSSProperties = { transition: "transform 120ms ease-out" };
+const FOCUSED_CARD_STYLE: CSSProperties = {
+  transition: "transform 120ms ease-out",
+};
 
 function getChopIndex(hand: ICard[], isChopMoved: (cardId: number) => boolean): number {
   for (let i = hand.length - 1; i >= 0; i--) {
@@ -606,17 +608,15 @@ const AnimatedCard = posedDiv({
   enter: {
     opacity: 1,
     scale: 1,
-    y: 0,
     transition: {
-      duration: 180,
+      duration: 110,
     },
   },
   exit: {
     opacity: 0,
     scale: 0.85,
-    y: 8,
     transition: {
-      duration: 140,
+      duration: 80,
     },
   },
 });

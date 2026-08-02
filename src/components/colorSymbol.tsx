@@ -14,10 +14,12 @@ export const ColorsToSymbols = {
 
 interface Props {
   color: IColor;
+  scale?: number;
+  boxed?: boolean;
 }
 
 export default function ColorSymbol(props: Props) {
-  const { color } = props;
+  const { color, scale = 1.4, boxed = false } = props;
 
   const svg = ColorsToSymbols[color];
 
@@ -25,8 +27,18 @@ export default function ColorSymbol(props: Props) {
     return null;
   }
 
+  if (boxed) {
+    return (
+      <div className="absolute w-100 h-100 flex justify-center items-center">
+        <div className="card-symbol-box flex justify-center items-center" style={{ transform: `scale(${scale})` }}>
+          <SvgImage svg={svg} />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="absolute w-100 h-100 flex justify-center items-center" style={{ transform: "scale(1.4)" }}>
+    <div className="absolute w-100 h-100 flex justify-center items-center" style={{ transform: `scale(${scale})` }}>
       <SvgImage svg={svg} />
     </div>
   );
