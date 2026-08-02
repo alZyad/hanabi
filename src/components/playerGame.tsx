@@ -455,6 +455,8 @@ function PlayerGame(props: Props) {
         </HandStrip>
       </PlayerRow>
 
+      {self && <div className="flex-grow-1" style={{ maxHeight: 400 }} />}
+
       {/* Self player actions */}
       <div
         className="ph6.5-m"

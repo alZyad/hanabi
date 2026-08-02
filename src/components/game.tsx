@@ -493,7 +493,7 @@ export function Game(props: Props) {
         )}
         {!interturn && (
           <div className="flex flex-grow-1 flex-column">
-            <div className="h-100">
+            <div className="h-100 flex flex-column">
               <PlayersBoard
                 displayStats={displayStats}
                 selectedArea={selectedArea}

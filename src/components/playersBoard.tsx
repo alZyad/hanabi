@@ -66,7 +66,7 @@ export default function PlayersBoard(props: Props) {
       </Tutorial>
       {selfPlayer && (
         <Tutorial step={ITutorialStep.SELF_PLAYER}>
-          <div className="mb4">
+          <div className="mb4 flex flex-column flex-grow-1">
             <PlayerGame
               active={currentPlayer === selfPlayer}
               cardIndex={cardIndex}
