@@ -1,0 +1,25 @@
+src/components/card.tsx
+  s_75ed722dc7055e::t_f0f0a0366ddfd4 304
+  s_75ed722dc7055e::t_7f51968877ec8d 97-104
+  s_75ed722dc7055e::t_8815ef27290e1d 69
+  s_75ed722dc7055e::t_f0bbfc460170a7 55
+src/styles/tachyons-overrides.css
+  s_75ed722dc7055e::t_a47bf33cb32e46 267
+  s_75ed722dc7055e::t_c72c7523f1dcdf 169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "c148a83b10b93c3420217b034ce1fe4246a8002f",
+  "prompts": {},
+  "sessions": {
+    "s_75ed722dc7055e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39984581-58cf-4701-8157-8ec5dc50d994",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
