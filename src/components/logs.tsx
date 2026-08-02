@@ -6,6 +6,7 @@ import Turn from "~/components/turn";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
+import { useMessages } from "~/hooks/messages";
 import { useReplay } from "~/hooks/replay";
 import { posedDiv } from "~/lib/posed";
 import { IMessage } from "~/lib/state";
@@ -21,9 +22,10 @@ export default function Logs(props: Props) {
   const game = useGame();
   const replay = useReplay();
   const selfPlayer = useSelfPlayer(game);
+  const allMessages = useMessages(game.id);
 
   const PoseItem = replay.cursor ? posedDiv() : Item;
-  const firstMessages = game.messages.filter((message) => message.turn === 0).reverse();
+  const firstMessages = allMessages.filter((message) => message.turn === 0).reverse();
 
   return (
     <div className="flex-grow-1 overflow-y-scroll">
@@ -32,7 +34,7 @@ export default function Logs(props: Props) {
           {[...game.turnsHistory].reverse().map((turn, i) => {
             const key = game.turnsHistory.length - i;
 
-            const messages = game.messages.filter((message) => message.turn === game.turnsHistory.length - i).reverse();
+            const messages = allMessages.filter((message) => message.turn === game.turnsHistory.length - i).reverse();
             const turnNumber = game.turnsHistory.length - i;
             return (
               <PoseItem key={key}>

@@ -44,9 +44,7 @@ const playerSchema = z.object({
   name: z.string().catch(""),
   bot: droppableBool,
   index: z.number().int().optional(),
-  reaction: z.string().nullish().catch(undefined),
   lastAction: actionSchema.optional().catch(undefined),
-  notified: z.boolean().optional().catch(undefined),
 });
 
 const optionsSchema = z.object({
@@ -62,13 +60,6 @@ const optionsSchema = z.object({
   private: droppableBool,
   turnsHistory: droppableBool,
   tutorial: z.boolean().optional().catch(undefined),
-});
-
-const messageSchema = z.object({
-  id: z.string().catch(""),
-  content: z.string().catch(""),
-  from: z.number().catch(-1),
-  turn: z.number().catch(0),
 });
 
 const reviewCommentSchema = z.object({
@@ -87,7 +78,6 @@ const gameStateSchema = z
     currentPlayer: z.number().catch(0),
     actionsLeft: z.number().catch(0),
     turnsHistory: strictArray(turnSchema),
-    messages: lenientArray(messageSchema).catch([]),
     reviewComments: lenientArray(reviewCommentSchema).catch([]),
     createdAt: z.number().catch(0),
     startedAt: z.number().optional().catch(undefined),

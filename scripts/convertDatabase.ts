@@ -5,7 +5,7 @@ import { omit } from "lodash";
 import { Sequelize } from "sequelize";
 import { JsonObject } from "type-fest";
 import { getMaximumPossibleScore, getScore } from "../src/lib/actions";
-import IGameState, { rebuildGame } from "../src/lib/state";
+import IGameState, { IMinimalGameState, rebuildGame } from "../src/lib/state";
 
 interface Database {
   games: Array<{
@@ -40,14 +40,16 @@ program
         const id = game.id;
         const options = JSON.stringify(game.options);
         const state = JSON.stringify(omit(game, ["id", "options", "history"]));
-        const fullState = rebuildGame(game as Partial<IGameState>);
+        const fullState = rebuildGame((game as unknown) as IMinimalGameState) as IGameState;
 
         const score = getScore(fullState);
         const maxPossibleScore = getMaximumPossibleScore(fullState);
         const playersCount = fullState.players.length;
         const variant = fullState.options.variant;
-        const colorblindMode = fullState.options.colorBlindMode ?? false;
-        const messagesCount = fullState.messages?.length ?? 0;
+        const colorblindMode = (game.options as { colorBlindMode?: boolean } | undefined)?.colorBlindMode ?? false;
+        const rawMessages = (game as { messages?: unknown }).messages;
+        const messagesCount =
+          rawMessages == null ? 0 : Array.isArray(rawMessages) ? rawMessages.length : Object.keys(rawMessages).length;
 
         await sequelize.query(`
           INSERT INTO "games"

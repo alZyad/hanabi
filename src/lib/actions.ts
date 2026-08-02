@@ -284,7 +284,6 @@ export const getStateAtTurn = mem(
       newState = commitAction(newState, turn.action);
     });
 
-    newState.messages = state.messages;
     newState.status = IGameStatus.ONGOING;
     newState.createdAt = state.createdAt;
 
@@ -469,7 +468,6 @@ export function createLobby(options: IGameOptions): ILobbyState {
     status: IGameStatus.LOBBY,
     players: [],
     options,
-    messages: [],
     reviewComments: [],
     createdAt: Date.now(),
     synced: false,
@@ -511,7 +509,6 @@ export function newGame(options: IGameOptions): IGameState {
     options,
     actionsLeft: options.playersCount + 1, // this will be decreased when the draw pile is empty
     turnsHistory: [],
-    messages: [],
     createdAt: Date.now(),
     synced: false,
     reviewComments: [],
@@ -530,7 +527,6 @@ export function startGameFromLobby(lobby: ILobbyState, startedAt: number): IGame
   nextGame.status = IGameStatus.ONGOING;
   nextGame.startedAt = startedAt;
   nextGame.createdAt = lobby.createdAt;
-  nextGame.messages = lobby.messages;
 
   return nextGame;
 }

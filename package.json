@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next dev",
     "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
     "start": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next start",
-    "lint": "eslint '**/*.{ts,tsx}'"
+    "lint": "eslint '**/*.{ts,tsx}'",
+    "migrate-messages": "node scripts/migrateMessages.js"
   },
   "dependencies": {
     "@sentry/browser": "^8.9.2",

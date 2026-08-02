@@ -32,6 +32,7 @@ export default function ChatPopover(props: Props) {
       content: message,
       from: selfPlayer.index,
       turn: game.turnsHistory.length,
+      sentAt: Date.now(),
     }).catch(logFailedPromise);
 
     setMessage("");

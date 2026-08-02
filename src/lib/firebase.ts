@@ -13,6 +13,7 @@ import IGameState, {
 } from "~/lib/state";
 import { MAX_PLAYERS } from "~/lib/actions";
 import { GAME_EXISTS_BUT_INVALID, parseGameState } from "~/lib/schemas/gameState";
+import { parseMessages } from "~/lib/schemas/messages";
 import { parseGameId } from "~/lib/schemas/params";
 import { logFailedPromise } from "~/lib/errors";
 
@@ -152,19 +153,40 @@ export async function updateGame(game: IGameState | ILobbyState) {
 }
 
 export async function addMessage(gameId: string, message: IMessage) {
-  await database()
-    .ref(`/games/${gameId}/messages`)
-    .transaction((messages) => {
-      return [...(messages || []), message];
-    });
+  await database().ref(`/messages/${gameId}/${message.id}`).set(message);
+}
+
+export function subscribeToMessages(gameId: string, callback: (messages: IMessage[]) => void) {
+  const ref = database().ref(`/messages/${gameId}`);
+
+  ref.on("value", (event) => {
+    callback(parseMessages(event.val()));
+  });
+
+  return () => ref.off();
+}
+
+export interface IPlayerState {
+  reaction?: string | null;
+  notified?: boolean;
+}
+
+export function subscribeToPlayerStates(gameId: string, callback: (states: Record<number, IPlayerState>) => void) {
+  const ref = database().ref(`/playerStates/${gameId}`);
+
+  ref.on("value", (event) => {
+    callback((event.val() ?? {}) as Record<number, IPlayerState>);
+  });
+
+  return () => ref.off();
 }
 
 export async function setReaction(game: IGameState, player: IPlayer, reaction: string | null) {
-  await database().ref(`/games/${game.id}/players/${player.index}/reaction`).set(reaction);
+  await database().ref(`/playerStates/${game.id}/${player.index}/reaction`).set(reaction);
 }
 
 export async function setNotification(game: IGameState, player: IPlayer, notified: boolean) {
-  await database().ref(`/games/${game.id}/players/${player.index}/notified`).set(notified);
+  await database().ref(`/playerStates/${game.id}/${player.index}/notified`).set(notified);
 }
 
 function gameIsPublic(game: IMinimalGameState) {

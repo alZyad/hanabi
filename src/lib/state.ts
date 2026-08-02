@@ -20,7 +20,6 @@ export default interface IGameState {
   // the last round of game when the draw is empty
   actionsLeft: number;
   turnsHistory: ITurn[];
-  messages: IMessage[];
   reviewComments: IReviewComment[];
   createdAt: number;
   startedAt?: number;
@@ -36,7 +35,6 @@ export interface ILobbyState {
   status: IGameStatus.LOBBY;
   players: IMinimalPlayer[];
   options: IGameOptions;
-  messages: IMessage[];
   reviewComments: IReviewComment[];
   createdAt: number;
   synced: boolean;
@@ -219,6 +217,7 @@ export interface IMessage {
   content: string;
   from: number;
   turn: number;
+  sentAt: number;
 }
 
 export interface IPlayer {
@@ -247,7 +246,6 @@ export function rebuildLobby(state: IMinimalGameState): ILobbyState {
     status: IGameStatus.LOBBY,
     options: state.options,
     players: (state.players || []).map((player, index) => ({ ...omit(player, "hand"), index })),
-    messages: state.messages ?? [],
     reviewComments: state.reviewComments ?? [],
     createdAt: state.createdAt,
     synced: false,
@@ -276,7 +274,6 @@ export function rebuildGame(state: IMinimalGameState | null): IGameState | ILobb
     newState = commitAction(newState, turn.action);
   });
 
-  newState.messages = state.messages ?? [];
   newState.status = state.status;
   newState.createdAt = state.createdAt;
   newState.nextGameId = state.nextGameId ?? null;
@@ -288,7 +285,7 @@ export function rebuildGame(state: IMinimalGameState | null): IGameState | ILobb
 export function cleanState(state: IGameState | ILobbyState): Partial<IMinimalGameState> {
   const base: Partial<IMinimalGameState> = {
     ...omit(state, ["playedCards", "drawPile", "discardPile"]),
-    players: state.players.map((player) => omit(player, "hand")) as IMinimalPlayer[],
+    players: state.players.map((player) => omit(player, ["hand", "reaction", "notified"])) as IMinimalPlayer[],
   };
 
   if (isLobby(state)) {
@@ -314,7 +311,6 @@ export function fillEmptyValues<T extends IMinimalGameState>(state: T | null): T
     playedCards: [],
     drawPile: [],
     discardPile: [],
-    messages: [],
     players: (state.players || []).map((player) =>
       defaults(player, {
         hand: [],
