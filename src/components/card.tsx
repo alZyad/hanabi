@@ -246,6 +246,7 @@ interface Props {
   position?: number;
   selected?: boolean;
   chop?: boolean;
+  chopMoved?: boolean;
   playable?: boolean;
   size?: CardSize;
   className?: string;
@@ -269,6 +270,7 @@ function Card(props: Props) {
     position = null,
     selected = false,
     chop = false,
+    chopMoved = false,
     onSelectCard,
     focusPanelReady = true,
   } = props;
@@ -347,6 +349,13 @@ function Card(props: Props) {
 
       {/* Whether the card is on the chop */}
       {chop && <div className={classnames("chop-marker", { "chop-marker--large": size === CardSize.LARGE })} />}
+
+      {chopMoved && (
+        <div
+          className="absolute left-0 top-0 br--right br--bottom br-100 bg-cm"
+          style={{ width: "20%", aspectRatio: "1" }}
+        />
+      )}
 
       {/* show positive hints with a larger type */}
       {displayHints &&

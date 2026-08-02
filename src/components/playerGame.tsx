@@ -401,6 +401,7 @@ function PlayerGame(props: Props) {
                         <Card
                           card={card}
                           chop={userPreferences.showChopIndicator && (lockedHand || i === chopIndex)}
+                          chopMoved={!userPreferences.disableCardNotes && card.id !== undefined && isChopMoved(card.id)}
                           className={classnames({
                             "mr1 mr2-l": !selected && i < player.hand.length - 1,
                           })}
