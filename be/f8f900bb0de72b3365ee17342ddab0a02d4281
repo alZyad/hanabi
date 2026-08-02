@@ -1,0 +1,44 @@
+src/components/chatPopover.tsx
+  s_99711484407657::t_d5c9ac2507970d 1,11-12,17,30,40
+  s_99711484407657::t_8762b28c3cd244 60,63-64
+src/styles/style.css
+  s_99711484407657::t_4cc337e791ad6b 54
+src/components/playerRow.tsx
+  s_99711484407657::t_82ce61cbdf2403 6-8
+  s_99711484407657::t_9b154e2abcaff1 4-5,9
+src/components/playerGame.tsx
+  s_99711484407657::t_685225267b307f 396
+  s_99711484407657::t_e98efe6660d76a 252
+  s_99711484407657::t_f8bb7c8a01924c 247
+  s_99711484407657::t_f330c35b1ee9d1 420
+  s_99711484407657::t_aed4333dde2b0a 137
+  s_99711484407657::t_82ce61cbdf2403 403
+  s_99711484407657::t_895ecd9e30a840 253-267,269,271-301,303-325,327-343,345-346,348-361,364-370,372-377,380-391
+  s_99711484407657::t_3370f08479bf9a 468
+  s_99711484407657::t_b8fd2b4e45c0de 552
+  s_99711484407657::t_28b92f311e4dd9 195,201,206
+  s_99711484407657::t_303dad178cb6ff 194,198,205,207,214
+  s_99711484407657::t_9ff4a534088cba 251
+  s_99711484407657::t_b6d135e0443db8 394
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "bef8f900bb0de72b3365ee17342ddab0a02d4281",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_99711484407657": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "edb17c91-01c6-4509-a371-9cd76ea8de12",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
