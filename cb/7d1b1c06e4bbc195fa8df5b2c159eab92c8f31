@@ -1,0 +1,53 @@
+src/lib/firebase.ts
+  s_60e3c8a9a9535a::t_0d30a4aca60298 156-181,185,189
+  s_60e3c8a9a9535a::t_af2df439d9973d 16
+src/lib/state.ts
+  s_60e3c8a9a9535a::t_9b548adaeb9359 288
+  s_60e3c8a9a9535a::t_d11c7b59d4aacd 220
+src/lib/schemas/messages.ts
+  s_60e3c8a9a9535a::t_9988161fd4a933 1-21
+src/components/chatPopover.tsx
+  s_60e3c8a9a9535a::t_0dc9d4a984284c 35
+scripts/convertDatabase.ts
+  s_60e3c8a9a9535a::t_68cf3992f7485b 8
+  s_60e3c8a9a9535a::t_b17d24529c02ec 49
+  h_78d9c443c6c3a1 43
+  s_60e3c8a9a9535a::t_ff6d15912d72f7 50-52
+src/components/GameIndex.tsx
+  s_60e3c8a9a9535a::t_489ea1e603498a 12
+  s_60e3c8a9a9535a::t_618a84d5563273 29,49-56,59-60,62
+  s_60e3c8a9a9535a::t_7df6de033748e1 3,9-11,13-23
+scripts/migrateMessages.js
+  s_60e3c8a9a9535a::t_c223d69d345a83 7,13-27,31,36,63-65
+  s_60e3c8a9a9535a::t_404bf3bf59b2f6 1-6,8-12,28-30,32-35,37-62,66-75
+src/components/logs.tsx
+  s_60e3c8a9a9535a::t_e185dc80b2a9c8 25,28
+  s_60e3c8a9a9535a::t_2d33a4be9e001f 37
+  s_60e3c8a9a9535a::t_0dec3399cd17be 9
+src/hooks/messages.ts
+  s_60e3c8a9a9535a::t_f21b7bddbc74c5 1-13
+package.json
+  s_60e3c8a9a9535a::t_a922a21aa19709 10
+  s_60e3c8a9a9535a::t_a3fea813c3664d 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "cb7d1b1c06e4bbc195fa8df5b2c159eab92c8f31",
+  "prompts": {},
+  "humans": {
+    "h_78d9c443c6c3a1": {
+      "author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  },
+  "sessions": {
+    "s_60e3c8a9a9535a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c5d56e8-13d0-456b-a175-9d8a17363006",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}

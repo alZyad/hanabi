@@ -1,0 +1,70 @@
+src/lib/tutorial.tsx
+  s_7a446988fa9852::t_4d3068a7b00b66 81
+  s_7a446988fa9852::t_f3cf2ca651aa2a 111-112,160,196,200,207
+  s_7a446988fa9852::t_ca909845908ed7 93,95,101,131,144-145,150,195
+  s_7a446988fa9852::t_44e18efca27453 6
+src/components/userPreferencesDialog.tsx
+  s_7a446988fa9852::t_676ce1b87d5dcc 76-80
+  s_7a446988fa9852::t_96f9724041b958 36-39
+src/lib/schemas/storage.ts
+  s_7a446988fa9852::t_80dbbd28862b47 27
+src/components/playerGame.tsx
+  s_7a446988fa9852::t_d171acfdfbd663 407,433
+  s_7a446988fa9852::t_102c1b91fe4766 25
+  s_7a446988fa9852::t_12fb90e24617ac 150
+src/components/gameStats.tsx
+  s_7a446988fa9852::t_2f486fb5198726 8
+  s_7a446988fa9852::t_93da1136b58d50 238
+  s_7a446988fa9852::t_18e103274e8f85 132
+src/components/turn.tsx
+  s_7a446988fa9852::t_0a6afe81a52c6d 10
+  s_7a446988fa9852::t_3306ce4cc9595a 36
+  s_7a446988fa9852::t_626d2c2fde4464 90,100,122,132,143,153,174
+src/components/hint.tsx
+  s_7a446988fa9852::t_56a9164de7d918 5
+  s_7a446988fa9852::t_68b96a59ac1eb2 18,21
+src/components/lobbyView.tsx
+  s_7a446988fa9852::t_86d3156eb45276 14
+  s_7a446988fa9852::t_e6c655351f119c 79
+src/pages/_app.tsx
+  s_7a446988fa9852::t_a19a55a40aa713 10
+  s_7a446988fa9852::t_433e331bdf4d8e 22-23
+src/hooks/userPreferences.ts
+  s_7a446988fa9852::t_2d90b47e1e91d0 11
+  s_7a446988fa9852::t_617ab9887093aa 22
+  s_7a446988fa9852::t_f24b34bc93cc1d 77-81
+  s_7a446988fa9852::t_048aa5b2bf2383 28-56
+src/components/game.tsx
+  s_7a446988fa9852::t_f3cf2ca651aa2a 159
+src/components/discardArea.tsx
+  s_7a446988fa9852::t_3af66dbd8a615b 8
+  s_7a446988fa9852::t_dc2ebf2d3f0b69 46
+  s_7a446988fa9852::t_e8965a0948cade 69
+src/components/gameBoard.tsx
+  s_7a446988fa9852::t_da42e5b5be9555 24
+  s_7a446988fa9852::t_0e46e59539e4b9 57
+  s_7a446988fa9852::t_c8083e24e68495 8
+src/pages/learn.tsx
+  s_7a446988fa9852::t_e20ce95a4cda1d 16
+  s_7a446988fa9852::t_6e5ca75b333b02 347-350
+src/components/vignettes.tsx
+  s_7a446988fa9852::t_4a191b7f1d46a2 4
+  s_7a446988fa9852::t_0b9b7d93021062 28,44
+  s_7a446988fa9852::t_2db2dac3152edd 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "a10d88a3fe10227cb3a9bb830bbff24953bbce14",
+  "prompts": {},
+  "sessions": {
+    "s_7a446988fa9852": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbcc9ee4-df85-4231-98ab-c6e556996c90",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
