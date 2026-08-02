@@ -1,0 +1,47 @@
+src/locales/fr.ts
+  s_dba12421d5f0ab::t_29cf414f0867ac 3
+src/hooks/userPreferences.ts
+  s_dba12421d5f0ab::t_1869075b522f16 10
+  s_dba12421d5f0ab::t_e7a01970764fc2 21
+src/locales/es.ts
+  s_dba12421d5f0ab::t_7962987f1899d3 3
+src/locales/pt.ts
+  s_dba12421d5f0ab::t_40e59be4c83d8e 3
+src/locales/de.ts
+  s_dba12421d5f0ab::t_19a0a804b75c92 3
+src/locales/en.ts
+  s_dba12421d5f0ab::t_9497dea4c9f867 4
+src/components/playerGame.tsx
+  s_dba12421d5f0ab::t_9f0e4b43d61f59 403
+src/locales/it.ts
+  s_dba12421d5f0ab::t_0ed0efcad0587f 3
+src/locales/sk.ts
+  s_dba12421d5f0ab::t_8c15745707ecd8 3
+src/lib/schemas/storage.ts
+  s_dba12421d5f0ab::t_6f7830dfc3d2e6 26
+src/locales/nl.ts
+  s_dba12421d5f0ab::t_a5b8fa1c9dcd32 3
+src/components/userPreferencesDialog.tsx
+  s_dba12421d5f0ab::t_f841ad0f4ac2df 72,74
+  s_dba12421d5f0ab::t_85ed892852f26b 32-33
+src/locales/ru.ts
+  s_dba12421d5f0ab::t_68aa1baf1a3f90 8
+src/locales/zh.ts
+  s_dba12421d5f0ab::t_88f17a730b3332 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "a84bcbc50e1c807fc03d6ba7df37c885627d612e",
+  "prompts": {},
+  "sessions": {
+    "s_dba12421d5f0ab": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4c2aa761-004a-438f-b852-880c560db89f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
