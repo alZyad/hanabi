@@ -1,0 +1,26 @@
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_a363d1d93ba410 121
+  s_23093bdf7f201c::t_7b95746c2f0d6c 389
+  s_23093bdf7f201c::t_e47063e3052098 157-165
+  s_23093bdf7f201c::t_2a182bfc3cd731 402
+src/components/card.tsx
+  s_23093bdf7f201c::t_de6c66414e92e2 209
+  s_23093bdf7f201c::t_5a55d0eb993629 227
+  s_23093bdf7f201c::t_b46ba634b0c032 314
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "e88d65b18ccbb77f061526809016688c23f5b5e8",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}

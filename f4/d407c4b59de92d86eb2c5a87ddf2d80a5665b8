@@ -1,0 +1,19 @@
+src/components/playerGame.tsx
+  s_3fbb7c6db7793f::t_e679427186a473 357
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "f4d407c4b59de92d86eb2c5a87ddf2d80a5665b8",
+  "prompts": {},
+  "sessions": {
+    "s_3fbb7c6db7793f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0d39eb7-be69-4f6c-bf2e-9ab67184220e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
