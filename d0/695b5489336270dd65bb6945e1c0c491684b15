@@ -1,0 +1,54 @@
+src/locales/fr.ts
+  s_75637db3ddb040::t_74f9b9d388014a 240-242
+src/components/messagesTabs.tsx
+  s_75637db3ddb040::t_d5e0c793b65414 55
+  s_75637db3ddb040::t_32992feefc4164 34
+  s_75637db3ddb040::t_cc77046063e57e 1-33,35-54,56-114
+src/components/logs.tsx
+  s_75637db3ddb040::t_dd04cfcc463157 2,27-39,41-51
+src/locales/es.ts
+  s_75637db3ddb040::t_29d94f346b6995 238-240
+src/locales/pt.ts
+  s_75637db3ddb040::t_50a29a3bb3743e 237-239
+src/locales/it.ts
+  s_75637db3ddb040::t_706b5c439e5906 238-240
+src/components/chat.tsx
+  s_75637db3ddb040::t_35817034cee728 1,4,14-18
+  s_75637db3ddb040::t_9e13a4c2951e8f 2-3,5-13,19-41
+src/locales/de.ts
+  s_75637db3ddb040::t_f176c3a64578a2 240-242
+src/locales/nl.ts
+  s_75637db3ddb040::t_a9aeeec63571e0 232-234
+src/styles/animations.css
+  s_75637db3ddb040::t_61bdf2ab455c83 49-69
+src/locales/zh.ts
+  s_75637db3ddb040::t_ffc55fd0b2b4ae 235-237
+src/locales/ru.ts
+  s_75637db3ddb040::t_55b45e0f7c8b74 246-248
+src/locales/sk.ts
+  s_75637db3ddb040::t_0aca930ec7dc3d 250-252
+src/locales/en.ts
+  s_75637db3ddb040::t_89e818cb555f37 246-248
+src/components/game.tsx
+  s_75637db3ddb040::t_fac2bb1148e57c 443
+  s_75637db3ddb040::t_191f5d205fc4b9 459
+  s_75637db3ddb040::t_dede7334d2735e 456,458
+  s_75637db3ddb040::t_21de0a7e894374 457
+  s_75637db3ddb040::t_dd12ac319542af 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "d0695b5489336270dd65bb6945e1c0c491684b15",
+  "prompts": {},
+  "sessions": {
+    "s_75637db3ddb040": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a48c94c-4acb-496e-b14b-f55208675fee",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
