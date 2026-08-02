@@ -1,0 +1,19 @@
+src/hooks/cardNotes.ts
+  s_540b7ca7fbbb26::t_6fd5c8a1d89926 96-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "6c07197a4293af0cbefaa7d06d8c7ed1f960a47d",
+  "prompts": {},
+  "sessions": {
+    "s_540b7ca7fbbb26": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "edeff565-fdae-4f75-a9e9-dd2ce78d2b62",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
