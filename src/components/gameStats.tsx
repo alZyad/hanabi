@@ -5,6 +5,7 @@ import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame } from "~/hooks/game";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import useLongPress from "~/hooks/longPress";
 import { getStateAtTurn, isPlayable } from "~/lib/actions";
 import { isCardDangerous, isCardEverPlayable } from "~/lib/ai";
@@ -128,6 +129,7 @@ function Dot(props: DotProps) {
 
 export default function GameStats() {
   const game = useGame();
+  const colorBlindMode = useColorBlindMode();
   const [displayCards, setDisplayCards] = useState(false);
   const longPressProps = useLongPress(() => {
     setDisplayCards(!displayCards);
@@ -233,7 +235,7 @@ export default function GameStats() {
                           {displayCards && (
                             <Card
                               card={card}
-                              colorBlindMode={game.options.colorBlindMode}
+                              colorBlindMode={colorBlindMode}
                               context={ICardContext.OTHER}
                               hintsLevel={game.options.hintsLevel}
                               size={CardSize.XSMALL}

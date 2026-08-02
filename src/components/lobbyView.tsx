@@ -11,7 +11,7 @@ import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useLocalStorage from "~/hooks/localStorage";
-import { colorBlindModeSchema } from "~/lib/schemas/storage";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import { useSession } from "~/hooks/session";
 import {
   deckSize,
@@ -76,7 +76,7 @@ export default function LobbyView(props: Props) {
 
   const { playerId } = useSession();
   const [, setGameId] = useLocalStorage<string | null>("gameId", null);
-  const [colorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
+  const colorBlindMode = useColorBlindMode();
   const [name, setName] = useState("");
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);

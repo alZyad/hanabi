@@ -5,6 +5,7 @@ import HomeButton from "~/components/homeButton";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import { getMaximumPossibleScore, getMaximumScore, getScore } from "~/lib/actions";
 import { IGameStatus } from "~/lib/state";
 
@@ -20,6 +21,7 @@ export default function GameBoard(props: Props) {
   const { t } = useTranslation();
 
   const game = useGame();
+  const colorBlindMode = useColorBlindMode();
   const selfPlayer = useSelfPlayer(game);
   const score = getScore(game);
   const maxScore = getMaximumScore(game);
@@ -52,7 +54,7 @@ export default function GameBoard(props: Props) {
       </div>
 
       <Board
-        colorBlindMode={game.options.colorBlindMode}
+        colorBlindMode={colorBlindMode}
         deckCount={game.drawPile.length}
         hints={game.tokens.hints}
         playedCards={game.playedCards}

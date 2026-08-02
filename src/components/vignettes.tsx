@@ -1,6 +1,7 @@
 import React from "react";
 import Vignette from "~/components/vignette";
 import { useGame } from "~/hooks/game";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import { getHintableColors, numbers } from "~/lib/actions";
 import { GameVariant, IHintAction } from "~/lib/state";
 
@@ -13,6 +14,7 @@ export default function Vignettes(props: Props) {
   const { onSelect, pendingHint } = props;
 
   const game = useGame();
+  const colorBlindMode = useColorBlindMode();
   const colors = getHintableColors(game);
 
   const hintableNumbers = game.options.variant === GameVariant.SEQUENCE ? numbers.slice(1) : numbers;
@@ -23,7 +25,7 @@ export default function Vignettes(props: Props) {
         {colors.map((color, i) => (
           <Vignette
             key={i}
-            colorBlindMode={game.options.colorBlindMode}
+            colorBlindMode={colorBlindMode}
             selected={pendingHint.type === "color" && pendingHint.value === color}
             type="color"
             value={color}
@@ -39,7 +41,7 @@ export default function Vignettes(props: Props) {
         {hintableNumbers.map((number) => (
           <Vignette
             key={number}
-            colorBlindMode={game.options.colorBlindMode}
+            colorBlindMode={colorBlindMode}
             selected={pendingHint.type === "number" && pendingHint.value === number}
             type="number"
             value={number}

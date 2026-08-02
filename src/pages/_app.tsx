@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import useConnectivity from "~/hooks/connectivity";
+import { migrateLegacyColorBlindMode } from "~/hooks/userPreferences";
 import { initAnalytics, logPageView } from "~/lib/analytics";
 import { i18n } from "~/lib/i18n";
 import "../styles/style.css";
@@ -17,6 +18,8 @@ Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
   environment: process.env.NODE_ENV,
 });
+
+migrateLegacyColorBlindMode();
 
 Router.events.on("routeChangeComplete", () => logPageView());
 

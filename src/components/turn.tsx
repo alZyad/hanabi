@@ -7,6 +7,7 @@ import PlayerName from "~/components/playerName";
 import { ReviewCommentPopover } from "~/components/reviewComments";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import {
   GameMode,
   GameVariant,
@@ -32,6 +33,7 @@ interface Props {
 export default function Turn(props: Props) {
   const { turn, showDrawn, showPosition = true } = props;
   const game = useGame();
+  const colorBlindMode = useColorBlindMode();
   const selfPlayer = useSelfPlayer(game);
 
   const isViewingOwnActions = turn.action.from === selfPlayer?.index;
@@ -85,7 +87,7 @@ export default function Turn(props: Props) {
         You discarded your
         <TurnCard
           card={turn.action.card}
-          colorBlindMode={game.options.colorBlindMode}
+          colorBlindMode={colorBlindMode}
           context={ICardContext.DISCARDED}
           variant={game.options.variant}
         />
@@ -95,7 +97,7 @@ export default function Turn(props: Props) {
         {playerNameFrom} discarded their
         <TurnCard
           card={turn.action.card}
-          colorBlindMode={game.options.colorBlindMode}
+          colorBlindMode={colorBlindMode}
           context={ICardContext.DISCARDED}
           variant={game.options.variant}
         />
@@ -117,7 +119,7 @@ export default function Turn(props: Props) {
           You caused a <span className="txt-strike">strike</span> playing
           <TurnCard
             card={turn.action.card}
-            colorBlindMode={game.options.colorBlindMode}
+            colorBlindMode={colorBlindMode}
             context={ICardContext.PLAYED}
             variant={game.options.variant}
           />
@@ -127,7 +129,7 @@ export default function Turn(props: Props) {
           You played
           <TurnCard
             card={turn.action.card}
-            colorBlindMode={game.options.colorBlindMode}
+            colorBlindMode={colorBlindMode}
             context={ICardContext.PLAYED}
             variant={game.options.variant}
           />
@@ -138,7 +140,7 @@ export default function Turn(props: Props) {
         {playerNameFrom} caused a <span className="txt-strike">strike</span> playing
         <TurnCard
           card={turn.action.card}
-          colorBlindMode={game.options.colorBlindMode}
+          colorBlindMode={colorBlindMode}
           context={ICardContext.PLAYED}
           variant={game.options.variant}
         />
@@ -148,7 +150,7 @@ export default function Turn(props: Props) {
         {playerNameFrom} played
         <TurnCard
           card={turn.action.card}
-          colorBlindMode={game.options.colorBlindMode}
+          colorBlindMode={colorBlindMode}
           context={ICardContext.PLAYED}
           variant={game.options.variant}
         />
@@ -169,7 +171,7 @@ export default function Turn(props: Props) {
     drawnTurn = (
       <Trans i18nKey={isViewingOwnActions ? "whatYouDrewTurn" : "whatTheyDrewTurn"}>
         and drew
-        <DrawnCard card={turn.card} colorBlindMode={game.options.colorBlindMode} variant={game.options.variant} />
+        <DrawnCard card={turn.card} colorBlindMode={colorBlindMode} variant={game.options.variant} />
       </Trans>
     );
   }

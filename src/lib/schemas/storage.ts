@@ -24,6 +24,7 @@ export const userPreferencesSchema = z
     codedHintMarkers: z.boolean().optional().catch(undefined),
     disableCardNotes: z.boolean().optional().catch(undefined),
     disableChopIndicator: z.boolean().optional().catch(undefined),
+    colorBlindMode: z.boolean().optional().catch(undefined),
   })
   .catch({});
 
@@ -43,5 +44,3 @@ const gameNotesSchema = z
 export const notesStoreSchema = z.record(z.string(), gameNotesSchema).catch({});
 
 export const tutorialStepSchema = z.number().int().nonnegative();
-
-export const colorBlindModeSchema = z.boolean();

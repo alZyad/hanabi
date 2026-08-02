@@ -13,7 +13,7 @@ import Txt, { TxtSize } from "~/components/ui/txt";
 import { Paragraph, Subtitle, Title } from "~/components/ui/typography";
 import Vignette from "~/components/vignette";
 import useLocalStorage from "~/hooks/localStorage";
-import { colorBlindModeSchema } from "~/lib/schemas/storage";
+import { userPreferencesSchema } from "~/lib/schemas/storage";
 import { getColors, newGame, numbers } from "~/lib/actions";
 import { posedDiv } from "~/lib/posed";
 import { logEvent } from "~/lib/analytics";
@@ -344,7 +344,10 @@ const Step = posedDiv({
 
 export default function Learn() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [colorBlindMode, setColorBlindMode] = useLocalStorage("colorBlindMode", false, colorBlindModeSchema);
+  const [userPreferences, setUserPreferences] = useLocalStorage("userPreferences", {}, userPreferencesSchema);
+  const colorBlindMode = Boolean(userPreferences.colorBlindMode);
+  const setColorBlindMode = (newColorBlindMode: boolean) =>
+    setUserPreferences({ ...userPreferences, colorBlindMode: newColorBlindMode });
   const steps = useSteps(colorBlindMode, setColorBlindMode);
   const router = useRouter();
   const { t } = useTranslation();
@@ -361,7 +364,6 @@ export default function Learn() {
       variant: GameVariant.CLASSIC,
       seed: "tutorial",
       gameMode: GameMode.NETWORK,
-      colorBlindMode: colorBlindMode,
       allowRollback: false,
       botsWait: 2000,
       hintsLevel: IGameHintsLevel.ALL,

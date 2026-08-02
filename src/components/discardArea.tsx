@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import Card, { CardSize, ICardContext } from "~/components/card";
 import Txt from "~/components/ui/txt";
 import { useGame } from "~/hooks/game";
+import { useColorBlindMode } from "~/hooks/userPreferences";
 import { useStableCards } from "~/hooks/stableCards";
 import { getColors } from "~/lib/actions";
 import { GameVariant, ICard, IColor, IGameHintsLevel } from "~/lib/state";
@@ -42,6 +43,7 @@ function CardPile(props: CardPileProps) {
 
 export default function DiscardArea() {
   const game = useGame();
+  const colorBlindMode = useColorBlindMode();
   const { t } = useTranslation();
 
   const discardPile = useStableCards(game.discardPile);
@@ -64,7 +66,7 @@ export default function DiscardArea() {
                   key={color}
                   cards={byColor[color] || []}
                   color={color}
-                  colorBlindMode={game.options.colorBlindMode}
+                  colorBlindMode={colorBlindMode}
                   hintsLevel={game.options.hintsLevel}
                   variant={game.options.variant}
                 />

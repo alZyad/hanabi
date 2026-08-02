@@ -22,7 +22,7 @@ import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
 import { useCardNotes } from "~/hooks/cardNotes";
 import { useStableCards } from "~/hooks/stableCards";
 import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
-import { useUserPreferences } from "~/hooks/userPreferences";
+import { useColorBlindMode, useUserPreferences } from "~/hooks/userPreferences";
 import { useReplay } from "~/hooks/replay";
 import { matchColor, matchNumber, MaxHints } from "~/lib/actions";
 import { posedDiv } from "~/lib/posed";
@@ -147,6 +147,7 @@ function PlayerGame(props: Props) {
   const chopIndex = getChopIndex(hand, isChopMoved);
   const lockedHand = chopIndex === -1;
   const [userPreferences] = useUserPreferences();
+  const colorBlindMode = useColorBlindMode();
 
   function nothingInvoked() {
     return chatOpen === false && reactionsOpen === false;
@@ -403,7 +404,7 @@ function PlayerGame(props: Props) {
                           className={classnames({
                             "mr1 mr2-l": !selected && i < player.hand.length - 1,
                           })}
-                          colorBlindMode={game.options.colorBlindMode}
+                          colorBlindMode={colorBlindMode}
                           context={cardContext}
                           focusPanelReady={focusReady}
                           hidden={hideCards}
@@ -429,7 +430,7 @@ function PlayerGame(props: Props) {
                             <div>
                               <CardNotesArea
                                 card={card}
-                                colorBlindMode={game.options.colorBlindMode}
+                                colorBlindMode={colorBlindMode}
                                 gameId={game.id}
                                 variant={game.options.variant}
                               />

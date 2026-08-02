@@ -139,7 +139,6 @@ export function Game(props: Props) {
       botsWait: 1000,
       turnsHistory: false,
       gameMode: GameMode.NETWORK,
-      colorBlindMode: game.options.colorBlindMode,
     });
 
     game.players.forEach((player) => {
@@ -157,15 +156,7 @@ export function Game(props: Props) {
     }
 
     setReachableScore(getScore(sameGame));
-  }, [
-    game.status,
-    game.id,
-    game.options.colorBlindMode,
-    game.options.playersCount,
-    game.options.seed,
-    game.options.variant,
-    game.players,
-  ]);
+  }, [game.status, game.id, game.options.playersCount, game.options.seed, game.options.variant, game.players]);
 
   const fillBots = useCallback(async () => {
     let newState = game;

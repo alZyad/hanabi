@@ -61,7 +61,6 @@ const optionsSchema = z.object({
   preventLoss: droppableBool,
   private: droppableBool,
   turnsHistory: droppableBool,
-  colorBlindMode: droppableBool,
   tutorial: z.boolean().optional().catch(undefined),
 });
 

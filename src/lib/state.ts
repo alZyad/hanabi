@@ -76,7 +76,6 @@ export interface IGameOptions {
   turnsHistory: boolean;
   botsWait: number;
   gameMode: GameMode;
-  colorBlindMode: boolean;
   tutorial?: boolean;
 }
 
