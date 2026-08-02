@@ -46,3 +46,24 @@
 .card-land {
   animation: CardLand 260ms ease-out backwards;
 }
+
+@keyframes BadgePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.badge-pop {
+  animation: BadgePop 200ms ease-out backwards;
+}

@@ -5,7 +5,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
 import DiscardArea from "~/components/discardArea";
 import GameBoard from "~/components/gameBoard";
-import Logs from "~/components/logs";
+import MessagesTabs from "~/components/messagesTabs";
 import MenuArea from "~/components/menuArea";
 import PlayersBoard from "~/components/playersBoard";
 import ReplayViewer from "~/components/replayViewer";
@@ -440,7 +440,7 @@ export function Game(props: Props) {
   return (
     <>
       <div className="game bg-main-dark relative flex flex-column w-100 h-100">
-        <div className="bg-black-50 pa2 pv2-l ph6.5-m">
+        <div className="bg-black-50 pt2 ph2 ph6.5-m">
           <GameBoard onMenuClick={onMenuClick} onRollbackClick={onRollbackClick} />
         </div>
         <div className="flex flex-column bg-black-50 bb b--yellow ph6.5-m">
@@ -453,10 +453,10 @@ export function Game(props: Props) {
           )}
 
           {game.status !== IGameStatus.LOBBY && selectedArea.type !== ActionAreaType.ROLLBACK && (
-            <div className="h4 pt0-l overflow-y-scroll">
-              <div className="flex justify-between h-100 pa1 pa2-l">
-                <Logs interturn={interturn} />
-                <div className="flex flex-column justify-between items-end">
+            <div className="pt0-l">
+              <div className="flex justify-between pl1 pl2-l" style={{ height: "10rem" }}>
+                <MessagesTabs interturn={interturn} />
+                <div className="flex flex-column justify-between items-end flex-shrink-0 pt3 ph1 pb1 ph2-l pb2-l">
                   <Tutorial placement="left" step={ITutorialStep.DISCARD_PILE}>
                     <DiscardArea />
                   </Tutorial>
