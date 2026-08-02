@@ -1,0 +1,46 @@
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_396fb1a3ea87ab 411-416
+  s_23093bdf7f201c::t_45d25fff3d6cb2 22
+  s_23093bdf7f201c::t_6284dbb684d331 378
+  s_23093bdf7f201c::t_d4228190860926 130
+src/styles/tachyons-overrides.css
+  s_23093bdf7f201c::t_6cf218c55f66eb 256-260
+  s_23093bdf7f201c::t_bb93a04c08c2b4 209-242
+  s_23093bdf7f201c::t_b9d522d020f9de 173-208
+src/components/cardNotesArea.tsx
+  s_23093bdf7f201c::t_04a2ebf2d202cc 70
+  s_23093bdf7f201c::t_f394fca1ef7d0d 54-55,57-58,65
+  s_23093bdf7f201c::t_a64abfabcf950d 7,11-13,20-21,25,27
+  s_23093bdf7f201c::t_26e888af8995d4 83-84
+src/components/playedCards.tsx
+  s_23093bdf7f201c::t_c6a41a01726f68 65
+  s_23093bdf7f201c::t_7b083dd66193ad 2,9-15
+  s_23093bdf7f201c::t_71d12e5c219e45 5
+  s_23093bdf7f201c::t_4a49f65ceb61bb 26-27
+  s_23093bdf7f201c::t_391a9e76fc8072 16
+src/hooks/stableCards.ts
+  s_23093bdf7f201c::t_84bdf5d2bc55c4 1-16
+src/components/card.tsx
+  s_23093bdf7f201c::t_c30ead4ae99e47 195-229
+  s_23093bdf7f201c::t_f0afd4e1dccf47 8
+  s_23093bdf7f201c::t_422b80c0134edd 359
+src/components/discardArea.tsx
+  s_23093bdf7f201c::t_6cebe25be0f9ac 47,49
+  s_23093bdf7f201c::t_b56a4c927ad81f 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "aecfcad244eda05ebbedbbb631dfcd2c3a9a5c57",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}

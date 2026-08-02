@@ -1,0 +1,23 @@
+src/styles/animations.css
+  s_23093bdf7f201c::t_3b4fea4646251d 28-48
+src/components/discardArea.tsx
+  s_23093bdf7f201c::t_de2985c0ddf137 28,30
+src/components/playedCards.tsx
+  s_23093bdf7f201c::t_c4c4ce79ee7ac0 48,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "dc1a2985ddd0b9b4865779ccb43bb9e74327fd34",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
