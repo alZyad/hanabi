@@ -1,0 +1,27 @@
+src/components/chopMoveButton.tsx
+  s_23093bdf7f201c::t_11fb369062e334 1-24
+src/components/cardNotesArea.tsx
+  s_23093bdf7f201c::t_05e192f87d59f5 74
+  s_23093bdf7f201c::t_57affae40fb7a4 3
+src/components/playerGame.tsx
+  s_23093bdf7f201c::t_ae01ecb256612e 422-429
+  s_23093bdf7f201c::t_d25d013d8148fc 175
+  s_23093bdf7f201c::t_66631b81649105 130
+  s_23093bdf7f201c::t_6f28312260e2e4 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "bd32abba00c21fe0f4c43a7684f15bc9ec826261",
+  "prompts": {},
+  "sessions": {
+    "s_23093bdf7f201c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c51e75b-5e12-4d18-8722-047e781e9bd4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
