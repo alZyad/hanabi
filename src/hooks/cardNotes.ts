@@ -93,10 +93,10 @@ export function useCardNotes(gameId: string) {
     [gameId]
   );
 
-  const isChopMoved = useCallback((cardId: number) => store[gameId]?.chopMoved?.includes(String(cardId)) ?? false, [
-    store,
-    gameId,
-  ]);
+  const isChopMoved = useCallback(
+    (cardId: number) => store[gameId]?.chopMoved?.includes(String(cardId)) ?? false,
+    [store, gameId]
+  );
 
   const toggleChopMoved = useCallback(
     (cardId: number) => {
