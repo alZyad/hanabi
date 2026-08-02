@@ -52,6 +52,7 @@ interface CardWrapperProps extends HTMLAttributes<HTMLElement> {
   color: string;
   colorBlindMode: boolean;
   size?: CardSize;
+  symbolInValueArea?: boolean;
   playable?: boolean;
   context?: ICardContext;
   className?: string;
@@ -65,6 +66,7 @@ export function CardWrapper(props: CardWrapperProps) {
     color,
     colorBlindMode,
     size = CardSize.MEDIUM,
+    symbolInValueArea = false,
     playable = false,
     context,
     className = "",
@@ -92,7 +94,14 @@ export function CardWrapper(props: CardWrapperProps) {
       onClick={onClick}
       {...attributes}
     >
-      {colorBlindMode && <ColorSymbol color={color as IColor} />}
+      {colorBlindMode &&
+        (symbolInValueArea ? (
+          <div className="fh-value-area absolute">
+            <ColorSymbol color={color as IColor} />
+          </div>
+        ) : (
+          <ColorSymbol color={color as IColor} />
+        ))}
       {children}
     </div>
   );
@@ -292,6 +301,7 @@ function Card(props: Props) {
       data-card={position !== null ? PositionMap[position] : undefined}
       playable={playable}
       size={size}
+      symbolInValueArea={displayHints && size === CardSize.LARGE}
       style={{
         ...style,
         ...(selected && { transform: "scale(1.20)" }),

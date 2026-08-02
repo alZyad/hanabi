@@ -166,8 +166,7 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  padding-bottom: 2.5rem;
+  bottom: 2.5rem;
 }
 
 .fh-panel {
@@ -265,7 +264,7 @@
   }
 
   .fh-value-area {
-    padding-bottom: 2.8rem;
+    bottom: 2.8rem;
   }
 
   .fh-chip--color {
