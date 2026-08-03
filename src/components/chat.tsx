@@ -44,6 +44,10 @@ function Message(props: MessageProps) {
 
   return (
     <div className="lavender">
+      <Txt className="di gray" size={TxtSize.XSMALL}>
+        {message.turn}
+      </Txt>
+      <span>&nbsp;</span>
       <Trans i18nKey="message">
         <Txt size={TxtSize.SMALL} value={player?.name} />
         <Txt className="white" size={TxtSize.SMALL} value={message.content} />
