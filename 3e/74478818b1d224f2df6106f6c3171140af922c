@@ -1,0 +1,19 @@
+src/components/messagesSection.desktop.tsx
+  s_891cf73c979373::t_2b1f720a1e8a81 2,4,11,13-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "3e74478818b1d224f2df6106f6c3171140af922c",
+  "prompts": {},
+  "sessions": {
+    "s_891cf73c979373": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a68826c1-2126-4945-b607-20837ac620d1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
