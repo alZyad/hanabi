@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Chat from "~/components/chat";
 import Logs from "~/components/logs";
 import Txt, { TxtSize } from "~/components/ui/txt";
-import { useGame } from "~/hooks/game";
+import { useGame, useSelfPlayer } from "~/hooks/game";
 import { useMessages } from "~/hooks/messages";
 
 type Tab = "history" | "chat";
@@ -17,6 +17,7 @@ export default function MessagesTabs(props: Props) {
   const { interturn } = props;
   const { t } = useTranslation();
   const game = useGame();
+  const selfPlayer = useSelfPlayer(game);
   const { messages, loaded } = useMessages(game.id);
 
   const turnsCount = game.turnsHistory.length;
@@ -53,7 +54,10 @@ export default function MessagesTabs(props: Props) {
   }, [activeTab, messagesCount, loaded]);
 
   const unreadHistory = Math.max(0, turnsCount - seenTurns);
-  const unreadChat = Math.max(0, messagesCount - seenMessages);
+  // Count only messages from other players: a message you sent yourself (via the
+  // chat popover, which is available regardless of the active tab) should never
+  // raise an unread badge on your own screen.
+  const unreadChat = messages.slice(seenMessages).filter((message) => message.from !== selfPlayer?.index).length;
 
   return (
     <div className="flex flex-column flex-grow-1 h-100 mr2" style={{ minWidth: 0 }}>
