@@ -1,0 +1,19 @@
+src/styles/tachyons-overrides.css
+  s_891cf73c979373::t_36e8838f217bc0 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "8724c51d7c41b30092614c4c370dc6fb3d5d99a1",
+  "prompts": {},
+  "sessions": {
+    "s_891cf73c979373": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a68826c1-2126-4945-b607-20837ac620d1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
