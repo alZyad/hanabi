@@ -1,0 +1,19 @@
+src/components/chat.tsx
+  s_891cf73c979373::t_7d984807737764 47-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "8d1e6f2e38ba22dbf038dda1bddc83e476bdf713",
+  "prompts": {},
+  "sessions": {
+    "s_891cf73c979373": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a68826c1-2126-4945-b607-20837ac620d1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
