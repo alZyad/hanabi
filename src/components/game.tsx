@@ -3,14 +3,13 @@ import { useRouter } from "next/router";
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
-import DiscardArea from "~/components/discardArea";
 import GameBoard from "~/components/gameBoard";
-import MessagesTabs from "~/components/messagesTabs";
+import MessagesSection from "~/components/messagesSection";
 import MenuArea from "~/components/menuArea";
 import PlayersBoard from "~/components/playersBoard";
 import ReplayViewer from "~/components/replayViewer";
 import RollbackArea from "~/components/rollbackArea";
-import Tutorial, { ITutorialStep, TutorialContext } from "~/components/tutorial";
+import { TutorialContext } from "~/components/tutorial";
 import TutorialInstructions from "~/components/tutorialInstructions";
 import Button, { ButtonSize } from "~/components/ui/button";
 import Txt, { TxtSize } from "~/components/ui/txt";
@@ -453,29 +452,7 @@ export function Game(props: Props) {
           )}
 
           {game.status !== IGameStatus.LOBBY && selectedArea.type !== ActionAreaType.ROLLBACK && (
-            <div className="pt0-l">
-              <div className="flex justify-between pl1 pl2-l" style={{ height: "10rem" }}>
-                <MessagesTabs interturn={interturn} />
-                <div className="flex flex-column justify-between items-end flex-shrink-0 pt3 ph1 pb1 ph2-l pb2-l">
-                  <Tutorial placement="left" step={ITutorialStep.DISCARD_PILE}>
-                    <DiscardArea />
-                  </Tutorial>
-                  <Button
-                    void
-                    className="tracked-tight"
-                    size={ButtonSize.TINY}
-                    text={replay.cursor === null ? t("rewind") : t("backToGame")}
-                    onClick={() => {
-                      if (replay.cursor === null) {
-                        onReplay();
-                      } else {
-                        onStopReplay();
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
+            <MessagesSection interturn={interturn} onReplay={onReplay} onStopReplay={onStopReplay} />
           )}
         </div>
 
