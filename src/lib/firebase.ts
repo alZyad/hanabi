@@ -70,11 +70,11 @@ export function subscribeToPublicGames(callback: (games: IMinimalGameState[]) =>
     .orderByChild("createdAt")
     .startAt(Date.now() - 10 * 60 * 1000);
 
-  ref.on("value", (event) => {
+  const handler = ref.on("value", (event) => {
     callback(toPublicGames(event.val()));
   });
 
-  return () => ref.off();
+  return () => ref.off("value", handler);
 }
 
 export async function loadGame(gameId: string): Promise<LoadGameResult> {
@@ -129,7 +129,7 @@ export function subscribeToGame(
 
   const ref = database().ref(`/games/${gameId}`);
 
-  ref.on("value", (event) => {
+  const handler = ref.on("value", (event) => {
     const result = toLoadResult(event.val());
     if (result.ok) {
       callback(result.game);
@@ -138,7 +138,7 @@ export function subscribeToGame(
     }
   });
 
-  return () => ref.off();
+  return () => ref.off("value", handler);
 }
 
 export async function updateGame(game: IGameState | ILobbyState) {
@@ -159,11 +159,15 @@ export async function addMessage(gameId: string, message: IMessage) {
 export function subscribeToMessages(gameId: string, callback: (messages: IMessage[]) => void) {
   const ref = database().ref(`/messages/${gameId}`);
 
-  ref.on("value", (event) => {
+  // Keep a reference to this specific handler so cleanup only detaches our own
+  // listener. Calling `ref.off()` with no arguments would remove *every* "value"
+  // listener at this path, tearing down other components subscribed to the same
+  // messages (e.g. the always-mounted MessagesTabs badge) when this one unmounts.
+  const handler = ref.on("value", (event) => {
     callback(parseMessages(event.val()));
   });
 
-  return () => ref.off();
+  return () => ref.off("value", handler);
 }
 
 export interface IPlayerState {
@@ -174,11 +178,11 @@ export interface IPlayerState {
 export function subscribeToPlayerStates(gameId: string, callback: (states: Record<number, IPlayerState>) => void) {
   const ref = database().ref(`/playerStates/${gameId}`);
 
-  ref.on("value", (event) => {
+  const handler = ref.on("value", (event) => {
     callback((event.val() ?? {}) as Record<number, IPlayerState>);
   });
 
-  return () => ref.off();
+  return () => ref.off("value", handler);
 }
 
 export async function setReaction(game: IGameState, player: IPlayer, reaction: string | null) {
