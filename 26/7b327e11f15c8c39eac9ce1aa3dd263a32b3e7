@@ -1,0 +1,31 @@
+src/components/logs.tsx
+  s_891cf73c979373::t_6e89766bd63257 14,18,26,31-33,40-47
+  s_891cf73c979373::t_8f8190ca4ea864 65
+src/styles/animations.css
+  s_891cf73c979373::t_91498b2c40989c 70-71,73,76-77
+  s_891cf73c979373::t_f32b90c590d62f 74
+  s_891cf73c979373::t_888cf0cde90c2f 72,75
+src/components/chat.tsx
+  s_891cf73c979373::t_1220b57ba7c80b 8-13,18-19,23-29
+src/components/messagesTabs.tsx
+  s_891cf73c979373::t_77c09952dc7841 29-30,36-37,42-47
+  s_891cf73c979373::t_adea781f60c998 83,89,94-98
+  s_891cf73c979373::t_a3e23817f49e2d 73-75
+  s_891cf73c979373::t_ee7eca5ad100bc 48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "267b327e11f15c8c39eac9ce1aa3dd263a32b3e7",
+  "prompts": {},
+  "sessions": {
+    "s_891cf73c979373": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a68826c1-2126-4945-b607-20837ac620d1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
