@@ -67,3 +67,11 @@
 .badge-pop {
   animation: BadgePop 200ms ease-out backwards;
 }
+
+.new-items-divider {
+  width: 50%;
+  height: 0;
+  margin: 0.35rem 0 0.35rem 12.5%;
+  border-top: 1px solid var(--color-white);
+  opacity: 0.55;
+}

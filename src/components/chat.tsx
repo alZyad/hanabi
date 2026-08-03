@@ -5,16 +5,28 @@ import { useGame } from "~/hooks/game";
 import { useMessages } from "~/hooks/messages";
 import { IMessage } from "~/lib/state";
 
-export default function Chat() {
+interface Props {
+  dividerAfter?: number;
+}
+
+export default function Chat(props: Props) {
+  const { dividerAfter } = props;
   const { t } = useTranslation();
   const game = useGame();
   const { messages } = useMessages(game.id);
 
+  const reversed = [...messages].reverse();
+
   return (
     <div>
       {messages.length === 0 && <Txt className="gray" size={TxtSize.SMALL} value={t("noMessagesYet")} />}
-      {[...messages].reverse().map((message) => (
-        <Message key={message.id} message={message} />
+      {reversed.map((message, i) => (
+        <React.Fragment key={message.id}>
+          <Message message={message} />
+          {dividerAfter !== undefined && i === dividerAfter - 1 && i < reversed.length - 1 && (
+            <div className="new-items-divider" />
+          )}
+        </React.Fragment>
       ))}
     </div>
   );

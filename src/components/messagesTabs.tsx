@@ -9,6 +9,14 @@ import { useMessages } from "~/hooks/messages";
 
 type Tab = "history" | "chat";
 
+function countNewFromOthers(authors: number[], since: number, self: number | undefined): number {
+  for (let i = since; i < authors.length; i++) {
+    if (authors[i] !== self) return authors.length - i;
+  }
+
+  return 0;
+}
+
 interface Props {
   interturn: boolean;
 }
@@ -26,14 +34,25 @@ export default function MessagesTabs(props: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("history");
   const [seenTurns, setSeenTurns] = useState(turnsCount);
   const [seenMessages, setSeenMessages] = useState(0);
+  const [historyDividerAt, setHistoryDividerAt] = useState(turnsCount);
+  const [chatDividerAt, setChatDividerAt] = useState(0);
   const messagesBaselined = useRef(false);
 
   useEffect(() => {
     setSeenTurns(game.turnsHistory.length);
     setSeenMessages(0);
+    setHistoryDividerAt(game.turnsHistory.length);
+    setChatDividerAt(0);
     messagesBaselined.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game.id]);
+
+  function openTab(tab: Tab) {
+    if (tab === activeTab) return;
+    if (tab === "history") setHistoryDividerAt(seenTurns);
+    else setChatDividerAt(seenMessages);
+    setActiveTab(tab);
+  }
 
   useEffect(() => {
     if (activeTab === "history") setSeenTurns(turnsCount);
@@ -59,6 +78,17 @@ export default function MessagesTabs(props: Props) {
   // raise an unread badge on your own screen.
   const unreadChat = messages.slice(seenMessages).filter((message) => message.from !== selfPlayer?.index).length;
 
+  const newHistory = countNewFromOthers(
+    game.turnsHistory.map((turn) => turn.action.from),
+    historyDividerAt,
+    selfPlayer?.index
+  );
+  const newChat = countNewFromOthers(
+    messages.map((message) => message.from),
+    chatDividerAt,
+    selfPlayer?.index
+  );
+
   return (
     <div className="flex flex-column flex-grow-1 h-100 mr2" style={{ minWidth: 0 }}>
       <div className="flex items-center" style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
@@ -66,18 +96,22 @@ export default function MessagesTabs(props: Props) {
           active={activeTab === "history"}
           label={t("history")}
           unread={activeTab === "history" ? 0 : unreadHistory}
-          onClick={() => setActiveTab("history")}
+          onClick={() => openTab("history")}
         />
         <Tab
           active={activeTab === "chat"}
           label={t("chat")}
           unread={activeTab === "chat" ? 0 : unreadChat}
-          onClick={() => setActiveTab("chat")}
+          onClick={() => openTab("chat")}
         />
       </div>
 
       <div className="flex-grow-1 overflow-y-scroll pt1">
-        {activeTab === "history" ? <Logs interturn={interturn} /> : <Chat />}
+        {activeTab === "history" ? (
+          <Logs dividerAfter={newHistory} interturn={interturn} />
+        ) : (
+          <Chat dividerAfter={newChat} />
+        )}
       </div>
     </div>
   );

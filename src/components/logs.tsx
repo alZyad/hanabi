@@ -11,10 +11,11 @@ import { posedDiv } from "~/lib/posed";
 
 interface Props {
   interturn: boolean;
+  dividerAfter?: number;
 }
 
 export default function Logs(props: Props) {
-  const { interturn } = props;
+  const { interturn, dividerAfter } = props;
   const { t } = useTranslation();
 
   const game = useGame();
@@ -22,21 +23,28 @@ export default function Logs(props: Props) {
   const selfPlayer = useSelfPlayer(game);
 
   const PoseItem = replay.cursor ? posedDiv() : Item;
+  const turnsCount = game.turnsHistory.length;
 
   return (
     <div className="relative">
       <PoseGroup>
-        {[...game.turnsHistory].reverse().map((turn, i) => {
-          const turnNumber = game.turnsHistory.length - i;
-          return (
+        {[...game.turnsHistory].reverse().flatMap((turn, i) => {
+          const turnNumber = turnsCount - i;
+          const nodes = [
             <PoseItem key={turnNumber}>
               <Turn
                 showDrawn={!interturn && game.players[turn.action.from]?.id !== selfPlayer?.id}
                 turn={turn}
                 turnNumber={turnNumber}
               />
-            </PoseItem>
-          );
+            </PoseItem>,
+          ];
+
+          if (dividerAfter !== undefined && i === dividerAfter - 1 && dividerAfter < turnsCount) {
+            nodes.push(<Divider key="new-items-divider" className="new-items-divider" />);
+          }
+
+          return nodes;
         })}
       </PoseGroup>
 
@@ -54,3 +62,4 @@ export default function Logs(props: Props) {
 }
 
 const Item = posedDiv({ enter: { y: 0 }, exit: { y: -100 } });
+const Divider = posedDiv({});
