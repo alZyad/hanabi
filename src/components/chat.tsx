@@ -8,7 +8,7 @@ import { IMessage } from "~/lib/state";
 export default function Chat() {
   const { t } = useTranslation();
   const game = useGame();
-  const messages = useMessages(game.id);
+  const { messages } = useMessages(game.id);
 
   return (
     <div>

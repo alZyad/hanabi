@@ -17,7 +17,7 @@ export default function MessagesTabs(props: Props) {
   const { interturn } = props;
   const { t } = useTranslation();
   const game = useGame();
-  const messages = useMessages(game.id);
+  const { messages, loaded } = useMessages(game.id);
 
   const turnsCount = game.turnsHistory.length;
   const messagesCount = messages.length;
@@ -40,13 +40,17 @@ export default function MessagesTabs(props: Props) {
 
   useEffect(() => {
     if (activeTab === "chat") {
+      // While viewing the chat, everything is considered seen.
       setSeenMessages(messagesCount);
       messagesBaselined.current = true;
-    } else if (!messagesBaselined.current && messagesCount > 0) {
+    } else if (!messagesBaselined.current && loaded) {
+      // Snapshot the count once the initial messages have loaded, even if it is
+      // zero. This way any message that arrives afterwards is counted as unread,
+      // including the very first message of the game.
       setSeenMessages(messagesCount);
       messagesBaselined.current = true;
     }
-  }, [activeTab, messagesCount]);
+  }, [activeTab, messagesCount, loaded]);
 
   const unreadHistory = Math.max(0, turnsCount - seenTurns);
   const unreadChat = Math.max(0, messagesCount - seenMessages);
