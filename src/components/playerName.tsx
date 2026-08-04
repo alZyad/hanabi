@@ -21,10 +21,11 @@ interface Props {
   explicit?: boolean;
   className?: string;
   reaction?: string;
+  truncate?: boolean;
 }
 
 export default function PlayerName(props: Props) {
-  const { player, size = PlayerNameSize.SMALL, explicit = false, className } = props;
+  const { player, size = PlayerNameSize.SMALL, explicit = false, truncate = false, className } = props;
   const { t } = useTranslation();
 
   const game = useGame();
@@ -33,7 +34,8 @@ export default function PlayerName(props: Props) {
 
   return (
     <Txt
-      className={classnames("relative inline-flex items-center truncate", className)}
+      className={classnames("relative", truncate ? "db truncate" : "inline-flex items-center", className)}
+      multiline={!truncate}
       size={PlayerNameTextSizes[size]}
       value={you ? t("you") : player.name}
     />
