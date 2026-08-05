@@ -22,7 +22,11 @@ export default function ChatPopover(props: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    messageRef.current?.focus();
+    const textarea = messageRef.current;
+    if (!textarea) return;
+
+    textarea.focus();
+    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
   }, [messageRef]);
 
   function onSubmit() {
