@@ -236,6 +236,7 @@ export const fr = {
   partySetup: "Joueurs : {{players}} · Variante : {{variant}} · Série #{{shuffle}}",
   sendMessagePlaceholder: "Envoie un message à tes partenaires",
   sendMessage: "Envoyer",
+  clearMessage: "Effacer",
   message: "<0></0> : <1></1>",
   history: "Historique",
   chat: "Chat",

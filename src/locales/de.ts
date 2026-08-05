@@ -236,6 +236,7 @@ export const de = {
   partySetup: "Spieler: {{players}} · Modus: {{variant}} · Deck #{{shuffle}}",
   sendMessagePlaceholder: "Sende eine Nachricht an deine Team Mitglieder",
   sendMessage: "Senden",
+  clearMessage: "Löschen",
   message: "<0></0>: <1></1>",
   history: "Verlauf",
   chat: "Chat",

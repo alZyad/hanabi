@@ -246,6 +246,7 @@ export const sk = {
   partySetup: "Hráči: {{players}} · Variant: {{variant}} · Permutácia #{{shuffle}}",
   sendMessagePlaceholder: "Pošli správu spoluhráčom",
   sendMessage: "Odoslať",
+  clearMessage: "Vymazať",
   message: "<0></0>: <1></1>",
   history: "História",
   chat: "Chat",

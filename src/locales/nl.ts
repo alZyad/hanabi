@@ -228,6 +228,7 @@ export const nl = {
   partySetup: "Spelers: {{players}} · Variant: {{variant}} · Shuffle #{{shuffle}}",
   sendMessagePlaceholder: "Stuur een bericht naar je teamgenoten",
   sendMessage: "Sturen",
+  clearMessage: "Wissen",
   message: "<0></0>: <1></1>",
   history: "Geschiedenis",
   chat: "Chat",

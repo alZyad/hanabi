@@ -242,6 +242,7 @@ export const ru = {
   partySetup: "Игроки: {{players}} · Режим: {{variant}} · Раздача #{{shuffle}}",
   sendMessagePlaceholder: "Отправить сообщение Вашей команде",
   sendMessage: "Отправить",
+  clearMessage: "Очистить",
   message: "<0></0>: <1></1>",
   history: "История",
   chat: "Чат",
