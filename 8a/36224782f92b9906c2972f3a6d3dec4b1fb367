@@ -1,0 +1,32 @@
+src/styles/style.css
+  s_2c143c1cad1af5::t_bc1679789ede3c 56-60
+  s_2c143c1cad1af5::t_9c76617d34f88a 61
+  s_2c143c1cad1af5::t_41e4203e3cad88 62-65
+src/components/playerName.tsx
+  s_2c143c1cad1af5::t_9a47204d0b7e16 24,28
+  s_2c143c1cad1af5::t_353b3803db2c3a 37-38
+src/components/playerGame.tsx
+  s_2c143c1cad1af5::t_b980679d4b2b51 420
+  s_2c143c1cad1af5::t_6591df945f116e 432
+  s_2c143c1cad1af5::t_18609a81ac8dab 253
+  s_2c143c1cad1af5::t_a12ec94e5785ec 269-274,276,278
+  s_2c143c1cad1af5::t_1be7c46d5579f3 277
+  s_2c143c1cad1af5::t_5a2313ca0c7676 251-252,254
+  s_2c143c1cad1af5::t_ba5cd75edc7770 275
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "8a36224782f92b9906c2972f3a6d3dec4b1fb367",
+  "prompts": {},
+  "sessions": {
+    "s_2c143c1cad1af5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "59dc9f1a-9cd6-4b3e-9548-f1e0003663fd",
+        "model": "claude-opus-5"
+      },
+      "human_author": null
+    }
+  }
+}
