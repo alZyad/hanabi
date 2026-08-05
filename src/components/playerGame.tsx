@@ -8,6 +8,7 @@ import Card, { CardSize, ICardContext, PositionMap } from "~/components/card";
 import ChatPopover from "~/components/chatPopover";
 import CardNotesArea from "~/components/cardNotesArea";
 import CardNotesOnboarding from "~/components/cardNotesOnboarding";
+import PersonalHint from "~/components/personalHint";
 import ChopMoveButton from "~/components/chopMoveButton";
 import PlayerName, { PlayerNameSize } from "~/components/playerName";
 import PlayerRow, { HandStrip } from "~/components/playerRow";
@@ -429,7 +430,10 @@ function PlayerGame(props: Props) {
 
               <div
                 ref={selected ? handRef : undefined}
-                className={classnames("flex items-center flex-shrink-0", selected ? "hand-focused" : "justify-end")}
+                className={classnames(
+                  "flex flex-shrink-0",
+                  selected ? "items-center hand-focused" : "items-start justify-end"
+                )}
               >
                 <PoseGroup>
                   {hand.map((card, i) => (
@@ -474,6 +478,14 @@ function PlayerGame(props: Props) {
                               />
                             </div>
                           </CardNotesOnboarding>
+                        )}
+                        {isSelf && !selected && !userPreferences.disableCardNotes && (
+                          <PersonalHint
+                            card={card}
+                            colorBlindMode={colorBlindMode}
+                            gameId={game.id}
+                            variant={game.options.variant}
+                          />
                         )}
                         {showOtherPlayerCm && focusReady && (
                           <div className="w-card-large flex justify-center mt1">
