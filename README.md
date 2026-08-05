@@ -59,6 +59,23 @@ You'll probably see the following answer
 
 4. Open your browser on `http://localhost:3000`
 
+##### Running the Firebase database locally
+
+Instead of connecting to a remote Firebase account, you can run a local Firebase Realtime Database with the `yarn db` command. It starts a [`firebase-server`](https://github.com/urish/firebase-server) instance listening on port `5001`.
+
+```bash
+# Start the local Firebase Realtime Database (leave it running in its own terminal)
+$ yarn db
+```
+
+Then point the app at the local database by setting `NEXT_PUBLIC_FIREBASE_DATABASE_URL` in your `.env` file to the local server:
+
+```bash
+NEXT_PUBLIC_FIREBASE_DATABASE_URL = ws://localhost:5001
+```
+
+With `yarn db` running in one terminal and `yarn dev` in another, the app will read from and write to your local database.
+
 
 ### Help us translate
 
