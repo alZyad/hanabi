@@ -234,6 +234,7 @@ export const it = {
   partySetup: "Giocatori: {{players}} · Modalità: {{variant}} · Miscuglio #{{shuffle}}",
   sendMessagePlaceholder: "Invia un messaggio ai tuoi compagni di squadra",
   sendMessage: "Invia",
+  clearMessage: "Cancella",
   message: "<0></0>: <1></1>",
   history: "Cronologia",
   chat: "Chat",

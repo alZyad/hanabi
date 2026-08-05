@@ -233,6 +233,7 @@ export const pt = {
   partySetup: "Jogadores: {{players}} · Modo: {{variant}} · Mesa #{{shuffle}}",
   sendMessagePlaceholder: "Mande uma mensagem para os seus companheiros",
   sendMessage: "Mandar",
+  clearMessage: "Limpar",
   message: "<0></0>: <1></1>",
   history: "Histórico",
   chat: "Chat",

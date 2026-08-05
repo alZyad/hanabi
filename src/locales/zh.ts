@@ -231,6 +231,7 @@ export const zh = {
   partySetup: "玩家：{{players}} · 模式：{{variant}} · 随机 #{{shuffle}}",
   sendMessagePlaceholder: "给队友发送信息",
   sendMessage: "发送",
+  clearMessage: "清除",
   message: "<0></0>：<1></1>",
   history: "历史",
   chat: "聊天",

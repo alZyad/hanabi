@@ -248,7 +248,10 @@ function PlayerGame(props: Props) {
         }}
         {...attributes}
       >
-        <div ref={identityRef} className={classnames("flex items-center", { "self-start": selected })}>
+        <div
+          ref={identityRef}
+          className={classnames("flex items-center identity-shrinkable", { "self-start": selected })}
+        >
           <div className="flex flex-wrap identityBlock">
             <div className="flex flex-wrap flex-row nameBlock">
               <div className="flex flex-column">
@@ -263,8 +266,16 @@ function PlayerGame(props: Props) {
                   </Tutorial>
                 )}
                 <div className={classnames("flex items-center")}>
-                  {player === currentPlayer && <Txt className="yellow mr2" size={TxtSize.SMALL} value="➤" />}
-                  <PlayerName className="mr2" explicit={true} player={player} size={PlayerNameSize.MEDIUM} />
+                  {player === currentPlayer && (
+                    <Txt className="yellow mr2 flex-shrink-0" size={TxtSize.SMALL} value="➤" />
+                  )}
+                  <PlayerName
+                    className="mr2"
+                    explicit={true}
+                    player={player}
+                    size={PlayerNameSize.MEDIUM}
+                    truncate={true}
+                  />
                 </div>
               </div>
 
@@ -406,7 +417,7 @@ function PlayerGame(props: Props) {
               {(game.endedAt || game.originalGame?.endedAt) && player === selfPlayer && (
                 <Button
                   void
-                  className="tracked-tight"
+                  className="tracked-tight flex-shrink-0"
                   size={ButtonSize.TINY}
                   text={revealCards ? t("hide") : t("reveal")}
                   onClick={(e) => {
@@ -418,7 +429,7 @@ function PlayerGame(props: Props) {
 
               <div
                 ref={selected ? handRef : undefined}
-                className={classnames("flex items-center", selected ? "hand-focused" : "justify-end")}
+                className={classnames("flex items-center flex-shrink-0", selected ? "hand-focused" : "justify-end")}
               >
                 <PoseGroup>
                   {hand.map((card, i) => (

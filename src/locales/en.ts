@@ -242,6 +242,7 @@ export const en = {
   partySetup: "Players: {{players}} · Mode: {{variant}} · Shuffle #{{shuffle}}",
   sendMessagePlaceholder: "Send a message to your teammates",
   sendMessage: "Send",
+  clearMessage: "Clear",
   message: "<0></0>: <1></1>",
   history: "History",
   chat: "Chat",

@@ -53,6 +53,16 @@ body ::-webkit-scrollbar {
   flex-wrap: wrap;
   flex-direction: column;
 }
+
+.identity-shrinkable,
+.identity-shrinkable * {
+  min-width: 0;
+}
+
+.identity-shrinkable .identityBlock {
+  flex-wrap: nowrap;
+}
+
 button {
   background-color: white;
 }
