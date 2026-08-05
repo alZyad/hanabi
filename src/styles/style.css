@@ -410,6 +410,26 @@ button {
   box-shadow: 0px 2px 12px 0px rgba(255, 255, 255, 0.4);
 }
 
+/**
+ * Token glow (driven by the number of hint tokens remaining)
+ */
+
+.token-glow-white {
+  box-shadow: 0 0 8px 3px color-mod(var(--color-white) alpha(90%));
+}
+
+.token-glow-yellow {
+  box-shadow: 0 0 8px 3px color-mod(var(--color-yellow) alpha(90%));
+}
+
+.token-glow-orange {
+  box-shadow: 0 0 8px 3px color-mod(var(--color-orange) alpha(90%));
+}
+
+.token-glow-red {
+  box-shadow: 0 0 8px 3px color-mod(var(--color-red) alpha(90%));
+}
+
 /* Safari fix? */
 button {
   -webkit-appearance: none;
