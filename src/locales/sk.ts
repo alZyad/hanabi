@@ -46,7 +46,7 @@ export const sk = {
   hideStats: "Skryť štatistiky",
   showStats: "Zobraziť štatistiky",
   gameOver: "Koniec hry! • Získali ste {{playedCardsLength}} bodov 🎉",
-  score: "Hanab • Skóre: {{score}} / {{maxPossibleScore}}",
+  score: "Skóre: {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer_0: "· Posledný ťah",
   turnsLeftDisclaimer_1: "· {{count}} ťahy do konca",
   turnsLeftDisclaimer_2: "· {{count}} ťahov do konca",

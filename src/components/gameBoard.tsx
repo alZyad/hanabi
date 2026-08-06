@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Board from "~/components/board";
@@ -7,6 +8,7 @@ import Txt from "~/components/ui/txt";
 import { useGame, useSelfPlayer } from "~/hooks/game";
 import { useColorBlindMode } from "~/hooks/userPreferences";
 import { getMaximumPossibleScore, getMaximumScore, getScore } from "~/lib/actions";
+import { logFailedPromise } from "~/lib/errors";
 import { IGameStatus } from "~/lib/state";
 
 interface Props {
@@ -20,6 +22,7 @@ export default function GameBoard(props: Props) {
   const { onMenuClick, onRollbackClick } = props;
   const { t } = useTranslation();
 
+  const router = useRouter();
   const game = useGame();
   const colorBlindMode = useColorBlindMode();
   const selfPlayer = useSelfPlayer(game);
@@ -31,6 +34,13 @@ export default function GameBoard(props: Props) {
     <div>
       <div className="flex justify-between items-center">
         <div>
+          <Txt
+            uppercase
+            className="pointer dim"
+            value={t("hanab")}
+            onClick={() => router.push("/").catch(logFailedPromise)}
+          />
+          <Txt uppercase className="mh1" value="•" />
           <Txt uppercase id="score" value={t("score", { score, maxPossibleScore })} />
 
           {maxScore !== maxPossibleScore && <Txt uppercase className="strike ml1 gray" value={maxScore} />}

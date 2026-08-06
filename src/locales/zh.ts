@@ -46,7 +46,7 @@ export const zh = {
   hideStats: "隐藏统计",
   showStats: "显示统计",
   gameOver: "游戏结束！• 你们的分数是 {{playedCardsLength}} 🎉",
-  score: "华火 • 分数：{{score}} / {{maxPossibleScore}}",
+  score: "分数：{{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer: "· 还剩 1 回合",
   turnsLeftDisclaimer_plural: "· 还剩 {{count}} 回合",
   cardLeft: "还剩 {{pileLength}} 张",

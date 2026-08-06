@@ -45,7 +45,7 @@ export const fr = {
   hideStats: "Voir les cartes",
   showStats: "Voir les stats",
   gameOver: "Game over ! • Votre score est de {{playedCardsLength}} 🎉",
-  score: "Hanab • Score : {{score}} / {{maxPossibleScore}}",
+  score: "Score : {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer: "· 1 tour restant",
   turnsLeftDisclaimer_plural: "· {{count}} tours restants",
   cardLeft: "{{pileLength}} restant",

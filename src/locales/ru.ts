@@ -50,7 +50,7 @@ export const ru = {
   hideStats: "Скрыть статистику",
   showStats: "Показать статистику",
   gameOver: "Игра окончена! • Ваш счет {{playedCardsLength}} 🎉",
-  score: "Ханаби • Счет: {{score}} / {{maxPossibleScore}}",
+  score: "Счет: {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer_0: "· 1 ход остался", // _0 is for 1 turn left
   turnsLeftDisclaimer_1: "· {{count}} хода осталось", // _1 is for 2, 3, 4 turns left
   turnsLeftDisclaimer_2: "· {{count}} ходов осталось", // _2 is for 0, 5 turns left

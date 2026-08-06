@@ -45,7 +45,7 @@ export const it = {
   hideStats: "Nascondi stats",
   showStats: "Dettagli",
   gameOver: "La partita è finita! • Il tuo punteggio è {{playedCardsLength}} 🎉",
-  score: "Hanab • Punteggio: {{score}} / {{maxPossibleScore}}",
+  score: "Punteggio: {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer: "· 1 turno rimasto",
   turnsLeftDisclaimer_plural: "· {{count}} turni rimasti",
   cardLeft: "{{pileLength}} sinistra",

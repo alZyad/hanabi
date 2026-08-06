@@ -45,7 +45,7 @@ export const pt = {
   hideStats: "Esconder estatísticas",
   showStats: "Mostrar estatísticas",
   gameOver: "O jogo acabou! • A sua pontuação é {{playedCardsLength}} 🎉",
-  score: "Hanab • Pontuação: {{score}} / {{maxPossibleScore}}",
+  score: "Pontuação: {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer: "· 1 turno restante",
   turnsLeftDisclaimer_plural: "· {{count}} turnos restantes",
   cardLeft: "{{pileLength}} restantes",

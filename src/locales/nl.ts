@@ -45,7 +45,7 @@ export const nl = {
   hideStats: "Verberg statistieken",
   showStats: "Toon statistieken",
   gameOver: "Het spel is voorbij! • Je score is {{playedCardsLength}} 🎉",
-  score: "Hanab • Score: {{score}} / {{maxPossibleScore}}",
+  score: "Score: {{score}} / {{maxPossibleScore}}",
   turnsLeftDisclaimer: "· 1 beurt over",
   turnsLeftDisclaimer_plural: "· {{count}} beurten over",
   cardLeft: "{{pileLength}} over",
