@@ -1,0 +1,64 @@
+src/components/userPreferencesDialog.tsx
+  s_a8c818b9c981ed::t_9f702bd2958bdb 40-41
+  s_a8c818b9c981ed::t_c97f07927f3a9d 86,88
+  s_a8c818b9c981ed::t_f61a58fef8b9cd 42-43
+  s_a8c818b9c981ed::t_5ee2e495622b7e 85,87,89
+src/locales/zh.ts
+  s_a8c818b9c981ed::t_554aab81bbe051 4
+src/locales/pt.ts
+  s_a8c818b9c981ed::t_f3d2fe51e377d6 4
+src/locales/en.ts
+  s_a8c818b9c981ed::t_b60525bef7fd5f 5
+src/components/personalHint.tsx
+  s_a8c818b9c981ed::t_9505e441e6c362 15,43-50,61
+  s_a8c818b9c981ed::t_0406a241a62525 4,7,17-36,38-42,51-54,56-60,62-64,76-78,80-83,85-88,90,92-103,106-107,111-121
+  s_a8c818b9c981ed::t_b5965de7299129 37
+  s_a8c818b9c981ed::t_2a97fdb4c82483 55
+  s_a8c818b9c981ed::t_de3c9ae71d6905 68
+  s_a8c818b9c981ed::t_05592e38b97a60 109-110
+  s_a8c818b9c981ed::t_37b3d9928df414 14
+  s_a8c818b9c981ed::t_979f94aa554211 16
+  s_a8c818b9c981ed::t_3b94650fc91b46 108
+src/locales/fr.ts
+  s_a8c818b9c981ed::t_121ae7fea26689 4
+src/locales/ru.ts
+  s_a8c818b9c981ed::t_8f69f354c93490 9
+src/lib/schemas/storage.ts
+  s_a8c818b9c981ed::t_fc5ac476d61d11 28
+src/components/playerGame.tsx
+  s_a8c818b9c981ed::t_1b34dcceafffad 443-447
+  s_a8c818b9c981ed::t_d586575b7d02b7 490
+  s_a8c818b9c981ed::t_1df525a3427627 254-256
+src/locales/de.ts
+  s_a8c818b9c981ed::t_2f7b6e5481e8ab 4
+src/locales/nl.ts
+  s_a8c818b9c981ed::t_99fe422ee8b93c 4
+src/hooks/userPreferences.ts
+  s_a8c818b9c981ed::t_5382bfeaef66cc 12
+  s_a8c818b9c981ed::t_59d23021addc0c 24
+src/locales/es.ts
+  s_a8c818b9c981ed::t_9f3d32e5ef9c5b 4
+src/locales/sk.ts
+  s_a8c818b9c981ed::t_0c1981f707d963 4
+src/styles/tachyons-overrides.css
+  s_a8c818b9c981ed::t_bd42b44f67e454 235-253,255-256
+  s_a8c818b9c981ed::t_87fec3bfd4d92c 254
+src/locales/it.ts
+  s_a8c818b9c981ed::t_6a4fdc92f473ea 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "107c81e13b646243e6a4531257a183e19888c8cd",
+  "prompts": {},
+  "sessions": {
+    "s_a8c818b9c981ed": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c5b121a-eb44-4312-b433-5f221e698eaf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
