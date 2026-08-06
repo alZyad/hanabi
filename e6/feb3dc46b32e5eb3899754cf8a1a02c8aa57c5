@@ -1,0 +1,35 @@
+src/components/lobbyView.tsx
+  s_f083778f213608::t_eff43b0f5898c7 89-108
+  s_f083778f213608::t_78f63cb765ea51 286
+  s_f083778f213608::t_4cc85095236e83 295-297,324,330
+  s_f083778f213608::t_e58211e86594f4 4,6,10,12,14,32
+  s_f083778f213608::t_03b614aa0dca08 287-294,298-323,325-329,331-341,343-344,346-348
+  s_f083778f213608::t_7e5adaed1580ff 345
+src/components/reactionsPopover.tsx
+  s_f083778f213608::t_8df097689972a8 14,19
+  s_f083778f213608::t_b4efdd57e6b9f9 46
+src/components/playerGame.tsx
+  s_f083778f213608::t_d2b1fe05ec4182 310
+src/components/lobbyChat.tsx
+  s_f083778f213608::t_e359586e9388fe 53
+  s_f083778f213608::t_b536df3c6dd1b8 1-52,54-61,63-79
+  s_f083778f213608::t_259876ff185150 62
+src/lib/firebase.ts
+  s_f083778f213608::t_86f49ce5b905c2 204-207,209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "e6feb3dc46b32e5eb3899754cf8a1a02c8aa57c5",
+  "prompts": {},
+  "sessions": {
+    "s_f083778f213608": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3526d35d-23b4-4f84-8367-7f24096d66f4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
