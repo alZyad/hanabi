@@ -1,0 +1,19 @@
+src/components/lobbyView.tsx
+  s_f083778f213608::t_39810aa7f0d984 273-274,276-277,281
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "e64c8949b772a44ab71ec7af661539d1f992d2de",
+  "prompts": {},
+  "sessions": {
+    "s_f083778f213608": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3526d35d-23b4-4f84-8367-7f24096d66f4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
