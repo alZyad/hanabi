@@ -1,0 +1,47 @@
+src/lib/schemas/storage.ts
+  s_cf4ab12128eecc::t_126a40ea2e575e 29
+src/lib/perfDebug.ts
+  s_cf4ab12128eecc::t_003671ae649de1 14
+  s_cf4ab12128eecc::t_e8aba15832273d 1-13,15-36,40-66
+  s_cf4ab12128eecc::t_a93ecfa1d6d42d 37-39,67
+src/components/GameIndex.tsx
+  s_cf4ab12128eecc::t_1b15092c5a1488 3,10
+  s_cf4ab12128eecc::t_e3ba233bf5fe3c 58-61,91-93,99
+  s_cf4ab12128eecc::t_e12dbd695f6093 69-74,89-90,100-102
+  s_cf4ab12128eecc::t_7d9c259338dd57 62-68,75-88,94-98
+src/hooks/userPreferences.ts
+  s_cf4ab12128eecc::t_5a37675f9c8bd4 13
+  s_cf4ab12128eecc::t_e41209e1d01616 26
+src/components/game.tsx
+  s_cf4ab12128eecc::t_ab262c094bd658 155
+  s_cf4ab12128eecc::t_e8ea2498ab189e 38
+  s_cf4ab12128eecc::t_95fe4513e53259 321-324,326-334,342-344
+  s_cf4ab12128eecc::t_bf3fb0a39bf27a 3
+  s_cf4ab12128eecc::t_7bb8a13cbe4a80 159-166
+  s_cf4ab12128eecc::t_7c69f3c3b9c9e8 169-177
+  s_cf4ab12128eecc::t_507972b703270f 367
+  s_cf4ab12128eecc::t_e2f599840973a4 37
+  s_cf4ab12128eecc::t_5a43065d8a7bc1 305
+  s_cf4ab12128eecc::t_9ebf24fd609ca1 325,335-341
+src/lib/firebase.ts
+  s_cf4ab12128eecc::t_987938eaeea4a4 19
+  s_cf4ab12128eecc::t_8737cb3e6ca1e7 100-101,103
+  s_cf4ab12128eecc::t_4f2c813654cec5 136-137,139,141,143-148
+  s_cf4ab12128eecc::t_dea0bd5bdeeb3d 138,140,142,149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "cebeaa19494b96ee9aa5bd96beb454cbb024e188",
+  "prompts": {},
+  "sessions": {
+    "s_cf4ab12128eecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "604cae01-94b1-4f2c-b9ef-8abe6c66a26b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
