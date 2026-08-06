@@ -1,0 +1,41 @@
+src/locales/zh.ts
+  s_1201b11de2785e::t_9cb29e2e1b702b 49
+src/locales/sk.ts
+  s_1201b11de2785e::t_decabed4105ac1 49
+src/locales/de.ts
+  s_1201b11de2785e::t_cc65fda6f51398 49
+src/locales/nl.ts
+  s_1201b11de2785e::t_3ab4dfc99c82ef 48
+src/locales/pt.ts
+  s_1201b11de2785e::t_2200b227a53ee9 48
+src/locales/fr.ts
+  s_1201b11de2785e::t_6d4e473d8a0158 48
+src/components/gameBoard.tsx
+  s_1201b11de2785e::t_c318d034f8b392 1,11
+  s_1201b11de2785e::t_7a503c0b095ab0 25
+  s_1201b11de2785e::t_9b68ba3279cae5 37-43
+src/locales/en.ts
+  s_1201b11de2785e::t_5222eb4f1a6726 54
+src/locales/it.ts
+  s_1201b11de2785e::t_708a937a981e08 48
+src/locales/es.ts
+  s_1201b11de2785e::t_9b37a4aaf8fc48 48
+src/locales/ru.ts
+  s_1201b11de2785e::t_f53c93f5c9977e 53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "244bad24b3c027edad2e2b269a8672e573674cbe",
+  "prompts": {},
+  "sessions": {
+    "s_1201b11de2785e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02c62612-35ea-4844-9601-7bba7f5f2952",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
