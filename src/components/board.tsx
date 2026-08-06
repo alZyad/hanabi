@@ -49,7 +49,7 @@ export default function Board(props: Props) {
       <div className="flex flex-column mb3">
         <PlayedCards cards={playedCards} colorBlindMode={colorBlindMode} variant={variant} />
       </div>
-      <div className="flex flex-row mt2 justify-right items-end ml2">
+      <div className="flex flex-row mt2 justify-right items-end">
         <DeckPile count={deckCount} />
         <div className="tc">
           <TokenSpace hints={hints} strikes={strikes} />
