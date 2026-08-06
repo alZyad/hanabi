@@ -16,6 +16,7 @@ import { GAME_EXISTS_BUT_INVALID, parseGameState } from "~/lib/schemas/gameState
 import { parseMessages } from "~/lib/schemas/messages";
 import { parseGameId } from "~/lib/schemas/params";
 import { logFailedPromise } from "~/lib/errors";
+import { perfDebug } from "~/lib/perfDebug";
 
 function database() {
   if (!firebase.apps.length) {
@@ -96,8 +97,10 @@ export type GameLoadFailure = "not-found" | "invalid";
 export type LoadGameResult = { ok: true; game: IGameState | ILobbyState } | { ok: false; reason: GameLoadFailure };
 
 function toLoadResult(raw: unknown): LoadGameResult {
-  const parsed = parseGameState(raw);
+  return buildLoadResult(parseGameState(raw));
+}
 
+function buildLoadResult(parsed: ReturnType<typeof parseGameState>): LoadGameResult {
   if (parsed === null) {
     return { ok: false, reason: "not-found" };
   }
@@ -130,7 +133,20 @@ export function subscribeToGame(
   const ref = database().ref(`/games/${gameId}`);
 
   const handler = ref.on("value", (event) => {
-    const result = toLoadResult(event.val());
+    const enabled = perfDebug.enabled;
+    const t0 = enabled ? performance.now() : 0;
+    const parsed = parseGameState(event.val());
+    const t1 = enabled ? performance.now() : 0;
+    const result = buildLoadResult(parsed);
+    const t2 = enabled ? performance.now() : 0;
+
+    if (enabled) {
+      perfDebug.receivedAt = t0;
+      perfDebug.parseMs = t1 - t0;
+      perfDebug.rebuildMs = t2 - t1;
+      perfDebug.turns = parsed && parsed !== GAME_EXISTS_BUT_INVALID ? parsed.turnsHistory?.length ?? 0 : 0;
+    }
+
     if (result.ok) {
       callback(result.game);
     } else {

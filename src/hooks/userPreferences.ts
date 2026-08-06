@@ -10,6 +10,7 @@ export interface UserPreferences {
   showChopIndicator?: boolean;
   colorBlindMode?: boolean;
   hideFoldedHints?: boolean;
+  perfLogging?: boolean;
 }
 
 type ValueAndSetter<T> = [T, (newValue: T) => void];
@@ -22,6 +23,7 @@ const DefaultPreferences: UserPreferences = {
   showChopIndicator: false,
   colorBlindMode: false,
   hideFoldedHints: false,
+  perfLogging: false,
 };
 export function loadUserPreferences(): UserPreferences {
   const loadedPreferences = readLocalStorage("userPreferences", userPreferencesSchema, {});

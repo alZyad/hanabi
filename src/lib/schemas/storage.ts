@@ -26,6 +26,7 @@ export const userPreferencesSchema = z
     showChopIndicator: z.boolean().optional().catch(undefined),
     colorBlindMode: z.boolean().optional().catch(undefined),
     hideFoldedHints: z.boolean().optional().catch(undefined),
+    perfLogging: z.boolean().optional().catch(undefined),
   })
   .catch({});
 

@@ -1,6 +1,6 @@
 import Fireworks from "fireworks-canvas";
 import { useRouter } from "next/router";
-import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ActionAreaType, ISelectedArea } from "~/components/actionArea";
 import GameBoard from "~/components/gameBoard";
@@ -34,6 +34,8 @@ import { setNotification, setReaction, updateGame } from "~/lib/firebase";
 import { uniqueId } from "~/lib/id";
 import IGameState, { GameMode, IAction, IGameHintsLevel, IGameStatus, ILobbyState, IPlayer } from "~/lib/state";
 import { logFailedPromise } from "~/lib/errors";
+import { perfDebug } from "~/lib/perfDebug";
+import usePrevious from "~/hooks/previous";
 
 interface Props {
   onGameChange: (game: IGameState | ILobbyState) => void;
@@ -150,12 +152,29 @@ export function Game(props: Props) {
 
     sameGame = dealHands(sameGame);
 
+    const aiSimStart = perfDebug.enabled ? performance.now() : 0;
     while (sameGame.status !== IGameStatus.OVER) {
       sameGame = cheat(sameGame);
     }
+    if (perfDebug.enabled) {
+      perfDebug.record({
+        t: Date.now(),
+        kind: "aiSim",
+        turns: game.turnsHistory.length,
+        ms: Math.round(performance.now() - aiSimStart),
+      });
+    }
 
     setReachableScore(getScore(sameGame));
-  }, [game.status, game.id, game.options.playersCount, game.options.seed, game.options.variant, game.players]);
+  }, [
+    game.status,
+    game.id,
+    game.options.playersCount,
+    game.options.seed,
+    game.options.variant,
+    game.players,
+    game.turnsHistory.length,
+  ]);
 
   const fillBots = useCallback(async () => {
     let newState = game;
@@ -283,6 +302,7 @@ export function Game(props: Props) {
   );
 
   const onCloseArea = useCallback(() => {
+    if (perfDebug.enabled) perfDebug.handToggleAt = performance.now();
     selectArea({
       id: "logs",
       type: ActionAreaType.LOGS,
@@ -297,6 +317,30 @@ export function Game(props: Props) {
 
     logEvent("Game", "Game rolled back");
   }
+
+  const selfHandExpanded = selectedArea.type === ActionAreaType.SELF_PLAYER;
+  const prevSelfHandExpanded = usePrevious(selfHandExpanded);
+
+  useLayoutEffect(() => {
+    if (!perfDebug.enabled) return;
+    if (prevSelfHandExpanded === undefined || selfHandExpanded === prevSelfHandExpanded) return;
+
+    const start = perfDebug.handToggleAt;
+    perfDebug.handToggleAt = null;
+    const commitAt = performance.now();
+    const render = start != null ? commitAt - start : NaN;
+
+    requestAnimationFrame(() => {
+      const paint = performance.now() - commitAt;
+      perfDebug.record({
+        t: Date.now(),
+        kind: "hand",
+        action: selfHandExpanded ? "expand" : "collapse",
+        render: Math.round(render),
+        paint: Math.round(paint),
+      });
+    });
+  }, [selfHandExpanded, prevSelfHandExpanded]);
 
   const onNotifyPlayer = useCallback(
     async (player: IPlayer) => {
@@ -320,6 +364,7 @@ export function Game(props: Props) {
   );
 
   const onSelectArea = useCallback((area: ISelectedArea) => {
+    if (perfDebug.enabled) perfDebug.handToggleAt = performance.now();
     selectArea((current) => (current.id === area.id ? { id: "logs", type: ActionAreaType.LOGS } : area));
   }, []);
 
