@@ -270,15 +270,15 @@ export default function LobbyView(props: Props) {
         )}
 
         {!gameFull && !lobby.options.tutorial && (
-          <div className="flex mt3">
-            <div className="flex flex-column mr2">
+          <div className="flex mt3 items-end">
+            <div className="flex flex-column flex-grow-1 mr2" style={{ minWidth: 0 }}>
               <Txt className="mb1" value={t("shareGame")} />
-              <a className="lavender flex-1" href={shareLink} rel="noopener noreferrer" target="_blank">
-                <Txt value={shareLink} />
+              <a className="lavender db truncate" href={shareLink} rel="noopener noreferrer" target="_blank">
+                <Txt multiline={false} value={shareLink} />
               </a>
             </div>
             <input ref={inputRef} readOnly className="fixed top--2 left--2" type="text" value={shareLink} />
-            <Button outlined text={t("copy")} onClick={copy} />
+            <Button outlined className="flex-shrink-0" text={t("copy")} onClick={copy} />
           </div>
         )}
       </div>
