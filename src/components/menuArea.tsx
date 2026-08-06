@@ -8,8 +8,10 @@ import Button, { ButtonSize } from "~/components/ui/button";
 import { Modal } from "~/components/ui/modal";
 import Txt, { TxtSize } from "~/components/ui/txt";
 import UserPreferencesDialog from "~/components/userPreferencesDialog";
+import useLocalStorage from "~/hooks/localStorage";
 import { UserPreferences, useUserPreferences } from "~/hooks/userPreferences";
 import { logFailedPromise } from "~/lib/errors";
+import { perfDebug } from "~/lib/perfDebug";
 
 interface Props {
   onCloseArea: () => void;
@@ -24,6 +26,35 @@ export default function MenuArea(props: Props) {
   const { t } = useTranslation();
   const [showUserPreferences, setShowUserPreferences] = useState(false);
   const [userPreferences, setUserPreferences] = useUserPreferences();
+  const [debugMode, setDebugMode] = useLocalStorage<boolean>("debugMode", false);
+  const [hanabClicks, setHanabClicks] = useState(0);
+
+  function onHanabClick() {
+    const next = hanabClicks + 1;
+    if (next < 5) {
+      setHanabClicks(next);
+      return;
+    }
+    setHanabClicks(0);
+    const enabling = !debugMode;
+    setDebugMode(enabling);
+    if (!enabling) {
+      setUserPreferences({ ...userPreferences, perfLogging: false });
+    }
+  }
+
+  function onDownloadPerfLog() {
+    const blob = new Blob([JSON.stringify(perfDebug.getLog(), null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `hanabi-perf-${Date.now()}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+    perfDebug.clear();
+  }
 
   function onPrefClick() {
     setShowUserPreferences(true);
@@ -40,6 +71,7 @@ export default function MenuArea(props: Props) {
   if (showUserPreferences) {
     return (
       <UserPreferencesDialog
+        debugMode={debugMode}
         saveUserPreferences={(userPreferences: UserPreferences) => {
           setUserPreferences(userPreferences);
         }}
@@ -56,7 +88,9 @@ export default function MenuArea(props: Props) {
       <div className={`flex flex-column justify-center items-center w-100 h-100 z-10 ${showRules ? "" : "pa2"}`}>
         {!showRules && (
           <div className="flex flex-column justify-center items-center">
-            <Txt className="ttu txt-yellow mb4 mb5-l" size={TxtSize.MEDIUM} value={t("hanab")} />
+            <div className="pointer" onClick={onHanabClick}>
+              <Txt className="ttu txt-yellow mb4 mb5-l" size={TxtSize.MEDIUM} value={t("hanab")} />
+            </div>
 
             <div className="mb4 mb5-l">
               <LanguageSelector />
@@ -70,6 +104,14 @@ export default function MenuArea(props: Props) {
               text={t("rules")}
               onClick={() => setShowRules(true)}
             />
+            {debugMode && (
+              <Button
+                className="mb3 w-100"
+                size={ButtonSize.MEDIUM}
+                text="Download perf log"
+                onClick={onDownloadPerfLog}
+              />
+            )}
           </div>
         )}
 

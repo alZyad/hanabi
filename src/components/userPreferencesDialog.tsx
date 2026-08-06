@@ -9,9 +9,15 @@ interface Props {
   onCloseArea: () => void;
   userPreferences: UserPreferences;
   saveUserPreferences: (userPreferences: UserPreferences) => void;
+  debugMode?: boolean;
 }
 
-export default function UserPreferencesDialog({ onCloseArea, userPreferences, saveUserPreferences }: Props) {
+export default function UserPreferencesDialog({
+  onCloseArea,
+  userPreferences,
+  saveUserPreferences,
+  debugMode = false,
+}: Props) {
   const { t } = useTranslation();
   function toggleSoundOnStrike() {
     const modifiedPreferences = { ...userPreferences, soundOnStrike: !userPreferences.soundOnStrike };
@@ -39,6 +45,10 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
   }
   function toggleHideFoldedHints() {
     const modifiedPreferences = { ...userPreferences, hideFoldedHints: !userPreferences.hideFoldedHints };
+    saveUserPreferences(modifiedPreferences);
+  }
+  function togglePerfLogging() {
+    const modifiedPreferences = { ...userPreferences, perfLogging: !userPreferences.perfLogging };
     saveUserPreferences(modifiedPreferences);
   }
 
@@ -87,6 +97,13 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
               &nbsp;
               <Txt value={t("hideFoldedHints")} />
             </div>
+            {debugMode && (
+              <div className="flex flex-row justify-start-l items-center">
+                <Checkbox checked={userPreferences.perfLogging} onChange={() => togglePerfLogging()} />
+                &nbsp;
+                <Txt value="Log performance" />
+              </div>
+            )}
           </div>
         </div>
       </div>
