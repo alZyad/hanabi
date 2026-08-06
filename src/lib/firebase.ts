@@ -201,8 +201,12 @@ export function subscribeToPlayerStates(gameId: string, callback: (states: Recor
   return () => ref.off("value", handler);
 }
 
+export async function setPlayerReaction(gameId: string, playerIndex: number, reaction: string | null) {
+  await database().ref(`/playerStates/${gameId}/${playerIndex}/reaction`).set(reaction);
+}
+
 export async function setReaction(game: IGameState, player: IPlayer, reaction: string | null) {
-  await database().ref(`/playerStates/${game.id}/${player.index}/reaction`).set(reaction);
+  await setPlayerReaction(game.id, player.index, reaction);
 }
 
 export async function setNotification(game: IGameState, player: IPlayer, notified: boolean) {

@@ -1,6 +1,5 @@
 import React, { CSSProperties } from "react";
 import Txt, { TxtSize } from "~/components/ui/txt";
-import { useGame, useSelfPlayer } from "~/hooks/game";
 
 const ClearReaction = "⊘";
 const Reactions = [
@@ -12,14 +11,12 @@ const Reactions = [
 interface Props {
   onReaction: (reaction: string | null) => void;
   onClose: () => void;
+  hasReaction?: boolean;
   style?: CSSProperties;
 }
 
 export default function ReactionsPopover(props: Props) {
-  const { onReaction, onClose } = props;
-
-  const game = useGame();
-  const selfPlayer = useSelfPlayer(game);
+  const { onReaction, onClose, hasReaction } = props;
 
   return (
     <div
@@ -46,7 +43,7 @@ export default function ReactionsPopover(props: Props) {
           ))}
         </div>
       ))}
-      {selfPlayer?.reaction && (
+      {hasReaction && (
         <a
           className="mt2 pointer"
           onClick={(e) => {

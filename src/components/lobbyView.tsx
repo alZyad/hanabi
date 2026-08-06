@@ -1,13 +1,17 @@
 import { last } from "lodash";
 import Head from "next/head";
 import Link from "next/link";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ArrowContainer, Popover } from "react-tiny-popover";
 import Board from "~/components/board";
 import FaceDownHand from "~/components/faceDownHand";
 import HomeButton from "~/components/homeButton";
+import LobbyChat from "~/components/lobbyChat";
 import MenuArea from "~/components/menuArea";
+import { POPOVER_ARROW_COLOR, POPOVER_CONTENT_STYLE } from "~/components/popoverAppearance";
 import PlayerRow, { HandStrip } from "~/components/playerRow";
+import ReactionsPopover from "~/components/reactionsPopover";
 import Button from "~/components/ui/button";
 import { Checkbox, Field, TextInput } from "~/components/ui/forms";
 import Txt, { TxtSize } from "~/components/ui/txt";
@@ -25,7 +29,7 @@ import {
 } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
 import { logFailedPromise } from "~/lib/errors";
-import { updateGame } from "~/lib/firebase";
+import { setPlayerReaction, updateGame } from "~/lib/firebase";
 import { uniqueId } from "~/lib/id";
 import IGameState, { GameMode, ILobbyState, IMinimalPlayer } from "~/lib/state";
 
@@ -82,11 +86,26 @@ export default function LobbyView(props: Props) {
   const [bot, setBot] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [reactionsOpen, setReactionsOpen] = useState(false);
+  const reactionTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const selfPlayer =
-    lobby.options.gameMode === GameMode.NETWORK
-      ? lobby.players.find((player) => player.id === playerId)
-      : last(lobby.players);
+  const isNetwork = lobby.options.gameMode === GameMode.NETWORK;
+
+  const selfPlayer = isNetwork ? lobby.players.find((player) => player.id === playerId) : last(lobby.players);
+
+  const onReaction = useCallback(
+    async (reaction: string | null) => {
+      if (selfPlayer?.index === undefined) return;
+      clearTimeout(reactionTimeoutRef.current);
+      await setPlayerReaction(lobby.id, selfPlayer.index, reaction);
+      if (reaction) {
+        reactionTimeoutRef.current = setTimeout(() => {
+          setPlayerReaction(lobby.id, selfPlayer.index as number, null).catch(logFailedPromise);
+        }, 10_000);
+      }
+    },
+    [lobby.id, selfPlayer?.index]
+  );
 
   const gameFull = lobby.players.length === MAX_PLAYERS;
   const canJoin = (lobby.options.gameMode === GameMode.PASS_AND_PLAY || !selfPlayer) && !gameFull;
@@ -264,18 +283,69 @@ export default function LobbyView(props: Props) {
         )}
       </div>
 
-      <div className="flex flex-grow-1 flex-column">
-        {lobby.players.map((player) => (
-          <PlayerRow key={player.id} className="bb b--yellow-light">
-            <div className="flex items-center">
-              <Txt className="mr3 truncate" style={{ width: "7rem" }} value={player.name} />
-            </div>
-            <HandStrip>
-              <FaceDownHand size={lobbyHandSize} />
-            </HandStrip>
-          </PlayerRow>
-        ))}
+      <div className="flex flex-grow-1 flex-column overflow-y-auto" style={{ minHeight: 0 }}>
+        {lobby.players.map((player) => {
+          const isSelf = isNetwork && player.id === selfPlayer?.id;
+
+          return (
+            <PlayerRow key={player.id} className="bb b--yellow-light">
+              <div className="flex items-center">
+                <Txt className="mr3 truncate" style={{ width: "7rem" }} value={player.name} />
+
+                {!isSelf && player.reaction && (
+                  <Txt style={{ animation: "FontPulse 600ms 5" }} value={player.reaction} />
+                )}
+
+                {isSelf && (
+                  <Popover
+                    containerClassName="z-999"
+                    content={({ position, childRect, popoverRect }) => (
+                      <ArrowContainer
+                        arrowColor={POPOVER_ARROW_COLOR}
+                        arrowSize={10}
+                        arrowStyle={{ opacity: 1 }}
+                        childRect={childRect}
+                        popoverRect={popoverRect}
+                        position={position}
+                      >
+                        <ReactionsPopover
+                          hasReaction={player.reaction != null}
+                          style={POPOVER_CONTENT_STYLE}
+                          onClose={() => setReactionsOpen(false)}
+                          onReaction={onReaction}
+                        />
+                      </ArrowContainer>
+                    )}
+                    isOpen={reactionsOpen}
+                    padding={5}
+                    onClickOutside={() => setReactionsOpen(false)}
+                  >
+                    <a
+                      className="pointer grow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setReactionsOpen(!reactionsOpen);
+                      }}
+                    >
+                      {player.reaction && <Txt style={{ animation: "FontPulse 600ms 5" }} value={player.reaction} />}
+                      {!player.reaction && <Txt style={{ filter: "grayscale(100%)" }} value="︎︎︎︎😊" />}
+                    </a>
+                  </Popover>
+                )}
+              </div>
+              <HandStrip>
+                <FaceDownHand size={lobbyHandSize} />
+              </HandStrip>
+            </PlayerRow>
+          );
+        })}
       </div>
+
+      {isNetwork && (lobby.players.length > 0 || selfPlayer) && (
+        <div className="bg-black-50 bt b--yellow ph6.5-m pa2 flex-shrink-0">
+          <LobbyChat lobby={lobby} selfPlayer={selfPlayer} />
+        </div>
+      )}
     </div>
   );
 }

@@ -307,6 +307,7 @@ function PlayerGame(props: Props) {
                           position={position}
                         >
                           <ReactionsPopover
+                            hasReaction={selfPlayer?.reaction != null}
                             style={POPOVER_CONTENT_STYLE}
                             onClose={() => setReactionsOpen(false)}
                             onReaction={onReaction ?? (() => undefined)}
