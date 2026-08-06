@@ -1,0 +1,28 @@
+src/components/userPreferencesDialog.tsx
+  s_cf4ab12128eecc::t_c7a4c179bbb117 50-53
+  s_cf4ab12128eecc::t_79c8bc216be555 12,15-20
+  s_cf4ab12128eecc::t_e9fa3cd69a6bc8 100-106
+src/components/menuArea.tsx
+  s_cf4ab12128eecc::t_64516bb7bfe104 29-55,57
+  s_cf4ab12128eecc::t_b5edc79b4d6708 56
+  s_cf4ab12128eecc::t_5cd9c6d13985a2 74
+  s_cf4ab12128eecc::t_261713156ab0f3 11,14
+  s_cf4ab12128eecc::t_ed743cb4589b64 107-114
+  s_cf4ab12128eecc::t_b3623e8c0a39a9 91-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "7f836125357b93c7ffc1792f44a62735f85550a1",
+  "prompts": {},
+  "sessions": {
+    "s_cf4ab12128eecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "604cae01-94b1-4f2c-b9ef-8abe6c66a26b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "alZyad <zyad.alalgui@theodo.com>"
+    }
+  }
+}
