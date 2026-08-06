@@ -251,7 +251,9 @@ function PlayerGame(props: Props) {
       >
         <div
           ref={identityRef}
-          className={classnames("flex items-center identity-shrinkable", { "self-start": selected })}
+          className={classnames("flex identity-shrinkable", self ? "items-start" : "items-center", {
+            "self-start": selected,
+          })}
         >
           <div className="flex flex-wrap identityBlock">
             <div className="flex flex-wrap flex-row nameBlock">
@@ -438,14 +440,15 @@ function PlayerGame(props: Props) {
                 <PoseGroup>
                   {hand.map((card, i) => (
                     <AnimatedCard key={card.id}>
-                      <div className="flex flex-column items-center">
+                      <div
+                        className={classnames("flex flex-column items-center", {
+                          "mr1 mr2-l": !selected && i < player.hand.length - 1,
+                        })}
+                      >
                         <Card
                           card={card}
                           chop={userPreferences.showChopIndicator && (lockedHand || i === chopIndex)}
                           chopMoved={!userPreferences.disableCardNotes && card.id !== undefined && isChopMoved(card.id)}
-                          className={classnames({
-                            "mr1 mr2-l": !selected && i < player.hand.length - 1,
-                          })}
                           colorBlindMode={colorBlindMode}
                           context={cardContext}
                           focusPanelReady={focusReady}
@@ -484,6 +487,7 @@ function PlayerGame(props: Props) {
                             card={card}
                             colorBlindMode={colorBlindMode}
                             gameId={game.id}
+                            showPossibilities={!userPreferences.hideFoldedHints}
                             variant={game.options.variant}
                           />
                         )}

@@ -1,6 +1,7 @@
 export const es = {
   disableCardNotes: "Desactivar las notas personales de las cartas",
   showChopIndicator: "Mostrar el indicador de posición chop",
+  hideFoldedHints: "Ocultar las pistas de la mano plegada",
   cardNotesOnboardingTitle: "Notas de carta",
   cardNotesOnboardingBody: "Úsalas para anotar las pistas implícitas que hayas deducido.\nSolo tú puedes verlas.",
   hanabi: "Hanab",

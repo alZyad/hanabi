@@ -6,6 +6,7 @@
 export const ru = {
   disableCardNotes: "Отключить личные заметки на картах",
   showChopIndicator: "Показывать индикатор позиции chop",
+  hideFoldedHints: "Скрывать подсказки свёрнутой руки",
   cardNotesOnboardingTitle: "Заметки на картах",
   cardNotesOnboardingBody: "Используй их, чтобы отмечать неявные подсказки, которые ты вывел.\nИх видишь только ты.",
   hanab: "Ханаби",

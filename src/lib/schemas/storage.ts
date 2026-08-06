@@ -25,6 +25,7 @@ export const userPreferencesSchema = z
     disableCardNotes: z.boolean().optional().catch(undefined),
     showChopIndicator: z.boolean().optional().catch(undefined),
     colorBlindMode: z.boolean().optional().catch(undefined),
+    hideFoldedHints: z.boolean().optional().catch(undefined),
   })
   .catch({});
 

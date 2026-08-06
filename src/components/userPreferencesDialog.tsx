@@ -37,6 +37,10 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
     const modifiedPreferences = { ...userPreferences, colorBlindMode: !userPreferences.colorBlindMode };
     saveUserPreferences(modifiedPreferences);
   }
+  function toggleHideFoldedHints() {
+    const modifiedPreferences = { ...userPreferences, hideFoldedHints: !userPreferences.hideFoldedHints };
+    saveUserPreferences(modifiedPreferences);
+  }
 
   return (
     <Modal isOpen onRequestClose={() => onCloseArea()}>
@@ -77,6 +81,11 @@ export default function UserPreferencesDialog({ onCloseArea, userPreferences, sa
               <Checkbox checked={userPreferences.colorBlindMode} onChange={() => toggleColorBlindMode()} />
               &nbsp;
               <Txt value={t("colorBlindMode")} />
+            </div>
+            <div className="flex flex-row justify-start-l items-center">
+              <Checkbox checked={userPreferences.hideFoldedHints} onChange={() => toggleHideFoldedHints()} />
+              &nbsp;
+              <Txt value={t("hideFoldedHints")} />
             </div>
           </div>
         </div>

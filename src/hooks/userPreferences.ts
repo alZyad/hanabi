@@ -9,6 +9,7 @@ export interface UserPreferences {
   disableCardNotes?: boolean;
   showChopIndicator?: boolean;
   colorBlindMode?: boolean;
+  hideFoldedHints?: boolean;
 }
 
 type ValueAndSetter<T> = [T, (newValue: T) => void];
@@ -20,6 +21,7 @@ const DefaultPreferences: UserPreferences = {
   disableCardNotes: false,
   showChopIndicator: false,
   colorBlindMode: false,
+  hideFoldedHints: false,
 };
 export function loadUserPreferences(): UserPreferences {
   const loadedPreferences = readLocalStorage("userPreferences", userPreferencesSchema, {});

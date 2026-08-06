@@ -1,6 +1,7 @@
 export const fr = {
   disableCardNotes: "Désactiver les notes de carte personnelles",
   showChopIndicator: "Afficher l'indicateur de position chop",
+  hideFoldedHints: "Masquer les indices de la main repliée",
   cardNotesOnboardingTitle: "Notes de carte",
   cardNotesOnboardingBody: "Utilise-les pour noter les indices implicites que tu as déduits.\nToi seul peux les voir.",
   hanab: "Hanab",
