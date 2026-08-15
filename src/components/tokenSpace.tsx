@@ -9,8 +9,22 @@ interface TokenProps {
   amount: number;
 }
 
+/**
+ * Glow color for the hint tokens, based on how many are left (out of 8).
+ * White while there are plenty, warming up to red as the team runs out.
+ */
+function hintsGlowClass(amount: number): string | undefined {
+  if (amount === 0) return "token-glow-red";
+  if (amount === 1) return "token-glow-orange";
+  if (amount === 2) return "token-glow-yellow";
+  if (amount === 8) return "token-glow-white";
+  return undefined;
+}
+
 export function Token(props: TokenProps) {
   const { color, amount } = props;
+
+  const glowClass = color === "hints" ? hintsGlowClass(amount) : undefined;
 
   if (!amount) {
     return (
@@ -18,7 +32,8 @@ export function Token(props: TokenProps) {
         className={classnames(
           "ba flex items-center justify-center br-100 h1.5 w1.5 o-70 gray ba ml2",
           `bg-${color}`,
-          `b--${color}`
+          `b--${color}`,
+          glowClass
         )}
         size={TxtSize.SMALL}
         value={0}
@@ -34,7 +49,9 @@ export function Token(props: TokenProps) {
           className={classnames(
             "outline-main-dark absolute ba flex items-center justify-center br-100 h1.5 w1.5 ba mr2",
             `bg-${color}`,
-            `b--${color}`
+            `b--${color}`,
+            // Only the top token of the stack glows, to avoid stacked shadows.
+            i === amount - 1 && glowClass
           )}
           size={TxtSize.SMALL}
           style={{

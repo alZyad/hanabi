@@ -36,11 +36,11 @@ program
     });
 
     await Promise.all(
-      Object.values((db.games as unknown) as Partial<IGameState>[]).map(async (game) => {
+      Object.values(db.games as unknown as Partial<IGameState>[]).map(async (game) => {
         const id = game.id;
         const options = JSON.stringify(game.options);
         const state = JSON.stringify(omit(game, ["id", "options", "history"]));
-        const fullState = rebuildGame((game as unknown) as IMinimalGameState) as IGameState;
+        const fullState = rebuildGame(game as unknown as IMinimalGameState) as IGameState;
 
         const score = getScore(fullState);
         const maxPossibleScore = getMaximumPossibleScore(fullState);
