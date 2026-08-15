@@ -426,6 +426,10 @@ export function Game(props: Props) {
    */
   useEffect(() => {
     function checkKey(event: KeyboardEvent) {
+      if (event.target instanceof HTMLElement && event.target.tagName === "INPUT") {
+        return;
+      }
+
       const cursor = replay.cursor;
 
       // left arrow: if hidden, display replay mode
