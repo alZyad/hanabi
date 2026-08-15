@@ -50,8 +50,11 @@ export default function LobbyChat(props: Props) {
           }}
         >
           <input
+            autoComplete="off"
             className="flex-grow-1 mr2 pa2 br2 bn f6 bg-white gray"
+            name="lobby-chat-message"
             placeholder={t("sendMessagePlaceholder")}
+            type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
