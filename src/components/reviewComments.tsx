@@ -69,6 +69,10 @@ export function ReviewCommentPopover({
   const showIcon = showAlways || comment;
   useEffect(() => {
     function checkKey(event: KeyboardEvent) {
+      if (event.target instanceof HTMLElement && event.target.tagName === "TEXTAREA") {
+        return;
+      }
+
       if (event.key === handleKeyEvent && game.status === IGameStatus.ONGOING) {
         setReviewCommentOpenForTurn(turnNumber);
         event.preventDefault();
