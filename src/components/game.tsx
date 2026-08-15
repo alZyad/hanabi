@@ -426,7 +426,10 @@ export function Game(props: Props) {
    */
   useEffect(() => {
     function checkKey(event: KeyboardEvent) {
-      if (event.target instanceof HTMLElement && event.target.tagName === "INPUT") {
+      if (
+        event.target instanceof HTMLElement &&
+        (event.target.tagName === "TEXTAREA" || event.target.tagName === "INPUT")
+      ) {
         return;
       }
 
