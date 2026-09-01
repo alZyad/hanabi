@@ -483,6 +483,12 @@ export function joinLobby(lobby: ILobbyState, player: IMinimalPlayer): ILobbySta
   return nextLobby;
 }
 
+export function removePlayerFromLobby(lobby: ILobbyState, playerId: string): ILobbyState {
+  const nextLobby = cloneDeep(lobby) as ILobbyState;
+  nextLobby.players = nextLobby.players.filter((player) => player.id !== playerId);
+  return nextLobby;
+}
+
 export function newGame(options: IGameOptions): IGameState {
   assert(options.playersCount >= MIN_PLAYERS && options.playersCount <= MAX_PLAYERS);
 
