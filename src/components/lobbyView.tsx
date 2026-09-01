@@ -25,6 +25,7 @@ import {
   MAX_PLAYERS,
   MaxHints,
   MIN_PLAYERS,
+  removePlayerFromLobby,
   startGameFromLobby,
 } from "~/lib/actions";
 import { logEvent } from "~/lib/analytics";
@@ -152,6 +153,15 @@ export default function LobbyView(props: Props) {
     updateGame(nextLobby).catch(logFailedPromise);
 
     logEvent("Game", "Bot added");
+  }
+
+  function onKickPlayer(playerId: string) {
+    const nextLobby = removePlayerFromLobby(lobby, playerId);
+
+    onStateChange({ ...nextLobby, synced: false });
+    updateGame(nextLobby).catch(logFailedPromise);
+
+    logEvent("Game", "Player kicked");
   }
 
   async function onStartGame() {
@@ -290,6 +300,9 @@ export default function LobbyView(props: Props) {
           return (
             <PlayerRow key={player.id} className="bb b--yellow-light">
               <div className="flex items-center">
+                <a className="pointer grow red mr3 f" onClick={() => onKickPlayer(player.id)}>
+                  <Txt value="✕" />
+                </a>
                 <Txt className="mr3 truncate" style={{ width: "7rem" }} value={player.name} />
 
                 {!isSelf && player.reaction && (

@@ -9,6 +9,23 @@ export function HandStrip(props: { children: ReactNode; className?: string }) {
   );
 }
 
+export function deletePlayerRow(props: Props) {
+  const { vertical, className, children, ...attributes } = props;
+
+  return (
+    <div
+      className={classnames(
+        "cards flex justify-start bg-main-dark pa2 pv2-l ph6.5-m relative",
+        { "flex-column": vertical },
+        className
+      )}
+      {...attributes}
+    >
+      {children}
+    </div>
+  );
+}
+
 interface Props extends HTMLAttributes<HTMLDivElement> {
   vertical?: boolean;
 }
