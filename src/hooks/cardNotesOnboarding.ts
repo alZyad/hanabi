@@ -1,14 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 const STORAGE_KEY = "cardNotesOnboardingDone";
 
 export function useCardNotesOnboarding() {
   const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!window.localStorage.getItem(STORAGE_KEY)) setActive(true);
-  }, []);
+  // Quick fix: la détection/activation automatique de l'onboarding des notes
+  // de cartes est désactivée. À la première partie, ce popover s'ouvrait et
+  // empêchait de jouer. Pour le réactiver plus tard, il suffit de restaurer
+  // ce useEffect.
+  // useEffect(() => {
+  //   if (typeof window === "undefined") return;
+  //   if (!window.localStorage.getItem(STORAGE_KEY)) setActive(true);
+  // }, []);
 
   const dismiss = useCallback(() => {
     setActive(false);
