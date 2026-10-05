@@ -318,29 +318,37 @@ export function Game(props: Props) {
     logEvent("Game", "Game rolled back");
   }
 
-  const selfHandExpanded = selectedArea.type === ActionAreaType.SELF_PLAYER;
-  const prevSelfHandExpanded = usePrevious(selfHandExpanded);
+  // Which hand is expanded: "self", another player's id, or null
+  const expandedHand =
+    selectedArea.type === ActionAreaType.SELF_PLAYER
+      ? "self"
+      : selectedArea.type === ActionAreaType.OTHER_PLAYER
+      ? selectedArea.player.id
+      : null;
+  const prevExpandedHand = usePrevious(expandedHand);
 
   useLayoutEffect(() => {
     if (!perfDebug.enabled) return;
-    if (prevSelfHandExpanded === undefined || selfHandExpanded === prevSelfHandExpanded) return;
+    if (prevExpandedHand === undefined || expandedHand === prevExpandedHand) return;
 
     const start = perfDebug.handToggleAt;
     perfDebug.handToggleAt = null;
     const commitAt = performance.now();
     const render = start != null ? commitAt - start : NaN;
+    const toggledHand = expandedHand ?? prevExpandedHand;
 
     requestAnimationFrame(() => {
       const paint = performance.now() - commitAt;
       perfDebug.record({
         t: Date.now(),
         kind: "hand",
-        action: selfHandExpanded ? "expand" : "collapse",
+        action: expandedHand ? "expand" : "collapse",
+        hand: toggledHand === "self" ? "self" : "other",
         render: Math.round(render),
         paint: Math.round(paint),
       });
     });
-  }, [selfHandExpanded, prevSelfHandExpanded]);
+  }, [expandedHand, prevExpandedHand]);
 
   const onNotifyPlayer = useCallback(
     async (player: IPlayer) => {
