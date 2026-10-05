@@ -9,8 +9,11 @@ export interface MessagesSectionProps {
   onStopReplay: () => void;
 }
 
-export default function MessagesSection(props: MessagesSectionProps) {
+function MessagesSection(props: MessagesSectionProps) {
   const isDesktop = useMediaQuery("(min-width: 650px)");
 
   return isDesktop ? <MessagesSectionDesktop {...props} /> : <MessagesSectionMobile {...props} />;
 }
+
+// Memoized so that toggling a hand (local state in <Game>) does not re-render the whole history.
+export default React.memo(MessagesSection);
