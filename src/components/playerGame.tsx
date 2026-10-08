@@ -22,6 +22,7 @@ import Vignettes from "~/components/vignettes";
 import { useCurrentPlayer, useGame, useSelfPlayer } from "~/hooks/game";
 import { useCardNotes } from "~/hooks/cardNotes";
 import { useStableCards } from "~/hooks/stableCards";
+import { useFlipMove } from "~/hooks/flipMove";
 import { useCardNotesOnboarding } from "~/hooks/cardNotesOnboarding";
 import { useColorBlindMode, useUserPreferences } from "~/hooks/userPreferences";
 import { useReplay } from "~/hooks/replay";
@@ -148,6 +149,7 @@ function PlayerGame(props: Props) {
   const onboarding = useCardNotesOnboarding();
   const { isChopMoved, toggleChopMoved } = useCardNotes(game.id);
   const hand = useStableCards(player.hand);
+  const flipMove = useFlipMove(hand.map((card) => card.id).join(","));
   const chopIndex = getChopIndex(hand, isChopMoved);
   const lockedHand = chopIndex === -1;
   const [userPreferences] = useUserPreferences();
@@ -438,7 +440,7 @@ function PlayerGame(props: Props) {
                   selected ? "items-center hand-focused" : "items-start justify-end"
                 )}
               >
-                <PoseGroup>
+                <PoseGroup flipMove={flipMove}>
                   {hand.map((card, i) => (
                     <AnimatedCard key={card.id}>
                       <div

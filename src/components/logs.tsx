@@ -5,6 +5,7 @@ import { ReviewCommentPopover } from "~/components/reviewComments";
 import Turn from "~/components/turn";
 import Tutorial, { ITutorialStep } from "~/components/tutorial";
 import Txt, { TxtSize } from "~/components/ui/txt";
+import { useFlipMove } from "~/hooks/flipMove";
 import { useGame, useSelfPlayer } from "~/hooks/game";
 import { useReplay } from "~/hooks/replay";
 import { posedDiv } from "~/lib/posed";
@@ -24,10 +25,11 @@ export default function Logs(props: Props) {
 
   const PoseItem = replay.cursor ? posedDiv() : Item;
   const turnsCount = game.turnsHistory.length;
+  const flipMove = useFlipMove(`${turnsCount}-${dividerAfter}`);
 
   return (
     <div className="relative">
-      <PoseGroup>
+      <PoseGroup flipMove={flipMove}>
         {[...game.turnsHistory].reverse().flatMap((turn, i) => {
           const turnNumber = turnsCount - i;
           const nodes = [

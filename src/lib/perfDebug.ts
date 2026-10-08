@@ -12,7 +12,15 @@ export type PerfEntry =
       render: number;
     }
   | { t: number; kind: "aiSim"; turns: number; ms: number }
-  | { t: number; kind: "hand"; action: "expand" | "collapse"; render: number; paint: number };
+  | {
+      t: number;
+      kind: "hand";
+      action: "expand" | "collapse";
+      // Missing on entries logged before other players' hands were tracked: those are all "self"
+      hand?: "self" | "other";
+      render: number;
+      paint: number;
+    };
 
 let entries: PerfEntry[] | null = null;
 
