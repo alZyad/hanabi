@@ -302,7 +302,7 @@ export function Game(props: Props) {
   );
 
   const onCloseArea = useCallback(() => {
-    if (perfDebug.enabled) perfDebug.handToggleAt = performance.now();
+    perfDebug.markHandToggle();
     selectArea({
       id: "logs",
       type: ActionAreaType.LOGS,
@@ -332,20 +332,29 @@ export function Game(props: Props) {
     if (prevExpandedHand === undefined || expandedHand === prevExpandedHand) return;
 
     const start = perfDebug.handToggleAt;
+    const inputAt = perfDebug.handInputAt;
+    const pointerDownAt = perfDebug.lastPointerDownAt;
     perfDebug.handToggleAt = null;
+    perfDebug.handInputAt = null;
     const commitAt = performance.now();
     const render = start != null ? commitAt - start : NaN;
     const toggledHand = expandedHand ?? prevExpandedHand;
 
     requestAnimationFrame(() => {
-      const paint = performance.now() - commitAt;
-      perfDebug.record({
-        t: Date.now(),
-        kind: "hand",
-        action: expandedHand ? "expand" : "collapse",
-        hand: toggledHand === "self" ? "self" : "other",
-        render: Math.round(render),
-        paint: Math.round(paint),
+      const frameAt = performance.now();
+
+      requestAnimationFrame(() => {
+        perfDebug.record({
+          t: Date.now(),
+          kind: "hand",
+          action: expandedHand ? "expand" : "collapse",
+          hand: toggledHand === "self" ? "self" : "other",
+          input: start != null && inputAt != null ? Math.round(start - inputAt) : undefined,
+          tap: start != null && pointerDownAt != null ? Math.round(start - pointerDownAt) : undefined,
+          render: Math.round(render),
+          paint: Math.round(frameAt - commitAt),
+          nextFrame: Math.round(performance.now() - frameAt),
+        });
       });
     });
   }, [expandedHand, prevExpandedHand]);
@@ -372,7 +381,7 @@ export function Game(props: Props) {
   );
 
   const onSelectArea = useCallback((area: ISelectedArea) => {
-    if (perfDebug.enabled) perfDebug.handToggleAt = performance.now();
+    perfDebug.markHandToggle();
     selectArea((current) => (current.id === area.id ? { id: "logs", type: ActionAreaType.LOGS } : area));
   }, []);
 
