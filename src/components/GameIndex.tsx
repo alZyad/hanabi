@@ -8,6 +8,7 @@ import { GameContext } from "~/hooks/game";
 import { loadUserPreferences, UserPreferencesContext } from "~/hooks/userPreferences";
 import { IPlayerState, subscribeToGame, subscribeToPlayerStates } from "~/lib/firebase";
 import { perfDebug } from "~/lib/perfDebug";
+import { startPerfObservers } from "~/lib/perfObservers";
 import IGameState, { ILobbyState, IMinimalPlayer, IPlayer, isLobby } from "~/lib/state";
 
 function mergePlayerStates<T extends IGameState | ILobbyState>(game: T, playerStates: Record<number, IPlayerState>): T {
@@ -57,6 +58,9 @@ function SsrFreeGameIndex(props: { host: string; game: IGameState | ILobbyState 
 
   useEffect(() => {
     perfDebug.enabled = Boolean(userPreferences.perfLogging);
+    if (!perfDebug.enabled) return;
+
+    return startPerfObservers();
   }, [userPreferences.perfLogging]);
 
   const pendingUpdateRef = useRef<{
